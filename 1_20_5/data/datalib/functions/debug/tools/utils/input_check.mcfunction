@@ -2,6 +2,11 @@
 # Security gate for dataLib function calls.
 # Returns 1 → passed. Returns 0 → blocked.
 
+# ======================================================================================
+tellraw @s [{"text":"[DL]","color":"aqua"},{"text":"STARTING INPUT CHECK...","color":"yellow"}]
+# ======================================================================================
+
+
 # ── Guard: recursion ────────────────────────────────────────────
 execute if data storage datalib:engine global{in_call:1b} run return 1
 
