@@ -2,28 +2,6 @@
 **Minecraft Java Edition 1.20.3–26.1.2+ | Multiplayer-Safe | Pure Datapack**
 
 ---
-## Project Summary
-
-dataLib is a utility library developed as a pure datapack for Minecraft Java Edition 1.20.3–26.1+. Its Fabric mod counterpart, [dataLib-Fabric](https://github.com/runtoolkit/dataLib-Fabric?utm_source=chatgpt.com), is still under active development, while this repository is being archived.
-
-## Technical Status
-
-| Feature            | Value                                                                              |
-| ------------------ | ---------------------------------------------------------------------------------- |
-| Latest version     | v5.1.1                                                                             |
-| Main `pack_format` | 101 (26.1.x)                                                                         |
-| Supported range    | `pack_format` 26–400000 (1.20.3–26.1.2+)                                             |
-| Overlay count      | 6 (`1_20_3`, `1_20_5`, `_pre_1_21_4`, `compat_1_21_4`, `1_21_5`, `1_21_6`, `26_1`) |
-| Dependencies       | Lantern Load, StringLib (bundled)                                                  |
-
-## Why It Was Archived
-
-* The Fabric mod version, [dataLib-Fabric](https://github.com/runtoolkit/dataLib-Fabric?utm_source=chatgpt.com), provides the same functionality with a more powerful API.
-* Maintaining the datapack version in a pure `mcfunction` environment requires significantly higher maintenance effort compared to the Fabric mod version.
-* Considering the breaking changes introduced in 26.1.2+ (`enable-command-blocks` was moved to the `command_blocks_work` gamerule) and the likelihood of further compatibility breaks in future versions, no active update plan is currently intended.
-
----
-
 > Current version: **v5.1.1**
 ---
 
