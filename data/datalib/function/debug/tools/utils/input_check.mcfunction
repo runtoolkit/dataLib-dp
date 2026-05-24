@@ -211,7 +211,7 @@ execute if data storage datalib:output inputs{func:"#"} run return 0
 # ======================================================================================
 
 execute unless data storage datalib:output inputs{func:"datalib:api/"} run function datalib:core/security/input_ns_violation
-execute unless data storage datalib:output inputs{func:"datalib:api/"} run return 0
+execute unless data storage datalib:output inputs{func:"datalib:api/"} run data modify storage datalib:output error set value {level:"WARN",code:"NS_VIOLATION",message:"Input namespace violation detected. Action allowed but logged."}
 
 # ======================================================================================
 # SECTION 7
