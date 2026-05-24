@@ -48,5 +48,6 @@ function datalib:core/engine/call/execute_validated
 data remove storage datalib:engine global.in_call
 
 data remove storage datalib:output data
+data remove storage datalib:output security
 data remove storage datalib:output inputs
 return 1
