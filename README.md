@@ -81,7 +81,7 @@ Provides deterministic load order, version tracking, and pre/load/post-load hook
 
 ```mcfunction
 # Check if dataLib is loaded
-execute if score dataLib load.status matches 1.. run say dataLib is loaded
+execute if score #dataLib load.status matches 1.. run say dataLib is loaded
 
 # Get version (major*10000 + minor*100 + patch → v5.1.1 = 50000)
 scoreboard players get dataLib load.status
