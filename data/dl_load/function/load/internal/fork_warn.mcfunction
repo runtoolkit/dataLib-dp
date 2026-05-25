@@ -5,7 +5,7 @@
 
 playsound datalib:ui.warn master @a ~ ~ ~ 0.5 0.9
 
-tellraw @a ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ ","color":"yellow"},{"text":"Modified fork detected.","color":"yellow"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ ","color":"yellow"},{"text":"Modified fork detected.","color":"yellow"}]
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ FORK ","color":"yellow","bold":true},{"text":"rt_origin_verified missing — _rt_origin.mcfunction removed or pack is modified.","color":"yellow"}]
 
 data modify storage datalib:input message set value "[Load] fork_warn — rt_origin_verified not set, possible modified fork"
