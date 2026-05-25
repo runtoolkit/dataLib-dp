@@ -1,0 +1,228 @@
+name: PR Security Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  scan:
+    name: Scan PR for malicious patterns
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "Changed files:"
+          echo "$CHANGED"
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Security scan — mcfunction
+        id: mcf_scan
+        run: |
+          python3 << 'PYEOF'
+          import re, sys, os, json
+
+          CHANGED = """${{ steps.changed.outputs.files }}"""
+          mcf_files = [f.strip() for f in CHANGED.splitlines() if f.strip().endswith(".mcfunction") and os.path.isfile(f.strip())]
+
+          # ── PATTERN DEFINITIONS ────────────────────────────────────────────────
+          # Each entry: (label, regex, severity, description)
+          # severity: CRITICAL | HIGH | MEDIUM
+          PATTERNS = [
+            # Privilege escalation
+            ("OP_GRANT",        r'(?<!\#)\bop\s+(@[ase]|@p|\$)',                         "CRITICAL", "Grants operator to players"),
+            ("OP_GRANT_NAME",   r'(?<!\#)\bop\s+(?!#)\S+',                               "CRITICAL", "Grants operator by name"),
+            ("DEOP",            r'(?<!\#)\bdeop\s+(@[ase]|@p|\$)',                        "HIGH",     "Removes operator status"),
+            ("WHITELIST_ADD",   r'(?<!\#)\bwhitelist\s+add\b',                            "HIGH",     "Modifies whitelist"),
+            ("WHITELIST_OFF",   r'(?<!\#)\bwhitelist\s+off\b',                            "HIGH",     "Disables whitelist entirely"),
+            ("BAN",             r'(?<!\#)\bban\s+(?!-ip)\S+',                             "HIGH",     "Bans a player"),
+            ("BAN_IP",          r'(?<!\#)\bban-ip\s+\S+',                                 "HIGH",     "Bans an IP"),
+            ("PARDON",          r'(?<!\#)\bpardon\b',                                      "MEDIUM",   "Unbans a player"),
+
+            # Mass item/effect abuse
+            ("GIVE_ALL",        r'(?<!\#)\bgive\s+@a\b',                                  "HIGH",     "Gives items to ALL players"),
+            ("EFFECT_ALL",      r'(?<!\#)\beffect\s+give\s+@a\b',                         "HIGH",     "Applies effect to ALL players"),
+            ("CLEAR_ALL",       r'(?<!\#)\bclear\s+@a\b',                                 "HIGH",     "Clears inventory of ALL players"),
+            ("ENCHANT_ALL",     r'(?<!\#)\benchant\s+@a\b',                               "MEDIUM",   "Enchants items of ALL players"),
+
+            # Server control
+            ("STOP",            r'(?<!\#)\bstop\b',                                        "CRITICAL", "Stops the server"),
+            ("RELOAD",          r'(?<!\#)\breload\b',                                      "HIGH",     "Reloads the server"),
+            ("SAVE_OFF",        r'(?<!\#)\bsave-off\b',                                    "HIGH",     "Disables world saving"),
+
+            # Destructive world modification
+            ("FILL_AIR",        r'(?<!\#)\bfill\b.+\bair\b',                              "HIGH",     "Fills region with air (possible griefing)"),
+            ("FORCELOAD_FLOOD", r'(?<!\#)\bforceload\s+add\b.+forceload\s+add\b',         "MEDIUM",   "Multiple forceload calls (lag abuse)"),
+            ("KILL_ALL",        r'(?<!\#)\bkill\s+@[ae]\b(?!\[)',                         "HIGH",     "Kills all entities unconditionally"),
+            ("SETBLOCK_LOOT",   r'(?<!\#)\bsetblock\b.+\bchest\b.+\{Items',               "MEDIUM",   "Places chest with items (possible dupe)"),
+
+            # Data exfiltration / storage poisoning
+            ("DATA_REMOVE_ENGINE", r'(?<!\#)\bdata\s+remove\s+storage\s+datalib:engine\b', "CRITICAL", "Removes engine storage (destabilizes lib)"),
+            ("DATA_MODIFY_ENGINE", r'(?<!\#)\bdata\s+modify\s+storage\s+datalib:engine\b', "HIGH",     "Directly modifies engine storage"),
+            ("DATA_REMOVE_OUTPUT", r'(?<!\#)\bdata\s+remove\s+storage\s+datalib:output\b', "HIGH",     "Removes output storage"),
+
+            # Suspicious URL patterns in tellraw/book content
+            ("URL_HTTP",        r'(?<!\#).+"url"\s*:\s*"http://',                         "HIGH",     "Unencrypted HTTP URL in click_event"),
+            ("URL_SUSPICIOUS",  r'(?<!\#).+"url"\s*:\s*"https?://(?!github\.com|modrinth\.com|curseforge\.com|minecraft\.net|mojang\.com|discord\.gg|discord\.com)',
+                                                                                           "MEDIUM",   "URL to non-whitelisted domain"),
+
+            # Macro injection
+            ("MACRO_CHAIN",     r'(?<!\#)\$.*\$\(',                                       "HIGH",     "Nested macro expansion (injection risk)"),
+            ("MACRO_STORAGE_INJECT", r'(?<!\#)\$function\s+\$\(',                         "CRITICAL", "Macro-expanded function call with macro path (injection)"),
+
+            # Attribution tampering
+            ("RT_ORIGIN_REMOVE",r'(?<!\#)\bdata\s+remove\s+storage\s+datalib:engine\s+global\.rt_origin_verified\b',
+                                                                                           "HIGH",     "Removes attribution verification flag"),
+            ("WATERMARK_REMOVE",r'(?<!\#)scoreboard\s+players\s+(set|reset|remove)\s+#runtoolkit\.watermark',
+                                                                                           "HIGH",     "Modifies attribution watermark score"),
+          ]
+
+          results = []
+          total_critical = 0
+          total_high = 0
+          total_medium = 0
+
+          for fpath in mcf_files:
+            try:
+              with open(fpath, encoding="utf-8") as f:
+                lines = f.readlines()
+            except Exception as e:
+              results.append({"file": fpath, "error": str(e)})
+              continue
+
+            file_hits = []
+            for lineno, line in enumerate(lines, 1):
+              stripped = line.strip()
+              # Skip pure comment lines
+              if stripped.startswith("#"):
+                continue
+              for label, pattern, severity, desc in PATTERNS:
+                if re.search(pattern, stripped, re.IGNORECASE):
+                  file_hits.append({
+                    "line": lineno,
+                    "label": label,
+                    "severity": severity,
+                    "desc": desc,
+                    "content": stripped[:120]
+                  })
+                  if severity == "CRITICAL": total_critical += 1
+                  elif severity == "HIGH":   total_high += 1
+                  elif severity == "MEDIUM": total_medium += 1
+
+            if file_hits:
+              results.append({"file": fpath, "hits": file_hits})
+
+          # ── OUTPUT ────────────────────────────────────────────────────────────
+          if not results:
+            print("SCAN_PASSED")
+            sys.exit(0)
+
+          # Build report
+          report_lines = []
+          report_lines.append(f"## ⚠️ PR Security Scan — Issues Found")
+          report_lines.append(f"")
+          report_lines.append(f"| Severity | Count |")
+          report_lines.append(f"|----------|-------|")
+          report_lines.append(f"| 🔴 CRITICAL | {total_critical} |")
+          report_lines.append(f"| 🟠 HIGH     | {total_high} |")
+          report_lines.append(f"| 🟡 MEDIUM   | {total_medium} |")
+          report_lines.append(f"")
+
+          for entry in results:
+            if "error" in entry:
+              report_lines.append(f"### ❌ `{entry['file']}` — read error: {entry['error']}")
+              continue
+            report_lines.append(f"### `{entry['file']}`")
+            for hit in entry["hits"]:
+              sev_icon = {"CRITICAL": "🔴", "HIGH": "🟠", "MEDIUM": "🟡"}.get(hit["severity"], "⚪")
+              report_lines.append(f"- {sev_icon} **{hit['severity']}** `{hit['label']}` (line {hit['line']}): {hit['desc']}")
+              report_lines.append(f"  ```")
+              report_lines.append(f"  {hit['content']}")
+              report_lines.append(f"  ```")
+            report_lines.append("")
+
+          report_lines.append("> **This scan is automated.** MEDIUM findings may be false positives.")
+          report_lines.append("> CRITICAL and HIGH findings must be reviewed before merge.")
+
+          report = "\n".join(report_lines)
+
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+            f.write(report + "\n")
+
+          with open("/tmp/scan_report.md", "w") as f:
+            f.write(report)
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+            f.write(f"report<<REPORT_EOF\n{report}\nREPORT_EOF\n")
+            f.write(f"critical={total_critical}\n")
+            f.write(f"high={total_high}\n")
+            f.write(f"medium={total_medium}\n")
+
+          if total_critical > 0 or total_high > 0:
+            print("SCAN_FAILED")
+            sys.exit(1)
+          else:
+            print("SCAN_WARNED")
+            sys.exit(0)
+          PYEOF
+
+      - name: Post scan results as PR comment
+        if: always() && steps.mcf_scan.outcome != 'skipped'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = '/tmp/scan_report.md';
+            if (!fs.existsSync(reportPath)) {
+              console.log('No issues found — skipping comment.');
+              return;
+            }
+            const body = fs.readFileSync(reportPath, 'utf8');
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c =>
+              c.user.login === 'github-actions[bot]' &&
+              c.body.includes('PR Security Scan')
+            );
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Fail on CRITICAL or HIGH findings
+        if: steps.mcf_scan.outcome == 'failure'
+        run: |
+          echo "PR blocked: CRITICAL or HIGH severity findings detected."
+          echo "Review the scan report above before merging."
+          exit 1
