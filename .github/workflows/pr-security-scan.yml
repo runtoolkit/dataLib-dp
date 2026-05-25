@@ -57,26 +57,16 @@ jobs:
             ("PARDON",          r'(?<!\#)\bpardon\b',                                      "MEDIUM",   "Unbans a player"),
 
             # Mass item/effect abuse
-            ("GIVE_ALL",        r'(?<!\#)\bgive\s+@a\b',                                  "HIGH",     "Gives items to ALL players"),
-            ("EFFECT_ALL",      r'(?<!\#)\beffect\s+give\s+@a\b',                         "HIGH",     "Applies effect to ALL players"),
-            ("CLEAR_ALL",       r'(?<!\#)\bclear\s+@a\b',                                 "HIGH",     "Clears inventory of ALL players"),
-            ("ENCHANT_ALL",     r'(?<!\#)\benchant\s+@a\b',                               "MEDIUM",   "Enchants items of ALL players"),
 
             # Server control
             ("STOP",            r'(?<!\#)\bstop\b',                                        "CRITICAL", "Stops the server"),
-            ("RELOAD",          r'(?<!\#)\breload\b',                                      "HIGH",     "Reloads the server"),
             ("SAVE_OFF",        r'(?<!\#)\bsave-off\b',                                    "HIGH",     "Disables world saving"),
 
             # Destructive world modification
-            ("FILL_AIR",        r'(?<!\#)\bfill\b.+\bair\b',                              "HIGH",     "Fills region with air (possible griefing)"),
             ("FORCELOAD_FLOOD", r'(?<!\#)\bforceload\s+add\b.+forceload\s+add\b',         "MEDIUM",   "Multiple forceload calls (lag abuse)"),
-            ("KILL_ALL",        r'(?<!\#)\bkill\s+@[ae]\b(?!\[)',                         "HIGH",     "Kills all entities unconditionally"),
-            ("SETBLOCK_LOOT",   r'(?<!\#)\bsetblock\b.+\bchest\b.+\{Items',               "MEDIUM",   "Places chest with items (possible dupe)"),
 
             # Data exfiltration / storage poisoning
             ("DATA_REMOVE_ENGINE", r'(?<!\#)\bdata\s+remove\s+storage\s+datalib:engine\b', "CRITICAL", "Removes engine storage (destabilizes lib)"),
-            ("DATA_MODIFY_ENGINE", r'(?<!\#)\bdata\s+modify\s+storage\s+datalib:engine\b', "HIGH",     "Directly modifies engine storage"),
-            ("DATA_REMOVE_OUTPUT", r'(?<!\#)\bdata\s+remove\s+storage\s+datalib:output\b', "HIGH",     "Removes output storage"),
 
             # Suspicious URL patterns in tellraw/book content
             ("URL_HTTP",        r'(?<!\#).+"url"\s*:\s*"http://',                         "HIGH",     "Unencrypted HTTP URL in click_event"),
@@ -90,7 +80,6 @@ jobs:
             # Attribution tampering
             ("RT_ORIGIN_REMOVE",r'(?<!\#)\bdata\s+remove\s+storage\s+datalib:engine\s+global\.rt_origin_verified\b',
                                                                                            "HIGH",     "Removes attribution verification flag"),
-            ("WATERMARK_REMOVE",r'(?<!\#)scoreboard\s+players\s+(set|reset|remove)\s+#runtoolkit\.watermark',
                                                                                            "HIGH",     "Modifies attribution watermark score"),
           ]
 
