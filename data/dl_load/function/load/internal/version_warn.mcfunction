@@ -4,7 +4,7 @@
 
 playsound datalib:ui.error master @a ~ ~ ~ 0.7 0.8
 
-tellraw @a ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"Version mismatch — expected ","color":"red"},{"text":"v5.1.1","color":"aqua"},{"text":". Load aborted.","color":"red"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"Version mismatch — expected ","color":"red"},{"text":"v5.1.1","color":"aqua"},{"text":". Load aborted.","color":"red"}]
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"DEBUG ","color":"aqua"},{"text":"expected: 5.1.1 · got: ","color":"#555555"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"yellow"},{"text":".","color":"#555555"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"yellow"},{"text":".","color":"#555555"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"yellow"}]
 
 data modify storage datalib:input message set value "[Load] version_warn — version mismatch, load aborted"
