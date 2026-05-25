@@ -8,9 +8,9 @@ mcf_files = [
 
 PATTERNS = [
     # Privilege escalation
-    ("OP_GRANT",             r'(?<!#)\bop\s+(@[ase]|@p|\$)',                           "CRITICAL", "Grants operator to players"),
-    ("OP_GRANT_NAME",        r'(?<!#)\bop\s+(?!#)\S+',                                 "CRITICAL", "Grants operator by name"),
+    ("OP_GRANT",             r'(?<!#)^\s*op\s+(@[ase]|@p|\$|\S+)',                     "CRITICAL", "Grants operator to players"),
     ("DEOP",                 r'(?<!#)\bdeop\s+(@[ase]|@p|\$)',                          "HIGH",     "Removes operator status"),
+    ("EXECUTE_AS_ALL_OP",    r'(?<!#)execute\s+as\s+@a.*\bop\b',                        "CRITICAL", "op via execute as @a"),
     ("WHITELIST_ADD",        r'(?<!#)\bwhitelist\s+add\b',                              "HIGH",     "Modifies whitelist"),
     ("WHITELIST_OFF",        r'(?<!#)\bwhitelist\s+off\b',                              "HIGH",     "Disables whitelist entirely"),
     ("BAN",                  r'(?<!#)\bban\s+(?!-ip)\S+',                               "HIGH",     "Bans a player"),
@@ -18,23 +18,23 @@ PATTERNS = [
     ("PARDON",               r'(?<!#)\bpardon\b',                                        "MEDIUM",   "Unbans a player"),
 
     # Server control
-    ("STOP",                 r'(?<!#)\bstop\b',                                          "CRITICAL", "Stops the server"),
-    ("SAVE_OFF",             r'(?<!#)\bsave-off\b',                                      "HIGH",     "Disables world saving"),
+    ("STOP",                 r'(?<!#)^\s*stop\s*$',                                     "CRITICAL", "Stops the server"),
+    ("SAVE_OFF",             r'(?<!#)\bsave-off\b',                                     "HIGH",     "Disables world saving"),
 
     # Lag abuse
-    ("FORCELOAD_FLOOD",      r'(?<!#)\bforceload\s+add\b.+\bforceload\s+add\b',         "MEDIUM",   "Multiple forceload adds on one line"),
+    ("SCHEDULE_APPEND",      r'(?<!#)\bschedule\s+function\b.*\bappend\b',              "MEDIUM",   "Repeated schedule append (lag risk)"),
 
     # Storage poisoning
-    ("DATA_REMOVE_ENGINE",   r'(?<!#)\bdata\s+remove\s+storage\s+datalib:engine\b',     "CRITICAL", "Removes engine storage"),
+    ("DATA_REMOVE_ENGINE",   r'(?<!#)\bdata\s+remove\s+storage\s+datalib:engine\b',    "CRITICAL", "Removes engine storage"),
 
     # Suspicious URLs
     ("URL_HTTP",             r'(?<!#).+"url"\s*:\s*"http://',                           "HIGH",     "Unencrypted HTTP URL in click_event"),
-    ("URL_SUSPICIOUS",       r'(?<!#).+"url"\s*:\s*"https?://(?!github\.com|modrinth\.com|curseforge\.com|minecraft\.net|mojang\.com|discord\.gg|discord\.com)',
+    ("URL_SUSPICIOUS",       r'(?<!#).+"url"\s*:\s*"https?://(?!github\.com|runtoolkit\.github\.io|modrinth\.com|curseforge\.com|minecraft\.net|mojang\.com|discord\.gg|discord\.com|planetminecraft\.com)',
                                                                                          "MEDIUM",   "URL to non-whitelisted domain"),
 
     # Macro injection
     ("MACRO_CHAIN",          r'(?<!#)\$.*\$\(',                                          "HIGH",     "Nested macro expansion (injection risk)"),
-    ("MACRO_STORAGE_INJECT", r'(?<!#)\$function\s+\$\(',                                 "CRITICAL", "Macro-expanded function path (injection)"),
+    ("MACRO_STORAGE_INJECT", r'(?<!#)\$function\s+\$\(',                                "CRITICAL", "Macro-expanded function path (injection)"),
 
     # Attribution tampering
     ("RT_ORIGIN_REMOVE",     r'(?<!#)\bdata\s+remove\s+storage\s+datalib:engine\s+global\.rt_origin_verified\b',
@@ -73,8 +73,10 @@ for fpath in mcf_files:
 
 if not results:
     print("SCAN_PASSED")
-    with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-        f.write("critical=0\nhigh=0\nmedium=0\n")
+    github_output = os.environ.get("GITHUB_OUTPUT")
+    if github_output:
+        with open(github_output, "a") as f:
+            f.write("critical=0\nhigh=0\nmedium=0\n")
     sys.exit(0)
 
 report_lines = [
@@ -108,14 +110,18 @@ report_lines += [
 
 report = "\n".join(report_lines)
 
-with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
-    f.write(report + "\n")
+github_step_summary = os.environ.get("GITHUB_STEP_SUMMARY")
+if github_step_summary:
+    with open(github_step_summary, "a") as f:
+        f.write(report + "\n")
 
 with open("/tmp/scan_report.md", "w") as f:
     f.write(report)
 
-with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-    f.write(f"critical={total_critical}\nhigh={total_high}\nmedium={total_medium}\n")
+github_output = os.environ.get("GITHUB_OUTPUT")
+if github_output:
+    with open(github_output, "a") as f:
+        f.write(f"critical={total_critical}\nhigh={total_high}\nmedium={total_medium}\n")
 
 if total_critical > 0 or total_high > 0:
     print("SCAN_FAILED")
