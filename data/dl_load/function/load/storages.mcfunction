@@ -85,7 +85,7 @@ data modify storage datalib:engine batches set value {}
 execute unless data storage datalib:engine wand_cooldowns run data modify storage datalib:engine wand_cooldowns set value {}
 
 # ─────────────────────────────────────────────────────────────────
-# Security module init (v5.1.1+)
+# Security module init (v5.1.2+)
 # BREAKING CHANGE: trust_players defaults to 0b — players must have
 # dl.perm_level explicitly set. datalib.admin tag alone gives no access.
 #
@@ -99,7 +99,7 @@ execute unless data storage datalib:engine wand_cooldowns run data modify storag
 # ─────────────────────────────────────────────────────────────────
 execute unless data storage datalib:engine security run data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:[]}
 # ─────────────────────────────────────────────────────────────────
-# Security module v5.1.1+ additions
+# Security module v5.1.2+ additions
 # BREAKING CHANGE: sandbox_allowlist is now a compound {} (was list []).
 # Empty compound {} = all sandbox commands blocked.
 # multi_type_allowlist: compound of permitted multiCommands.type values.

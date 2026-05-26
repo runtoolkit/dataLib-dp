@@ -85,7 +85,7 @@ data modify storage datalib:engine batches set value {}
 execute unless data storage datalib:engine wand_cooldowns run data modify storage datalib:engine wand_cooldowns set value {}
 
 # ─────────────────────────────────────────────────────────────────
-# Security module v5.1.1+ additions
+# Security module v5.1.2+ additions
 # BREAKING CHANGE: sandbox_allowlist is now a compound {} (was list []).
 # Empty compound {} = all sandbox commands blocked.
 # multi_type_allowlist: compound of permitted multiCommands.type values.

@@ -1,5 +1,5 @@
-execute unless data storage datalib:engine global run data modify storage datalib:engine global set value {version:"v5.1.1"}
-data modify storage datalib:engine global.version set value "v5.1.1"
+execute unless data storage datalib:engine global run data modify storage datalib:engine global set value {version:"v5.1.2"}
+data modify storage datalib:engine global.version set value "v5.1.2"
 
 execute unless data storage datalib:engine log_display run data modify storage datalib:engine log_display set value []
 execute unless score #dl.log_count dl.tmp matches 0.. run scoreboard players set #dl.log_count dl.tmp 0

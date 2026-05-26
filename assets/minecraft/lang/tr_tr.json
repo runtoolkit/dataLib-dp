@@ -13,7 +13,7 @@
   "datalib.msg.safe_load.denied.admin": "safe_load/yes reddedildi — datalib.admin etiketi gerekli.",
   "datalib.msg.safe_load.denied.perm":  "safe_load/yes reddedildi — dl.perm_level \u2265 4 gerekli.",
   "datalib.msg.safe_load.denied.loaded":"safe_load/yes reddedildi — motor zaten yüklü.",
-  "datalib.msg.version_conflict":       "Sürüm çakışması! Beklenen v5.1.1 \u2014 kayıtlı puanlar eşleşmiyor.",
+  "datalib.msg.version_conflict":       "Sürüm çakışması! Beklenen v5.1.2 \u2014 kayıtlı puanlar eşleşmiyor.",
   "datalib.msg.version_reload":         "\u2192 dataLib'i yeniden başlatmak için /reload çalıştırın.",
 
   "datalib.subtitle.load_success": "dataLib yüklendi",

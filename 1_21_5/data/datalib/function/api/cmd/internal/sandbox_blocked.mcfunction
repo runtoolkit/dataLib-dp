@@ -1,7 +1,7 @@
 # datalib:api/cmd/internal/sandbox_blocked [1.21.5+ overlay]
 # Extends the base sandbox_blocked with a test_block server log entry.
 #
-# NOTE (v5.1.1): The primary sandbox enforcement path now goes through
+# NOTE (v5.1.2): The primary sandbox enforcement path now goes through
 # datalib:api/cmd/internal/sandbox_gate → datalib:core/security/type_violation.
 # This function is retained for direct callers and backwards compatibility.
 # The type_violation overlay (1_21_5) handles test_block logging for the

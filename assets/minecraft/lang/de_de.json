@@ -13,7 +13,7 @@
   "datalib.msg.safe_load.denied.admin": "safe_load/yes verweigert — datalib.admin-Tag erforderlich.",
   "datalib.msg.safe_load.denied.perm":  "safe_load/yes verweigert — dl.perm_level \u2265 4 erforderlich.",
   "datalib.msg.safe_load.denied.loaded":"safe_load/yes verweigert — Engine bereits geladen.",
-  "datalib.msg.version_conflict":       "Versionskonflikt! Erwartet v5.1.1 \u2014 gespeicherte Werte stimmen nicht \u00fcberein.",
+  "datalib.msg.version_conflict":       "Versionskonflikt! Erwartet v5.1.2 \u2014 gespeicherte Werte stimmen nicht \u00fcberein.",
   "datalib.msg.version_reload":         "\u2192 F\u00fchren Sie /reload aus, um dataLib neu zu initialisieren.",
 
   "datalib.subtitle.load_success": "dataLib geladen",

@@ -169,7 +169,7 @@ jobs:
       - name: Read version
         id: ver
         run: |
-          # Extract version like "v5.1.1" from the description array in pack.mcmeta
+          # Extract version like "v5.1.2" from the description array in pack.mcmeta
           VERSION=$(jq -r '
             .pack.description |
             if type == "array" then

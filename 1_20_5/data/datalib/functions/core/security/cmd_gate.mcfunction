@@ -9,7 +9,7 @@
 #   execute unless function datalib:core/security/cmd_gate run return 0
 #   $$(cmd)
 #
-# SECURITY MODEL (v5.1.1+):
+# SECURITY MODEL (v5.1.2+):
 #   • Engine must be loaded (loaded:1b).
 #   • Players require dl.perm_level >= security.cmd_min_level.
 #   • sandbox:1b raises the floor to security.sandbox_cmd_min_level.
