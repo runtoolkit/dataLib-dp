@@ -127,3 +127,11 @@ data remove storage datalib:engine _uuid_cache
 
 # pid init temp cleanup
 data remove storage datalib:engine _pid_init_tmp
+
+# Color API cleanup
+# palette and gradients are intentionally preserved (pack-owned data).
+# _names is rebuilt each load by systems/color/init.
+# fork_warn flags are transient — cleared on clean unload.
+data remove storage datalib:engine color._names
+data remove storage datalib:engine fork_warn
+data remove storage datalib:engine fork_warn_tick

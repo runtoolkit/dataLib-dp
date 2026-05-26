@@ -140,3 +140,10 @@ data remove storage datalib:engine _cb_last
 data remove storage datalib:engine _cb_work
 data remove storage datalib:engine _cb_entry
 execute unless data storage datalib:engine modules.cb run data modify storage datalib:engine modules.cb set value 1b
+
+# ─────────────────────────────────────────────────────────────────
+# Color API init
+# Populates named color lookup table and initializes color namespace.
+# palette and gradients are preserved across reloads (unless data guards).
+# ─────────────────────────────────────────────────────────────────
+function datalib:systems/color/init

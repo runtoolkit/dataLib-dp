@@ -1,9 +1,9 @@
 {
-  "release": "v5.1.1",
+  "release": "v5.1.2",
   "semver": {
     "major": 5,
     "minor": 1,
-    "patch": 1,
+    "patch": 2,
     "pre": 0
   },
   "targets": [
