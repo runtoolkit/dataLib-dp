@@ -132,14 +132,14 @@
         "directory": "1_21_6",
         "formats": {
           "min_inclusive": 80,
-          "max_inclusive": 400000
+          "max_inclusive": 100
         },
         "min_format": [
           80,
           0
         ],
         "max_format": [
-          400000,
+          100,
           1
         ]
       },
@@ -200,6 +200,21 @@
         ],
         "max_format": [
           47,
+          1
+        ]
+      },
+      {
+        "directory": "26_2",
+        "formats": {
+          "min_inclusive": 106,
+          "max_inclusive": 400000
+        },
+        "min_format": [
+          106,
+          0
+        ],
+        "max_format": [
+          400000,
           1
         ]
       }

@@ -49,6 +49,13 @@
       "overlays": [
         "26_1"
       ]
+    },
+    {
+      "label": "26_2",
+      "pack_format": 106,
+      "overlays": [
+        "26_2"
+      ]
     }
   ]
 }
