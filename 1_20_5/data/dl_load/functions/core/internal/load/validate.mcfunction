@@ -5,7 +5,7 @@ execute unless data storage datalib:engine log_display run data modify storage d
 execute unless score #dl.log_count dl.tmp matches 0.. run scoreboard players set #dl.log_count dl.tmp 0
 
 execute if data storage datalib:engine global{loaded:1b} run data modify storage datalib:engine _log_add_tmp.message set value "Already loaded — skipping reload."
-execute if data storage datalib:engine global{loaded:1b} run function datalib:systems/log/warn with storage datalib:engine {}
+execute if data storage datalib:engine global{loaded:1b} run function datalib:systems/log/warn with storage datalib:engine _log_add_tmp
 execute if data storage datalib:engine global{loaded:1b} run return 0
 
 scoreboard objectives add dl.pre_version dummy
