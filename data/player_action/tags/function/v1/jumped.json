@@ -1,5 +1,5 @@
 {
   "values": [
-    "datalib:systems/hook/internal/on_jump"
+    "datalib:core/internal/systems/hook/on_jump"
   ]
 }
