@@ -5,7 +5,7 @@
 # Runs the full cleanup pipeline then announces shutdown via marker.
 # No macro parameters needed.
 
-function dl_load:load/internal/cleanup
+function dl_load:core/internal/load/cleanup
 
 summon minecraft:marker ~ ~ ~ {Tags:["datalib.gate_disable"],CustomName:{"text":"DL"}}
 execute as @e[type=minecraft:marker,tag=datalib.gate_disable,limit=1] run say [DL] Engine DISABLED. All scoreboards and storage removed.

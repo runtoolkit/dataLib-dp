@@ -6,11 +6,11 @@ execute as @a[scores={dl_run=1..}] run function #datalib:run
 scoreboard players set @a[scores={dl_run=1..}] dl_run 0
 scoreboard players enable @a[scores={dl_run=-1..}] dl_run
 
-execute as @a[scores={dl_action=1..}] run function datalib:api/trigger/internal/dispatch
+execute as @a[scores={dl_action=1..}] run function datalib:core/internal/api/trigger/dispatch
 
-function datalib:api/interaction/internal/tick_scan
+function datalib:core/internal/api/interaction/tick_scan
 
-function datalib:api/perm/trigger/internal/tick_start
+function datalib:core/internal/api/perm/trigger/tick_start
 
 scoreboard players remove @a[scores={datalib.dialog_load=1..}] datalib.dialog_load 1
 
@@ -21,8 +21,8 @@ execute as @a[scores={datalib.dialog_load=1..}] run title @s actionbar ["",{"tex
 execute as @a[scores={datalib.dialog_load=0},tag=datalib.dialog_closed] at @s run function datalib:api/dialog/open
 execute as @a[scores={datalib.dialog_load=0},tag=!datalib.dialog_closed,tag=!datalib.dialog_opened] at @s run function datalib:api/dialog/open
 
-function datalib:api/wand/internal/tick_scan
-function datalib:systems/hook/internal/tick_scan
+function datalib:core/internal/api/wand/tick_scan
+function datalib:core/internal/systems/hook/tick_scan
 
-function datalib:systems/geo/region_watch/internal/tick_scan
-function datalib:api/cmd/freeze/internal/tick
+function datalib:core/internal/systems/geo/region_watch/tick_scan
+function datalib:core/internal/api/cmd/freeze/tick

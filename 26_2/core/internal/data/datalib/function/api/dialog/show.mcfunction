@@ -11,7 +11,7 @@ execute unless data storage datalib:engine dialog.DIALOG run return 0
 execute at @s run function datalib:player/get_name
 data modify storage datalib:engine dialog.NAME set from storage datalib:names temp.NAME
 
-function datalib:api/dialog/internal/show_dialog_exec with storage datalib:engine dialog
+function datalib:core/internal/api/dialog/show_dialog_exec with storage datalib:engine dialog
 
 tag @s add datalib.dialog_opened
 

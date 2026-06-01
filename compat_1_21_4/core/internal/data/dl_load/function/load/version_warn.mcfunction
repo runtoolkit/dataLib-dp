@@ -3,6 +3,6 @@ tellraw @a ["",{"text":" ↳ ","color":"#555555"},{"text":"Run ","color":"gray"}
 
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL/DEBUG] ","color":"aqua"},{"text":"dl.pre_version → ","color":"#555555"},{"text":"major=","color":"gray"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"yellow"},{"text":" minor=","color":"gray"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"yellow"},{"text":" patch=","color":"gray"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"yellow"},{"text":" pre=","color":"gray"},{"score":{"name":"#dl.pre","objective":"dl.pre_version"},"color":"yellow"},{"text":" (expected: 4 0 2 pre=0)","color":"red"}]
 
-data modify storage datalib:input message set value "❌ Version mismatch — expected v5.1.2. Load aborted."
-function datalib:systems/log/warn with storage datalib:input {}
-data remove storage datalib:input message
+data modify storage datalib:engine _log_add_tmp.message set value "❌ Version mismatch — expected v5.1.2. Load aborted."
+function datalib:systems/log/warn with storage datalib:engine _log_add_tmp {}
+data remove storage datalib:engine _log_add_tmp.message
