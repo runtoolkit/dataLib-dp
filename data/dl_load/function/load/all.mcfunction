@@ -8,9 +8,9 @@ execute as @e[type=minecraft:marker,tag=datalib.stage1,limit=1] run kill @s
 
 execute unless function dl_load:core/internal/load/validate run return 0
 
-data modify storage datalib:engine _log_add_tmp level set value "D.L."
-data modify storage datalib:engine _log_add_tmp message set value "Starting..."
-data modify storage datalib:engine _log_add_tmp color set value "aqua"
+data modify storage datalib:engine _log_add_tmp.level set value "D.L."
+data modify storage datalib:engine _log_add_tmp.message set value "Starting..."
+data modify storage datalib:engine _log_add_tmp.color set value "aqua"
 function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 
 # RT Origin — Gate 1: watermark doğrulama
@@ -55,9 +55,9 @@ scoreboard players operation #dataLib load.status = #version_calc dl.tmp
 execute if score #dl.pre dl.pre_version matches 1.. run tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Loaded. ","color":"green"},[{"text":"v","color":"aqua"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":"-pre","color":"#ff8800"},{"score":{"name":"#dl.pre","objective":"dl.pre_version"},"color":"#ff8800","bold":true}]]
 execute if score #dl.pre dl.pre_version matches ..0 run tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Loaded. ","color":"green"},[{"text":"v","color":"aqua"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"aqua","bold":true}]]
 
-data modify storage datalib:engine _log_add_tmp level set value "dataLib"
-data modify storage datalib:engine _log_add_tmp message set value "Loaded."
-data modify storage datalib:engine _log_add_tmp color set value "green"
+data modify storage datalib:engine _log_add_tmp.level set value "dataLib"
+data modify storage datalib:engine _log_add_tmp.message set value "Loaded."
+data modify storage datalib:engine _log_add_tmp.color set value "green"
 function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 
 # RT Origin verification

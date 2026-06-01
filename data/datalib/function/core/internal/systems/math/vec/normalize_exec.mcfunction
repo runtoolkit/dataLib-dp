@@ -5,9 +5,9 @@
 
 function datalib:core/lib/input_push
 
-data modify storage datalib:engine _math_d3d_tmp x1 set value 0
-data modify storage datalib:engine _math_d3d_tmp y1 set value 0
-data modify storage datalib:engine _math_d3d_tmp z1 set value 0
+data modify storage datalib:engine _math_d3d_tmp.x1 set value 0
+data modify storage datalib:engine _math_d3d_tmp.y1 set value 0
+data modify storage datalib:engine _math_d3d_tmp.z1 set value 0
 $data modify storage datalib:engine _math_d3d_tmp x2 set value $(x)
 $data modify storage datalib:engine _math_d3d_tmp y2 set value $(y)
 $data modify storage datalib:engine _math_d3d_tmp z2 set value $(z)

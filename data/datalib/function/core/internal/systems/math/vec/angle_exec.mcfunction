@@ -13,9 +13,9 @@ $data modify storage datalib:engine _vec_dot_tmp bz set value $(bz)
 function datalib:systems/math/vec/dot with storage datalib:engine _vec_dot_tmp
 execute store result score $vang_dot dl.tmp run data get storage datalib:output result
 
-data modify storage datalib:engine _math_d3d_tmp x1 set value 0
-data modify storage datalib:engine _math_d3d_tmp y1 set value 0
-data modify storage datalib:engine _math_d3d_tmp z1 set value 0
+data modify storage datalib:engine _math_d3d_tmp.x1 set value 0
+data modify storage datalib:engine _math_d3d_tmp.y1 set value 0
+data modify storage datalib:engine _math_d3d_tmp.z1 set value 0
 $data modify storage datalib:engine _math_d3d_tmp x2 set value $(ax)
 $data modify storage datalib:engine _math_d3d_tmp y2 set value $(ay)
 $data modify storage datalib:engine _math_d3d_tmp z2 set value $(az)
