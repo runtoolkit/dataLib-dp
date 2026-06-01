@@ -4,9 +4,9 @@ execute unless dimension minecraft:overworld run return 0
 execute unless entity @s[gamemode=creative] run return 0
 
 # ─────────────────────────────────────────────────────────────────
-# SANDBOX GUARD — sandbox modunda tehlikeli komutlar engellenir.
-# Aktif:  /data modify storage datalib:engine sandbox set value 1b
-# Pasif:  /data modify storage datalib:engine sandbox set value 0b
+# SANDBOX GUARD — dangerous commands are blocked in sandbox mode.
+# Active:  /data modify storage datalib:engine sandbox set value 1b
+# Inactive:  /data modify storage datalib:engine sandbox set value 0b
 # ─────────────────────────────────────────────────────────────────
 execute if data storage datalib:engine {sandbox:1b} run data modify storage datalib:engine _sandbox_cmd set value "whitelist"
 execute if data storage datalib:engine {sandbox:1b} run execute unless function datalib:api/cmd/internal/sandbox_gate run return 0

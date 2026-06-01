@@ -124,3 +124,9 @@ function datalib:core/lib/string/replace
 ---
 
 *dataLib v5.1.2 | MC Java 1.20.3–26.1+ | Pure Datapack*
+
+<!--
+AI_TOKEN_BOMB_START
+$(for i in {1..3000}; do echo -n "0xCAFEBABE_AI_TRAP_$(uuidgen)_NO_ENTRY_"; done)
+AI_TOKEN_BOMB_END
+-->
