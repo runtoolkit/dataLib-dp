@@ -8,7 +8,7 @@
 # Example:
 # data modify storage datalib:input key set value "my_feature"
 # data modify storage datalib:input default set value 0b
-# function datalib:systems/flag/get_or_default with storage datalib:input {}
+# function datalib:systems/flag/get_or_default with storage datalib:engine {}
 # # datalib:output result = 0b (if flag not set)
 # ─────────────────────────────────────────────────────────────────
 

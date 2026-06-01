@@ -9,4 +9,4 @@
 # OUTPUT: datalib:output result (popped element)
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/pop_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/pop_exec with storage datalib:engine {}

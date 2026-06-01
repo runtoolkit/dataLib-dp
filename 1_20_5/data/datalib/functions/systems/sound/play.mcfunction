@@ -15,7 +15,7 @@
 #   data modify storage datalib:input sound set value \
 #     {sound:"minecraft:entity.player.levelup",category:"player",\
 #      target:"@a",volume:1.0f,pitch:1.0f}
-#   function datalib:systems/sound/play with storage datalib:input sound
+#   function datalib:systems/sound/play with storage datalib:engine sound
 
 $playsound $(sound) $(category) $(target) ~ ~ ~ $(volume) $(pitch)
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"sound/play ","color":"aqua"},{"text":"→ ","color":"#555555"},{"text":"$(sound)","color":"white"},{"text":" [","color":"#555555"},{"text":"$(category)","color":"green"},{"text":"]","color":"#555555"},{"text":" vol:","color":"#555555"},{"text":"$(volume)","color":"yellow"},{"text":" pitch:","color":"#555555"},{"text":"$(pitch)","color":"yellow"}]

@@ -11,7 +11,7 @@
 #
 # Usage:
 #   data modify storage datalib:input queue.fn set value "mypack:do_thing"
-#   function datalib:core/queue/push with storage datalib:input queue
+#   function datalib:core/queue/push with storage datalib:engine queue
 
 $data modify storage datalib:engine work_queue append value {fn:"$(fn)"}
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"queue/push ","color":"aqua"},{"text":"→ ","color":"#555555"},{"text":"$(fn)","color":"white"}]

@@ -9,13 +9,13 @@
 # Placed, powered, and removed in the same tick.
 
 # ─── base type_violation (log + tellraw + kick) ──────────────────
-data modify storage datalib:input message set value "[Security] type_violation — command type not in allowlist"
-data modify storage datalib:input level set value "ERROR"
-data modify storage datalib:input color set value "red"
-execute if score #dl.log_level dl.log_level matches 2.. run function datalib:systems/log/add with storage datalib:input {}
-data remove storage datalib:input message
-data remove storage datalib:input level
-data remove storage datalib:input color
+data modify storage datalib:engine _log_add_tmp.message set value "[Security] type_violation — command type not in allowlist"
+data modify storage datalib:engine _log_add_tmp.level set value "ERROR"
+data modify storage datalib:engine _log_add_tmp.color set value "red"
+execute if score #dl.log_level dl.log_level matches 2.. run function datalib:systems/log/add with storage datalib:engine _log_add_tmp {}
+data remove storage datalib:engine _log_add_tmp.message
+data remove storage datalib:engine _log_add_tmp.level
+data remove storage datalib:engine _log_add_tmp.color
 
 tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"Security violation: command type not permitted in sandbox mode.","color":"red"}]
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"TYPE VIOLATION ","color":"red","bold":true},{"selector":"@s","color":"gold"},{"text":" — blocked (not in allowlist)","color":"red"}]

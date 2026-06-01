@@ -12,7 +12,7 @@
 # Output → datalib:output result 1b=ALLOWED 0b=DENIED
 
 # Auto-seed: if bucket for this player+key doesn't exist, create from template
-$execute unless data storage datalib:engine "rate_limit.rules.player:$(key):$(player)" run function datalib:systems/rate_limit/player/internal/ensure {tpl:"$(key)",full:"player:$(key):$(player)"}
+$execute unless data storage datalib:engine "rate_limit.rules.player:$(key):$(player)" run function datalib:core/internal/systems/rate_limit/player/ensure {tpl:"$(key)",full:"player:$(key):$(player)"}
 
 # Delegate to generic check with full compound key
 $function datalib:systems/rate_limit/check {key:"player:$(key):$(player)"}

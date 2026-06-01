@@ -8,7 +8,7 @@ data remove storage datalib:input event
 data remove storage datalib:input duration
 data remove storage datalib:input team
 data remove storage datalib:input target
-data remove storage datalib:input message
+data remove storage datalib:engine _log_add_tmp.message
 data remove storage datalib:input color
 data remove storage datalib:input label
 data remove storage datalib:input interval
@@ -102,7 +102,7 @@ data modify storage datalib:input event set from storage datalib:engine _input_s
 data modify storage datalib:input duration set from storage datalib:engine _input_stack[-1].duration
 data modify storage datalib:input team set from storage datalib:engine _input_stack[-1].team
 data modify storage datalib:input target set from storage datalib:engine _input_stack[-1].target
-data modify storage datalib:input message set from storage datalib:engine _input_stack[-1].message
+data modify storage datalib:engine _log_add_tmp.message set from storage datalib:engine _input_stack[-1].message
 data modify storage datalib:input color set from storage datalib:engine _input_stack[-1].color
 data modify storage datalib:input label set from storage datalib:engine _input_stack[-1].label
 data modify storage datalib:input interval set from storage datalib:engine _input_stack[-1].interval

@@ -23,7 +23,7 @@ execute unless data storage datalib:engine player_pids run data modify storage d
 execute unless data storage datalib:engine _pid_seq run data modify storage datalib:engine _pid_seq set value 0
 
 # UUID module init
-function datalib:systems/uuid/internal/init
+function datalib:core/internal/systems/uuid/init
 
 # once_per_player module init
 execute unless data storage datalib:engine once_per_player run data modify storage datalib:engine once_per_player set value {}

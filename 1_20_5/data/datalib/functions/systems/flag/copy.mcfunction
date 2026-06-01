@@ -10,7 +10,7 @@
 # Example:
 # data modify storage datalib:input from set value "feature_a"
 # data modify storage datalib:input to set value "feature_a_backup"
-# function datalib:systems/flag/copy with storage datalib:input {}
+# function datalib:systems/flag/copy with storage datalib:engine {}
 # ─────────────────────────────────────────────────────────────────
 
 # Default: clear destination

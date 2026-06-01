@@ -10,7 +10,7 @@ data modify storage datalib:engine _input_stack[-1].event set from storage datal
 data modify storage datalib:engine _input_stack[-1].duration set from storage datalib:input duration
 data modify storage datalib:engine _input_stack[-1].team set from storage datalib:input team
 data modify storage datalib:engine _input_stack[-1].target set from storage datalib:input target
-data modify storage datalib:engine _input_stack[-1].message set from storage datalib:input message
+data modify storage datalib:engine _input_stack[-1].message set from storage datalib:engine _log_add_tmp.message
 data modify storage datalib:engine _input_stack[-1].color set from storage datalib:input color
 data modify storage datalib:engine _input_stack[-1].label set from storage datalib:input label
 data modify storage datalib:engine _input_stack[-1].interval set from storage datalib:input interval

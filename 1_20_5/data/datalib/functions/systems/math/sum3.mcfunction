@@ -8,7 +8,7 @@
 # data modify storage datalib:input a set value 100
 # data modify storage datalib:input b set value 200
 # data modify storage datalib:input c set value 300
-# function datalib:systems/math/sum3 with storage datalib:input {}
+# function datalib:systems/math/sum3 with storage datalib:engine {}
 # # datalib:output result = 600
 # ─────────────────────────────────────────────────────────────────
 

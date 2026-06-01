@@ -7,4 +7,4 @@
 # spread_over → how many ticks to spread over (default: 1)
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/batch/internal/begin_exec with storage datalib:input {}
+function datalib:core/internal/lib/batch/begin_exec with storage datalib:engine {}

@@ -1,6 +1,6 @@
 # dl_load:load/internal/version_warn
 # Called when dl.pre_version scores don't match expected (5.1.1).
-# Fires error sound + sade hata mesajı, load reddedilir.
+# Fires error sound + plain error message, load aborted.
 
 playsound datalib:ui.error master @a ~ ~ ~ 0.7 0.8
 

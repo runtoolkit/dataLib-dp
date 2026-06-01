@@ -4,7 +4,7 @@
 # Note:   Prefer 'data modify ... set string storage ...' when possible (cheaper)
 # Dep:    StringLib (CMDred)
 data modify storage datalib:engine _str_bridge.Input set from storage datalib:input value
-function datalib:core/lib/string/internal/to_string_dispatch with storage datalib:engine _str_bridge
+function datalib:core/internal/lib/string/to_string_dispatch with storage datalib:engine _str_bridge
 data modify storage datalib:output string.result set from storage stringlib:output to_string
 data remove storage stringlib:output to_string
 data remove storage datalib:engine _str_bridge

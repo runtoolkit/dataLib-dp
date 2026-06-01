@@ -26,7 +26,7 @@ execute if score $rnd_n dl.tmp matches 0 run return 0
 # Step 2 — assign sequential dl.rnd_idx to each matching entity
 #           (random_assign runs AS each entity to maintain counter state)
 scoreboard players set $rnd_i dl.tmp 0
-$execute as @e[type=$(type),tag=$(tag)] run function datalib:world/entity/internal/random_assign
+$execute as @e[type=$(type),tag=$(tag)] run function datalib:core/internal/world/entity/random_assign
 
 # Step 3 — compute max = count-1, store for the dispatch macro
 scoreboard players remove $rnd_n dl.tmp 1
@@ -36,7 +36,7 @@ $data modify storage datalib:engine _rnd.type set value "$(type)"
 $data modify storage datalib:engine _rnd.tag set value "$(tag)"
 
 # Step 4 — roll /random value 0..max and run func as the winner
-function datalib:world/entity/internal/random_dispatch with storage datalib:engine _rnd
+function datalib:core/internal/world/entity/random_dispatch with storage datalib:engine _rnd
 
 # Cleanup
 data remove storage datalib:engine _rnd

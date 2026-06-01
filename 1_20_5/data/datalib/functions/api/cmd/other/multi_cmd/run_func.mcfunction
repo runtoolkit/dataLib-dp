@@ -8,7 +8,7 @@
 
 # Convert strings to {func:"..."} format
 data modify storage datalib:engine _mcmd_queue set value []
-function datalib:api/cmd/other/multi_cmd/internal/func_convert_loop
+function datalib:core/internal/api/cmd/other/multi_cmd/func_convert_loop
 
 data modify storage datalib:engine _mcmd_options set value {error_mode:"continue",profile:0b,spread:0}
 function datalib:api/cmd/other/multi_cmd/run

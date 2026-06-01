@@ -8,4 +8,4 @@
 # id → batch id
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/batch/internal/flush_exec with storage datalib:input {}
+function datalib:core/internal/lib/batch/flush_exec with storage datalib:engine {}

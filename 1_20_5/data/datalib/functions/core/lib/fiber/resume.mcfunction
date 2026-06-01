@@ -8,4 +8,4 @@
 # func → function to run
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/fiber/internal/resume_exec with storage datalib:input {}
+function datalib:core/internal/lib/fiber/resume_exec with storage datalib:engine {}

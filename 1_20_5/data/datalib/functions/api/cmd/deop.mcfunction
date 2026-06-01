@@ -9,7 +9,7 @@ execute unless entity @s[gamemode=creative] run return 0
 # Disable: /data modify storage datalib:engine sandbox set value 0b
 # ─────────────────────────────────────────────────────────────────
 execute if data storage datalib:engine {sandbox:1b} run data modify storage datalib:engine _sandbox_cmd set value "deop"
-execute if data storage datalib:engine {sandbox:1b} run execute unless function datalib:api/cmd/internal/sandbox_gate run return 0
+execute if data storage datalib:engine {sandbox:1b} run execute unless function datalib:core/internal/api/cmd/sandbox_gate run return 0
 execute unless data storage datalib:engine {sandbox:1b} run tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"TIP ","color":"yellow","bold":true},{"text":"Sandbox mode recommended → ","color":"gray"},{"text":"/data modify storage datalib:engine sandbox set value 1b","color":"aqua"}]
 $deop $(player)
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"cmd/deop ","color":"aqua"},{"text":"$(player)","color":"white"}]

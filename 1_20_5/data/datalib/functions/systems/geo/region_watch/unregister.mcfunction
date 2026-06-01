@@ -7,4 +7,4 @@
 # id → region id
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/geo/region_watch/internal/unregister_exec with storage datalib:input {}
+function datalib:core/internal/systems/geo/region_watch/unregister_exec with storage datalib:engine {}

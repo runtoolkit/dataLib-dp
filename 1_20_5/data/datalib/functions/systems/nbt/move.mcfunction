@@ -8,4 +8,4 @@
 # to_path → hedef path
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/move_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/move_exec with storage datalib:engine {}

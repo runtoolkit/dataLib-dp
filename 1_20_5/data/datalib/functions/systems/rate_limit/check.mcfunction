@@ -23,9 +23,9 @@ data modify storage datalib:output result set value 1b
 # Key format "player:<tpl>:<name>" → tpl is the second segment
 # We attempt player_ensure unconditionally; it exits early if not a player key or no template
 $data modify storage datalib:rl_work ensure_key set value "$(key)"
-function datalib:systems/rate_limit/internal/player_check with storage datalib:rl_work
+function datalib:core/internal/systems/rate_limit/player_check with storage datalib:rl_work
 
-$execute unless data storage datalib:engine rate_limit.rules.$(key) run function datalib:systems/rate_limit/internal/no_rule
+$execute unless data storage datalib:engine rate_limit.rules.$(key) run function datalib:core/internal/systems/rate_limit/no_rule
 $execute unless data storage datalib:engine rate_limit.rules.$(key) run return 0
 
 # Copy rule into work storage with key context
@@ -33,4 +33,4 @@ $data modify storage datalib:rl_work rule set from storage datalib:engine rate_l
 $data modify storage datalib:rl_work rule.key set value "$(key)"
 
 # Run the sliding window evaluation
-function datalib:systems/rate_limit/internal/evaluate with storage datalib:rl_work rule
+function datalib:core/internal/systems/rate_limit/evaluate with storage datalib:rl_work rule

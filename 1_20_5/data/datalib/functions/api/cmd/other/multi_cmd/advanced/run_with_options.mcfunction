@@ -18,8 +18,8 @@ execute unless data storage datalib:engine _mcmd_options.error_mode run data mod
 execute unless data storage datalib:engine _mcmd_options.profile run data modify storage datalib:engine _mcmd_options.profile set value 0b
 execute unless data storage datalib:engine _mcmd_options.spread_ticks run data modify storage datalib:engine _mcmd_options.spread_ticks set value 0
 
-execute if data storage datalib:engine _mcmd_options{priority_sort:1b} run function datalib:api/cmd/other/multi_cmd/advanced/internal/sort_by_priority
-execute if data storage datalib:engine _mcmd_options.spread_ticks unless data storage datalib:engine _mcmd_options{spread_ticks:0} run return run function datalib:api/cmd/other/multi_cmd/advanced/internal/run_spread
+execute if data storage datalib:engine _mcmd_options{priority_sort:1b} run function datalib:core/internal/api/cmd/other/multi_cmd/advanced/sort_by_priority
+execute if data storage datalib:engine _mcmd_options.spread_ticks unless data storage datalib:engine _mcmd_options{spread_ticks:0} run return run function datalib:core/internal/api/cmd/other/multi_cmd/advanced/run_spread
 
 function datalib:api/cmd/other/multi_cmd/run
 tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"multi_cmd/advanced ","color":"aqua"},{"text":"✔ with options","color":"green"}]}

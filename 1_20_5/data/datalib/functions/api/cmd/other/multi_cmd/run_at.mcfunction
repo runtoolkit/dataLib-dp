@@ -6,4 +6,4 @@
 # selector → entity selector
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:api/cmd/other/multi_cmd/internal/run_at_exec with storage datalib:input
+function datalib:core/internal/api/cmd/other/multi_cmd/run_at_exec with storage datalib:engine

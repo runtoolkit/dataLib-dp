@@ -14,7 +14,7 @@
 # data modify storage datalib:input a set value 1000000
 # data modify storage datalib:input b set value 1000000
 # data modify storage datalib:input c set value 500000
-# function datalib:systems/math/mul_div with storage datalib:input {}
+# function datalib:systems/math/mul_div with storage datalib:engine {}
 # # datalib:output result = 2000000
 # ─────────────────────────────────────────────────────────────────
 

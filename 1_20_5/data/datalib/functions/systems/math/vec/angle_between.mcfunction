@@ -9,4 +9,4 @@
 # result=0 for zero vectors.
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/math/vec/internal/angle_exec with storage datalib:input {}
+function datalib:core/internal/systems/math/vec/angle_exec with storage datalib:engine {}

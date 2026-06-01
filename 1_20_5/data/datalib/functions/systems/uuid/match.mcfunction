@@ -24,4 +24,4 @@ function datalib:systems/uuid/from_entity
 
 # Compare: if matched, run func
 # Is the current UUID (datalib:input value) equal to the expected?
-function datalib:systems/uuid/internal/match_check with storage datalib:input
+function datalib:core/internal/systems/uuid/match_check with storage datalib:engine

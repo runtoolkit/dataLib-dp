@@ -13,4 +13,4 @@
 # datalib:input value → UUID hex string
 # (value unchanged if key not found)
 # ============================================================
-function datalib:systems/uuid/internal/recall_read with storage datalib:input
+function datalib:core/internal/systems/uuid/recall_read with storage datalib:engine

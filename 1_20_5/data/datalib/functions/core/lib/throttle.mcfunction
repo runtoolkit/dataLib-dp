@@ -11,5 +11,5 @@ $scoreboard players set $thr_int dl.tmp $(interval)
 scoreboard players operation $thr_now dl.tmp += $thr_int dl.tmp
 $execute store result storage datalib:engine throttle.$(key) int 1 run scoreboard players get $thr_now dl.tmp
 
-function datalib:core/lib/queue_add with storage datalib:input {}
+function datalib:core/lib/queue_add with storage datalib:engine {}
 $tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"lib/throttle ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(key)","color":"aqua"}]}

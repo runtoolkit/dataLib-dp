@@ -3,7 +3,7 @@ execute unless data storage datalib:engine interaction_binds.attack[0] run retur
 data modify storage datalib:engine _ia_ubinds set from storage datalib:engine interaction_binds.attack
 data modify storage datalib:engine interaction_binds.attack set value []
 $data modify storage datalib:engine _ia_ufilter set value {tag:"$(tag)", func:"$(func)", list:"attack"}
-function datalib:api/interaction/internal/unbind_filter
+function datalib:core/internal/api/interaction/unbind_filter
 data remove storage datalib:engine _ia_ubinds
 data remove storage datalib:engine _ia_ufilter
 

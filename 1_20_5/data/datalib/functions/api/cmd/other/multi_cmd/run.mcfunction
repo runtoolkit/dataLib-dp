@@ -8,12 +8,12 @@ execute if data storage datalib:engine _mcmd_options{profile:1b} run data modify
 execute if data storage datalib:engine _mcmd_options{profile:1b} run execute store result storage datalib:engine _mcmd_stats.start_time int 1 run time query gametime
 
 # Start recursive stepping
-function datalib:api/cmd/other/multi_cmd/internal/step
+function datalib:core/internal/api/cmd/other/multi_cmd/step
 
 # Cleanup
-function datalib:api/cmd/other/multi_cmd/internal/cleanup
+function datalib:core/internal/api/cmd/other/multi_cmd/cleanup
 
 # Show statistics
-execute if data storage datalib:engine _mcmd_options{profile:1b} run function datalib:api/cmd/other/multi_cmd/internal/show_stats
+execute if data storage datalib:engine _mcmd_options{profile:1b} run function datalib:core/internal/api/cmd/other/multi_cmd/show_stats
 
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"multi_cmd/run ","color":"aqua"},{"text":"✔ batch done","color":"green"}]

@@ -16,4 +16,4 @@
 # function datalib:systems/nbt/copy
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/copy_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/copy_exec with storage datalib:engine {}

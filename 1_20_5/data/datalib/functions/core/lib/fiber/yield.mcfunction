@@ -11,4 +11,4 @@
 # CALL SITE: called at the end of a fiber step function.
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/fiber/internal/yield_exec with storage datalib:input {}
+function datalib:core/internal/lib/fiber/yield_exec with storage datalib:engine {}

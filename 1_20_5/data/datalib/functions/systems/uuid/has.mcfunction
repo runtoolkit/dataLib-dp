@@ -11,7 +11,7 @@
 # datalib:input key → name of the key to check
 #
 # OUTPUT:
-# $uuid.has dl.tmp → 1 (var) veya 0 (yok)
+# $uuid.has dl.tmp → 1 (exists) or 0 (does not exist)
 # ============================================================
 scoreboard players set $uuid.has dl.tmp 0
-function datalib:systems/uuid/internal/has_check with storage datalib:input
+function datalib:core/internal/systems/uuid/has_check with storage datalib:engine

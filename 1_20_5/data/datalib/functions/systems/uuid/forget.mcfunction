@@ -9,4 +9,4 @@
 # INPUT:
 # datalib:input key → name of the key to delete
 # ============================================================
-function datalib:systems/uuid/internal/forget_key with storage datalib:input
+function datalib:core/internal/systems/uuid/forget_key with storage datalib:engine

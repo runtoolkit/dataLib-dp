@@ -26,7 +26,7 @@ data modify storage datalib:hook placed.active set value 1b
 
 # Hook event sistemine "placed_block" event'i fire et
 data modify storage datalib:engine _hook_fire_tmp set value {event:"placed_block"}
-execute as @s run function datalib:systems/hook/internal/fire with storage datalib:engine _hook_fire_tmp
+execute as @s run function datalib:core/internal/systems/hook/fire with storage datalib:engine _hook_fire_tmp
 data remove storage datalib:engine _hook_fire_tmp
 
 # Legacy event system support (if present)

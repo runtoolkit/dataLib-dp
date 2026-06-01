@@ -11,6 +11,6 @@ $data modify storage datalib:engine tools_trigger.type  set value "$(type)"
 $data modify storage datalib:engine tools_trigger.data  set value $(data)
 $execute unless data storage datalib:engine tools_trigger.config{silent:1} run tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"tools/trigger ","color":"aqua"},{"text":"► ","color":"yellow"},{"text":"$(type)","color":"white"}]
 
-function datalib:debug/tools/trigger/internal/dispatch
+function datalib:core/internal/debug/tools/trigger/dispatch
 
 data remove storage datalib:engine tools_trigger

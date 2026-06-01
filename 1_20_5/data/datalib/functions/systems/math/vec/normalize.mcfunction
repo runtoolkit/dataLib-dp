@@ -9,4 +9,4 @@
 # If length=0, zero vector — returns x,y,z=0.
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/math/vec/internal/normalize_exec with storage datalib:input {}
+function datalib:core/internal/systems/math/vec/normalize_exec with storage datalib:engine {}

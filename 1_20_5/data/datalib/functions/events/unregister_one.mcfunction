@@ -6,7 +6,7 @@ $data modify storage datalib:engine _uro.src set from storage datalib:engine eve
 
 $data remove storage datalib:engine events.$(event)
 
-execute if data storage datalib:engine _uro.src[0] run function datalib:events/internal/uro_loop
+execute if data storage datalib:engine _uro.src[0] run function datalib:core/internal/events/uro_loop
 
 data remove storage datalib:engine _uro
 $tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"event/unregister_one ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(func)","color":"aqua"}]}

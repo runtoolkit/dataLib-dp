@@ -1,6 +1,6 @@
 $data modify storage datalib:engine event_context.player set value "$(player)"
 
-function datalib:events/fire with storage datalib:input {}
+function datalib:events/fire with storage datalib:engine {}
 
 data remove storage datalib:engine event_context.player
 

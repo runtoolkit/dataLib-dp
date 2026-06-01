@@ -13,7 +13,7 @@
 # data modify storage datalib:input player set value "@s"
 # data modify storage datalib:input objective set value "myPoints"
 # data modify storage datalib:input color set value "green"
-# function datalib:systems/string/score_display with storage datalib:input {}
+# function datalib:systems/string/score_display with storage datalib:engine {}
 # # Output: "Points 42" (42 from scoreboard)
 # ─────────────────────────────────────────────────────────────────
 

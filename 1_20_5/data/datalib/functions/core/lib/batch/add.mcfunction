@@ -8,4 +8,4 @@
 # cmd → command to run (optional, used if no func)
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/batch/internal/add_exec with storage datalib:input {}
+function datalib:core/internal/lib/batch/add_exec with storage datalib:engine {}

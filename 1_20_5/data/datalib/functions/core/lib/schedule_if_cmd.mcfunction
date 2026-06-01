@@ -1,1 +1,1 @@
-function datalib:core/lib/queue_add_cmd with storage datalib:input {}
+function datalib:core/lib/queue_add_cmd with storage datalib:engine {}

@@ -13,21 +13,21 @@ $scoreboard players set $sr_n dl.tmp $(count)
 execute if score $sr_n dl.tmp matches ..0 run scoreboard players set $sr_n dl.tmp 1
 execute if score $sr_n dl.tmp matches 17.. run scoreboard players set $sr_n dl.tmp 16
 
-execute if score $sr_n dl.tmp matches 1 run function datalib:systems/string/internal/repeat_1 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 2 run function datalib:systems/string/internal/repeat_2 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 3 run function datalib:systems/string/internal/repeat_3 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 4 run function datalib:systems/string/internal/repeat_4 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 5 run function datalib:systems/string/internal/repeat_5 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 6 run function datalib:systems/string/internal/repeat_6 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 7 run function datalib:systems/string/internal/repeat_7 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 8 run function datalib:systems/string/internal/repeat_8 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 9 run function datalib:systems/string/internal/repeat_9 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 10 run function datalib:systems/string/internal/repeat_10 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 11 run function datalib:systems/string/internal/repeat_11 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 12 run function datalib:systems/string/internal/repeat_12 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 13 run function datalib:systems/string/internal/repeat_13 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 14 run function datalib:systems/string/internal/repeat_14 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 15 run function datalib:systems/string/internal/repeat_15 with storage datalib:input {}
-execute if score $sr_n dl.tmp matches 16 run function datalib:systems/string/internal/repeat_16 with storage datalib:input {}
+execute if score $sr_n dl.tmp matches 1 run function datalib:core/internal/systems/string/repeat_1 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 2 run function datalib:core/internal/systems/string/repeat_2 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 3 run function datalib:core/internal/systems/string/repeat_3 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 4 run function datalib:core/internal/systems/string/repeat_4 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 5 run function datalib:core/internal/systems/string/repeat_5 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 6 run function datalib:core/internal/systems/string/repeat_6 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 7 run function datalib:core/internal/systems/string/repeat_7 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 8 run function datalib:core/internal/systems/string/repeat_8 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 9 run function datalib:core/internal/systems/string/repeat_9 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 10 run function datalib:core/internal/systems/string/repeat_10 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 11 run function datalib:core/internal/systems/string/repeat_11 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 12 run function datalib:core/internal/systems/string/repeat_12 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 13 run function datalib:core/internal/systems/string/repeat_13 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 14 run function datalib:core/internal/systems/string/repeat_14 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 15 run function datalib:core/internal/systems/string/repeat_15 with storage datalib:engine {}
+execute if score $sr_n dl.tmp matches 16 run function datalib:core/internal/systems/string/repeat_16 with storage datalib:engine {}
 
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/repeat ","color":"aqua"},{"text":"'$(char)'","color":"yellow"},{"text":" × $(count) → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"white"}]

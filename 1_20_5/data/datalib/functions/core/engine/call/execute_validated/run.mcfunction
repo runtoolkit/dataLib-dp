@@ -5,4 +5,4 @@
 # uses datalib:input storage as the parameter source.
 # ─────────────────────────────────────────────
 
-$function $(func) with storage datalib:input {}
+$function $(func) with storage datalib:engine {}

@@ -15,4 +15,4 @@
 #
 # Use case: writing UUID to entity NBT (e.g. Owner field)
 # ============================================================
-function datalib:systems/uuid/internal/recall_arr_read with storage datalib:input
+function datalib:core/internal/systems/uuid/recall_arr_read with storage datalib:engine

@@ -8,7 +8,7 @@
 # data modify storage datalib:input value set value 15
 # data modify storage datalib:input min set value 10
 # data modify storage datalib:input max set value 20
-# function datalib:systems/math/is_between with storage datalib:input {}
+# function datalib:systems/math/is_between with storage datalib:engine {}
 # # datalib:output result = 1b
 # ─────────────────────────────────────────────────────────────────
 

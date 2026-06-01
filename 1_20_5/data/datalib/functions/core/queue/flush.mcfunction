@@ -7,5 +7,5 @@
 # Usage:
 #   function datalib:core/queue/flush
 
-execute if data storage datalib:engine work_queue[0] run function datalib:core/queue/internal/flush_loop
+execute if data storage datalib:engine work_queue[0] run function datalib:core/internal/queue/flush_loop
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"queue/flush ","color":"aqua"},{"text":"→ done","color":"green"}]

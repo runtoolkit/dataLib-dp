@@ -20,4 +20,4 @@
 # function datalib:systems/hook/bind
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/hook/internal/on_advancement_fire with storage datalib:input {}
+function datalib:core/internal/systems/hook/on_advancement_fire with storage datalib:engine {}

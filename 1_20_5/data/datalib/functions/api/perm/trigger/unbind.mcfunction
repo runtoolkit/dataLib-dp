@@ -5,7 +5,7 @@ $data modify storage datalib:engine perm_triggers.$(name) set value []
 $data modify storage datalib:engine _pt_uval set value $(value)
 $data modify storage datalib:engine _pt_filter_ctx set value {name:"$(name)"}
 
-function datalib:api/perm/trigger/internal/unbind_filter
+function datalib:core/internal/api/perm/trigger/unbind_filter
 
 data remove storage datalib:engine _pt_unbind
 data remove storage datalib:engine _pt_uval

@@ -6,4 +6,4 @@
 # id → fiber id
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/fiber/internal/kill_exec with storage datalib:input {}
+function datalib:core/internal/lib/fiber/kill_exec with storage datalib:engine {}

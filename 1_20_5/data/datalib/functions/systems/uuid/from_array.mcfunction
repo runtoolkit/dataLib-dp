@@ -22,6 +22,6 @@ execute store result score $uuid.2 dl.tmp run data get storage datalib:input val
 execute store result score $uuid.3 dl.tmp run data get storage datalib:input value[3]
 
 # Split into 16 bytes → convert to hex chars → concatenate UUID string
-function datalib:systems/uuid/internal/extract_bytes
-function datalib:systems/uuid/internal/get_hexes with storage datalib:uuid _tmp
-function datalib:systems/uuid/internal/concat with storage datalib:uuid _tmp
+function datalib:core/internal/systems/uuid/extract_bytes
+function datalib:core/internal/systems/uuid/get_hexes with storage datalib:uuid _tmp
+function datalib:core/internal/systems/uuid/concat with storage datalib:uuid _tmp

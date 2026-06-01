@@ -6,12 +6,12 @@ summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage1"],CustomName:'{"text":"DL"}
 execute as @e[type=minecraft:marker,tag=datalib.stage1,limit=1] run say Starting dataLib...
 execute as @e[type=minecraft:marker,tag=datalib.stage1,limit=1] run kill @s
 
-execute unless function dl_load:load/internal/validate run return 0
+execute unless function dl_load:core/internal/load/validate run return 0
 
-data modify storage datalib:input level set value "D.L."
-data modify storage datalib:input message set value "Starting..."
-data modify storage datalib:input color set value "aqua"
-function datalib:systems/log/add with storage datalib:input {}
+data modify storage datalib:engine _log_add_tmp.level set value "D.L."
+data modify storage datalib:engine _log_add_tmp.message set value "Starting..."
+data modify storage datalib:engine _log_add_tmp.color set value "aqua"
+function datalib:systems/log/add with storage datalib:engine {}
 
 # Stage 2 debug
 summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage2"],CustomName:'{"text":"DL"}'}
@@ -29,7 +29,7 @@ function dl_load:load/other
 
 data modify storage datalib:engine global.loaded set value 1b
 
-function dl_load:load/internal/version_set
+function dl_load:core/internal/load/version_set
 
 # Lantern Load integration — set pack version in load.status
 # Format: (major * 10000) + (minor * 100) + patch
@@ -45,9 +45,9 @@ scoreboard players operation #dataLib load.status = #version_calc dl.tmp
 execute if score #dl.pre dl.pre_version matches 1.. run tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Loaded. ","color":"green"},[{"text":"v","color":"aqua"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":"-pre","color":"#ff8800"},{"score":{"name":"#dl.pre","objective":"dl.pre_version"},"color":"#ff8800","bold":true}]]
 execute if score #dl.pre dl.pre_version matches ..0 run tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Loaded. ","color":"green"},[{"text":"v","color":"aqua"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"aqua","bold":true},{"text":".","color":"aqua"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"aqua","bold":true}]]
 
-data modify storage datalib:input level set value "dataLib"
-data modify storage datalib:input message set value "Loaded."
-data modify storage datalib:input color set value "green"
-function datalib:systems/log/add with storage datalib:input {}
+data modify storage datalib:engine _log_add_tmp.level set value "dataLib"
+data modify storage datalib:engine _log_add_tmp.message set value "Loaded."
+data modify storage datalib:engine _log_add_tmp.color set value "green"
+function datalib:systems/log/add with storage datalib:engine {}
 
-function dl_load:load/internal/finalize
+function dl_load:core/internal/load/finalize

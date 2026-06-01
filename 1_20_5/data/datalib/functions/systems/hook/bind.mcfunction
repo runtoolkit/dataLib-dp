@@ -15,4 +15,4 @@
 # function datalib:systems/hook/bind
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/hook/internal/bind_exec with storage datalib:input {}
+function datalib:core/internal/systems/hook/bind_exec with storage datalib:engine {}

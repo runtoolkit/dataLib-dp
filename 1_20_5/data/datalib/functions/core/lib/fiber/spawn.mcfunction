@@ -13,4 +13,4 @@
 # function datalib:core/lib/fiber/spawn
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/fiber/internal/spawn_exec with storage datalib:input {}
+function datalib:core/internal/lib/fiber/spawn_exec with storage datalib:engine {}

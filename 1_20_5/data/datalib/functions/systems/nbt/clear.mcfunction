@@ -7,4 +7,4 @@
 # path → silinecek path
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/clear_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/clear_exec with storage datalib:engine {}

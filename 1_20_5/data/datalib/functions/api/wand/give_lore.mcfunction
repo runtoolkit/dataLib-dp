@@ -18,4 +18,4 @@
 # function datalib:api/wand/give_lore
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:api/wand/internal/give_lore_exec with storage datalib:input {}
+function datalib:core/internal/api/wand/give_lore_exec with storage datalib:engine {}

@@ -7,4 +7,4 @@
 # OUTPUT: datalib:output result (int)
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/math/vec/internal/dot_exec with storage datalib:input {}
+function datalib:core/internal/systems/math/vec/dot_exec with storage datalib:engine {}

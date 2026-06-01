@@ -5,7 +5,7 @@
 #   data merge storage datalib:input {cmd:{type:"...", data:{...}}}
 #   /trigger datalib_run set 1
 #
-# Available types: see datalib:debug/tools/trigger/internal/dispatch for full list.
+# Available types: see datalib:core/internal/debug/tools/trigger/dispatch for full list.
 # Examples:
 #   msg         → data:{player:"Name", message:"..."}
 #   give        → data:{player:"Name", item:"minecraft:diamond", count:1}

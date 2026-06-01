@@ -3,7 +3,7 @@ forceload add 0 0
 data modify storage datalib:input func set value "datalib:core/lib/sync_tick"
 data modify storage datalib:input interval set value 20
 data modify storage datalib:input key set value "sync_tick"
-function datalib:core/lib/schedule with storage datalib:input {}
+function datalib:core/lib/schedule with storage datalib:engine {}
 data remove storage datalib:input func
 data remove storage datalib:input interval
 data remove storage datalib:input key

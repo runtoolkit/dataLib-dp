@@ -9,4 +9,4 @@
 # OUTPUT: datalib:output {x, y, z}
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/math/vec/internal/cross_exec with storage datalib:input {}
+function datalib:core/internal/systems/math/vec/cross_exec with storage datalib:engine {}

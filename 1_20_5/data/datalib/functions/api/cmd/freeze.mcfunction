@@ -13,7 +13,7 @@ execute unless function datalib:debug/tools/utils/check_all run return 0
 # and the player receives the datalib.frozen tag.
 #
 # The per-tick teleport back is handled by:
-#   datalib:api/cmd/freeze/internal/tick  (hooked via #datalib:events/on_tick)
+#   datalib:core/internal/api/cmd/freeze/tick  (hooked via #datalib:events/on_tick)
 #
 # Use datalib:api/cmd/unfreeze to release.
 #
@@ -23,5 +23,5 @@ execute unless function datalib:debug/tools/utils/check_all run return 0
 #   function datalib:api/cmd/freeze {player:"Steve"}
 # ─────────────────────────────────────────────────────────────────
 
-$execute as @a[name=$(player),tag=!datalib.frozen,limit=1] run function datalib:api/cmd/freeze/internal/apply
+$execute as @a[name=$(player),tag=!datalib.frozen,limit=1] run function datalib:core/internal/api/cmd/freeze/apply
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"cmd/freeze ","color":"aqua"},{"text":"$(player)","color":"white"},{"text":" → ","color":"#555555"},{"translate":"datalib.msg.freeze","color":"#00aaff","bold":true}]

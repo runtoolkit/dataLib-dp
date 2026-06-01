@@ -23,4 +23,4 @@ function datalib:systems/uuid/from_entity
 data modify storage datalib:uuid _store_arr set from storage datalib:uuid _work
 
 # Write both to cache (get key name via macro)
-function datalib:systems/uuid/internal/store_write with storage datalib:input
+function datalib:core/internal/systems/uuid/store_write with storage datalib:engine

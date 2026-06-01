@@ -18,4 +18,4 @@
 # function datalib:systems/nbt/merge
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/merge_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/merge_exec with storage datalib:engine {}

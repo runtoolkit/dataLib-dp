@@ -8,7 +8,7 @@
 #
 # Usage:
 #   data modify storage datalib:input queue.rate set value 4
-#   function datalib:core/queue/set_rate with storage datalib:input queue
+#   function datalib:core/queue/set_rate with storage datalib:engine queue
 
 $data modify storage datalib:engine work_queue_rate set value $(rate)
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"queue/set_rate ","color":"aqua"},{"text":"→ ","color":"#555555"},{"text":"$(rate)","color":"yellow"},{"text":" items/tick","color":"#555555"}]

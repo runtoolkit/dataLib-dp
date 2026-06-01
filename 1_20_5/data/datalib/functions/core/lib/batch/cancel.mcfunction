@@ -8,4 +8,4 @@
 # id → batch id
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/lib/batch/internal/cancel_exec with storage datalib:input {}
+function datalib:core/internal/lib/batch/cancel_exec with storage datalib:engine {}

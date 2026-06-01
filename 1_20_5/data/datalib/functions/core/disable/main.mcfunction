@@ -1,1 +1,1 @@
-function dl_load:load/internal/cleanup
+function dl_load:core/internal/load/cleanup

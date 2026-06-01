@@ -6,4 +6,4 @@
 # event → event name
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/hook/internal/unbind_exec with storage datalib:input {}
+function datalib:core/internal/systems/hook/unbind_exec with storage datalib:engine {}

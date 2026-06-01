@@ -9,4 +9,4 @@
 # OUTPUT: datalib:output result (int)
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/count_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/count_exec with storage datalib:engine {}

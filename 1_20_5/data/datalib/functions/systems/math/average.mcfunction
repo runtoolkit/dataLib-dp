@@ -10,7 +10,7 @@
 # data modify storage datalib:input v1 set value 20
 # data modify storage datalib:input v2 set value 30
 # data modify storage datalib:input count set value 3
-# function datalib:systems/math/average with storage datalib:input {}
+# function datalib:systems/math/average with storage datalib:engine {}
 # # datalib:output result = 20
 # ─────────────────────────────────────────────────────────────────
 

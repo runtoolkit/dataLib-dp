@@ -25,4 +25,4 @@
 # function datalib:systems/geo/region_watch/register
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/geo/region_watch/internal/register_exec with storage datalib:input {}
+function datalib:core/internal/systems/geo/region_watch/register_exec with storage datalib:engine {}

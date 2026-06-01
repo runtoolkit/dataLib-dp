@@ -11,7 +11,7 @@
 #   data modify storage datalib:input key set value "pvp_enabled"
 #   data modify storage datalib:input matches set value "1.."
 #   data modify storage datalib:input func set value "mypack:on_pvp"
-#   function datalib:core/config/exec with storage datalib:input {}
+#   function datalib:core/config/exec with storage datalib:engine {}
 #
 # EXAMPLE (bind a command instead of func):
 #   Use score_set to write the value, then check inline:

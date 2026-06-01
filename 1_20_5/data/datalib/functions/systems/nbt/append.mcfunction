@@ -9,4 +9,4 @@
 # src_path → path of the value to append
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/append_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/append_exec with storage datalib:engine {}

@@ -4,7 +4,7 @@
 # Output: datalib:output string.result — uppercase string
 # Dep:    StringLib (CMDred)
 data modify storage datalib:engine _str_bridge.String set from storage datalib:input string
-function datalib:core/lib/string/internal/to_upper_fast_dispatch with storage datalib:engine _str_bridge
+function datalib:core/internal/lib/string/to_upper_fast_dispatch with storage datalib:engine _str_bridge
 data modify storage datalib:output string.result set from storage stringlib:output to_uppercase
 data remove storage stringlib:output to_uppercase
 data remove storage datalib:engine _str_bridge

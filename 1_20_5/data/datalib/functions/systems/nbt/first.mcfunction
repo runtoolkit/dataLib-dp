@@ -17,4 +17,4 @@
 # function datalib:systems/nbt/first
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/first_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/first_exec with storage datalib:engine {}

@@ -6,7 +6,7 @@
 #
 # Example:
 # data modify storage datalib:input player set value "Steve"
-# function datalib:core/cooldown/reset_all with storage datalib:input {}
+# function datalib:core/cooldown/reset_all with storage datalib:engine {}
 # ─────────────────────────────────────────────────────────────────
 
 $data remove storage datalib:engine cooldowns.$(player)

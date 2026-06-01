@@ -3,5 +3,5 @@
 # @s = dying player
 advancement revoke @s only datalib:systems/hook/player_death
 data modify storage datalib:engine _hook_fire_tmp set value {event:"player_death"}
-function datalib:systems/hook/internal/fire with storage datalib:engine _hook_fire_tmp
+function datalib:core/internal/systems/hook/fire with storage datalib:engine _hook_fire_tmp
 data remove storage datalib:engine _hook_fire_tmp

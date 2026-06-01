@@ -8,4 +8,4 @@
 # path_b → ikinci path
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:systems/nbt/internal/swap_exec with storage datalib:input {}
+function datalib:core/internal/systems/nbt/swap_exec with storage datalib:engine {}
