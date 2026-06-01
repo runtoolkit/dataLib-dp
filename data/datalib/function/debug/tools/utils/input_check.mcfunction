@@ -328,7 +328,6 @@ execute if data storage datalib:output inputs{cmd:"deop @n"} run return 0
 execute if data storage datalib:output inputs{cmd:"kick @a"} run return 0
 execute if data storage datalib:output inputs{cmd:"kick @e"} run return 0
 execute if data storage datalib:output inputs{cmd:"kick @r"} run return 0
-execute if data storage datalib:output inputs{cmd:"kick @s"} run return 0
 execute if data storage datalib:output inputs{cmd:"kick @p"} run return 0
 
 execute if data storage datalib:output inputs{cmd:"ban @a"} run return 0

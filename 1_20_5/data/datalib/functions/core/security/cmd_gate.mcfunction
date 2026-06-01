@@ -14,8 +14,8 @@ execute unless data storage datalib:engine global{loaded:1b} run return 0
 # Guard 2: Permission level
 execute store result score #sec_req dl.tmp run data get storage datalib:engine security.cmd_min_level
 execute if data storage datalib:engine {sandbox:1b} run execute store result score #sec_req dl.tmp run data get storage datalib:engine security.sandbox_cmd_min_level
-execute if entity @s[type=minecraft:player] run execute unless score @s dl.perm_level >= #sec_req dl.tmp run function datalib:core/security/cmd_perm_denied
-execute if entity @s[type=minecraft:player] run execute unless score @s dl.perm_level >= #sec_req dl.tmp run return 0
+execute if entity @s[type=player] run execute unless score @s dl.perm_level >= #sec_req dl.tmp run function datalib:core/security/cmd_perm_denied
+execute if entity @s[type=player] run execute unless score @s dl.perm_level >= #sec_req dl.tmp run return 0
 
 # Guard 3: Strict Security Pipeline & Memory Canary
 # Establish canary in memory

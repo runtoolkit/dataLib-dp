@@ -1,5 +1,5 @@
 {
   "values": [
-    "datalib:api/cmd/freeze/internal/tick"
+    "datalib:core/internal/api/cmd/freeze/tick"
   ]
 }

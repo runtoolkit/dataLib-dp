@@ -1,5 +1,5 @@
 {
   "values": [
-    "datalib:systems/hook/internal/on_open_gui"
+    "datalib:core/internal/systems/hook/on_open_gui"
   ]
 }

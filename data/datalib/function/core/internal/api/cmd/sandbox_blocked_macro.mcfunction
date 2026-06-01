@@ -10,6 +10,5 @@ $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true
 data remove storage datalib:engine _log_add_tmp.message
 data remove storage datalib:engine _log_add_tmp.level
 data remove storage datalib:engine _log_add_tmp.color
-execute if entity @s[type=minecraft:player] run playsound datalib:ui.error master @s ~ ~ ~ 0.7 0.8
-execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"\uE000","color":"#00AAAA"},{"text":" ","color":"#00AAAA"},{"text":"✘ ","color":"red"},{"translate":"datalib.msg.sandbox_blocked","color":"red"}]
-#execute if entity @s[type=minecraft:player] run kick @s [DL] Sandbox violation — command blocked
+execute if entity @s[type=player] run playsound datalib:ui.error master @s ~ ~ ~ 0.7 0.8
+execute if entity @s[type=player] run tellraw @s ["",{"text":"\uE000","color":"#00AAAA"},{"text":" ","color":"#00AAAA"},{"text":"✘ ","color":"red"},{"translate":"datalib.msg.sandbox_blocked","color":"red"}]

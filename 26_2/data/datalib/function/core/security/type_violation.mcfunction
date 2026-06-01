@@ -19,4 +19,3 @@ tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","co
 function datalib:core/security/type_violation/notify_admins with storage datalib:engine _log_add_tmp {}
 
 # Kick offending player (26.2+: kick cannot be used inside execute...run)
-kick @s [DL] Security violation - sandbox command blocked
