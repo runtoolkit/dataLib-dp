@@ -11,7 +11,7 @@ execute unless function dl_load:core/internal/load/validate run return 0
 data modify storage datalib:engine _log_add_tmp.level set value "D.L."
 data modify storage datalib:engine _log_add_tmp.message set value "Starting..."
 data modify storage datalib:engine _log_add_tmp.color set value "aqua"
-function datalib:systems/log/add with storage datalib:engine {}
+function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 
 # Stage 2 debug
 summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage2"],CustomName:'{"text":"DL"}'}
@@ -48,6 +48,6 @@ execute if score #dl.pre dl.pre_version matches ..0 run tellraw @a[tag=datalib.d
 data modify storage datalib:engine _log_add_tmp.level set value "dataLib"
 data modify storage datalib:engine _log_add_tmp.message set value "Loaded."
 data modify storage datalib:engine _log_add_tmp.color set value "green"
-function datalib:systems/log/add with storage datalib:engine {}
+function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 
 function dl_load:core/internal/load/finalize
