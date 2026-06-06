@@ -64,38 +64,6 @@
       1
     ]
   },
-  "filter": {
-    "block": [
-      {
-        "namespace": "datalib",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      },
-      {
-        "namespace": "minecraft",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      },
-      {
-        "namespace": "dl_load",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      },
-      {
-        "namespace": "stringlib",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      },
-      {
-        "namespace": "load",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      },
-      {
-        "namespace": "player_action",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      },
-      {
-        "namespace": "global",
-        "path": ".*\\.(txt|log|bak|tmp|js|tsx|sh|c|css|exe|jar|zip|apk|cmd|bat|py)$"
-      }
-    ]
-  },
   "overlays": {
     "entries": [
       {
@@ -203,7 +171,7 @@
           1
         ]
       },
-            {
+      {
         "directory": "26_2",
         "formats": {
           "min_inclusive": 106,
