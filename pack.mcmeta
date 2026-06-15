@@ -64,6 +64,11 @@
       1
     ]
   },
+  "features": {
+    "enabled": [
+      "minecraft:vanilla"
+    ]
+  },
   "overlays": {
     "entries": [
       {
