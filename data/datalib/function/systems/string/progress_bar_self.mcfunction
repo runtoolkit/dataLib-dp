@@ -21,4 +21,3 @@ $execute if score $pbs_seg dl.tmp matches 7 run title @s actionbar {"text":"$(pb
 $execute if score $pbs_seg dl.tmp matches 8 run title @s actionbar {"text":"$(pb_label) ████████░░"}
 $execute if score $pbs_seg dl.tmp matches 9 run title @s actionbar {"text":"$(pb_label) █████████░"}
 $execute if score $pbs_seg dl.tmp matches 10 run title @s actionbar {"text":"$(pb_label) ██████████"}
-tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/progress_bar_self ","color":"aqua"}]
