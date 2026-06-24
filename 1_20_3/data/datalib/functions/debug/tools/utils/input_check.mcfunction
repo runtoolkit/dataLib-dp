@@ -9,9 +9,7 @@ data modify storage datalib:output data set from storage datalib:engine
 
 execute unless data storage datalib:output inputs.func run return 0
 
-# ── NAMESPACE ALLOWLIST ─────────────────────────────────────────
-execute unless data storage datalib:output inputs{func:"datalib:api/"} run function datalib:core/security/input_ns_violation
-execute unless data storage datalib:output inputs{func:"datalib:api/"} run return 0
+
 
 # ── BLOCKLIST: high-risk ─────────────────────────────────────────
 execute if data storage datalib:output inputs{func:"datalib:api/cmd/op"} run return 0

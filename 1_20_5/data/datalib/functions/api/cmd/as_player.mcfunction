@@ -1,3 +1,4 @@
+execute unless function datalib:core/security/cmd_gate run return 0
 execute unless function datalib:debug/tools/utils/check_all run return 0
 
 $execute as @a[name=$(player),limit=1] at @s run $(cmd)
