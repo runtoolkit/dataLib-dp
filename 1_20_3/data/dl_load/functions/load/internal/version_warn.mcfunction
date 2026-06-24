@@ -1,8 +1,0 @@
-tellraw @a ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"Version conflict! ","color":"red","bold":true},{"text":"Expected ","color":"#555555"},{"text":"v5.1.2","color":"aqua","bold":true},{"text":" — stored scores do not match.","color":"#555555"}]
-tellraw @a ["",{"text":" ","color":"#555555"},{"text":"→ Run ","color":"gray"},{"text":"/reload","color":"aqua","underlined":true,"hoverEvent":{"action":"show_text","value":"Reload DataLib"}},{"text":" to reinitialize dataLib.","color":"gray"}]
-
-tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"DEBUG ","color":"aqua"},{"text":"dl.pre_version scores → ","color":"#555555"},{"text":"major=","color":"gray"},{"score":{"name":"#dl.major","objective":"dl.pre_version"},"color":"yellow"},{"text":" minor=","color":"gray"},{"score":{"name":"#dl.minor","objective":"dl.pre_version"},"color":"yellow"},{"text":" patch=","color":"gray"},{"score":{"name":"#dl.patch","objective":"dl.pre_version"},"color":"yellow"},{"text":" pre=","color":"gray"},{"score":{"name":"#dl.pre","objective":"dl.pre_version"},"color":"yellow"},{"text":" (expected: 5 1 2 pre=0)","color":"red"}]
-
-data modify storage datalib:input message set value "✘ Version mismatch — expected v5.1.2. Load aborted."
-function datalib:systems/log/warn with storage datalib:input {}
-data remove storage datalib:input message

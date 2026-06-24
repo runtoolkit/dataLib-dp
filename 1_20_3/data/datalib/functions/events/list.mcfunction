@@ -1,4 +1,0 @@
-tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"━━━ Registered Events ","color":"aqua"},{"text":"━━━━━━","color":"#555555"}]}
-execute if data storage datalib:engine events run tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":" ","color":"#555555"},{"storage":"datalib:engine","nbt":"events","interpret":false,"color":"yellow"}]}
-execute unless data storage datalib:engine events run tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":" ","color":"#555555"},{"text":"(no registered events)","color":"gray","italic":true}]}
-tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"━━━━━━━━━━━━━━━━━━━━━━","color":"#555555"}]}

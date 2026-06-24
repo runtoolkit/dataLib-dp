@@ -1,5 +1,0 @@
-execute if data storage datalib:engine queue[0].func if data storage datalib:engine queue[0].player run function datalib:core/internal/lib/queue_run_func_as with storage datalib:engine queue[0]
-execute if data storage datalib:engine queue[0].func unless data storage datalib:engine queue[0].player run function datalib:core/internal/lib/queue_run_func with storage datalib:engine queue[0]
-execute if data storage datalib:engine queue[0].cmd if data storage datalib:engine queue[0].player run function datalib:core/internal/lib/queue_run_cmd_as with storage datalib:engine queue[0]
-execute if data storage datalib:engine queue[0].cmd unless data storage datalib:engine queue[0].player run function datalib:core/internal/lib/queue_run_cmd with storage datalib:engine queue[0]
-data remove storage datalib:engine queue[0]
