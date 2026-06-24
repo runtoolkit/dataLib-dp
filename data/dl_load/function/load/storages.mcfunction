@@ -85,7 +85,7 @@ data modify storage datalib:engine batches set value {}
 execute unless data storage datalib:engine wand_cooldowns run data modify storage datalib:engine wand_cooldowns set value {}
 
 # ─────────────────────────────────────────────────────────────────
-# Security module init (v5.1.2+)
+# Security module init (v6.0.0+)
 # BREAKING CHANGE: trust_players defaults to 0b — players must have
 # dl.perm_level explicitly set. datalib.admin tag alone gives no access.
 #
@@ -95,19 +95,21 @@ execute unless data storage datalib:engine wand_cooldowns run data modify storag
 #   sandbox_cmd_min_level stricter $$(cmd) floor when sandbox:1b [4]
 #   admin_min_level       min level for cmd/ functions (check_all) [2]
 #   admin_can_override    0b = admins cannot bypass security rules
-#   sandbox_allowlist     list of allowed command prefixes in sandbox []
+#   sandbox_allowlist     compound of allowed command prefixes in sandbox {}
+#   multi_type_allowlist  compound of permitted multiCommands.type values
 # ─────────────────────────────────────────────────────────────────
-execute unless data storage datalib:engine security run data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:[]}
+# BUGFIX v6.0.1: initial set used [] (old list format) — now uses {} (compound).
+# Migration guard converts any pre-existing [] to {} on reload.
+execute unless data storage datalib:engine security run data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:{}}
 # ─────────────────────────────────────────────────────────────────
-# Security module v5.1.2+ additions
+# Security module v6.0.0+ additions
 # BREAKING CHANGE: sandbox_allowlist is now a compound {} (was list []).
 # Empty compound {} = all sandbox commands blocked.
 # multi_type_allowlist: compound of permitted multiCommands.type values.
 # multiCommands: tracks active multi-command execution context.
 # ─────────────────────────────────────────────────────────────────
-# Reset security to new compound format (migration: [] → {})
+# Migration: convert old list [] format to compound {}
 execute if data storage datalib:engine security.sandbox_allowlist[] run data modify storage datalib:engine security.sandbox_allowlist set value {}
-execute unless data storage datalib:engine security run data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:{}}
 execute unless data storage datalib:engine security.sandbox_allowlist run data modify storage datalib:engine security.sandbox_allowlist set value {}
 execute unless data storage datalib:engine security.multi_type_allowlist run data modify storage datalib:engine security.multi_type_allowlist set value {multi_cmd:1b,multi_cmd_adv:1b}
 

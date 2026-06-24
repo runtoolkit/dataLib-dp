@@ -15,4 +15,6 @@ function datalib:core/internal/api/dialog/show_dialog_exec with storage datalib:
 
 tag @s add datalib.dialog_opened
 
+function datalib:api/dialog/notify_admins
+
 return 1

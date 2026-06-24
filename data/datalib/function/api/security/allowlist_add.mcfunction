@@ -2,7 +2,7 @@
 # Adds a command prefix to datalib:engine security.sandbox_allowlist (compound).
 # Compound format: {give:1b, say:1b, ...} — O(1) lookup.
 #
-# BREAKING CHANGE (v5.1.2): allowlist is now a compound, not a list.
+# BREAKING CHANGE (v6.0.0): allowlist is now a compound, not a list.
 # Enforcement is now ACTIVE — unlisted commands in sandbox mode are blocked + kick.
 #
 # INPUT (macro args):
