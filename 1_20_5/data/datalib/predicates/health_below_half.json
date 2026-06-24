@@ -3,7 +3,7 @@
     "condition": "minecraft:entity_scores",
     "entity": "this",
     "scores": {
-      "macro.health": {
+      "datalib.health": {
         "max": 10
       }
     }
