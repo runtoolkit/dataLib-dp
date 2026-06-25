@@ -12,8 +12,6 @@ jobs:
       - name: Validate JSON
         run: |
           echo "Checking JSON..."
-          sudo apt-get update -q
-          sudo apt-get install -y -q jq
           find . -name "*.json" -not -path "./.git/*" -print0 | xargs -0 -n1 jq empty
 
       - name: Lint mcfunction files (pre-check)
