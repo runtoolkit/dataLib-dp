@@ -3,7 +3,7 @@
         "title": "dataLib",
         "description": "dataLib",
         "icon": {
-            "id": "minecraft:minecraft:command_block"
+            "id": "minecraft:command_block"
         },
         "show_toast": false,
         "announce_to_chat": false

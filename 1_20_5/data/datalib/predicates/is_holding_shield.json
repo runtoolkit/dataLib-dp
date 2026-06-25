@@ -5,7 +5,7 @@
     "predicate": {
       "equipment": {
         "offhand": {
-          "items": ["minecraft:shield"]
+          "items": "minecraft:shield"
         }
       }
     }

@@ -8,9 +8,7 @@
       },
       "equipment": {
         "chest": {
-          "items": [
-            "minecraft:elytra"
-          ]
+          "items": "minecraft:elytra"
         }
       }
     }
