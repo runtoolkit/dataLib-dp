@@ -44,14 +44,12 @@ jobs:
             1_21_5/ \
             1_21_6/ \
             26_1/ \
+            26_2/ \
             _pre_1_21_4/ \
             compat_1_21_4/ \
             pack.mcmeta \
             pack.png \
-            version.json \
-            dependencies.json \
             LICENSE \
-            README.md
 
       - name: Build dataLib-rp.zip (resource pack only)
         run: |
