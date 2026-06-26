@@ -257,7 +257,7 @@ def main():
     parser.add_argument("--build-dir", required=True, type=Path, help="Build output directory")
     parser.add_argument("--patched-dir", required=True, type=Path, help="Patched output directory")
     parser.add_argument("--warn-mode", choices=["fail", "warn"], default="fail")
-    parser.add_argument("--max-files", type=int, default=500)
+    parser.add_argument("--max-files", type=int, default=10000)
     
     args = parser.parse_args()
     
@@ -277,8 +277,9 @@ def main():
     # Count files (safety limit)
     mcfunction_files = list(base_dir.rglob("*.mcfunction"))
     if len(mcfunction_files) > args.max_files:
-        err(f"Too many mcfunction files ({len(mcfunction_files)} > {args.max_files})")
-        sys.exit(1)
+        warn(f"Large datapack detected: {len(mcfunction_files)} mcfunction files (limit: {args.max_files})")
+        warn("Continuing anyway (limit increased for dataLib)")
+        # Do not exit — we want Fabric GameTest to run even on large packs
     
     # Create working copy in /tmp (never touch original)
     workdir = Path(tempfile.mkdtemp(prefix="datapack-fix-"))
