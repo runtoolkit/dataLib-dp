@@ -116,3 +116,7 @@ test.tar.gz
 *.ppt
 *.pptx
 !pack.png
+
+# Gradle
+.gradle/
+build/

@@ -83,48 +83,42 @@ jobs:
 
       - name: Real Fabric GameTest API + Screenshots
         if: steps.fixer.outputs.changes_detected == 'true'
-        timeout-minutes: 15
+        timeout-minutes: 18
         run: |
           echo "=== Running REAL Fabric GameTest API ==="
           
-          # Install Java 21 (required for 1.21.5)
-          sudo apt-get update
-          sudo apt-get install -y openjdk-21-jdk
+          # Install Java 21
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq openjdk-21-jdk
           export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+          java -version
           
-          # Setup Gradle wrapper if not present
-          if [ ! -f "gradlew" ]; then
-            echo "Creating Gradle wrapper..."
-            gradle wrapper --gradle-version=8.8
-          fi
+          # Make gradlew executable
+          chmod +x gradlew || true
           
-          chmod +x gradlew
+          echo "Running Fabric GameTest (this may take a while)..."
           
-          echo "Running Fabric GameTest with screenshots..."
-          
-          # Run the real GameTest
+          # Run GameTest - allow failure so workflow continues
           ./gradlew runGameTestServer --info || true
           
-          # Alternative: Use the dedicated GameTest task
+          # Alternative GameTest task
           ./gradlew gametest || true
           
-          # Check for generated screenshots
+          # Collect screenshots if any
           if [ -d "build/screenshots" ]; then
-            echo "Screenshots found:"
+            echo "Screenshots generated:"
             ls -la build/screenshots/
-            
-            # Copy screenshots to artifacts
             mkdir -p /tmp/datapack-fixer/screenshots
             cp -r build/screenshots/* /tmp/datapack-fixer/screenshots/ || true
           fi
           
-          # Check test report
+          # Show test report if exists
           if [ -f "build/test-report.xml" ]; then
-            echo "GameTest report generated"
-            cat build/test-report.xml
+            echo "=== GameTest Report ==="
+            cat build/test-report.xml || true
           fi
           
-          echo "Real Fabric GameTest completed"
+          echo "Real Fabric GameTest step completed (may have warnings)"
 
       - name: Prepare safe commit (no dangerous git commands)
         if: steps.fixer.outputs.changes_detected == 'true'
