@@ -1,0 +1,88 @@
+name: Lint & Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Mecha Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install mecha
+        run: pip install mecha
+
+      - name: Run mecha (main datapack)
+        run: mecha data/ --version java:1.21.4
+
+  build:
+    name: Build ZIPs
+    runs-on: ubuntu-latest
+    needs: lint
+    if: github.event_name != 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Build dataLib-dp.zip (datapack only)
+        run: |
+          zip -r dataLib-dp.zip \
+            data/ \
+            1_20_3/ \
+            1_20_5/ \
+            1_21_5/ \
+            1_21_6/ \
+            26_1/ \
+            26_2/ \
+            _pre_1_21_4/ \
+            compat_1_21_4/ \
+            pack.mcmeta \
+            pack.png \
+            LICENSE \
+
+      - name: Build dataLib-rp.zip (resource pack only)
+        run: |
+          mkdir -p _rp_build/assets
+          cp -r assets/* _rp_build/assets/
+          cat > _rp_build/pack.mcmeta << 'MCMETA'
+          {
+            "pack": {
+              "pack_format": 46,
+              "supported_formats": {
+                "min_inclusive": 22,
+                "max_inclusive": 999
+              },
+              "description": [
+                {"text": "dataLib", "color": "#00ccff", "bold": true},
+                {"text": " Resource Pack", "color": "#aaaaaa"},
+                {"text": " | TR/EN/DE + custom font & sounds", "color": "#888888"}
+              ]
+            }
+          }
+          MCMETA
+          cd _rp_build && zip -r ../dataLib-rp.zip .
+
+      - name: Upload dataLib-dp.zip
+        uses: actions/upload-artifact@v6
+        with:
+          name: dataLib-dp
+          path: dataLib-dp.zip
+          retention-days: 30
+
+      - name: Upload dataLib-rp.zip
+        uses: actions/upload-artifact@v6
+        with:
+          name: dataLib-rp
+          path: dataLib-rp.zip
+          retention-days: 30

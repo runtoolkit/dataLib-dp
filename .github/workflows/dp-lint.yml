@@ -1,0 +1,77 @@
+name: Datapack Lint
+on:
+  push:
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Validate JSON
+        run: |
+          echo "Checking JSON..."
+          find . -name "*.json" -not -path "./.git/*" -print0 | xargs -0 -n1 jq empty
+
+      - name: Lint mcfunction files (pre-check)
+        run: |
+          echo "Scanning .mcfunction files..."
+          FILES=$(find . -name "*.mcfunction" -not -path "./.git/*")
+          if [ -z "$FILES" ]; then
+            echo "No .mcfunction files found."
+            exit 0
+          fi
+          ERRORS=0
+          while IFS= read -r file; do
+            if head -c 3 "$file" | grep -qP '^\xef\xbb\xbf'; then
+              echo "BOM detected: $file"
+              ERRORS=$((ERRORS + 1))
+            fi
+            if grep -Pql '\x00' "$file"; then
+              echo "Null byte detected: $file"
+              ERRORS=$((ERRORS + 1))
+            fi
+            if file "$file" | grep -q "CRLF"; then
+              echo "CRLF line endings: $file"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done <<< "$FILES"
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "$ERRORS issue(s) found in .mcfunction files."
+            exit 1
+          fi
+          echo "Pre-check passed."
+
+      - name: Install mecha
+        run: pip install git+https://github.com/mcbeet/mecha.git --break-system-packages -q
+
+      - name: Patch mecha compat (colon-space in storage paths + 26.1 time syntax)
+        # 1. "namespace: path" — space after colon in storage targets.
+        #    Valid in Minecraft, unsupported by mecha's parser.
+        # 2. "time of <dimension> query" — dimension-scoped time command added in 26.1.
+        #    Mecha only knows: time add|query|set.
+        #    Normalized to "time query daytime" for validation purposes.
+        # 3. "time query day repetition" — new subcommand added in 26.1.
+        #    Mecha does not recognize "repetition"; stripped for validation purposes.
+        # All changes apply to the runner copy only — source files are not modified.
+        run: |
+          find . -name "*.mcfunction" -not -path "./.git/*" \
+            -exec grep -lP '[\w.-]+: _' {} \; | \
+            xargs --no-run-if-empty sed -i -E 's/([a-z0-9._-]+): _/\1:_/g'
+          find . -name "*.mcfunction" -not -path "./.git/*" \
+            -exec grep -l 'time of ' {} \; | \
+            xargs --no-run-if-empty sed -i -E 's/time of [a-z0-9_:.-]+ /time /g'
+          find . -name "*.mcfunction" -not -path "./.git/*" \
+            -exec grep -l 'time query day repetition' {} \; | \
+            xargs --no-run-if-empty sed -i 's/time query day repetition/time query daytime/g'
+
+      - name: Validate mcfunction syntax (mecha)
+        run: mecha .
+
+      - name: Validate pack.mcmeta
+        run: |
+          if [ ! -f pack.mcmeta ]; then
+            echo "pack.mcmeta is missing!"
+            exit 1
+          fi
