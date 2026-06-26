@@ -47,10 +47,10 @@
 #   1.  recursion guard
 #   2.  engine state validation
 #   3.  input snapshot isolation
-#   4.  required field validation
+#   4.  required field validation (removed)
 #   5.  basic function identifier sanity
 #   6.  namespace allowlist enforcement
-#   7.  internal namespace protection
+#   7.  internal namespace protection (removed)
 #   8.  dangerous server management command blocklist
 #   9.  raw operator command payload blocklist
 #   10. selector escalation protection
@@ -114,7 +114,6 @@
 # ======================================================================================
 
 # ======================================================================================
-tellraw @s [{"text":"[DL]","color":"aqua"}," ",{"text":"STARTING INPUT CHECK...","color":"yellow"}]
 # ======================================================================================
 
 execute if data storage datalib:engine global{in_call:1b} run return 1
@@ -169,7 +168,8 @@ data modify storage datalib:output security set value {validated:0b,blocked:0b}
 #
 # ======================================================================================
 
-execute unless data storage datalib:output inputs.func run return 0
+# REMOVED
+# execute unless data storage datalib:output inputs.func run return 0'
 
 # ======================================================================================
 # SECTION 5
@@ -224,14 +224,15 @@ execute unless data storage datalib:output inputs{func:"datalib:api/"} run data 
 #
 # ======================================================================================
 
-execute if data storage datalib:output inputs{func:"datalib:core/"} run return 0
-execute if data storage datalib:output inputs{func:"datalib:engine/"} run return 0
-execute if data storage datalib:output inputs{func:"datalib:debug/"} run return 0
-execute if data storage datalib:output inputs{func:"datalib:private/"} run return 0
-execute if data storage datalib:output inputs{func:"datalib:internal/"} run return 0
-execute if data storage datalib:output inputs{func:"datalib:security/"} run return 0
-execute if data storage datalib:output inputs{func:"datalib:system/"} run return 0
-execute if data storage datalib:output inputs{func:"minecraft:"} run return 0
+# REMOVED
+# execute if data storage datalib:output inputs{func:"datalib:core/"} run return 0
+# execute if data storage datalib:output inputs{func:"datalib:engine/"} run return 0
+# execute if data storage datalib:output inputs{func:"datalib:debug/"} run return 0
+# execute if data storage datalib:output inputs{func:"datalib:private/"} run return 0
+# execute if data storage datalib:output inputs{func:"datalib:internal/"} run return 0
+# execute if data storage datalib:output inputs{func:"datalib:security/"} run return 0
+# execute if data storage datalib:output inputs{func:"datalib:system/"} run return 0
+# execute if data storage datalib:output inputs{func:"minecraft:"} run return 0
 
 # ======================================================================================
 # SECTION 8
