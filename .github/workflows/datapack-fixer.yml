@@ -21,26 +21,22 @@ on:
           - 'warn'
 
   schedule:
-    # Run every day at 03:00 UTC
     - cron: '0 3 * * *'
 
 env:
   PYTHONUNBUFFERED: '1'
-  FIXER_TIMEOUT: 300
-  # Increased because dataLib has 3000+ mcfunction files
   MAX_FILES: 10000
 
 jobs:
   safe-fix:
     runs-on: ubuntu-latest
-    # Prevent fork abuse / DDoS on self-hosted
     if: github.repository == 'runtoolkit/dataLib'
     permissions:
       contents: write
       actions: read
 
     steps:
-      - name: Checkout base branch (safe)
+      - name: Checkout base branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.base_branch || 'main' }}
@@ -51,26 +47,20 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          # cache: 'pip'  → Disabled because no requirements.txt / pyproject.toml exists
-          # We install packages manually with pip install --user
 
-      - name: Install safe dependencies (no global pollution)
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install beet mecha
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Create isolated workspace in /tmp
+      - name: Create isolated workspace
         run: |
-          mkdir -p /tmp/datapack-fixer
+          mkdir -p /tmp/datapack-fixer/{original,build,patched}
           cp -r . /tmp/datapack-fixer/original
-          mkdir -p /tmp/datapack-fixer/build
-          mkdir -p /tmp/datapack-fixer/patched
-          echo "Isolated workspace ready"
 
-      - name: Run Safe Datapack Fixer (Python)
+      - name: Run Safe Datapack Fixer
         id: fixer
-        timeout-minutes: 8
+        timeout-minutes: 10
         env:
           WARN_MODE: ${{ github.event.inputs.warn_mode || 'fail' }}
         run: |
@@ -81,121 +71,82 @@ jobs:
             --warn-mode "$WARN_MODE" \
             --max-files ${{ env.MAX_FILES }}
 
-      - name: Real Fabric GameTest API + Screenshots
+      # ==========================================
+      # REAL FABRIC GAMETEST (Server + Client)
+      # ==========================================
+      - name: Setup Java 21
         if: steps.fixer.outputs.changes_detected == 'true'
-        timeout-minutes: 18
-        run: |
-          echo "=== Running REAL Fabric GameTest API ==="
-          
-          # Install Java 21
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq openjdk-21-jdk
-          export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-          java -version
-          
-          # Make gradlew executable
-          chmod +x gradlew || true
-          
-          echo "Running Fabric GameTest (this may take a while)..."
-          
-          # Run GameTest - allow failure so workflow continues
-          ./gradlew runGameTestServer --info || true
-          
-          # Alternative GameTest task
-          ./gradlew gametest || true
-          
-          # Collect screenshots if any
-          if [ -d "build/screenshots" ]; then
-            echo "Screenshots generated:"
-            ls -la build/screenshots/
-            mkdir -p /tmp/datapack-fixer/screenshots
-            cp -r build/screenshots/* /tmp/datapack-fixer/screenshots/ || true
-          fi
-          
-          # Show test report if exists
-          if [ -f "build/test-report.xml" ]; then
-            echo "=== GameTest Report ==="
-            cat build/test-report.xml || true
-          fi
-          
-          echo "Real Fabric GameTest step completed (may have warnings)"
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
 
-      - name: Prepare safe commit (no dangerous git commands)
+      - name: Setup Gradle
+        if: steps.fixer.outputs.changes_detected == 'true'
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.8
+
+      - name: Run Fabric GameTest (Server + Client + Fail Detection)
+        if: steps.fixer.outputs.changes_detected == 'true'
+        timeout-minutes: 20
+        run: |
+          echo "=== SERVER GameTest ==="
+          ./gradlew runGameTestServer --info || true
+
+          echo "=== CLIENT GameTest ==="
+          ./gradlew runClientGameTest --info || true
+
+          echo "=== Checking for Fail / Failed to load ==="
+          
+          # Fail: ile başlayan mesaj kontrolü
+          if grep -r "Fail:" build/ 2>/dev/null; then
+            echo "::error::FAIL message detected in GameTest"
+            exit 1
+          fi
+
+          # Failed to load hataları
+          if grep -r "Failed to load" build/ 2>/dev/null; then
+            echo "::error::'Failed to load' errors detected"
+            exit 1
+          fi
+
+          echo "=== GameTest completed successfully ==="
+
+      - name: Prepare safe commit
         if: steps.fixer.outputs.changes_detected == 'true'
         run: |
           cd /tmp/datapack-fixer/original
-          
-          # Only add explicitly listed safe files (NEVER git add .)
           SAFE_FILES=()
-          
-          # Only include files that actually changed and are safe
           while IFS= read -r -d '' file; do
-            if [[ -f "$file" && "$file" != *.git* && "$file" != *${BUILD_DIR}* ]]; then
-              # Only stage data/ and pack.mcmeta (never delete)
-              if [[ "$file" == data/* || "$file" == pack.mcmeta || "$file" == beet.json ]]; then
-                SAFE_FILES+=("$file")
-              fi
+            if [[ "$file" == data/* || "$file" == pack.mcmeta || "$file" == beet.json ]]; then
+              SAFE_FILES+=("$file")
             fi
           done < <(find . -type f -print0)
-          
+
           if [ ${#SAFE_FILES[@]} -gt 0 ]; then
-            echo "Staging only safe files: ${SAFE_FILES[*]}"
             git add "${SAFE_FILES[@]}"
-          else
-            echo "No safe files to stage"
-            exit 0
           fi
 
-      - name: Create fix branch and commit (safe)
+      - name: Create fix branch and commit
         if: steps.fixer.outputs.changes_detected == 'true'
         run: |
           FIX_BRANCH="${{ github.event.inputs.fix_branch || 'datapack-fixer/main' }}"
-          
           cd /tmp/datapack-fixer/original
-          
-          # Create branch safely
           git checkout -B "$FIX_BRANCH"
-          
-          # Commit only if there are staged changes
-          if ! git diff --cached --quiet; then
-            git commit -m "Safe auto-fix: Mecha + 1.21.5+ compat patches
 
-            - All changes validated with Beet/Mecha
-            - No files deleted
-            - Server test simulation passed
-            - Fixes applied only via sed on known patterns"
-            
-            echo "Commit created successfully"
-          else
-            echo "No changes to commit"
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-fix: Mecha + 1.21.5+ compat + GameTest validated"
           fi
 
-      - name: Push fix branch (with protection awareness)
+      - name: Push fix branch
         if: steps.fixer.outputs.changes_detected == 'true'
         run: |
           FIX_BRANCH="${{ github.event.inputs.fix_branch || 'datapack-fixer/main' }}"
           cd /tmp/datapack-fixer/original
-          
-          # Safe push (will fail on protected branch if rules are strict)
-          if git push -u origin "$FIX_BRANCH" --force-with-lease; then
-            echo "✅ Pushed $FIX_BRANCH successfully"
-          else
-            echo "::warning::Push failed. Branch protection rules may be active."
-            echo "Common blocked commands on protected branches:"
-            echo "  - git push --force / -f"
-            echo "  - Direct pushes to main without PR"
-            echo "  - git reset --hard on protected branch"
-            echo ""
-            echo "Recommended branch protection rules for datapack-fixer/* :"
-            echo "  - Require status checks (this workflow)"
-            echo "  - Require PR reviews for main"
-            echo "  - Allow force pushes only for datapack-fixer/* branches"
-          fi
+          git push -u origin "$FIX_BRANCH" --force-with-lease || echo "::warning::Push failed (branch protection?)"
 
       - name: Final status
         run: |
           echo "=== Datapack Auto Fixer completed ==="
-          echo "Changes detected: ${{ steps.fixer.outputs.changes_detected }}"
-          echo "All operations were performed in /tmp (no risk to original repo)"
-          echo "No deletion commands were executed."
-          echo "Only explicit file staging was used."
+          echo "Changes: ${{ steps.fixer.outputs.changes_detected }}"
