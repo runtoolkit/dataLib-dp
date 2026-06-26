@@ -14,10 +14,10 @@ dependencies {
     minecraft 'com.mojang:minecraft:1.21.5'
     mappings 'net.fabricmc:yarn:1.21.5+build.1:v2'
 
-    modImplementation 'net.fabricmc:fabric-loader:0.16.9'
+    modImplementation 'net.fabricmc:fabric-loader:0.16.10'
     modImplementation 'net.fabricmc.fabric-api:fabric-api:0.119.0+1.21.5'
 
-    // GameTest support
+    // GameTest support (included in fabric-api, but explicit for clarity)
     modImplementation 'net.fabricmc.fabric-api:fabric-gametest-api-v1:0.119.0+1.21.5'
 }
 

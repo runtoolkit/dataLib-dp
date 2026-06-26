@@ -81,44 +81,47 @@ jobs:
             --warn-mode "$WARN_MODE" \
             --max-files ${{ env.MAX_FILES }}
 
-      - name: Real Fabric GameTest API + Screenshots
+      - name: Real Fabric GameTest (Server + Client) + Fix Library
         if: steps.fixer.outputs.changes_detected == 'true'
-        timeout-minutes: 18
+        timeout-minutes: 20
+        env:
+          FAIL_ON_ERROR: "true"
         run: |
-          echo "=== Running REAL Fabric GameTest API ==="
+          echo "=== Running REAL Fabric GameTest API (Server + Client) ==="
           
           # Install Java 21
           sudo apt-get update -qq
           sudo apt-get install -y -qq openjdk-21-jdk
           export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-          java -version
           
-          # Make gradlew executable
           chmod +x gradlew || true
           
-          echo "Running Fabric GameTest (this may take a while)..."
-          
-          # Run GameTest - allow failure so workflow continues
+          echo "=== SERVER GameTest ==="
           ./gradlew runGameTestServer --info || true
           
-          # Alternative GameTest task
-          ./gradlew gametest || true
+          echo "=== CLIENT GameTest ==="
+          ./gradlew runClientGameTest --info || true
           
-          # Collect screenshots if any
-          if [ -d "build/screenshots" ]; then
-            echo "Screenshots generated:"
-            ls -la build/screenshots/
-            mkdir -p /tmp/datapack-fixer/screenshots
-            cp -r build/screenshots/* /tmp/datapack-fixer/screenshots/ || true
+          # Check for "Failed to load" errors in logs
+          echo "=== Checking for load errors ==="
+          if grep -q "Failed to load" build/*.log 2>/dev/null || grep -q "Failed to load" *.log 2>/dev/null; then
+            echo "ERROR: 'Failed to load' errors detected!"
+            grep "Failed to load" build/*.log 2>/dev/null || true
+            if [ "$FAIL_ON_ERROR" = "true" ]; then
+              echo "::error::Failed to load errors found in GameTest"
+              exit 1
+            fi
           fi
           
-          # Show test report if exists
-          if [ -f "build/test-report.xml" ]; then
-            echo "=== GameTest Report ==="
-            cat build/test-report.xml || true
+          # Check for FAIL messages
+          if grep -q "FAIL" build/test-report.xml 2>/dev/null; then
+            echo "ERROR: FAIL detected in test report!"
+            if [ "$FAIL_ON_ERROR" = "true" ]; then
+              exit 1
+            fi
           fi
           
-          echo "Real Fabric GameTest step completed (may have warnings)"
+          echo "=== GameTest completed successfully ==="
 
       - name: Prepare safe commit (no dangerous git commands)
         if: steps.fixer.outputs.changes_detected == 'true'
