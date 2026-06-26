@@ -1,15 +1,17 @@
 {
-	"name": "dataLib & Python Dev",
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"SPGoding.datapack-language-server",
-				"ms-python.python",
-				"ms-python.flake8",
-				"dlyz.md-link-checker"
-			],
-			"settings": {}
-		}
-	}
+  "name": "dataLib & Python Dev",
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "SPGoding.datapack-language-server",
+        "ms-python.python",
+        "ms-python.flake8",
+        "dlyz.md-link-checker",
+        "vscjava.vscode-gradle"
+      ],
+      "settings": {}
+    }
+  },
+  "onCreateCommand": "bash .devcontainer/setup.sh"
 }
