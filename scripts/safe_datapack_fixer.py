@@ -103,50 +103,9 @@ def apply_safe_patches(workdir: Path) -> int:
     else:
         log(f"{patch_desc} -> no matches, skipped")
     
-    # Patch 2: Legacy 'time of <dimension>' syntax
-    patch_desc = "legacy 'time of <dimension>' query syntax"
-    pattern = re.compile(r'time of [a-z0-9_:.-]+ ')
-    count = 0
-    
-    for mcfile in workdir.rglob("*.mcfunction"):
-        if ".git" in str(mcfile) or "build" in str(mcfile):
-            continue
-        try:
-            content = mcfile.read_text(encoding="utf-8")
-            if pattern.search(content):
-                new_content = pattern.sub("time ", content)
-                mcfile.write_text(new_content, encoding="utf-8")
-                count += 1
-        except Exception:
-            continue
-    
-    if count > 0:
-        ok(f"{patch_desc} -> {count} file(s) patched")
-        patches_applied += count
-    else:
-        log(f"{patch_desc} -> no matches, skipped")
-    
-    # Patch 3: time query day repetition -> daytime
-    patch_desc = "'time query day repetition' -> 'time query daytime'"
-    count = 0
-    
-    for mcfile in workdir.rglob("*.mcfunction"):
-        if ".git" in str(mcfile) or "build" in str(mcfile):
-            continue
-        try:
-            content = mcfile.read_text(encoding="utf-8")
-            if "time query day repetition" in content:
-                new_content = content.replace("time query day repetition", "time query daytime")
-                mcfile.write_text(new_content, encoding="utf-8")
-                count += 1
-        except Exception:
-            continue
-    
-    if count > 0:
-        ok(f"{patch_desc} -> {count} file(s) patched")
-        patches_applied += count
-    else:
-        log(f"{patch_desc} -> no matches, skipped")
+    # NOTE: time of <dimension> is now the correct modern syntax (1.21.5+)
+    # We no longer patch "time of" or "time query daytime" as they are valid.
+    # Patch 2 and Patch 3 have been removed to avoid breaking current syntax.
     
     return patches_applied
 
