@@ -51,12 +51,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
+          # cache: 'pip'  → Disabled because no requirements.txt / pyproject.toml exists
+          # We install packages manually with pip install --user
 
       - name: Install safe dependencies (no global pollution)
         run: |
-          python -m pip install --user --upgrade pip
-          python -m pip install --user beet mecha
+          python -m pip install --upgrade pip
+          python -m pip install beet mecha
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Create isolated workspace in /tmp
