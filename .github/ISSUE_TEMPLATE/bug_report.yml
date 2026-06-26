@@ -1,0 +1,67 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[BUG] "
+labels: [ bug ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check for existing issues before reporting.
+  - type: input
+    id: ame_version
+    attributes:
+      label: D.L. Version
+      placeholder: "e.g.: v1.0.6-pre4"
+    validations:
+      required: true
+  - type: dropdown
+    id: mc_version
+    attributes:
+      label: Minecraft Version
+      options:
+        - "1.21.1"
+        - "1.21.2 / 1.21.3"
+        - "1.21.4"
+        - "1.21.5"
+        - "1.21.6+"
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Singleplayer
+        - Multiplayer (vanilla server)
+        - Multiplayer (Paper/Spigot)
+        - Multiplayer (Fabric)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Bug
+      description: What happened? What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Run `/function datalib:...`
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: affected_functions
+    attributes:
+      label: Affected Functions
+      description: Which `datalib:` function(s) are affected?
+      placeholder: "e.g.: datalib:flag/toggle_system, datalib:lib/tick_guard"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Error Output
+      description: In-game error messages or content from `.minecraft/logs/latest.txt`
+      render: text

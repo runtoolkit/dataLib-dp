@@ -1,0 +1,9 @@
+title: "[Idea]"
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: "Your Idea"
+      description: "Share your idea for the datapack."
+      placeholder: "Explain what you think could improve the datapack."

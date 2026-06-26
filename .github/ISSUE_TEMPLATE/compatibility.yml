@@ -1,0 +1,65 @@
+name: Version Compatibility Issue
+description: Report something that is not working in a specific Minecraft version
+title: "[COMPAT] "
+labels: [ compatibility ]
+body:
+  - type: input
+    id: ame_version
+    attributes:
+      label: D.L. Version
+      placeholder: "e.g.: v1.0.6-pre4"
+    validations:
+      required: true
+  - type: dropdown
+    id: broken_version
+    attributes:
+      label: Minecraft Version Where the Issue Occurs
+      options:
+        - "1.20.3"
+        - "1.20.4"
+        - "1.21"
+        - "1.21.1"
+        - "1.21.2 / 1.21.3"
+        - "1.21.4"
+        - "1.21.5"
+        - "1.21.6"
+        - "1.21.7"
+        - "1.21.8"
+        - "1.21.9"
+        - "1.21.10"
+        - "1.21.11"
+        - "26.1"
+        - "26.1.1"
+        - "26.1.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: working_version
+    attributes:
+      label: Working Minecraft Version (if known)
+      options:
+        - I don't know
+        - "1.21.1"
+        - "1.21.2 / 1.21.3"
+        - "1.21.4"
+        - "1.21.5"
+        - "1.21.6+"
+  - type: input
+    id: pack_format
+    attributes:
+      label: pack_format Value
+      description: From F3 screen or pack.mcmeta
+      placeholder: "e.g.: 61"
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Issue
+      description: Which command/function is not working? What error does it give?
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Message
+      render: text
+      placeholder: "Unknown function / Invalid variable for command / ..."
