@@ -15,6 +15,18 @@ echo "📦 Package manager: $PKG"
 SUDO=""
 command -v sudo &>/dev/null && SUDO="sudo"
 
+# ── PATH helper ───────────────────────────────────────────────────────
+append_path() {
+  local DIR="$1"
+  local MARKER="# path:$DIR"
+  for RC in /etc/bash.bashrc /etc/profile "$HOME/.bashrc" "$HOME/.profile"; do
+    [ -f "$RC" ] || continue
+    grep -qF "$MARKER" "$RC" 2>/dev/null && continue
+    printf '\n%s\nexport PATH="%s:$PATH"\n' "$MARKER" "$DIR" >> "$RC"
+  done
+  export PATH="$DIR:$PATH"
+}
+
 # ── System packages ───────────────────────────────────────────────────
 echo "📦 Installing system packages..."
 if [ "$PKG" = "apk" ]; then
@@ -31,7 +43,7 @@ fi
 
 # ── Git LFS init ──────────────────────────────────────────────────────
 echo "🗂  Initializing Git LFS..."
-git lfs install
+git lfs install --system || git lfs install
 
 # ── Node.js 20 ────────────────────────────────────────────────────────
 echo "📦 Installing Node.js 20..."
@@ -46,19 +58,36 @@ fi
 
 # ── Java 21 (Temurin binary) ──────────────────────────────────────────
 echo "☕ Installing Java JDK 21..."
-if command -v java &>/dev/null; then
-  echo "  Already installed: $(java -version 2>&1 | head -1)"
-else
+if [ ! -f "/opt/jdk21/bin/java" ]; then
   wget -q -O /tmp/jdk21.tar.gz \
     "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jdk_x64_linux_hotspot_21.0.7_6.tar.gz"
   $SUDO mkdir -p /opt/jdk21
   $SUDO tar -xzf /tmp/jdk21.tar.gz -C /opt/jdk21 --strip-components=1
   rm /tmp/jdk21.tar.gz
-  export JAVA_HOME=/opt/jdk21
-  export PATH="$JAVA_HOME/bin:$PATH"
-  printf 'export JAVA_HOME=/opt/jdk21\nexport PATH=$JAVA_HOME/bin:$PATH\n' \
-    | $SUDO tee /etc/profile.d/jdk21.sh > /dev/null
+else
+  echo "  Already installed: $(/opt/jdk21/bin/java -version 2>&1 | head -1)"
 fi
+export JAVA_HOME=/opt/jdk21
+append_path "/opt/jdk21/bin"
+for RC in /etc/bash.bashrc /etc/profile "$HOME/.bashrc" "$HOME/.profile"; do
+  [ -f "$RC" ] || continue
+  grep -qF 'JAVA_HOME=/opt/jdk21' "$RC" 2>/dev/null && continue
+  printf '\nexport JAVA_HOME=/opt/jdk21\n' >> "$RC"
+done
+
+# ── Gradle 8.8 (direct binary) ────────────────────────────────────────
+echo "🐘 Installing Gradle 8.8..."
+if [ ! -f "/opt/gradle/bin/gradle" ]; then
+  wget -q -O /tmp/gradle.zip \
+    "https://services.gradle.org/distributions/gradle-8.8-bin.zip"
+  $SUDO mkdir -p /tmp/gradle-extract /opt/gradle
+  $SUDO unzip -q /tmp/gradle.zip -d /tmp/gradle-extract
+  $SUDO cp -r /tmp/gradle-extract/gradle-8.8/. /opt/gradle/
+  $SUDO rm -rf /tmp/gradle-extract /tmp/gradle.zip
+else
+  echo "  Already installed: $(/opt/gradle/bin/gradle -v | grep Gradle)"
+fi
+append_path "/opt/gradle/bin"
 
 # ── SDKMAN ────────────────────────────────────────────────────────────
 echo "🧰 Installing SDKMAN..."
@@ -67,23 +96,21 @@ if [ ! -f "$SDKMAN_DIR/bin/sdkman-init.sh" ]; then
   curl -s "https://get.sdkman.io" | bash
 fi
 # shellcheck disable=SC1091
-source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-# ── Gradle 8.8 ────────────────────────────────────────────────────────
-echo "🐘 Installing Gradle 8.8..."
-if command -v gradle &>/dev/null && gradle -v 2>/dev/null | grep -q "8.8"; then
-  echo "  Already installed: $(gradle -v | head -2 | tail -1)"
-else
-  sdk install gradle 8.8
-fi
+source "$SDKMAN_DIR/bin/sdkman-init.sh" || true
+SDKMAN_INIT_LINE='[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"'
+for RC in "$HOME/.bashrc" "$HOME/.profile"; do
+  [ -f "$RC" ] || continue
+  grep -qF 'sdkman-init.sh' "$RC" 2>/dev/null && continue
+  printf '\n%s\n' "$SDKMAN_INIT_LINE" >> "$RC"
+done
 
 # ── Done ──────────────────────────────────────────────────────────────
 echo ""
 echo "✅ Versions:"
 node -v
 npm -v
-java -version
-gradle -v
+/opt/jdk21/bin/java -version
+/opt/gradle/bin/gradle -v | grep Gradle
 jq --version
 shellcheck --version | head -1
 git lfs version
