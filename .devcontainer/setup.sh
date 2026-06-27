@@ -19,12 +19,22 @@ command -v sudo &>/dev/null && SUDO="sudo"
 append_path() {
   local DIR="$1"
   local MARKER="# path:$DIR"
-  for RC in /etc/bash.bashrc /etc/profile "$HOME/.bashrc" "$HOME/.profile"; do
-    [ -f "$RC" ] || continue
+  for RC in "$HOME/.bashrc" "$HOME/.profile"; do
+    [ -f "$RC" ] || touch "$RC"
     grep -qF "$MARKER" "$RC" 2>/dev/null && continue
     printf '\n%s\nexport PATH="%s:$PATH"\n' "$MARKER" "$DIR" >> "$RC"
   done
   export PATH="$DIR:$PATH"
+}
+
+append_env() {
+  local LINE="$1"
+  local MARKER="$2"
+  for RC in "$HOME/.bashrc" "$HOME/.profile"; do
+    [ -f "$RC" ] || touch "$RC"
+    grep -qF "$MARKER" "$RC" 2>/dev/null && continue
+    printf '\n%s\n' "$LINE" >> "$RC"
+  done
 }
 
 # ── System packages ───────────────────────────────────────────────────
@@ -43,7 +53,7 @@ fi
 
 # ── Git LFS init ──────────────────────────────────────────────────────
 echo "🗂  Initializing Git LFS..."
-git lfs install --system || git lfs install
+git lfs install --system 2>/dev/null || git lfs install
 
 # ── Node.js 20 ────────────────────────────────────────────────────────
 echo "📦 Installing Node.js 20..."
@@ -69,11 +79,7 @@ else
 fi
 export JAVA_HOME=/opt/jdk21
 append_path "/opt/jdk21/bin"
-for RC in /etc/bash.bashrc /etc/profile "$HOME/.bashrc" "$HOME/.profile"; do
-  [ -f "$RC" ] || continue
-  grep -qF 'JAVA_HOME=/opt/jdk21' "$RC" 2>/dev/null && continue
-  printf '\nexport JAVA_HOME=/opt/jdk21\n' >> "$RC"
-done
+append_env "export JAVA_HOME=/opt/jdk21" "JAVA_HOME=/opt/jdk21"
 
 # ── Gradle 8.8 (direct binary) ────────────────────────────────────────
 echo "🐘 Installing Gradle 8.8..."
@@ -97,12 +103,9 @@ if [ ! -f "$SDKMAN_DIR/bin/sdkman-init.sh" ]; then
 fi
 # shellcheck disable=SC1091
 source "$SDKMAN_DIR/bin/sdkman-init.sh" || true
-SDKMAN_INIT_LINE='[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"'
-for RC in "$HOME/.bashrc" "$HOME/.profile"; do
-  [ -f "$RC" ] || continue
-  grep -qF 'sdkman-init.sh' "$RC" 2>/dev/null && continue
-  printf '\n%s\n' "$SDKMAN_INIT_LINE" >> "$RC"
-done
+append_env \
+  '[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"' \
+  'sdkman-init.sh'
 
 # ── Done ──────────────────────────────────────────────────────────────
 echo ""
