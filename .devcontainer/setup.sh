@@ -19,7 +19,7 @@ curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 echo "🐘 Installing Gradle..."
-sdk install gradle
+sdk install gradle 8.8.0
 
 echo "✅ Versions:"
 node -v && npm -v && java -version && gradle -v
