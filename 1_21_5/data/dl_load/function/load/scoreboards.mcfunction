@@ -4,7 +4,6 @@ scoreboard objectives add datalib_menu trigger
 scoreboard objectives add dl_run trigger
 scoreboard objectives add dl_action trigger
 scoreboard objectives add datalib.dialog_load dummy
-scoreboard objectives add datalib.tick_guard dummy
 scoreboard objectives add health health {"text":"❤","color":"red"}
 scoreboard objectives add dl.pre_version dummy
 scoreboard objectives add datalib.pid dummy

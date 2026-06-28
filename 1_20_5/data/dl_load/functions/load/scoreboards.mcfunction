@@ -4,7 +4,6 @@ scoreboard objectives add dl_menu trigger
 scoreboard objectives add datalib_run trigger
 scoreboard objectives add datalib_action trigger
 scoreboard objectives add datalib.dialog_load dummy
-scoreboard objectives add datalib.tick_guard dummy
 scoreboard objectives add health health {"text":"❤","color":"red"}
 scoreboard objectives add dl.pre_version dummy
 scoreboard objectives add datalib.pid dummy
@@ -75,3 +74,6 @@ scoreboard objectives add dl.perm_level dummy
 # Log level system: 0=off 1=error 2=warn 3=info 4=debug
 scoreboard objectives add dl.log_level dummy
 execute unless score #dl.log_level dl.log_level matches 0.. run scoreboard players set #dl.log_level dl.log_level 3
+
+# Custom gamerule system
+scoreboard objectives add dl.gamerule dummy

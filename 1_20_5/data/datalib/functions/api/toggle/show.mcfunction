@@ -1,19 +1,16 @@
 # datalib:api/toggle/show
-# Opens the module toggle dialog (inline, 1.21.6+).
-#
-# Usage:  function datalib:api/toggle/show
-# Caller: datalib.admin tag required
-#
-# On submit → dialog calls:
-#   /function datalib:api/toggle/<Module>/<State>
-#   where <State> is "true" (enable) or "false" (disable).
-#
-# Supported modules: hook, interaction, perm, wand, geo
-#
-# NOTE: template uses $(Module) and $(2) to match the defined input keys.
-#       The original spec used $(1) which does not correspond to any key;
-#       $(Module) is the correct substitution for key:"Module".
+# Opens the module toggle menu (1.20.5 compat: tellraw + clickEvent).
+# The main pack uses "dialog show" which only exists from 1.21.6 onward.
+# Confirmed failing under mecha 1.20 target before this fix.
 
 execute unless entity @s[tag=datalib.admin] run return 0
 
-dialog show @s {"type":"minecraft:multi_action","title":"","inputs":[{"type":"minecraft:text","key":"Module","label":"Module Name","label_visible":true,"max_length":64},{"type":"minecraft:boolean","key":"2","label":"Enabled","initial":true,"on_true":"true","on_false":"false"}],"can_close_with_escape":true,"after_action":"close","pause":false,"exit_action":{"label":"Close"},"actions":[{"label":"Apply","action":{"type":"minecraft:dynamic/run_command","template":"/function datalib:api/toggle/$(Module)/$(2)"}}]}
+tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"━━━ Toggle a module ━━━━━━━━━━━━━","color":"#555555"}]
+tellraw @s ["",{"text":"  hook        ","color":"yellow"},{"text":"[ON] ","color":"green","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/hook/true"}},{"text":"[OFF]","color":"red","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/hook/false"}}]
+tellraw @s ["",{"text":"  interaction ","color":"yellow"},{"text":"[ON] ","color":"green","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/interaction/true"}},{"text":"[OFF]","color":"red","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/interaction/false"}}]
+tellraw @s ["",{"text":"  perm        ","color":"yellow"},{"text":"[ON] ","color":"green","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/perm/true"}},{"text":"[OFF]","color":"red","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/perm/false"}}]
+tellraw @s ["",{"text":"  wand        ","color":"yellow"},{"text":"[ON] ","color":"green","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/wand/true"}},{"text":"[OFF]","color":"red","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/wand/false"}}]
+tellraw @s ["",{"text":"  geo         ","color":"yellow"},{"text":"[ON] ","color":"green","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/geo/true"}},{"text":"[OFF]","color":"red","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/geo/false"}}]
+tellraw @s ["",{"text":"  cb          ","color":"yellow"},{"text":"[ON] ","color":"green","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/cb/true"}},{"text":"[OFF]","color":"red","clickEvent":{"action":"run_command","value":"/function datalib:api/toggle/cb/false"}}]
+tellraw @s ["",{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"#555555"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"toggle/show","color":"aqua"},{"text":" → opened (1.20.5 tellraw menu)","color":"gray"}]

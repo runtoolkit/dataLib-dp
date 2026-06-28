@@ -1,4 +1,3 @@
-execute as @a run function datalib:core/lib/tick_guard_clear
 
 execute as @a[scores={dl_menu=1..}] run function datalib:menu
 scoreboard players set @a[scores={dl_menu=1..}] dl_menu 0
@@ -17,6 +16,8 @@ function datalib:core/internal/api/perm/trigger/tick_start
 function datalib:core/internal/api/wand/tick_scan
 
 function datalib:core/internal/systems/hook/tick_scan
+# Geo / region-watch — missing before this fix
+execute if data storage datalib:engine modules{geo:1b} run function datalib:core/internal/systems/geo/region_watch/tick_scan
 # Event bus — on_tick
 function #datalib:events/on_tick
 

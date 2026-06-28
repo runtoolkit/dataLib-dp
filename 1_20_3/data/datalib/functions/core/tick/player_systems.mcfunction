@@ -1,4 +1,3 @@
-execute as @a run function datalib:core/lib/tick_guard_clear
 
 execute as @a[scores={dl_menu=1..}] run function datalib:menu
 scoreboard players set @a[scores={dl_menu=1..}] dl_menu 0

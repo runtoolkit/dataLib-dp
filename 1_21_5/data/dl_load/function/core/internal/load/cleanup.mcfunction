@@ -52,7 +52,6 @@ scoreboard objectives remove datalib.time
 scoreboard objectives remove dl_menu
 scoreboard objectives remove dl_run
 scoreboard objectives remove dl_action
-scoreboard objectives remove datalib.tick_guard
 scoreboard objectives remove datalib.dialog_load
 scoreboard objectives remove health
 scoreboard objectives remove dl.pre_version
