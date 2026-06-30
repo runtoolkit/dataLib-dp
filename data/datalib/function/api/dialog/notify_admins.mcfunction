@@ -1,4 +1,4 @@
-# datalib:api/dialog/notify_admins
+# datalib:api/dialog/notify_admins [1.21.6 overlay]
 # Notifies all online admins that the executing player opened a dialog.
 # Logs the dialog identifier to the debug log buffer.
 #

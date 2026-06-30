@@ -1,8 +1,0 @@
-# ============================================================
-# datalib:systems/uuid/internal/has_check [MACRO FUNCTION]
-# Checks key existence in the cache
-#
-# Call: function datalib:systems/uuid/internal/has_check with storage datalib:input
-# $(key) = name of the key to check
-# ============================================================
-$execute if data storage datalib:engine uuid_cache.$(key) run scoreboard players set $uuid.has dl.tmp 1

@@ -1,3 +1,5 @@
+playsound minecraft:block.note_block.pling master @s ~ ~ ~ 4 2
+
 function datalib:core/disable/main
 
-tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Engine disabled. ","color":"red"},{"text":"Restart → ","color":"#555555"},{"text":"/reload","color":"aqua","bold":true,"underlined":true}]
+tellraw @s [{"text":"To restart:"}," ",{"text":"/reload","color":"aqua","bold":true,"italic":false}]

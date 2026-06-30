@@ -1,6 +1,0 @@
-# Admin-protected trigger/unbind_all. Takes no arguments.
-execute unless function datalib:debug/tools/utils/check_all run return run \
- tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"Permission denied.","color":"red"}]
-
-function datalib:api/trigger/unbind_all
-tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ ","color":"yellow"},{"text":"trigger/unbind_all ","color":"aqua"},{"text":"all binds cleared","color":"#555555"}]

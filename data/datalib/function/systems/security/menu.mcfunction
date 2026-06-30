@@ -1,15 +1,18 @@
-# datalib:systems/security/menu
-# Security status panel — part of #datalib:admin/menu.
-# 1.21.6+ overlay replaces this with an interactive dialog.
+# datalib:systems/security/menu  [1.21.6 OVERLAY]
+# Dialog-based security menu. Replaces tellraw version on 1.21.6+.
 # Requires: dl.perm_level >= security.admin_min_level
+#
+# NOTE: Dialog cannot read storage/score natively — values are injected
+# via macro ($) in menu_build.mcfunction.
 execute unless function datalib:debug/tools/utils/perm_check run return 0
-tellraw @s ["",{"text":"─── DL Security ─────────────────────","color":"#00AAAA","bold":true}]
-tellraw @s ["",{"text":"  Version         ","color":"gray"},{"storage":"datalib:engine","nbt":"global.version","color":"aqua"}]
-tellraw @s ["",{"text":"  sandbox         ","color":"gray"},{"storage":"datalib:engine","nbt":"sandbox","color":"gold"}]
-tellraw @s ["",{"text":"  trust_players   ","color":"gray"},{"storage":"datalib:engine","nbt":"security.trust_players","color":"gold"}]
-tellraw @s ["",{"text":"  cmd_min_level   ","color":"gray"},{"storage":"datalib:engine","nbt":"security.cmd_min_level","color":"green"}]
-tellraw @s ["",{"text":"  sandbox_level   ","color":"gray"},{"storage":"datalib:engine","nbt":"security.sandbox_cmd_min_level","color":"green"}]
-tellraw @s ["",{"text":"  admin_min_level ","color":"gray"},{"storage":"datalib:engine","nbt":"security.admin_min_level","color":"green"}]
-tellraw @s ["",{"text":"  admin_override  ","color":"gray"},{"storage":"datalib:engine","nbt":"security.admin_can_override","color":"gold"}]
-tellraw @s ["",{"text":"  Your level      ","color":"gray"},{"score":{"name":"@s","objective":"dl.perm_level"},"color":"yellow","bold":true}]
-tellraw @s ["",{"text":"  [sandbox on] ","color":"green","click_event":{"action":"suggest_command","command":"/data modify storage datalib:engine sandbox set value 1b"},"hover_event":{"action":"show_text","value":"Suggest: enable sandbox"}},{"text":"[sandbox off]","color":"red","click_event":{"action":"suggest_command","command":"/data modify storage datalib:engine sandbox set value 0b"},"hover_event":{"action":"show_text","value":"Suggest: disable sandbox"}}]
+
+# Collect dynamic values into datalib:input for macro interpolation
+data modify storage datalib:input sandbox set from storage datalib:engine sandbox
+data modify storage datalib:input trust_players set from storage datalib:engine security.trust_players
+data modify storage datalib:input cmd_min_level set from storage datalib:engine security.cmd_min_level
+data modify storage datalib:input sandbox_lvl set from storage datalib:engine security.sandbox_cmd_min_level
+data modify storage datalib:input admin_min_level set from storage datalib:engine security.admin_min_level
+data modify storage datalib:input admin_override set from storage datalib:engine security.admin_can_override
+execute store result storage datalib:input perm_level int 1 run scoreboard players get @s dl.perm_level
+
+function datalib:systems/security/menu_build with storage datalib:input {}

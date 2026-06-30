@@ -1,5 +1,5 @@
 # datalib:systems/geo/region_watch/internal/tick_scan
-# Called from hook/internal/tick_scan (requires patch).
+# Called directly from core/tick/queue_systems.mcfunction.
 # If region_watches is non-empty, checks all regions for each player.
 
 # Module toggle guard — skips this module when disabled via datalib:api/toggle/geo/false

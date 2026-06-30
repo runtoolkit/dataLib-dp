@@ -1,7 +1,0 @@
-{
-  "_comment": "datalib: set_custom_model_data — 1.20.5-1.21.3 format (single int). The composite floats/strings/flags/colors format is 1.21.4+ only.",
-  "function": "minecraft:set_components",
-  "components": {
-    "minecraft:custom_model_data": 1
-  }
-}

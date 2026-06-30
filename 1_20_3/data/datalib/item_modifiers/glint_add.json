@@ -1,4 +1,0 @@
-{
-  "function": "minecraft:set_nbt",
-  "tag": "{Enchantments:[{id:\"minecraft:unbreaking\",lvl:1s}],HideFlags:1}"
-}

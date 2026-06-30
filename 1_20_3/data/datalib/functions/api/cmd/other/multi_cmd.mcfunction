@@ -1,7 +1,0 @@
-execute unless entity @s[tag=datalib.admin] run return 0
-
-$data modify storage datalib:engine _mcmd_queue set value $(commands)
-data modify storage datalib:engine _mcmd_options set value {error_mode:"continue",profile:0b,spread:0}
-
-execute at @s run function datalib:api/cmd/other/multi_cmd/run
-tellraw @a[tag=datalib.debug] {"text":"","extra":[{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"cmd/other/multi_cmd ","color":"aqua"},{"text":"▶ executing batch","color":"#555555"}]}
