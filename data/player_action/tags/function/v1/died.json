@@ -1,0 +1,5 @@
+{
+  "values": [
+    "datalib:core/internal/systems/hook/on_player_death"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "interact_anvil": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:flower_pot"
+                ]
+              }
+            }
+          }
+        ]
+      }
+	  }
+  },
+  "rewards":{ 
+    "function":"player_action:v1/internal/interact_flower_pot"
+  }
+}
