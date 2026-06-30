@@ -1,5 +1,5 @@
 # 🔧 dataLib
-**Minecraft Java Edition 1.20.3–26.1.2+ | Multiplayer-Safe | Pure Datapack**
+**Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
 
 ---
 > Current version: **v6.0.0**
@@ -123,4 +123,4 @@ function datalib:core/lib/string/replace
 
 ---
 
-*dataLib v6.0.0 | MC Java 1.20.3–26.1+ | Pure Datapack*
+*dataLib v6.0.0 | MC Java 26.2 | Pure Datapack*
