@@ -1,0 +1,15 @@
+title: "[Q&A]"
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "Question"
+      description: "Ask your question about DataLib."
+      placeholder: "For example: How do I create a macro that…?"
+  - type: input
+    id: mc_version
+    attributes:
+      label: "Minecraft Version"
+      description: "Which Minecraft version are you using?"
+      placeholder: "1.21.8"

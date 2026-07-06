@@ -1,0 +1,25 @@
+title: "[Question]"
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Provide a short summary of your question about the datapack.
+      placeholder: "What's your question about (function, macro, GUI, etc.)?"
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Give detailed information, including Minecraft version and datapack version.
+      placeholder: "Include relevant context, errors, screenshots, or example commands."
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Select the category that best fits your question.
+      options:
+        - Function / Macro
+        - Custom Items
+        - GUI / Admin Panel
+        - NPC / Entity
+        - Other
