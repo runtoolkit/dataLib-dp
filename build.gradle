@@ -297,3 +297,34 @@ tasks.register("clean", Delete) {
     description = "Deletes the build/ directory"
     delete(layout.buildDirectory)
 }
+
+
+// ---------------------------------------------------------------------
+// createSourceArchive: Copies project files into the archive directory, excluding .git
+// ---------------------------------------------------------------------
+tasks.register('createSourceArchive', Copy) {
+    description = 'Copies project files into the archive directory, excluding .git'
+    from(rootDir) {
+        exclude 'archive/**'
+        exclude '.github/**'
+        exclude '.git/**'
+    }
+    into layout.buildDirectory.dir('archive/source')
+}
+
+tasks.register('copyGitHistory', Copy) {
+    description = 'Copies git history into the archive directory'
+    dependsOn createSourceArchive
+    from(rootDir) {
+        include '.git/**'
+    }
+    into layout.buildDirectory.dir('archive/source')
+}
+
+tasks.register('createSourceZip', Zip) {
+    description = 'Creates source-with-history.zip'
+    dependsOn copyGitHistory
+    from layout.buildDirectory.dir('archive/source')
+    archiveFileName = 'source-with-history.zip'
+    destinationDirectory = layout.buildDirectory.dir('archive')
+}
