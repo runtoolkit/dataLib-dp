@@ -204,8 +204,9 @@ TARGETS.each { label, packFormat ->
 
 tasks.register("buildAll") {
     group = "build"
-    description = "Builds every datapack variant (equivalent to the old build.yml matrix)"
+    description = "Builds every datapack variant and repacks each zip to pack.mcmeta + pack.png + data/ only"
     dependsOn buildTasks
+    finalizedBy "repack"
 }
 
 // ---------------------------------------------------------------------
