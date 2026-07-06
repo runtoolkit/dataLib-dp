@@ -11,6 +11,10 @@
 > **Do not copy `datalib:input` or `datalib:engine` into your own datapack.** It is an internal implementation detail and may change without notice between releases.
 
 ---
+
+> [!NOTE]
+> /reload is no longer required. dataLib initializes automatically, and player-targeted commands (such as tellraw @s) are executed when the first player joins the world.
+---
 > 🛡️ **This is a Minecraft Datapack — it contains no executables or scripts outside of `.mcfunction` files.**
 > Some antivirus software may flag `.mcfunction` files as suspicious due to macro-like syntax. This is a **false positive**. The pack has been scanned on [VirusTotal](https://www.virustotal.com) and returned clean.
 > **Only download from this official repository.** Do not trust redistributed or repackaged versions from third-party sources.
