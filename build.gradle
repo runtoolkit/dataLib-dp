@@ -228,6 +228,7 @@ tasks.register("repack") {
             copy {
                 from(zipTree(zipFile)) {
                     include "pack.mcmeta"
+                    include "pack.png"
                     include "data/**"
                 }
                 into(scratch)
