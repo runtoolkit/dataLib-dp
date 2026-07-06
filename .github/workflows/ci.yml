@@ -102,3 +102,16 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Auto generate build.py"
           git push origin HEAD:${GITHUB_REF#refs/heads/}
+
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Gradle createSourceZip
+        run: chmod +x gradlew && ./gradlew createSourceZip --no-daemon
