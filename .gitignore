@@ -21,7 +21,7 @@ rad.json
 #Test results file
 TestResults.xml
 
-# MC (Minecraft)
+# Minecraft / Cache
 usercache.json
 playerdata/
 saves/
@@ -115,8 +115,15 @@ test.tar.gz
 *.xlsx
 *.ppt
 *.pptx
+*.png
 !pack.png
 
 # Gradle
 .gradle/
 build/
+
+# Datapack / Mod
+!data/
+!gradle/
+!src/
+!pack.mcmeta
