@@ -284,7 +284,7 @@ tasks.register("release") {
         exec {
             commandLine "gh", "release", "create", version,
                 "--title", "dataLib ${version}",
-                "--notes", "**Datapack build** (pack_format 101).",
+                "--notes", "**Datapack build** (pack_format 107).",
                 "--latest",
                 "${zip}#dataLib-full.zip"
         }
