@@ -256,7 +256,7 @@ tasks.register("repack") {
 tasks.register("release") {
     group = "publish"
     description = "Creates/updates the GitHub release for the full build"
-    dependsOn "repoLock", "zipFull"
+    dependsOn "repoLock", "zipFull", "repack"
 
     doLast {
         def metaFile = new File(buildRoot, "full/pack.mcmeta")
