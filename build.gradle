@@ -209,6 +209,44 @@ tasks.register("buildAll") {
 }
 
 // ---------------------------------------------------------------------
+// Repack: strips every dist zip down to pack.mcmeta + data/ only.
+// Deletes the original zip and writes the trimmed one in its place.
+// ---------------------------------------------------------------------
+tasks.register("repack") {
+    group = "build"
+    description = "Trims each dist zip to pack.mcmeta + data/ only, replacing the original"
+    dependsOn buildTasks
+
+    doLast {
+        def scratch = layout.buildDirectory.dir("repack-scratch").get().asFile
+
+        distRoot.listFiles({ f -> f.name.endsWith(".zip") } as FileFilter)?.each { zipFile ->
+            def name = zipFile.name
+            delete(scratch)
+            mkdir(scratch)
+
+            copy {
+                from(zipTree(zipFile)) {
+                    include "pack.mcmeta"
+                    include "data/**"
+                }
+                into(scratch)
+            }
+
+            if (!new File(scratch, "pack.mcmeta").exists()) {
+                throw new GradleException("${name}: pack.mcmeta missing after filtering — refusing to repack.")
+            }
+
+            delete(zipFile)
+
+            ant.zip(destfile: zipFile, basedir: scratch)
+
+            logger.lifecycle("Repacked ${name} -> pack.mcmeta + data/ only")
+        }
+    }
+}
+
+// ---------------------------------------------------------------------
 // Release: reads version from the full build's pack.mcmeta, publishes
 // via gh CLI. Only meaningful on push to main — that branch/event gate
 // stays in ci.yml, not here, since it's CI trigger logic, not a build step.
@@ -244,7 +282,7 @@ tasks.register("release") {
         exec {
             commandLine "gh", "release", "create", version,
                 "--title", "dataLib ${version}",
-                "--notes", "**Datapack build** (pack_format 107).",
+                "--notes", "**Datapack build** (pack_format 101).",
                 "--latest",
                 "${zip}#dataLib-full.zip"
         }
