@@ -109,7 +109,7 @@ tasks.register("lintMecha", Exec) {
         mkdir(scratch)
         copy {
             from(projectDir) {
-                exclude ".git/**", ".github/**"
+                exclude "build/**", ".git/**", ".github/**"
             }
             into(scratch)
         }
@@ -176,7 +176,7 @@ TARGETS.each { label, packFormat ->
 
             copy {
                 from(projectDir) {
-                    exclude ".git/**", ".github/**", ".gitattributes", ".gitignore",
+                    exclude "build/**", ".git/**", ".github/**", ".gitattributes", ".gitignore",
                              "README.md", "version.json", "dependencies.json"
                 }
                 into(stageDir)
