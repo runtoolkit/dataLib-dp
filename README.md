@@ -23,12 +23,26 @@
 
 ## 📦 Installation
 
-```
 1. Place dataLib-full.zip into <world>/datapacks/
-2. /function dl_load:load/yes
-3. /function dl_load:load/fork_no or /function dl_load:load/fork_yes.
-4. /tag @s add datalib.admin
-5. /scoreboard players set @a[tag=datalib.admin] dl.perm_level 4
+
+2. Add the following logic to your datapack's initialization files:
+
+```mcfunction
+#> <namespace>:load
+execute unless data storage datalib:engine {global:{loaded:1b}} run function <namespace>:load_datalib
+```
+
+```mcfunction
+#> <namespace>:load_datalib
+
+execute if data <namespace>:engine (loaded_datalib:1b] run return 0
+
+function dl_load:load/yes
+function dl_load:load/fork_no or `/function dl_load:load/fork_yes`.
+tag @s add datalib.admin
+scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
+
+data modify storage <namespace>:engine loaded_datalib set value 1b
 ```
 
 ---
