@@ -25,10 +25,10 @@
 
 ```
 1. Place dataLib-full.zip into <world>/datapacks/
-3. /function dl_load:load/yes
-4. /function dl_load:load/fork_no or /function dl_load:load/fork_yes.
-5. /tag @s add datalib.admin
-6. /scoreboard players set @a[tag=datalib.admin] dl.perm_level 4
+2. /function dl_load:load/yes
+3. /function dl_load:load/fork_no or /function dl_load:load/fork_yes.
+4. /tag @s add datalib.admin
+5. /scoreboard players set @a[tag=datalib.admin] dl.perm_level 4
 ```
 
 ---
