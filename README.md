@@ -24,11 +24,11 @@
 ## 📦 Installation
 
 ```
-1. Place dataLib-v6.0.0 into <world>/datapacks/
-2. /reload
+1. Place dataLib-full.zip into <world>/datapacks/
 3. /function dl_load:load/yes
-4. /tag @s add datalib.admin
-5. /scoreboard players set @a[tag=datalib.admin] dl.perm_level 3
+4. /function dl_load:load/fork_no or /function dl_load:load/fork_yes.
+5. /tag @s add datalib.admin
+6. /scoreboard players set @a[tag=datalib.admin] dl.perm_level 4
 ```
 
 ---
@@ -92,7 +92,7 @@ Provides deterministic load order, version tracking, and pre/load/post-load hook
 # Check if dataLib is loaded
 execute if score #dataLib load.status matches 1.. run say dataLib is loaded
 
-# Get version (major*10000 + minor*100 + patch → v6.0.0 = 50000)
+# Get version (major*10000 + minor*100 + patch → v6.0.0 = 60000)
 scoreboard players get dataLib load.status
 ```
 
