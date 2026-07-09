@@ -208,10 +208,17 @@ execute if data storage datalib:output inputs{func:"#"} run return 0
 # BEHAVIOR:
 #   If func does not contain "datalib:api/" prefix, log violation and deny.
 #
+# SECURITY FIX (v6.1.1):
+#   Previously this section logged the violation but did NOT return 0,
+#   meaning execute_validated/run would still run $function $(func) on
+#   any namespace afterward. Fail-open on the exact check documented as
+#   "namespace allowlist enforcement". Now returns 0 after logging.
+#
 # ======================================================================================
 
 execute unless data storage datalib:output inputs{func:"datalib:api/"} run function datalib:core/security/input_ns_violation
-execute unless data storage datalib:output inputs{func:"datalib:api/"} run data modify storage datalib:output error set value {level:"WARN",code:"NS_VIOLATION",message:"Input namespace violation detected. Action allowed but logged."}
+execute unless data storage datalib:output inputs{func:"datalib:api/"} run data modify storage datalib:output error set value {level:"WARN",code:"NS_VIOLATION",message:"Input namespace violation detected. Call denied."}
+execute unless data storage datalib:output inputs{func:"datalib:api/"} run return 0
 
 # ======================================================================================
 # SECTION 7
