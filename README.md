@@ -35,10 +35,10 @@ execute unless data storage datalib:engine {global:{loaded:1b}} run function <na
 ```mcfunction
 #> <namespace>:load_datalib
 
-execute if data <namespace>:engine (loaded_datalib:1b] run return 0
+execute if data storage <namespace>:engine {loaded_datalib:1b} run return 0
 
 function dl_load:load/yes
-function dl_load:load/fork_no or `/function dl_load:load/fork_yes`.
+function dl_load:load/fork_no
 tag @s add datalib.admin
 scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
 
