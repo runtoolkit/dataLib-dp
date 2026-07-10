@@ -54,7 +54,6 @@ backups/
 session.lock
 usernamecache.json
 realms_persistence.json
-resourcepacks/
 shaderpacks/
 screenshots/
 eula.txt
