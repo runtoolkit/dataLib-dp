@@ -2,13 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [main, workflows]
+    branches: [main, workflows, devlop]
   pull_request:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: read
 
 jobs:
   # =====================================================================
