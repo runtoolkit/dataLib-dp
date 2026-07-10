@@ -1,4 +1,4 @@
-function datalib:core/disable/main
+function dl_load:gate/yes
 
 function datalib:systems/hook/unbind_all
 function datalib:api/trigger/unbind_all
