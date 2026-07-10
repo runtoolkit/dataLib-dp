@@ -1,4 +1,4 @@
-function datalib:core/disable/main
+function dl_load:gate/yes
 
 function datalib:systems/hook/unbind_all
 function datalib:api/trigger/unbind_all
@@ -12,4 +12,4 @@ data remove storage datalib:engine schedules
 data remove storage datalib:engine global.tick
 data remove storage datalib:engine global.epoch
 
-tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Engine disabled. ","color":"red"},{"text":"Restart → ","color":"#555555"},{"text":"/reload","color":"aqua","bold":true,"underlined":true}]
+tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"Engine disabled. ","color":"red"},{"text":"Restart → ","color":"#555555"},{"text":"/reload","color":"aqua","bold":true,"underlined":true,"click_event": {"action": "run_command", "command": "/reload"}}]

@@ -20,3 +20,4 @@
 
 data modify storage datalib:engine pending_gate set value {type:"disable"}
 function dl_load:gate/request
+function dl_load:gate/yes
