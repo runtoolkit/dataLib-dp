@@ -1,61 +1,9 @@
 {
-  "release": "v6.0.0",
+  "release": "v6.0.1",
   "semver": {
-    "major": 5,
-    "minor": 1,
-    "patch": 2,
-    "pre": 0
-  },
-  "targets": [
-    {
-      "label": "1_20_3",
-      "pack_format": 26,
-      "overlays": [
-        "1_20_3"
-      ]
-    },
-    {
-      "label": "1_20_5",
-      "pack_format": 41,
-      "overlays": [
-        "1_20_5"
-      ]
-    },
-    {
-      "label": "pre_1_21_4",
-      "pack_format": 48,
-      "overlays": [
-        "_pre_1_21_4",
-        "compat_1_21_4"
-      ]
-    },
-    {
-      "label": "1_21_5",
-      "pack_format": 71,
-      "overlays": [
-        "1_21_5"
-      ]
-    },
-    {
-      "label": "1_21_6",
-      "pack_format": 80,
-      "overlays": [
-        "1_21_6"
-      ]
-    },
-    {
-      "label": "26_1",
-      "pack_format": 101,
-      "overlays": [
-        "26_1"
-      ]
-    },
-    {
-      "label": "26_2",
-      "pack_format": 106,
-      "overlays": [
-        "26_2"
-      ]
-    }
-  ]
+    "major": 6,
+    "minor": 0,
+    "patch": 1,
+    "pre": 1
+  }
 }

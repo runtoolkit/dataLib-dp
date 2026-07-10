@@ -1,6 +1,7 @@
 scoreboard objectives add dl.tmp dummy
+scoreboard objectives add datalib.meta dummy
 scoreboard objectives add datalib.time dummy
-scoreboard objectives add datalib_menu trigger
+scoreboard objectives add dl_menu trigger
 scoreboard objectives add dl_run trigger
 scoreboard objectives add dl_action trigger
 scoreboard objectives add datalib.dialog_load dummy

@@ -12,6 +12,7 @@ execute unless score #dl.dsm dl.tmp matches 1 run data modify storage datalib:en
 scoreboard players reset #dl.dsm dl.tmp
 
 # Refresh book
+function datalib:systems/dev_settings/other/toggle_admin_mode
 function datalib:systems/dev_settings/display/open
 
 tellraw @s ["",{"text":"[Dev Settings] ","color":"gold"},{"text":"devMode updated.","color":"yellow"}]

@@ -13,7 +13,7 @@
   "datalib.msg.safe_load.denied.admin": "safe_load/yes denied — datalib.admin tag required.",
   "datalib.msg.safe_load.denied.perm":  "safe_load/yes denied — dl.perm_level \u2265 4 required.",
   "datalib.msg.safe_load.denied.loaded":"safe_load/yes denied — engine is already loaded.",
-  "datalib.msg.version_conflict":       "Version conflict! Expected v6.0.0 \u2014 stored scores do not match.",
+  "datalib.msg.version_conflict":       "Version conflict! Expected v6.0.1 \u2014 stored scores do not match.",
   "datalib.msg.version_reload":         "\u2192 Run /reload to reinitialize dataLib.",
 
   "datalib.subtitle.load_success": "dataLib loaded",
