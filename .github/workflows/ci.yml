@@ -115,3 +115,12 @@ jobs:
           java-version: "21"
       - name: Gradle createSourceZip
         run: chmod +x gradlew && ./gradlew createSourceZip --no-daemon
+
+      - name: Run actions/upload-artifact@v7
+        run: exit 0
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dataLib-sources
+          path: build/archive/source-with-history.zip
+          retention-days: 14
+          if-no-files-found: error
