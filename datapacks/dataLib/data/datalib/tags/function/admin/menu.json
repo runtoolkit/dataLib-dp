@@ -1,6 +1,4 @@
 {
     "replace": false,
-    "values": [
-        "datalib:systems/security/menu"
-    ]
+    "values": []
 }
