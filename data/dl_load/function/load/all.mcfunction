@@ -3,7 +3,7 @@ forceload add -30000000 1600
 
 # Stage 0 — Preparing
 summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage0prep"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.stage0prep,limit=1] run say [DL] Preparing...
+execute as @e[type=minecraft:marker,tag=datalib.stage0prep,limit=1] run say Preparing...
 execute as @e[type=minecraft:marker,tag=datalib.stage0prep,limit=1] run kill @s
 
 execute unless function dl_load:core/internal/load/validate run return 0
@@ -50,7 +50,7 @@ function dl_load:core/internal/load/version_set
 # Format: (major * 10000) + (minor * 100) + patch
 # Example: v2.2.6 = 20206
 execute store result score #version_calc dl.tmp run scoreboard players get #dl.major dl.pre_version
-scoreboard players operation #version_calc dl.tmp *= #10000 dl.tmp
+scoreboard players operation #version_calc dl.tmp *= #601 dl.tmp
 execute store result score #temp dl.tmp run scoreboard players get #dl.minor dl.pre_version
 scoreboard players operation #temp dl.tmp *= #100 dl.tmp
 scoreboard players operation #version_calc dl.tmp += #temp dl.tmp
