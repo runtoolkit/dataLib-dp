@@ -94,7 +94,7 @@ Used with `execute if predicate <id>`.
 | `datalib:in_nether` | Player is in the Nether |
 | `datalib:in_end` | Player is in the End |
 
-Full reference: [Predicate Reference](../../wiki/Predicate-Reference)
+Full reference: [Predicate Reference](https://github.com/runtoolkit/dataLib/wiki)
 
 ---
 
