@@ -8,7 +8,7 @@ import groovy.json.JsonOutput
 // because it commits+pushes — not a build responsibility.
 // =====================================================================
 
-def REPO_SLUG   = "runtoolkit/dataLib"
+def REPO_SLUG   = "runtoolkit/dataLib-dp"
 
 // label -> pack_format. Single target now that overlays are gone.
 def TARGETS = [
