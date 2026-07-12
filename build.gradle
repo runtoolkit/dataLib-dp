@@ -12,8 +12,12 @@ def REPO_SLUG   = "runtoolkit/dataLib"
 
 // label -> pack_format. Single target now that overlays are gone.
 def TARGETS = [
-    "full" : 101
+    "full" : 107
 ]
+
+// Source roots after the datapacks/ + resourcepacks/ restructure.
+def dataLibSrc     = file("datapacks/dataLib")
+def extensionsSrc  = file("datapacks/datalib_extensions")
 
 def buildRoot   = layout.buildDirectory.dir("datapack").get().asFile
 def distRoot    = layout.buildDirectory.dir("dist").get().asFile
@@ -140,14 +144,15 @@ tasks.register("lintMecha", Exec) {
 // ---------------------------------------------------------------------
 tasks.register("lintPackMcmeta") {
     group = "verification"
-    description = "Checks pack.mcmeta exists and is valid JSON"
+    description = "Checks pack.mcmeta exists and is valid JSON for dataLib and datalib_extensions"
     doLast {
-        def meta = file("pack.mcmeta")
-        if (!meta.exists()) {
-            throw new GradleException("pack.mcmeta is missing!")
+        [new File(dataLibSrc, "pack.mcmeta"), new File(extensionsSrc, "pack.mcmeta")].each { meta ->
+            if (!meta.exists()) {
+                throw new GradleException("${meta} is missing!")
+            }
+            new JsonSlurper().parse(meta)
         }
-        new JsonSlurper().parse(meta)
-        logger.lifecycle("pack.mcmeta is valid JSON.")
+        logger.lifecycle("pack.mcmeta files valid.")
     }
 }
 
@@ -175,10 +180,7 @@ TARGETS.each { label, packFormat ->
             mkdir(stageDir)
 
             copy {
-                from(projectDir) {
-                    exclude "build/**", ".git/**", ".github/**", ".gitattributes", ".gitignore",
-                             "README.md", "version.json", "dependencies.json"
-                }
+                from(dataLibSrc)
                 into(stageDir)
             }
 
@@ -202,9 +204,40 @@ TARGETS.each { label, packFormat ->
     buildTasks << zipTask
 }
 
+// ---------------------------------------------------------------------
+// datalib_extensions: separate zip target, built alongside dataLib.
+// ---------------------------------------------------------------------
+def extensionsStageDir = new File(buildRoot, "extensions")
+
+def prepareExtensionsTask = tasks.register("prepareExtensions") {
+    group = "build"
+    description = "Assembles datalib_extensions into build/datapack/extensions"
+    dependsOn "repoLock"
+
+    doLast {
+        delete(extensionsStageDir)
+        mkdir(extensionsStageDir)
+        copy {
+            from(extensionsSrc)
+            into(extensionsStageDir)
+        }
+    }
+}
+
+def zipExtensionsTask = tasks.register("zipExtensions", Zip) {
+    group = "build"
+    description = "Packages datalib_extensions as a zip artifact"
+    dependsOn prepareExtensionsTask
+    from(extensionsStageDir)
+    destinationDirectory.set(distRoot)
+    archiveFileName.set("datalib_extensions.zip")
+}
+
+buildTasks << zipExtensionsTask
+
 tasks.register("buildAll") {
     group = "build"
-    description = "Builds every datapack variant and repacks each zip to pack.mcmeta + pack.png + data/ only"
+    description = "Builds every datapack variant (dataLib + datalib_extensions) and repacks each zip to pack.mcmeta + pack.png + data/ only"
     dependsOn buildTasks
     finalizedBy "repack"
 }
@@ -296,4 +329,35 @@ tasks.register("clean", Delete) {
     group = "build"
     description = "Deletes the build/ directory"
     delete(layout.buildDirectory)
+}
+
+
+// ---------------------------------------------------------------------
+// createSourceArchive: Copies project files into the archive directory, excluding .git
+// ---------------------------------------------------------------------
+tasks.register('createSourceArchive', Copy) {
+    description = 'Copies project files into the archive directory, excluding .git'
+    from(rootDir) {
+        exclude 'archive/**'
+        exclude '.github/**'
+        exclude '.git/**'
+    }
+    into layout.buildDirectory.dir('archive/source')
+}
+
+tasks.register('copyGitHistory', Copy) {
+    description = 'Copies git history into the archive directory'
+    dependsOn createSourceArchive
+    from(rootDir) {
+        include '.git/**'
+    }
+    into layout.buildDirectory.dir('archive/source')
+}
+
+tasks.register('createSourceZip', Zip) {
+    description = 'Creates source-with-history.zip'
+    dependsOn copyGitHistory
+    from layout.buildDirectory.dir('archive/source')
+    archiveFileName = 'source-with-history.zip'
+    destinationDirectory = layout.buildDirectory.dir('archive')
 }

@@ -1,1 +1,0 @@
-tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ ","color":"yellow"},{"text":"Engine not loaded yet. Run ","color":"#555555"},{"text":"/reload","color":"aqua","underlined":true},{"text":" first.","color":"#555555"}]

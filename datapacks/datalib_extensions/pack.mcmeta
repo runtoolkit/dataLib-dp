@@ -1,0 +1,18 @@
+{
+  "pack": {
+    "description": "datalib_extensions by Runtoolkit",
+    "min_format": [
+      107,
+      1
+    ],
+    "max_format": [
+      107,
+      1
+    ]
+  },
+  "features": {
+    "enabled": [
+      "minecraft:vanilla"
+    ]
+  }
+}

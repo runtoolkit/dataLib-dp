@@ -1,8 +1,12 @@
 # 🔧 dataLib
 **Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
 
+[![CI](https://github.com/runtoolkit/dataLib/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
+
 ---
-> Current version: **v6.0.0**
+> Current version: **v6.0.1**
 ---
 
 > [!WARNING]
@@ -23,12 +27,26 @@
 
 ## 📦 Installation
 
+1. Place dataLib-full.zip into <world>/datapacks/
+
+2. Add the following logic to your datapack's initialization files:
+
+```mcfunction
+#> <namespace>:load
+execute unless data storage datalib:engine {global:{loaded:1b}} run function <namespace>:load_datalib
 ```
-1. Place dataLib-v6.0.0 into <world>/datapacks/
-2. /reload
-3. /function dl_load:load/yes
-4. /tag @s add datalib.admin
-5. /scoreboard players set @a[tag=datalib.admin] dl.perm_level 3
+
+```mcfunction
+#> <namespace>:load_datalib
+
+execute if data storage <namespace>:engine {loaded_datalib:1b} run return 0
+
+function dl_load:load/yes
+function dl_load:load/fork_no
+tag @s add datalib.admin
+scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
+
+data modify storage <namespace>:engine loaded_datalib set value 1b
 ```
 
 ---
@@ -38,7 +56,7 @@
 ```
 datalib:engine  (persistent data)
 ├── global
-│   ├── version: "v6.0.0"
+│   ├── version: "v6.0.1"
 │   └── tick: <int>
 ├── players
 │   └── Steve { coins:150, level:5, xp:2300, online:1b, ... }
@@ -76,7 +94,7 @@ Used with `execute if predicate <id>`.
 | `datalib:in_nether` | Player is in the Nether |
 | `datalib:in_end` | Player is in the End |
 
-Full reference: [Predicate Reference](../../wiki/Predicate-Reference)
+Full reference: [Predicate Reference](https://github.com/runtoolkit/dataLib/wiki)
 
 ---
 
@@ -92,7 +110,7 @@ Provides deterministic load order, version tracking, and pre/load/post-load hook
 # Check if dataLib is loaded
 execute if score #dataLib load.status matches 1.. run say dataLib is loaded
 
-# Get version (major*10000 + minor*100 + patch → v6.0.0 = 50000)
+# Get version (major*10000 + minor*100 + patch → v6.0.1 = 601)
 scoreboard players get dataLib load.status
 ```
 
@@ -132,4 +150,4 @@ function datalib:core/lib/string/replace
 
 ---
 
-*dataLib v6.0.0 | MC Java 26.2 | Pure Datapack*
+*dataLib v6.0.1 | MC Java 26.2 | Pure Datapack*
