@@ -1,7 +1,7 @@
 # 🔧 dataLib
 **Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
 
-[![CI](https://github.com/runtoolkit/dataLib/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib/actions/workflows/ci.yml)
+[![CI](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
 
@@ -94,7 +94,7 @@ Used with `execute if predicate <id>`.
 | `datalib:in_nether` | Player is in the Nether |
 | `datalib:in_end` | Player is in the End |
 
-Full reference: [Predicate Reference](https://github.com/runtoolkit/dataLib/wiki)
+Full reference: [Predicate Reference](https://github.com/runtoolkit/dataLib-dp/wiki)
 
 ---
 
@@ -145,8 +145,8 @@ function datalib:core/lib/string/replace
 
 ## 💬 Support
 
-[![Issues](https://img.shields.io/github/issues/runtoolkit/DataLib?style=for-the-badge)](https://github.com/runtoolkit/DataLib/issues)
-[![Discussions](https://img.shields.io/github/discussions/runtoolkit/DataLib?style=for-the-badge&logo=github&color=blue)](https://github.com/runtoolkit/DataLib/discussions)
+[![Issues](https://img.shields.io/github/issues/runtoolkit/dataLib-dp?style=for-the-badge)](https://github.com/runtoolkit/dataLib-dp/issues)
+[![Discussions](https://img.shields.io/github/discussions/runtoolkit/dataLib-dp?style=for-the-badge&logo=github&color=blue)](https://github.com/runtoolkit/dataLib-dp/discussions)
 
 ---
 
