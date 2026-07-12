@@ -1,0 +1,20 @@
+{
+  "embedded": [
+    {
+      "id": "player_action",
+      "version": "v1.7",
+      "source": "https://github.com/ICY105/PlayerAction",
+      "license": "MIT",
+      "namespace": "player_action",
+      "load_tag": "#player_action:load",
+      "note": "Embedded as-is. Provides player event hooks (click, movement, block interaction)."
+    }
+  ],
+  "required": [
+    {
+      "id": "lanternload",
+      "source": "https://github.com/LanternMC/load",
+      "note": "Already bundled via data/load namespace."
+    }
+  ]
+}
