@@ -17,3 +17,4 @@
 
 scoreboard players operation $freeze_tp dl.tmp = @s dl.freeze_id
 execute as @a[tag=datalib.frozen] if score @s datalib.pid = $freeze_tp dl.tmp run teleport @s ~ ~ ~
+execute as @a[tag=datalib.frozen] if score @s datalib.pid = $freeze_tp dl.tmp run gamemode adventure @s
