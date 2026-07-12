@@ -23,7 +23,7 @@ def buildRoot   = layout.buildDirectory.dir("datapack").get().asFile
 def distRoot    = layout.buildDirectory.dir("dist").get().asFile
 
 // ---------------------------------------------------------------------
-// Repo lock — refuse to run outside runtoolkit/dataLib
+// Repo lock — refuse to run outside runtoolkit/dataLib-dp
 // ---------------------------------------------------------------------
 tasks.register("repoLock") {
     group = "verification"
