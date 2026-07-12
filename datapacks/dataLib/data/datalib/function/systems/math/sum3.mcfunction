@@ -25,4 +25,4 @@ scoreboard players operation $s3_a dl.tmp += $s3_c dl.tmp
 execute if score $s3_a dl.tmp matches 2147483647.. run scoreboard players set $s3_a dl.tmp 2147483647
 
 execute store result storage datalib:output result int 1 run scoreboard players get $s3_a dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/sum3 ","color":"aqua"},{"text":"($(a)+$(b)+$(c)) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/sum3 ","color":"aqua"},{"text":"($(a)+$(b)+$(c)) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

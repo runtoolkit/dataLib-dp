@@ -20,4 +20,4 @@ $execute if data storage datalib:engine flags.$(from) run data modify storage da
 $execute if data storage datalib:engine flags.$(from) run data modify storage datalib:output result set value 1b
 $execute unless data storage datalib:engine flags.$(from) run data remove storage datalib:engine flags.$(to)
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"flag/copy ","color":"aqua"},{"text":"$(from) → $(to) ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"flag/copy ","color":"aqua"},{"text":"$(from) → $(to) ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

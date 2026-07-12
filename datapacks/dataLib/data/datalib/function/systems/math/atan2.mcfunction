@@ -182,4 +182,4 @@ execute if score $a2_sx dl.tmp matches 1 if score $a2_sy dl.tmp matches -1 run s
 execute if score $a2_sx dl.tmp matches 1 if score $a2_sy dl.tmp matches -1 run scoreboard players operation $a2_r dl.tmp = $a2_neg dl.tmp
 
 execute store result storage datalib:output result int 1 run scoreboard players get $a2_r dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/atan2 ","color":"aqua"},{"text":"y=$(y) x=$(x) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"},{"text":"/1000°","color":"#555555"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/atan2 ","color":"aqua"},{"text":"y=$(y) x=$(x) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"},{"text":"/1000°","color":"#555555"}]

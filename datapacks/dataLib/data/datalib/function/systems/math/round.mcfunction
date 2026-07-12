@@ -32,4 +32,4 @@ scoreboard players operation #rnd_v dl.tmp /= #rnd_s dl.tmp
 scoreboard players operation #rnd_v dl.tmp *= #rnd_s dl.tmp
 
 execute store result storage datalib:output result int 1 run scoreboard players get #rnd_v dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/round ","color":"aqua"},{"text":"$(value) step=$(step) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/round ","color":"aqua"},{"text":"$(value) step=$(step) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

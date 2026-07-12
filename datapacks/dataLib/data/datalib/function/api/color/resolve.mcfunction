@@ -27,4 +27,4 @@ $data modify storage datalib:engine _color_resolve_tmp set value {color:"$(color
 execute if data storage datalib:engine color.palette run function datalib:core/internal/systems/color/resolve_exec with storage datalib:engine _color_resolve_tmp
 data remove storage datalib:engine _color_resolve_tmp
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/resolve ","color":"aqua"},{"text":"$(color)","color":"white"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/resolve ","color":"aqua"},{"text":"$(color)","color":"white"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

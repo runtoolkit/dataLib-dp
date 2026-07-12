@@ -854,10 +854,10 @@ data modify storage datalib:debug last_validated_call.func set from storage data
 execute unless data storage datalib:engine dev_settings{devMode:1b} unless entity @a[tag=datalib.debug] run return fail
 
 # Caller-facing confirmation (players only)
-execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✔ ","color":"green"},{"text":"Validated: ","color":"gray"},{"storage":"datalib:output","nbt":"inputs.func","color":"aqua"}]
+execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✔ ","color":"green"},{"text":"Validated: ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"inputs.func","color":"aqua"}]
 
 # Admin-facing full record
-tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"CALL ","color":"green","bold":true},{"selector":"@s","color":"gold"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"inputs.func","color":"aqua"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"CALL ","color":"green","bold":true},{"selector":"@s","color":"gold"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"inputs.func","color":"aqua"}]
 
 # Server console log (devMode only — say is noisy)
 execute if data storage datalib:engine dev_settings{devMode:1b} run say [DL/input_check] VALIDATED

@@ -14,4 +14,4 @@
 
 $data modify storage datalib:output result set value $(default)
 $execute if data storage datalib:engine flags.$(key) run data modify storage datalib:output result set value 1b
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"flag/get_or_default ","color":"aqua"},{"text":"$(key) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"flag/get_or_default ","color":"aqua"},{"text":"$(key) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

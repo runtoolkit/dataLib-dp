@@ -26,4 +26,4 @@ $execute if entity @a[name=$(player),gamemode=creative,limit=1] run data modify 
 $execute if entity @a[name=$(player),gamemode=adventure,limit=1] run data modify storage datalib:output name set value "adventure"
 $execute if entity @a[name=$(player),gamemode=spectator,limit=1] run data modify storage datalib:output name set value "spectator"
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/get_gamemode ","color":"aqua"},{"text":"$(player) → ","color":"gray"},{"storage":"datalib:output","nbt":"name","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/get_gamemode ","color":"aqua"},{"text":"$(player) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"name","color":"green"}]

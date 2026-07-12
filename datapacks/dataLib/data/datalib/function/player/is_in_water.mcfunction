@@ -19,4 +19,4 @@ $execute unless entity @a[name=$(player),limit=1] run return 0
 
 data modify storage datalib:output found set value 1b
 $execute as @a[name=$(player),limit=1] if predicate datalib:is_in_water run data modify storage datalib:output result set value 1b
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/is_in_water ","color":"aqua"},{"text":"$(player) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/is_in_water ","color":"aqua"},{"text":"$(player) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

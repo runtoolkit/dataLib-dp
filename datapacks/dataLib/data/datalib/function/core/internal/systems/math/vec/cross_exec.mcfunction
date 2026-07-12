@@ -37,4 +37,4 @@ scoreboard players operation $vcay2 dl.tmp *= $vcbx2 dl.tmp
 scoreboard players operation $vcax2 dl.tmp -= $vcay2 dl.tmp
 execute store result storage datalib:output z int 1 run scoreboard players get $vcax2 dl.tmp
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/vec/cross ","color":"aqua"},{"text":"($(ax),$(ay),$(az))×($(bx),$(by),$(bz)) → ","color":"gray"},{"storage":"datalib:output","nbt":"x","color":"yellow"},{"text":",","color":"gray"},{"storage":"datalib:output","nbt":"y","color":"yellow"},{"text":",","color":"gray"},{"storage":"datalib:output","nbt":"z","color":"yellow"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/vec/cross ","color":"aqua"},{"text":"($(ax),$(ay),$(az))×($(bx),$(by),$(bz)) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"x","color":"yellow"},{"text":",","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"y","color":"yellow"},{"text":",","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"z","color":"yellow"}]

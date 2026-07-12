@@ -12,7 +12,7 @@
 
 execute unless entity @s[tag=datalib.dialog_opened] run return 0
 
-tellraw @a[tag=datalib.admin] ["",{"text":"[DL/dialog] ","color":"gold","bold":true},{"selector":"@s","color":"yellow"},{"text":" opened dialog: ","color":"white"},{"nbt":"dialog.DIALOG.title","storage":"datalib:engine","color":"aqua","italic":true}]
+tellraw @a[tag=datalib.admin] ["",{"text":"[DL/dialog] ","color":"gold","bold":true},{"selector":"@s","color":"yellow"},{"text":" opened dialog: ","color":"white"},{"nbt":"dialog.DIALOG.title","plain":true ,"storage":"datalib:engine","color":"aqua","italic":true}]
 
 data modify storage datalib:engine _log_add_tmp.message set value "[dialog/notify_admins] dialog opened"
 data modify storage datalib:engine _log_add_tmp.level set value "INFO"

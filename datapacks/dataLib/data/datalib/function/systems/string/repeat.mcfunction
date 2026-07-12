@@ -30,4 +30,4 @@ execute if score $sr_n dl.tmp matches 14 run function datalib:core/internal/syst
 execute if score $sr_n dl.tmp matches 15 run function datalib:core/internal/systems/string/repeat_15 with storage datalib:input {}
 execute if score $sr_n dl.tmp matches 16 run function datalib:core/internal/systems/string/repeat_16 with storage datalib:input {}
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/repeat ","color":"aqua"},{"text":"'$(char)'","color":"yellow"},{"text":" × $(count) → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"white"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/repeat ","color":"aqua"},{"text":"'$(char)'","color":"yellow"},{"text":" × $(count) → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"white"}]

@@ -5,6 +5,6 @@
 # ─────────────────────────────────────────────────────────────────
 
 tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"━━━ Cooldown Dump ","color":"aqua"},{"text":"━━━━━━━━━━━━━━━━━━","color":"#555555"}]
-tellraw @s ["",{"text":" ","color":"#555555"},{"text":"engine.cooldowns","color":"white"},{"text":" → ","color":"#555555"},{"storage":"datalib:engine","nbt":"cooldowns","color":"yellow","italic":false}]
+tellraw @s ["",{"text":" ","color":"#555555"},{"text":"engine.cooldowns","color":"white"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:engine","nbt":"cooldowns","color":"yellow","italic":false}]
 tellraw @s ["",{"text":" ","color":"#555555"},{"text":"epoch now: ","color":"gray"},{"score":{"name":"$epoch","objective":"datalib.time"},"color":"aqua"}]
 tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"#555555"}]

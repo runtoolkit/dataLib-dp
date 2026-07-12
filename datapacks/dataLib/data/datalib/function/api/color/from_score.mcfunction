@@ -32,4 +32,4 @@ $data modify storage datalib:output result set value "$(high_color)"
 $execute if score $(player) $(objective) matches ..$(low_threshold) run data modify storage datalib:output result set value "$(low_color)"
 $execute if score $(player) $(objective) matches $(low_threshold)..$(mid_threshold) run data modify storage datalib:output result set value "$(mid_color)"
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/from_score ","color":"aqua"},{"text":"$(player) ","color":"white"},{"text":"→ ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/from_score ","color":"aqua"},{"text":"$(player) ","color":"white"},{"text":"→ ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

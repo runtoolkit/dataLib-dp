@@ -23,4 +23,4 @@ $data modify storage datalib:engine _plr_plural set value $(plural)
 data modify storage datalib:output result set from storage datalib:engine _plr_plural
 execute if score #plr_c dl.tmp matches 1 run data modify storage datalib:output result set from storage datalib:engine _plr_singular
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/pluralize ","color":"aqua"},{"text":"count=$(count) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/pluralize ","color":"aqua"},{"text":"count=$(count) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

@@ -1,3 +1,3 @@
 data modify storage datalib:output result set value 0
 $execute if data storage datalib:engine events.$(event) run execute store result storage datalib:output result int 1 run data get storage datalib:engine events.$(event)
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"event/count ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(event)","color":"aqua"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"event/count ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(event)","color":"aqua"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

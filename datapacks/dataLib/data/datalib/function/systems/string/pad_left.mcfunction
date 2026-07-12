@@ -26,4 +26,4 @@ execute if score $pl_pad dl.tmp matches 5.. run data modify storage datalib:outp
 execute if score $pl_pad dl.tmp matches 6.. run data modify storage datalib:output result set value "000000"
 execute if score $pl_pad dl.tmp matches 7.. run data modify storage datalib:output result set value "0000000"
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/pad_left ","color":"aqua"},{"text":"$(value) w=$(width) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"},{"text":"[NUM]","color":"#555555"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/pad_left ","color":"aqua"},{"text":"$(value) w=$(width) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"},{"text":"[NUM]","color":"#555555"}]

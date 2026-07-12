@@ -10,4 +10,4 @@ execute if score $mmx_b dl.tmp > $mmx_a dl.tmp run scoreboard players operation 
 execute store result storage datalib:output min int 1 run scoreboard players get $mmx_lo dl.tmp
 execute store result storage datalib:output max int 1 run scoreboard players get $mmx_hi dl.tmp
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/minmax ","color":"aqua"},{"text":"($(a),$(b))","color":"gray"},{"text":" → ","color":"#555555"},{"text":"min=","color":"gray"},{"storage":"datalib:output","nbt":"min","color":"green"},{"text":" max=","color":"gray"},{"storage":"datalib:output","nbt":"max","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/minmax ","color":"aqua"},{"text":"($(a),$(b))","color":"gray"},{"text":" → ","color":"#555555"},{"text":"min=","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"min","color":"green"},{"text":" max=","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"max","color":"green"}]

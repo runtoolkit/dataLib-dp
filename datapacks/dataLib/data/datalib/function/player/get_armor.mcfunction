@@ -21,4 +21,4 @@ $execute unless entity @a[name=$(player),limit=1] run return 0
 data modify storage datalib:output found set value 1b
 $execute as @a[name=$(player),limit=1] store result storage datalib:output result int 1 run data get entity @s Attributes[{Name:"minecraft:armor"}].Base
 $execute as @a[name=$(player),limit=1] store result storage datalib:output toughness int 1000 run data get entity @s Attributes[{Name:"minecraft:armor_toughness"}].Base
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/get_armor ","color":"aqua"},{"text":"$(player) → armor=","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"},{"text":" toughness=","color":"gray"},{"storage":"datalib:output","nbt":"toughness","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/get_armor ","color":"aqua"},{"text":"$(player) → armor=","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"},{"text":" toughness=","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"toughness","color":"green"}]

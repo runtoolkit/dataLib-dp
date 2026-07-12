@@ -15,4 +15,4 @@ scoreboard players operation $ft_s dl.tmp %= $ft_60 dl.tmp
 execute store result storage datalib:output minutes int 1 run scoreboard players get $ft_m dl.tmp
 execute store result storage datalib:output seconds int 1 run scoreboard players get $ft_s dl.tmp
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/format_ticks ","color":"aqua"},{"text":"$(ticks)t","color":"white"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"minutes","color":"green"},{"text":"m ","color":"#555555"},{"storage":"datalib:output","nbt":"seconds","color":"green"},{"text":"s","color":"#555555"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/format_ticks ","color":"aqua"},{"text":"$(ticks)t","color":"white"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"minutes","color":"green"},{"text":"m ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"seconds","color":"green"},{"text":"s","color":"#555555"}]

@@ -10,8 +10,8 @@
 # To display "3rd place" in chat:
 # function datalib:systems/string/ordinal {n:3}
 # tellraw @a ["",
-# {"storage":"datalib:output","nbt":"n"},
-# {"storage":"datalib:output","nbt":"suffix","color":"gold"},
+# {"plain":true ,"storage":"datalib:output","nbt":"n"},
+# {"plain":true ,"storage":"datalib:output","nbt":"suffix","color":"gold"},
 # {"text":" place"}]
 #
 # Examples:
@@ -46,4 +46,4 @@ execute if score $ord_d dl.tmp matches 3 run data modify storage datalib:output 
 # Teen override — 11, 12, 13 must always be "th"
 execute if score $ord_h dl.tmp matches 11..13 run data modify storage datalib:output suffix set value "th"
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/ordinal ","color":"aqua"},{"text":"$(n)","color":"white"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"suffix","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/ordinal ","color":"aqua"},{"text":"$(n)","color":"white"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"suffix","color":"green"}]

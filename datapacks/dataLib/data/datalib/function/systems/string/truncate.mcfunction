@@ -23,7 +23,7 @@ $data modify storage datalib:engine _trunc_t set value $(truncated)
 scoreboard players set #trunc_flag dl.tmp 0
 execute store result score #trunc_flag dl.tmp run data get storage datalib:engine _trunc_t
 
-$execute if score #trunc_flag dl.tmp matches 0 run title @a[name=$(player),limit=1] actionbar {"storage":"datalib:output","nbt":"text"}
-$execute if score #trunc_flag dl.tmp matches 1.. run title @a[name=$(player),limit=1] actionbar ["",{"storage":"datalib:output","nbt":"text"},{"text":"$(suffix)","color":"gray"}]
+$execute if score #trunc_flag dl.tmp matches 0 run title @a[name=$(player),limit=1] actionbar {"plain":true ,"storage":"datalib:output","nbt":"text"}
+$execute if score #trunc_flag dl.tmp matches 1.. run title @a[name=$(player),limit=1] actionbar ["",{"plain":true ,"storage":"datalib:output","nbt":"text"},{"text":"$(suffix)","color":"gray"}]
 
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/truncate ","color":"aqua"},{"text":"$(player) truncated=$(truncated)","color":"gray"}]
