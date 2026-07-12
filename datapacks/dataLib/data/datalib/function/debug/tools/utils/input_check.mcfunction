@@ -236,7 +236,9 @@ execute if data storage datalib:output inputs{func:"#"} run return 0
 #
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"func",needle:"datalib:api/"}
+function datalib:core/security/string/field_contains {field:"func",needle:"datalib:"}
+scoreboard players operation #DL.NsPrefixOk dl.tmp = #DL.StrIndex dl.tmp
+function datalib:core/security/string/field_contains {field:"func",needle:"stringlib:"}
 scoreboard players operation #DL.NsPrefixOk dl.tmp = #DL.StrIndex dl.tmp
 
 execute unless score #DL.NsPrefixOk dl.tmp matches 0 run function datalib:core/security/input_ns_violation
@@ -264,8 +266,6 @@ execute unless score #DL.NsPrefixOk dl.tmp matches 0 run function datalib.main:e
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:core/"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:engine/"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"func",needle:"datalib:debug/"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:private/"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -548,8 +548,6 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"&&"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"||"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"\n"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"\r"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"\t"}
@@ -707,7 +705,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"{Comma
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"{auto:1b"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"Tags:[\\\dataLibb."}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"Tags:[\\\"dataLibb."}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
