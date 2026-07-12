@@ -9,5 +9,5 @@ execute unless function datalib:debug/tools/utils/perm_check run return 0
 tellraw @s ["",{"text":"─── Dev Settings ────────────────────","color":"#FFAA00","bold":true}]
 
 # Inline quick-status line in chat, then offer book
-tellraw @s ["",{"text":"  devMode  ","color":"gray"},{"storage":"datalib:engine","nbt":"dev_settings.devMode","color":"gold"},{"text":"    version  ","color":"gray"},{"storage":"datalib:engine","nbt":"dev_settings.version","color":"aqua"}]
+tellraw @s ["",{"text":"  devMode  ","color":"gray"},{"plain":true ,"storage":"datalib:engine","nbt":"dev_settings.devMode","color":"gold"},{"text":"    version  ","color":"gray"},{"plain":true ,"storage":"datalib:engine","nbt":"dev_settings.version","color":"aqua"}]
 tellraw @s ["",{"text":"  "},{"text":"[Open Book]","color":"light_purple","hover_event":{"action":"show_text","value":"Opens the interactive Dev Settings book"},"click_event":{"action":"run_command","command":"/function datalib:systems/dev_settings/display/open"}}]

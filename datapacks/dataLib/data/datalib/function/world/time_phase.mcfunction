@@ -36,4 +36,4 @@ execute if score $tp_t dl.tmp matches 12000..13799 run data modify storage datal
 execute if score $tp_t dl.tmp matches 13800..23999 run data modify storage datalib:output phase set value "night"
 
 # Debug message (optional)
-tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"world/time_phase ","color":"aqua"},{"storage":"datalib:output","nbt":"phase","color":"green"},{"text":" t=","color":"gray"},{"storage":"datalib:output","nbt":"daytime","color":"white"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"world/time_phase ","color":"aqua"},{"plain":true ,"storage":"datalib:output","nbt":"phase","color":"green"},{"text":" t=","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"daytime","color":"white"}]

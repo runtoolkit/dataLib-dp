@@ -26,6 +26,6 @@ data remove storage stringlib:input replace
 data remove storage datalib:output gamerule
 function datalib:core/internal/api/gamerule/read with storage datalib:input {}
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"gamerule/get ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(_gamerule_norm)","color":"white"},{"text":" = ","color":"#555555"},{"storage":"datalib:output","nbt":"gamerule","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"gamerule/get ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(_gamerule_norm)","color":"white"},{"text":" = ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"gamerule","color":"green"}]
 
 data remove storage datalib:input _gamerule_norm

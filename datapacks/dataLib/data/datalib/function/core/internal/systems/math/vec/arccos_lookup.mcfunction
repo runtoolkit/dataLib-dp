@@ -22,4 +22,4 @@ execute if score $vang_dot dl.tmp matches -962..-903 run data modify storage dat
 execute if score $vang_dot dl.tmp matches -992..-963 run data modify storage datalib:output result set value 170
 execute if score $vang_dot dl.tmp matches ..-993 run data modify storage datalib:output result set value 180
 
-tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/vec/angle_between ","color":"aqua"},{"text":"cos×1000=","color":"gray"},{"score":{"name":"$vang_dot","objective":"dl.tmp"},"color":"yellow"},{"text":" → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"yellow"},{"text":"°","color":"gray"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/vec/angle_between ","color":"aqua"},{"text":"cos×1000=","color":"gray"},{"score":{"name":"$vang_dot","objective":"dl.tmp"},"color":"yellow"},{"text":" → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"yellow"},{"text":"°","color":"gray"}]

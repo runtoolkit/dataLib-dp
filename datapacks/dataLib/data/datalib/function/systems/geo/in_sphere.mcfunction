@@ -33,4 +33,4 @@ $scoreboard players set $sph_r dl.tmp $(r)
 scoreboard players operation $sph_r dl.tmp *= $sph_r dl.tmp
 
 execute if score $sph_dsq dl.tmp <= $sph_r dl.tmp run data modify storage datalib:output result set value 1b
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"geo/in_sphere ","color":"aqua"},{"text":"r=$(r) dsq=","color":"gray"},{"score":{"name":"$sph_dsq","objective":"dl.tmp"},"color":"yellow"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"geo/in_sphere ","color":"aqua"},{"text":"r=$(r) dsq=","color":"gray"},{"score":{"name":"$sph_dsq","objective":"dl.tmp"},"color":"yellow"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

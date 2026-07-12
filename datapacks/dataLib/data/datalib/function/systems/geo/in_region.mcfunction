@@ -31,4 +31,4 @@ execute if score $rgn_z dl.tmp < $rgn_z1 dl.tmp run return 0
 execute if score $rgn_z dl.tmp > $rgn_z2 dl.tmp run return 0
 
 data modify storage datalib:output result set value 1b
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"geo/in_region ","color":"aqua"},{"text":"($(x),$(y),$(z)) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"geo/in_region ","color":"aqua"},{"text":"($(x),$(y),$(z)) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

@@ -26,4 +26,4 @@
 data modify storage datalib:output result set value ""
 $data modify storage datalib:engine _color_lerp_tmp set value {gradient:"$(gradient)",step:$(step)}
 $execute if data storage datalib:engine color.gradients.$(gradient) run function datalib:core/internal/systems/color/lerp_exec with storage datalib:engine _color_lerp_tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/lerp ","color":"aqua"},{"text":"$(gradient)[$(step)]","color":"white"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/lerp ","color":"aqua"},{"text":"$(gradient)[$(step)]","color":"white"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

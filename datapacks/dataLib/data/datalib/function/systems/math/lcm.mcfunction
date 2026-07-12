@@ -36,4 +36,4 @@ scoreboard players operation $lcm_a dl.tmp /= $gcd_a dl.tmp
 scoreboard players operation $lcm_a dl.tmp *= $lcm_b dl.tmp
 
 execute store result storage datalib:output result int 1 run scoreboard players get $lcm_a dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/lcm ","color":"aqua"},{"text":"($(a),$(b)) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/lcm ","color":"aqua"},{"text":"($(a),$(b)) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

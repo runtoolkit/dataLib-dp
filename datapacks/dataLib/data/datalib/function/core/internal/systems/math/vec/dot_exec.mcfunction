@@ -18,4 +18,4 @@ scoreboard players operation $vdax dl.tmp += $vdaz dl.tmp
 
 execute store result storage datalib:output result int 1 run scoreboard players get $vdax dl.tmp
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/vec/dot ","color":"aqua"},{"text":"($(ax),$(ay),$(az))·($(bx),$(by),$(bz)) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"yellow"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/vec/dot ","color":"aqua"},{"text":"($(ax),$(ay),$(az))·($(bx),$(by),$(bz)) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"yellow"}]

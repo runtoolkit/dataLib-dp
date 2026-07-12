@@ -31,4 +31,4 @@ $execute if score $avg_c dl.tmp matches 8.. run scoreboard players add $avg_s dl
 scoreboard players operation $avg_s dl.tmp /= $avg_c dl.tmp
 
 execute store result storage datalib:output result int 1 run scoreboard players get $avg_s dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/average ","color":"aqua"},{"text":"count=$(count) ","color":"gray"},{"text":"→ ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/average ","color":"aqua"},{"text":"count=$(count) ","color":"gray"},{"text":"→ ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

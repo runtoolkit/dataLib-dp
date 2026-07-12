@@ -8,4 +8,4 @@ scoreboard players operation $tr_t dl.tmp += $tr_a dl.tmp
 $execute store result storage datalib:engine players.$(to).$(key) int 1 run scoreboard players get $tr_t dl.tmp
 
 execute store result storage datalib:output result int 1 run scoreboard players get $tr_t dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/transfer_var ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(key)","color":"aqua"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/transfer_var ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(key)","color":"aqua"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

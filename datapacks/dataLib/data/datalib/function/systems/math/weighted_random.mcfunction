@@ -56,4 +56,4 @@ $scoreboard players add $wr_acc dl.tmp $(w9)
 execute if score $wr_done dl.tmp matches 0 run execute if score $wr_roll dl.tmp < $wr_acc dl.tmp run data modify storage datalib:output result set value 9
 execute if score $wr_done dl.tmp matches 0 run execute if score $wr_roll dl.tmp < $wr_acc dl.tmp run scoreboard players set $wr_done dl.tmp 1
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/weighted_random ","color":"aqua"},{"text":"total=$(total) roll=","color":"gray"},{"score":{"name":"$wr_roll","objective":"dl.tmp"},"color":"yellow"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/weighted_random ","color":"aqua"},{"text":"total=$(total) roll=","color":"gray"},{"score":{"name":"$wr_roll","objective":"dl.tmp"},"color":"yellow"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

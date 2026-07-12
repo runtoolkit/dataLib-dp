@@ -112,4 +112,4 @@ execute if score $sin_d dl.tmp matches 90 run scoreboard players set $sin_r dl.t
 
 scoreboard players operation $sin_r dl.tmp *= $sin_nf dl.tmp
 execute store result storage datalib:output result int 1 run scoreboard players get $sin_r dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/sin ","color":"aqua"},{"text":"deg=$(deg) ","color":"gray"},{"text":"→ ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"},{"text":"/1000","color":"#555555"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"math/sin ","color":"aqua"},{"text":"deg=$(deg) ","color":"gray"},{"text":"→ ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"},{"text":"/1000","color":"#555555"}]

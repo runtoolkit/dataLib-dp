@@ -19,4 +19,4 @@ execute unless score $cdp_exp dl.tmp matches 1.. run return 0
 $execute store result storage datalib:engine paused_cooldowns.$(player).$(key) int 1 run scoreboard players get $cdp_exp dl.tmp
 $data remove storage datalib:engine cooldowns.$(player).$(key)
 execute store result storage datalib:output result int 1 run scoreboard players get $cdp_exp dl.tmp
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"cooldown/pause ","color":"aqua"},{"text":"⏸ ","color":"yellow"},{"text":"$(player)","color":"white"},{"text":":","color":"#555555"},{"text":"$(key)","color":"aqua"},{"text":" → ","color":"#555555"},{"storage":"datalib:output","nbt":"result","color":"green"},{"text":"t remaining","color":"#555555"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"cooldown/pause ","color":"aqua"},{"text":"⏸ ","color":"yellow"},{"text":"$(player)","color":"white"},{"text":":","color":"#555555"},{"text":"$(key)","color":"aqua"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"},{"text":"t remaining","color":"#555555"}]

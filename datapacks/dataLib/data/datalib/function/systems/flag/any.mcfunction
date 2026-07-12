@@ -31,4 +31,4 @@ execute if score #fany_b dl.tmp matches 1 run data modify storage datalib:output
 scoreboard players operation #fany_a dl.tmp += #fany_b dl.tmp
 execute if score #fany_a dl.tmp matches 1.. run data modify storage datalib:output result set value 1b
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"flag/any ","color":"aqua"},{"text":"$(key_a)|$(key_b) → ","color":"gray"},{"storage":"datalib:output","nbt":"result","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"flag/any ","color":"aqua"},{"text":"$(key_a)|$(key_b) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"result","color":"green"}]

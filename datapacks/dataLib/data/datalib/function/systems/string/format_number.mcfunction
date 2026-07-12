@@ -43,4 +43,4 @@ execute if score $fn_v dl.tmp matches 1000000000.. run scoreboard players set $f
 execute if score $fn_v dl.tmp matches 1000000000.. run scoreboard players operation $fn_v dl.tmp /= $fn_div dl.tmp
 execute if score $fn_v dl.tmp matches 1000000000.. run execute store result storage datalib:output short int 1 run scoreboard players get $fn_v dl.tmp
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/format_number ","color":"aqua"},{"text":"$(value) → ","color":"gray"},{"storage":"datalib:output","nbt":"short","color":"green"},{"storage":"datalib:output","nbt":"suffix","color":"green"}]
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"string/format_number ","color":"aqua"},{"text":"$(value) → ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"short","color":"green"},{"plain":true ,"storage":"datalib:output","nbt":"suffix","color":"green"}]

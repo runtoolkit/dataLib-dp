@@ -12,7 +12,7 @@ execute store result storage datalib:engine _mcmd_stats.total int 1 run scoreboa
 execute store result storage datalib:engine _mcmd_stats.success int 1 run scoreboard players get $mcmd_success dl.tmp
 execute store result storage datalib:engine _mcmd_stats.duration int 1 run scoreboard players get $mcmd_duration dl.tmp
 
-tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"multi_cmd/stats ","color":"aqua"},{"text":"Total: ","color":"#555555"},{"nbt":"_mcmd_stats.total","storage":"datalib:engine","color":"white"},{"text":" | Success: ","color":"#555555"},{"nbt":"_mcmd_stats.success","storage":"datalib:engine","color":"green"},{"text":" | Duration: ","color":"#555555"},{"nbt":"_mcmd_stats.duration","storage":"datalib:engine","color":"yellow"},{"text":"t","color":"yellow"}]
+tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"multi_cmd/stats ","color":"aqua"},{"text":"Total: ","color":"#555555"},{"nbt":"_mcmd_stats.total","plain":true ,"storage":"datalib:engine","color":"white"},{"text":" | Success: ","color":"#555555"},{"nbt":"_mcmd_stats.success","plain":true ,"storage":"datalib:engine","color":"green"},{"text":" | Duration: ","color":"#555555"},{"nbt":"_mcmd_stats.duration","plain":true ,"storage":"datalib:engine","color":"yellow"},{"text":"t","color":"yellow"}]
 
 scoreboard players reset $mcmd_total dl.tmp
 scoreboard players reset $mcmd_success dl.tmp
