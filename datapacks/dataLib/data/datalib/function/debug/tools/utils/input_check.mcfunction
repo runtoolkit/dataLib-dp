@@ -46,28 +46,27 @@
 #
 #   1.  recursion guard
 #   2.  engine state validation
-#   3.  input snapshot isolation
-#   4.  required field validation (removed)
-#   5.  basic function identifier sanity
-#   6.  namespace allowlist enforcement
-#   7.  internal namespace protection (removed)
-#   8.  dangerous server management command blocklist
-#   9.  raw operator command payload blocklist
-#   10. selector escalation protection
-#   11. wildcard and mass-target protection
-#   12. execute-chain abuse protection
-#   13. command chain injection protection
-#   14. storage injection protection
-#   15. execute store and data mutation abuse protection
-#   16. NBT injection protection
-#   17. gamerule abuse protection
-#   18. scoreboard system corruption protection
-#   19. entity and tag manipulation protection
-#   20. debug output
-#   21. validated execution lock
-#   22. validated execution
-#   23. execution lock cleanup
-#   24. temporary storage cleanup
+#   3.  input snapshot isolation)
+#   4.  basic function identifier sanity
+#   5.  namespace allowlist enforcement
+#   6.  internal namespace protection (removed)
+#   7.  dangerous server management command blocklist
+#   8.  raw operator command payload blocklist
+#   9. selector escalation protection
+#   10. wildcard and mass-target protection
+#   11. execute-chain abuse protection
+#   12. command chain injection protection
+#   13. storage injection protection
+#   14. execute store and data mutation abuse protection
+#   15. NBT injection protection
+#   16. gamerule abuse protection
+#   17. scoreboard system corruption protection
+#   18. entity and tag manipulation protection
+#   29. debug output
+#   20. validated execution lock
+#   21. validated execution
+#   22. execution lock cleanup
+#   23. temporary storage cleanup
 #   25. success return
 #
 # RETURN VALUES:
@@ -157,30 +156,6 @@ data modify storage datalib:output security set value {validated:0b,blocked:0b}
 
 # ======================================================================================
 # SECTION 4
-# REQUIRED FIELD VALIDATION
-# ======================================================================================
-#
-# THREAT:
-#   Missing mandatory fields cause undefined behavior in the engine.
-#   An absent inputs.func reaches execute_validated/run, which does
-#   `$function $(func) with storage datalib:input {}` — an unset $(func)
-#   makes that macro call fail to resolve a function, an unhandled
-#   engine-level error rather than a clean, logged denial.
-#
-# REQUIRED:
-#   inputs.func — the function identifier to execute
-#
-# SECURITY FIX (this pass):
-#   This check was previously commented out entirely ("REMOVED"). Restored
-#   as a hard requirement — every other section from here on assumes
-#   inputs.func exists and is a string.
-#
-# ======================================================================================
-
-execute unless data storage datalib:output inputs.func run return 0
-
-# ======================================================================================
-# SECTION 5
 # BASIC FUNCTION IDENTIFIER SANITY CHECKS
 # ======================================================================================
 #
@@ -201,7 +176,7 @@ execute if data storage datalib:output inputs{func:"*"} run return 0
 execute if data storage datalib:output inputs{func:"#"} run return 0
 
 # ======================================================================================
-# SECTION 6
+# SECTION 5
 # NAMESPACE ALLOWLIST ENFORCEMENT
 # ======================================================================================
 #
@@ -244,7 +219,7 @@ execute unless score #DL.NsPrefixOk dl.tmp matches 0 run data modify storage dat
 execute unless score #DL.NsPrefixOk dl.tmp matches 0 run return 0
 
 # ======================================================================================
-# SECTION 7
+# SECTION 6
 # INTERNAL NAMESPACE PROTECTION
 # ======================================================================================
 #
@@ -261,8 +236,6 @@ execute unless score #DL.NsPrefixOk dl.tmp matches 0 run return 0
 #   internal prefix occurring ANYWHERE in func (not just at index 0) so a
 #   crafted func like "datalib:api/../core/engine/x" is also caught.
 
-function datalib:core/security/string/field_contains {field:"func",needle:"datalib:core/"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:engine/"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:debug/"}
@@ -273,13 +246,11 @@ function datalib:core/security/string/field_contains {field:"func",needle:"datal
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:security/"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"func",needle:"datalib:system/"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"minecraft:"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 8
+# SECTION 7
 # HIGH-RISK SERVER MANAGEMENT COMMAND BLOCKLIST (func field)
 # ======================================================================================
 #
@@ -339,7 +310,7 @@ function datalib:core/security/string/field_contains {field:"func",needle:"datal
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 9
+# SECTION 8
 # RAW OPERATOR COMMAND PAYLOAD BLOCKLIST (cmd field)
 # ======================================================================================
 #
@@ -385,7 +356,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"setidl
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 10
+# SECTION 9
 # SELECTOR ESCALATION PROTECTION
 # ======================================================================================
 #
@@ -466,7 +437,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"execut
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 11
+# SECTION 10
 # WILDCARD AND MASS-TARGET PROTECTION
 # ======================================================================================
 #
@@ -495,7 +466,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"@e"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 12
+# SECTION 11
 # EXECUTE-CHAIN ABUSE PROTECTION
 # ======================================================================================
 #
@@ -515,19 +486,11 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 #
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"cmd",needle:"run function"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"schedule function"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"schedule clear"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute as "}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute at "}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute in "}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute on "}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute positioned"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -539,13 +502,9 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"execut
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute align"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute summon"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute run"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 13
+# SECTION 12
 # COMMAND CHAIN INJECTION PROTECTION
 # ======================================================================================
 #
@@ -572,7 +531,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"\t"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 14
+# SECTION 13
 # STORAGE INJECTION PROTECTION
 # ======================================================================================
 #
@@ -594,15 +553,11 @@ function datalib:core/security/string/field_contains {field:"func",needle:"with 
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:output"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:input"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:engine"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:output"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:input"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -610,8 +565,6 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"with storage datalib:engine"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"with storage datalib:output"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"with storage datalib:input"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"with storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -625,7 +578,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"storag
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 15
+# SECTION 14
 # EXECUTE STORE AND DATA MUTATION ABUSE PROTECTION
 # ======================================================================================
 #
@@ -651,10 +604,6 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"execut
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute store success storage datalib:output"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute store result storage datalib:input"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute store success storage datalib:input"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute store result storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute store success storage datalib:debug"}
@@ -673,8 +622,6 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data modify storage datalib:output"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data merge storage datalib:input"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"data remove storage datalib:input"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data modify storage datalib:input"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -719,7 +666,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"tag @n
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 16
+# SECTION 15
 # NBT INJECTION PROTECTION
 # ======================================================================================
 #
@@ -739,21 +686,17 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 #
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"cmd",needle:"Command"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"auto"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"CustomName"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"Tags"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"dataLib"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"datalib"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"minecraft:custom_data"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"{Tags:[\\\"datalib."}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"{Tags:[datalib."}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 17
+# SECTION 16
 # GAMERULE ABUSE PROTECTION
 # ======================================================================================
 #
@@ -773,23 +716,30 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 #
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule commandBlocksWork"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule command_blocks_work"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule commandBlockEnabled"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule gamerule advance_time"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule maxCommandChainLength"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule max_command_forks"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule maxEntityCramming"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule max_command_sequence_length"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule randomTickSpeed"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule random_tick_speed"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule spawnRadius"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"/gamerule command_blocks_work"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"gamerule playersSleepingPercentage"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"/gamerule gamerule advance_time"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"/gamerule max_command_forks"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"/gamerule max_command_sequence_length"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"/gamerule random_tick_speed"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
+
 # ======================================================================================
-# SECTION 18
+# SECTION 17
 # ENTITY AND TAG MANIPULATION PROTECTION
 # ======================================================================================
 #
@@ -836,7 +786,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"effect
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 19
+# SECTION 18
 # FORCELOAD AND BLOCK PLACEMENT ABUSE PROTECTION
 # ======================================================================================
 #
@@ -852,19 +802,19 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 #
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"cmd",needle:"forceload add"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"forceload add 0 0"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"forceload remove"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"forceload remove 0 0"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"setblock 0 -64 0"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"command_block"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"fill "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"minecraft:command_block"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"fillbiome "}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
-# SECTION 20
+# SECTION 19
 # DEBUG OUTPUT
 # ======================================================================================
 #
@@ -913,7 +863,7 @@ tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true}
 execute if data storage datalib:engine dev_settings{devMode:1b} run say [DL/input_check] VALIDATED
 
 # ======================================================================================
-# SECTION 21
+# SECTION 20
 # VALIDATED EXECUTION LOCK
 # ======================================================================================
 #
@@ -927,21 +877,21 @@ execute if data storage datalib:engine dev_settings{devMode:1b} run say [DL/inpu
 data modify storage datalib:engine global.in_call set value 1b
 
 # ======================================================================================
-# SECTION 22
+# SECTION 21
 # EXECUTE VALIDATED FUNCTION
 # ======================================================================================
 
 function datalib:core/engine/call/execute_validated
 
 # ======================================================================================
-# SECTION 23
+# SECTION 22
 # CLEANUP EXECUTION LOCK
 # ======================================================================================
 
 data remove storage datalib:engine global.in_call
 
 # ======================================================================================
-# SECTION 24
+# SECTION 23
 # CLEANUP TEMPORARY STORAGE
 # ======================================================================================
 
@@ -950,7 +900,7 @@ data remove storage datalib:output security
 data remove storage datalib:output inputs
 
 # ======================================================================================
-# SECTION 25
+# SECTION 24
 # SUCCESS RETURN
 # ======================================================================================
 
