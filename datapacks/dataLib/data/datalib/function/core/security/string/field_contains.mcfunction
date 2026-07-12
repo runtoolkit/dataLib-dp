@@ -25,10 +25,10 @@ $data modify storage stringlib:input find.Find set value "$(needle)"
 
 # Guard: if the field itself is absent, treat as "not found" without
 # invoking StringLib (find.String would carry a stale/empty value).
-execute unless data storage datalib:output inputs.$(field) run scoreboard players set #DL.StrFound dl.tmp 0
-execute unless data storage datalib:output inputs.$(field) run scoreboard players set #DL.StrIndex dl.tmp -1
-execute unless data storage datalib:output inputs.$(field) run data remove storage stringlib:input find
-execute unless data storage datalib:output inputs.$(field) run return 0
+$execute unless data storage datalib:output inputs.$(field) run scoreboard players set #DL.StrFound dl.tmp 0
+$execute unless data storage datalib:output inputs.$(field) run scoreboard players set #DL.StrIndex dl.tmp -1
+$execute unless data storage datalib:output inputs.$(field) run data remove storage stringlib:input find
+$execute unless data storage datalib:output inputs.$(field) run return 0
 
 function datalib:core/security/string/contains
 
