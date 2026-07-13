@@ -22,9 +22,13 @@ function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 function datalib:_rt_origin
 execute unless data storage datalib:engine {global:{rt_origin_verified:1b}} run return run tellraw @s {"text":"Exit code: 1 — rt_origin verification failed","color":"red"}
 
-# RT Origin — Gate 2: fork kontrolü
-# fork_verified field yoksa onay kapısını aç (1b=orijinal, 0b=fork onaylı, her ikisi de geçer)
+# RT Origin — Gate 2: fork check
+# If fork_verified field doesn't exist, open the approval gate (1b=original, 0b=fork approved, either passes)
 execute unless data storage datalib:engine global.fork_verified run return run function dl_load:load/fork
+
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage1b"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage1b,limit=1] run say Fork gate passed...
+execute as @e[type=minecraft:marker,tag=datalib.stage1b,limit=1] run kill @s
 
 # Stage 2 debug
 summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage2"],CustomName:{"text":"DL"}}
@@ -42,9 +46,17 @@ function dl_load:load/dev_settings
 
 function dl_load:load/other
 
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage4"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run say Loading other systems...
+execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run kill @s
+
 data modify storage datalib:engine global.loaded set value 1b
 
 function dl_load:core/internal/load/version_set
+
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage5"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage5,limit=1] run say Setting version...
+execute as @e[type=minecraft:marker,tag=datalib.stage5,limit=1] run kill @s
 
 # Lantern Load integration — set pack version in load.status
 # Format: (major * 10000) + (minor * 100) + patch
@@ -68,5 +80,9 @@ function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 # RT Origin verification
 function datalib:_rt_origin
 execute unless data storage datalib:engine {global:{rt_origin_verified:1b}} run return run tellraw @s {"text":"Exit code: 1 — rt_origin verification failed","color":"red"}
+
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage6"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage6,limit=1] run say Finalizing...
+execute as @e[type=minecraft:marker,tag=datalib.stage6,limit=1] run kill @s
 
 function dl_load:core/internal/load/finalize
