@@ -56,7 +56,7 @@ data modify storage <namespace>:engine loaded_datalib set value 1b
 ```
 datalib:engine  (persistent data)
 ├── global
-│   ├── version: "v6.0.1"
+│   ├── version: "v6.0.1-pre1"
 │   └── tick: <int>
 ├── players
 │   └── Steve { coins:150, level:5, xp:2300, online:1b, ... }
