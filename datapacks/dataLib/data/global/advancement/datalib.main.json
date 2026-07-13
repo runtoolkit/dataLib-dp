@@ -1,0 +1,29 @@
+{
+  "display": {
+    "title": "IronCrest",
+    "description": "",
+    "icon": {
+      "id": "minecraft:player_head",
+      "components": {
+        "minecraft:profile": {
+          "name": "IronCrest",
+          "properties": [
+            {
+              "name": "textures",
+              "value": "ewogICJ0aW1lc3RhbXAiIDogMTc3ODQwMTU1MjY3OCwKICAicHJvZmlsZUlkIiA6ICI1ZWI0NGNjYzA4NTY0YTc5YWI3ZWRlYTA1ZmE4YzExNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJJcm9uY3Jlc3QiLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjA0YzRjNmZlY2Y1NDc1MDhjMjAxNDdhMmI4MzEyY2VjOGM4MzQ3NzIyNTljZmQ4MzBmMTBmZmVmM2RiZGJmMiIKICAgIH0KICB9Cn0="
+            }
+          ]
+        }
+      }
+    },
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "global:root",
+  "criteria": {
+    "trigger": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

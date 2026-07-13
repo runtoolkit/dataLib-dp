@@ -1,0 +1,11 @@
+{
+  "criteria": {
+    "killed_any_entity": {
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_entity_kill"
+  },
+  "parent": "datalib:hidden/root"
+}

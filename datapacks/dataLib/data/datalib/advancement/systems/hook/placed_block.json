@@ -1,0 +1,11 @@
+{
+  "criteria": {
+    "placed_any_block": {
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_placed_block"
+  },
+  "parent": "datalib:hidden/root"
+}

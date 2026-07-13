@@ -1,0 +1,11 @@
+{
+  "criteria": {
+    "trigger": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {}
+    }
+  },
+  "rewards": {
+    "function": "datalib:core/internal/systems/hook/on_eat"
+  }
+}
