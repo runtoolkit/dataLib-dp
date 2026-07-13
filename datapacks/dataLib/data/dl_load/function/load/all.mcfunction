@@ -18,8 +18,7 @@ data modify storage datalib:engine _log_add_tmp.message set value "Starting..."
 data modify storage datalib:engine _log_add_tmp.color set value "aqua"
 function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 
-# RT Origin — Gate 1: watermark doğrulama
-function datalib:_rt_origin
+# RT Origin — Gate 1: watermark doğrulama (artık validate içinde çağrılıyor, burada tekrar çağırmaya gerek yok)
 execute unless data storage datalib:engine {global:{rt_origin_verified:1b}} run return run tellraw @s {"text":"Exit code: 1 — rt_origin verification failed","color":"red"}
 
 # RT Origin — Gate 2: fork check
@@ -42,7 +41,9 @@ execute as @e[type=minecraft:marker,tag=datalib.stage3,limit=1] run say Loading 
 execute as @e[type=minecraft:marker,tag=datalib.stage3,limit=1] run kill @s
 function dl_load:load/storages
 
-function dl_load:load/dev_settings
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage4"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run say Loading other systems...
+execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run kill @s
 
 function dl_load:load/other
 
@@ -77,8 +78,7 @@ data modify storage datalib:engine _log_add_tmp.message set value "Loaded."
 data modify storage datalib:engine _log_add_tmp.color set value "green"
 function datalib:systems/log/add with storage datalib:engine _log_add_tmp
 
-# RT Origin verification
-function datalib:_rt_origin
+# RT Origin verification (flag already set by validate at start of load)
 execute unless data storage datalib:engine {global:{rt_origin_verified:1b}} run return run tellraw @s {"text":"Exit code: 1 — rt_origin verification failed","color":"red"}
 
 summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage6"],CustomName:{"text":"DL"}}
@@ -86,3 +86,17 @@ execute as @e[type=minecraft:marker,tag=datalib.stage6,limit=1] run say Finalizi
 execute as @e[type=minecraft:marker,tag=datalib.stage6,limit=1] run kill @s
 
 function dl_load:core/internal/load/finalize
+
+# Detect datalib_extensions
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage7"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage7,limit=1] run say Finding datalib_extensions...
+execute as @e[type=minecraft:marker,tag=datalib.stage7,limit=1] run kill @s
+
+execute if score #datalib_extensions.present datalib.meta matches 1.. run summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage8"],CustomName:{"text":"DL"}}
+execute if score #datalib_extensions.present datalib.meta matches 1.. run execute as @e[type=minecraft:marker,tag=datalib.stage8,limit=1] run say Detected datalib_extensions...
+execute if score #datalib_extensions.present datalib.meta matches 1.. run execute as @e[type=minecraft:marker,tag=datalib.stage8,limit=1] run kill @s
+
+# Debug
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage9"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage9,limit=1] run say Done!
+execute as @e[type=minecraft:marker,tag=datalib.stage9,limit=1] run kill @s

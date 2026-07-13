@@ -86,6 +86,3 @@ scoreboard objectives add datalib.state dummy
 # Security module — per-player permission level
 # 0=no access (default)  1=basic  2=standard  3=elevated($$(cmd))  4=super
 scoreboard objectives add dl.perm_level dummy
-
-# dev_settings module — per-player book page cursor
-scoreboard objectives add dl.dev_pg2 dummy

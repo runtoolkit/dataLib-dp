@@ -82,7 +82,6 @@
 #   storage datalib:debug   machine-readable violation record
 #
 # DEBUG MODE:
-#   All output channels are gated on datalib:engine dev_settings.devMode
 #   or the presence of at least one player with tag datalib.debug.
 #   In production with no debug players, all tellraw/say are skipped.
 #
@@ -877,16 +876,13 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 data modify storage datalib:debug last_validated_call.func set from storage datalib:output inputs.func
 
 # Gate remaining output on debug mode or active debug players
-execute unless data storage datalib:engine dev_settings{devMode:1b} unless entity @a[tag=datalib.debug] run return fail
+execute unless entity @a[tag=datalib.debug] run return fail
 
 # Caller-facing confirmation (players only)
 execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✔ ","color":"green"},{"text":"Validated: ","color":"gray"},{"plain":true ,"storage":"datalib:output","nbt":"inputs.func","color":"aqua"}]
 
 # Admin-facing full record
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"CALL ","color":"green","bold":true},{"selector":"@s","color":"gold"},{"text":" → ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"inputs.func","color":"aqua"}]
-
-# Server console log (devMode only — say is noisy)
-execute if data storage datalib:engine dev_settings{devMode:1b} run say [DL/input_check] VALIDATED
 
 # ======================================================================================
 # SECTION 20

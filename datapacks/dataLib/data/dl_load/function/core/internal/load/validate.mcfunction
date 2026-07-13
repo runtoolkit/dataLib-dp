@@ -25,6 +25,10 @@ execute if score #dl.mismatch dl.pre_version matches 1 run return 0
 
 # ── Fork detection ───────────────────────────────────────────────
 # _rt_origin.mcfunction sets rt_origin_verified:1b at load time.
+# Must run BEFORE the check below, otherwise the flag is never set yet
+# on this pass (all.mcfunction calls _rt_origin AFTER validate) and the
+# fork warning fires on every single load.
+function datalib:_rt_origin
 # Absence = file removed or pack is a modified fork.
 # WARN only — load is not aborted, but admins are notified.
 execute unless data storage datalib:engine global{rt_origin_verified:1b} run function dl_load:core/internal/load/fork_warn

@@ -1,5 +1,4 @@
 forceload add 0 0
-function datalib:_rt_origin
 
 data modify storage datalib:input func set value "datalib:core/lib/sync_tick"
 data modify storage datalib:input interval set value 20
