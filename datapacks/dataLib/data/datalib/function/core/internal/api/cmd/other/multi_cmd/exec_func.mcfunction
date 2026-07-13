@@ -1,1 +1,0 @@
-$function $(current_cmd)
