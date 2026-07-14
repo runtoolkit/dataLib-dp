@@ -46,6 +46,11 @@ execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run say Loading 
 execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run kill @s
 
 function dl_load:load/other
+
+summon minecraft:marker ~ ~ ~ {Tags:["datalib.stage4"],CustomName:{"text":"DL"}}
+execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run say Loading other systems...
+execute as @e[type=minecraft:marker,tag=datalib.stage4,limit=1] run kill @s
+
 data modify storage datalib:engine global.loaded set value 1b
 
 function dl_load:core/internal/load/version_set
