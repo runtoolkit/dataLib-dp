@@ -17,7 +17,7 @@ execute if score #dl.log_level dl.log_level matches 1.. run function datalib:sys
 data remove storage datalib:debug log
 
 # Notify caller — only if @s is a player (non-player callers have no chat)
-execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ ","color":"#FFCC00"},{"text":"Security Warning: function call outside permitted namespace (datalib:api/*).","color":"#FFCC00"}]
+execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"⚠ ","color":"#FFCC00"},{"text":"Security Warning: function call outside permitted namespace(s) (","color":"#FFCC00"},{"color":"#FFCC00","storage":"datalib:output",nbt:"config.namespace_allowlist[]","plain": true},{"color":"#FFCC00","text":")"}]
 
 # Notify debug admins (always — admin tag may be on non-player entities too)
 tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"NS WARNING ","color":"#FFCC00","bold":true},{"selector":"@s","color":"gold"},{"text":" — func not in datalib:api/*","color":"#FFCC00"}]
