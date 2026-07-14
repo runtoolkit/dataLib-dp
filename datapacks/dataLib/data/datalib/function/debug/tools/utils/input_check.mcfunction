@@ -208,16 +208,29 @@ execute if data storage datalib:output inputs{func:"#"} run return 0
 #   have passed). Replaced with a real prefix check via StringLib: find
 #   the literal at index 0.
 #
+# SECURITY FIX (this pass — allowlist externalized):
+#   The approved prefix set was previously two hardcoded field_contains
+#   calls inline in this file ("datalib:" and "stringlib:" — note "stringlib:"
+#   was previously accepted with NO reviewed justification and NO
+#   corresponding Section 6 internal-path guard, see SECTION 6 note below).
+#   Moved to datalib:config/namespace_list, a single reviewable file where
+#   each additional prefix is its own PR-visible line. This section now
+#   loops over that list at validation time; it does not change what is
+#   fail-closed — an empty or missing list still denies everything.
+#
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"func",needle:"datalib:"}
-scoreboard players operation #DL.NsPrefixOk dl.tmp = #DL.StrIndex dl.tmp
-function datalib:core/security/string/field_contains {field:"func",needle:"stringlib:"}
-scoreboard players operation #DL.NsPrefixOk dl.tmp = #DL.StrIndex dl.tmp
+function datalib:config/namespace_list
+scoreboard players set #DL.NsPrefixOk dl.tmp 0
+data modify storage datalib:output _ns.List set from storage datalib:output config.namespace_allowlist
+function datalib:core/security/namespace_allowlist_loop
 
-execute unless score #DL.NsPrefixOk dl.tmp matches 0 run function datalib:core/security/input_ns_violation
-execute unless score #DL.NsPrefixOk dl.tmp matches 0 run data modify storage datalib:output error set value {level:"WARN",code:"NS_VIOLATION",message:"Input namespace violation detected. Call denied."}
-execute unless score #DL.NsPrefixOk dl.tmp matches 0 run function datalib.main:empty
+execute unless score #DL.NsPrefixOk dl.tmp matches 1 run function datalib:core/security/input_ns_violation
+execute unless score #DL.NsPrefixOk dl.tmp matches 1 run data modify storage datalib:output error set value {level:"WARN",code:"NS_VIOLATION",message:"Input namespace violation detected. Call denied."}
+execute unless score #DL.NsPrefixOk dl.tmp matches 1 run function datalib.main:empty
+
+data remove storage datalib:output _ns
+data remove storage datalib:output config
 
 # ======================================================================================
 # SECTION 6
