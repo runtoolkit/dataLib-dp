@@ -41,7 +41,7 @@
 #
 # ======================================================================================
 
-data modify storage datalib:output config.namespace_allowlist set value ["datalib:","example:"]
+data modify storage datalib:output config.namespace_allowlist set value ["datalib:","datalib.main:empty"]
 
 # --- Approved additional prefixes go below this line, one per line. ---
 # Example (DO NOT UNCOMMENT WITHOUT A REVIEWED PR):
