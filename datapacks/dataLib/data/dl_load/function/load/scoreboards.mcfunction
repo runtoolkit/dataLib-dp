@@ -13,8 +13,6 @@ scoreboard objectives add datalib.onlinePlayers dummy
 # Lantern Load integration — pack version tracking
 scoreboard objectives add load.status dummy
 
-
-
 # Wand module — carrot_on_a_stick right-click tracker
 scoreboard objectives add datalib.rightClick minecraft.used:minecraft.carrot_on_a_stick
 
