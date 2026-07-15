@@ -157,7 +157,6 @@ TARGETS.each { label, packFormat ->
     def prepareTask = tasks.register("prepare${label.capitalize()}") {
         group = "build"
         description = "Assembles the ${label} datapack variant into build/datapack/${label}"
-        dependsOn "repoLock"
 
         doLast {
             delete(stageDir)
