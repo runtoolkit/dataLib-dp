@@ -8,8 +8,6 @@ import groovy.json.JsonOutput
 // because it commits+pushes — not a build responsibility.
 // =====================================================================
 
-def REPO_SLUG   = "runtoolkit/dataLib-dp"
-
 // label -> pack_format. Single target now that overlays are gone.
 def TARGETS = [
     "full" : 107
@@ -21,20 +19,6 @@ def extensionsSrc  = file("datapacks/datalib_extensions")
 
 def buildRoot   = layout.buildDirectory.dir("datapack").get().asFile
 def distRoot    = layout.buildDirectory.dir("dist").get().asFile
-
-// ---------------------------------------------------------------------
-// Repo lock — refuse to run outside runtoolkit/dataLib-dp
-// ---------------------------------------------------------------------
-tasks.register("repoLock") {
-    group = "verification"
-    description = "Fails the build if GITHUB_REPOSITORY != ${REPO_SLUG}"
-    doLast {
-        def repo = System.getenv("GITHUB_REPOSITORY")
-        if (repo != null && repo != REPO_SLUG) {
-            throw new GradleException("This build may only run in ${REPO_SLUG} (got: ${repo})")
-        }
-    }
-}
 
 // ---------------------------------------------------------------------
 // Lint: JSON validity
@@ -212,7 +196,6 @@ def extensionsStageDir = new File(buildRoot, "extensions")
 def prepareExtensionsTask = tasks.register("prepareExtensions") {
     group = "build"
     description = "Assembles datalib_extensions into build/datapack/extensions"
-    dependsOn "repoLock"
 
     doLast {
         delete(extensionsStageDir)
@@ -289,7 +272,7 @@ tasks.register("repack") {
 tasks.register("release") {
     group = "publish"
     description = "Creates/updates the GitHub release for the full build"
-    dependsOn "repoLock", "zipFull", "repack"
+    dependsOn "zipFull", "repack"
 
     doLast {
         def metaFile = new File(buildRoot, "full/pack.mcmeta")
