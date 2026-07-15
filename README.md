@@ -6,7 +6,7 @@
 [![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
 
 ---
-> Current version: **v6.0.1**
+> Current version: **v6.0.1-pre1**
 ---
 
 > [!WARNING]
