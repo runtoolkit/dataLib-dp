@@ -222,8 +222,6 @@ jobs:
 
           function dl_load:load/yes
           function dl_load:load/fork_no
-          tag @s add datalib.admin
-          scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
 
           data modify storage ${NS}:engine loaded_datalib set value 1b
           EOF
@@ -303,8 +301,6 @@ execute if data storage ${NAMESPACE}:engine {loaded_datalib:1b} run return 0
 
 function dl_load:load/yes
 function dl_load:load/fork_no
-tag @s add datalib.admin
-scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
 
 data modify storage ${NAMESPACE}:engine loaded_datalib set value 1b
 EOF
