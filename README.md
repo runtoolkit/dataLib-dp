@@ -203,7 +203,7 @@ jobs:
           mkdir -p tmp_datalib
           unzip -q datalib-src/build/dist/dataLib-full.zip -d tmp_datalib
           cp -r tmp_datalib/data/dl_load out/injected/data/
-          cp -r tmp_datalib/data/strintlib out/injected/data/
+          cp -r tmp_datalib/data/stringlib out/injected/data/
           cp -r tmp_datalib/data/datalib.main out/injected/data/
           cp -r tmp_datalib/data/stringlib out/injected/data/
 
