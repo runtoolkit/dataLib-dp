@@ -202,7 +202,10 @@ jobs:
           cp -r target/. out/injected/
           mkdir -p tmp_datalib
           unzip -q datalib-src/build/dist/dataLib-full.zip -d tmp_datalib
-          cp -r tmp_datalib/data/datalib out/injected/data/
+          cp -r tmp_datalib/data/dl_load out/injected/data/
+          cp -r tmp_datalib/data/strintlib out/injected/data/
+          cp -r tmp_datalib/data/datalib.main out/injected/data/
+          cp -r tmp_datalib/data/stringlib out/injected/data/
 
           LOAD_FILE="out/injected/data/${NS}/function/load.mcfunction"
           mkdir -p "$(dirname "$LOAD_FILE")"
@@ -276,6 +279,11 @@ UNZIP_DIR="$(mktemp -d)"
 unzip -q "$DATALIB_ZIP" -d "$UNZIP_DIR"
 mkdir -p "$OUT_DIR/data"
 cp -r "$UNZIP_DIR/data/datalib" "$OUT_DIR/data/"
+cp -r "$UNZIP_DIR/data/datalib.main" "$OUT_DIR/data/"
+cp -r "$UNZIP_DIR/data/dl_load" "$OUT_DIR/data/"
+cp -r "$UNZIP_DIR/data/player_action "$OUT_DIR/data/"
+cp -r "$UNZIP_DIR/data/stringlib" "$OUT_DIR/data/"
+
 rm -rf "$UNZIP_DIR"
 
 # Patch the load hook.
@@ -304,195 +312,6 @@ OUT_ZIP="$(basename "$TARGET_DIR")-injected.zip"
 ( cd "$OUT_DIR" && zip -qr "$OLDPWD/$OUT_ZIP" . )
 
 echo "Wrote $OUT_ZIP ($TARGET_DIR was not modified)"
-```
-
----
-
-### Method 3 — Python
-
-```python
-#!/usr/bin/env python3
-"""
-inject_datalib.py
-Usage: python3 inject_datalib.py <target_dir> <namespace> [datalib_zip]
-"""
-import shutil
-import sys
-import tempfile
-import zipfile
-from pathlib import Path
-
-LOAD_HOOK = (
-    "\nexecute unless data storage datalib:engine {{global:{{loaded:1b}}}} "
-    "run function {ns}:load_datalib\n"
-)
-
-LOAD_DATALIB_FN = """\
-execute if data storage {ns}:engine {{loaded_datalib:1b}} run return 0
-
-function dl_load:load/yes
-function dl_load:load/fork_no
-tag @s add datalib.admin
-scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
-
-data modify storage {ns}:engine loaded_datalib set value 1b
-"""
-
-
-def inject(target_dir: str, namespace: str, datalib_zip: str = "dataLib-full.zip") -> Path:
-    target = Path(target_dir)
-    if not target.is_dir():
-        raise SystemExit(f"error: target datapack not found: {target}")
-
-    datalib_zip_path = Path(datalib_zip)
-    if not datalib_zip_path.is_file():
-        raise SystemExit(
-            f"error: {datalib_zip_path} not found. "
-            "Run './gradlew zipFull' in dataLib-dp first."
-        )
-
-    with tempfile.TemporaryDirectory() as scratch_str:
-        scratch = Path(scratch_str)
-
-        # Copy target into scratch — source datapack is never touched.
-        injected = scratch / "injected"
-        shutil.copytree(target, injected)
-
-        # Unpack dataLib, copy only data/datalib in.
-        unzip_dir = scratch / "datalib_unzipped"
-        with zipfile.ZipFile(datalib_zip_path) as zf:
-            zf.extractall(unzip_dir)
-        dest_datalib = injected / "data" / "datalib"
-        if dest_datalib.exists():
-            shutil.rmtree(dest_datalib)
-        shutil.copytree(unzip_dir / "data" / "datalib", dest_datalib)
-
-        # Patch load hook.
-        fn_dir = injected / "data" / namespace / "function"
-        fn_dir.mkdir(parents=True, exist_ok=True)
-
-        load_file = fn_dir / "load.mcfunction"
-        existing = load_file.read_text() if load_file.exists() else ""
-        if "loaded_datalib" not in existing:
-            with load_file.open("a") as f:
-                f.write(LOAD_HOOK.format(ns=namespace))
-
-        (fn_dir / "load_datalib.mcfunction").write_text(
-            LOAD_DATALIB_FN.format(ns=namespace)
-        )
-
-        # Zip result next to cwd, source untouched.
-        out_zip = Path(f"{target.name}-injected.zip")
-        if out_zip.exists():
-            out_zip.unlink()
-        base_name = str(out_zip.with_suffix(""))
-        shutil.make_archive(base_name, "zip", injected)
-
-        print(f"Wrote {out_zip} ({target} was not modified)")
-        return out_zip
-
-
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        raise SystemExit(__doc__)
-    inject(sys.argv[1], sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "dataLib-full.zip")
-```
-
----
-
-### Method 4 — JavaScript (Node.js)
-
-Requires `adm-zip` (`npm install adm-zip`).
-
-```javascript
-#!/usr/bin/env node
-// inject-datalib.js
-// Usage: node inject-datalib.js <targetDir> <namespace> [dataLibZip]
-
-const fs = require("fs");
-const path = require("path");
-const os = require("os");
-const AdmZip = require("adm-zip");
-
-function copyDirSync(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
-  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
-      copyDirSync(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
-}
-
-function inject(targetDir, namespace, dataLibZip = "dataLib-full.zip") {
-  if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) {
-    throw new Error(`target datapack not found: ${targetDir}`);
-  }
-  if (!fs.existsSync(dataLibZip)) {
-    throw new Error(
-      `${dataLibZip} not found. Run './gradlew zipFull' in dataLib-dp first.`
-    );
-  }
-
-  const scratch = fs.mkdtempSync(path.join(os.tmpdir(), "datalib-inject-"));
-  const injectedDir = path.join(scratch, "injected");
-
-  // Copy target into scratch — source datapack is never touched.
-  copyDirSync(targetDir, injectedDir);
-
-  // Unpack dataLib, copy only data/datalib in.
-  const unzipDir = path.join(scratch, "datalib_unzipped");
-  new AdmZip(dataLibZip).extractAllTo(unzipDir, true);
-  const destDatalib = path.join(injectedDir, "data", "datalib");
-  if (fs.existsSync(destDatalib)) fs.rmSync(destDatalib, { recursive: true });
-  copyDirSync(path.join(unzipDir, "data", "datalib"), destDatalib);
-
-  // Patch load hook.
-  const fnDir = path.join(injectedDir, "data", namespace, "function");
-  fs.mkdirSync(fnDir, { recursive: true });
-
-  const loadFile = path.join(fnDir, "load.mcfunction");
-  const existing = fs.existsSync(loadFile) ? fs.readFileSync(loadFile, "utf8") : "";
-  if (!existing.includes("loaded_datalib")) {
-    fs.appendFileSync(
-      loadFile,
-      `\nexecute unless data storage datalib:engine {global:{loaded:1b}} run function ${namespace}:load_datalib\n`
-    );
-  }
-
-  fs.writeFileSync(
-    path.join(fnDir, "load_datalib.mcfunction"),
-    `execute if data storage ${namespace}:engine {loaded_datalib:1b} run return 0
-
-function dl_load:load/yes
-function dl_load:load/fork_no
-tag @s add datalib.admin
-scoreboard players set @s[tag=datalib.admin,type=minecraft:player] dl.perm_level 4
-
-data modify storage ${namespace}:engine loaded_datalib set value 1b
-`
-  );
-
-  // Zip result next to cwd, source untouched.
-  const outZip = `${path.basename(targetDir)}-injected.zip`;
-  const zip = new AdmZip();
-  zip.addLocalFolder(injectedDir);
-  zip.writeZip(outZip);
-
-  fs.rmSync(scratch, { recursive: true });
-  console.log(`Wrote ${outZip} (${targetDir} was not modified)`);
-  return outZip;
-}
-
-const [, , targetDir, namespace, dataLibZip] = process.argv;
-if (!targetDir || !namespace) {
-  console.error("Usage: node inject-datalib.js <targetDir> <namespace> [dataLibZip]");
-  process.exit(1);
-}
-inject(targetDir, namespace, dataLibZip);
 ```
 
 ---
