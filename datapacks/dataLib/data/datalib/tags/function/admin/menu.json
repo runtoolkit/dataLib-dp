@@ -1,6 +1,4 @@
 {
     "replace": false,
-    "values": [
-        "datalib:config/menu_entry"
-    ]
+    "values": []
 }
