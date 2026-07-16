@@ -262,9 +262,26 @@ if [ ! -d "$TARGET_DIR" ]; then
   echo "error: target datapack not found: $TARGET_DIR" >&2
   exit 1
 fi
+
+# If dataLib-full.zip is missing, clone dataLib-dp and build it.
 if [ ! -f "$DATALIB_ZIP" ]; then
-  echo "error: $DATALIB_ZIP not found. Run './gradlew zipFull' in dataLib-dp first." >&2
-  exit 1
+  echo "warning: $DATALIB_ZIP not found. Cloning and building dataLib-dp..." >&2
+  BUILD_DIR="$(mktemp -d)"
+  git clone https://github.com/runtoolkit/dataLib-dp.git "$BUILD_DIR/dataLib-dp"
+  (
+    cd "$BUILD_DIR/dataLib-dp"
+    chmod +x ./gradlew
+    ./gradlew zipFull
+  )
+  # Locate the produced zip (adjust glob if the actual output path differs).
+  BUILT_ZIP="$(find "$BUILD_DIR/dataLib-dp" -maxdepth 6 -iname 'dataLib-full*.zip' -print -quit)"
+  if [ -z "$BUILT_ZIP" ]; then
+    echo "error: zipFull ran but no dataLib-full*.zip was found under build output." >&2
+    rm -rf "$BUILD_DIR"
+    exit 1
+  fi
+  cp "$BUILT_ZIP" "$DATALIB_ZIP"
+  rm -rf "$BUILD_DIR"
 fi
 
 OUT_DIR="$(mktemp -d)"
@@ -273,16 +290,20 @@ trap 'rm -rf "$OUT_DIR"' EXIT
 # Copy target into scratch — source datapack is never touched.
 cp -r "$TARGET_DIR/." "$OUT_DIR/"
 
-# Unpack dataLib and copy only its data/datalib folder in.
+# Unpack dataLib and copy only its known data folders in.
 UNZIP_DIR="$(mktemp -d)"
 unzip -q "$DATALIB_ZIP" -d "$UNZIP_DIR"
 mkdir -p "$OUT_DIR/data"
-cp -r "$UNZIP_DIR/data/datalib" "$OUT_DIR/data/"
-cp -r "$UNZIP_DIR/data/datalib.main" "$OUT_DIR/data/"
-cp -r "$UNZIP_DIR/data/dl_load" "$OUT_DIR/data/"
-cp -r "$UNZIP_DIR/data/player_action "$OUT_DIR/data/"
-cp -r "$UNZIP_DIR/data/stringlib" "$OUT_DIR/data/"
 
+for module in datalib datalib.main dl_load player_action stringlib; do
+  SRC="$UNZIP_DIR/data/$module"
+  if [ ! -d "$SRC" ]; then
+    echo "error: expected module missing from zip: data/$module" >&2
+    rm -rf "$UNZIP_DIR"
+    exit 1
+  fi
+  cp -r "$SRC" "$OUT_DIR/data/"
+done
 rm -rf "$UNZIP_DIR"
 
 # Patch the load hook.
@@ -298,16 +319,13 @@ fi
 
 cat > "$OUT_DIR/data/$NAMESPACE/function/load_datalib.mcfunction" <<EOF
 execute if data storage ${NAMESPACE}:engine {loaded_datalib:1b} run return 0
-
 function dl_load:load/yes
 function dl_load:load/fork_no
-
 data modify storage ${NAMESPACE}:engine loaded_datalib set value 1b
 EOF
 
 OUT_ZIP="$(basename "$TARGET_DIR")-injected.zip"
 ( cd "$OUT_DIR" && zip -qr "$OLDPWD/$OUT_ZIP" . )
-
 echo "Wrote $OUT_ZIP ($TARGET_DIR was not modified)"
 ```
 
