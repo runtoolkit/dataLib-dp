@@ -1,12 +1,12 @@
 # dl_load:load/fork
 # Fork confirmation gate — called when fork_verified is not set.
-# Player is prompted to confirm with /yes or /no.
+# Player is prompted to confirm with a click or /yes-/no command.
 #
 # USAGE:
 #   /function dl_load:load/fork
 #
-# CONFIRM:  /function dl_load:load/fork_yes
-# CANCEL:   /function dl_load:load/fork_no
+# CONFIRM:  /function dl_load:load/fork_yes  (or click [Yes])
+# CANCEL:   /function dl_load:load/fork_no   (or click [No])
 
 scoreboard objectives add dl.fork_gate dummy
 
@@ -21,12 +21,9 @@ scoreboard players set #confirmed dl.fork_gate 0
 
 scoreboard players set #pending dl.fork_gate 1
 
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.fork_gate"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.fork_gate,limit=1] run say [DL FORK GATE] This copy is not marked as a fork.
-execute as @e[type=minecraft:marker,tag=datalib.fork_gate,limit=1] run say [DL FORK GATE] Do you want to continue?
-execute as @e[type=minecraft:marker,tag=datalib.fork_gate,limit=1] run say [DL FORK GATE] YES:    /function dl_load:load/fork_yes
-execute as @e[type=minecraft:marker,tag=datalib.fork_gate,limit=1] run say [DL FORK GATE] NO:     /function dl_load:load/fork_no
-execute as @e[type=minecraft:marker,tag=datalib.fork_gate,limit=1] run say [DL FORK GATE] Auto-cancel fires in 30 seconds.
-execute as @e[type=minecraft:marker,tag=datalib.fork_gate,limit=1] run kill @s
+tellraw @a ["",{"text":"[DL FORK GATE] ","color":"#555555"},{"text":"This copy is not marked as a fork.","color":"yellow"}]
+tellraw @a ["",{"text":"[DL FORK GATE] ","color":"#555555"},{"text":"Do you want to continue?","color":"gray"}]
+tellraw @a ["",{"text":"[DL FORK GATE] ","color":"#555555"},{"text":"[Yes]","color":"green","bold":true,"underlined":true,"click_event":{"action":"run_command","command":"/function dl_load:load/fork_yes"}},{"text":"   ","color":"gray"},{"text":"[No]","color":"red","bold":true,"underlined":true,"click_event":{"action":"run_command","command":"/function dl_load:load/fork_no"}}]
+tellraw @a ["",{"text":"[DL FORK GATE] ","color":"#555555"},{"text":"Auto-cancel fires in 30 seconds.","color":"gray"}]
 
 schedule function dl_load:load/fork_no 30s replace

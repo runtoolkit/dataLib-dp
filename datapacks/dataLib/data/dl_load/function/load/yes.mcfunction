@@ -15,7 +15,7 @@
 #   4. Schedule dl_load:load/all at t+1 (clean tick boundary)
 #
 # The 1-tick delay lets the scoreboard objective removal settle before
-# dl_load:load/scoreboards runs and recreates its own objectives.
+# dl_load:loader/scoreboards runs and recreates its own objectives.
 
 # Guard: no gate open
 execute unless score #pending dl.load matches 1 run return 0
@@ -30,10 +30,8 @@ scoreboard players set #pending dl.load 0
 # Cancel auto-cancel timeout
 schedule clear dl_load:timeout
 
-# Announce via marker (safe on all MC versions, no player context needed)
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.gate_yes"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.gate_yes,limit=1] run say [DL GATE] Load CONFIRMED by operator. Initializing dataLib...
-execute as @e[type=minecraft:marker,tag=datalib.gate_yes,limit=1] run kill @s
+# Announce via tellraw — no marker entity needed.
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Load CONFIRMED","color":"green","bold":true},{"text":" by operator. Initializing dataLib...","color":"gray"}]
 
 # Tear down gate scoreboard before load pipeline touches scoreboards
 scoreboard players reset #pending dl.load
@@ -43,5 +41,5 @@ scoreboard objectives remove dl.load
 
 # Fire the actual load pipeline
 # 1-tick delay gives scoreboard removal a clean tick boundary before
-# dl_load:load/scoreboards recreates its objectives
+# dl_load:loader/scoreboards recreates its objectives
 schedule function dl_load:load/all 1t replace

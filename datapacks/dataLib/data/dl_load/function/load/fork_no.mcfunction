@@ -31,8 +31,6 @@ schedule clear dl_load:load/fork_no
 # distinct from fork_yes's 0b ("is a fork, operator confirmed it").
 data modify storage datalib:engine global.fork_verified set value 1b
 
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.fork_no"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.fork_no,limit=1] run say [DL FORK GATE] Cancelled — continuing with normal load.
-execute as @e[type=minecraft:marker,tag=datalib.fork_no,limit=1] run kill @s
+tellraw @a ["",{"text":"[DL FORK GATE] ","color":"#555555"},{"text":"Cancelled","color":"red"},{"text":" — continuing with normal load.","color":"gray"}]
 
 function dl_load:load/yes

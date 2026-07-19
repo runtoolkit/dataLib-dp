@@ -1,3 +1,7 @@
+# dl_load:loader/scoreboards
+# (moved from dl_load:load/scoreboards in v6.0.1-pre2 — load/ vs loader/
+#  separates gate/confirmation logic from the actual init routines)
+
 scoreboard objectives add dl.tmp dummy
 scoreboard objectives add datalib.meta dummy
 scoreboard objectives add datalib.time dummy

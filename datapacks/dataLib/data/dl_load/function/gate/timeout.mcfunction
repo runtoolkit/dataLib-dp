@@ -5,8 +5,6 @@
 # already closed by an explicit /yes or /no, the #pending guard in
 # gate/no returns 0 and nothing happens.
 
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.gtimeout"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.gtimeout,limit=1] run say [DL GATE] Dangerous command timeout (30s) — auto-cancelling.
-execute as @e[type=minecraft:marker,tag=datalib.gtimeout,limit=1] run kill @s
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Dangerous command timeout (30s)","color":"red"},{"text":" — auto-cancelling.","color":"gray"}]
 
 execute if score #pending dl.gate matches 1 run function dl_load:gate/no

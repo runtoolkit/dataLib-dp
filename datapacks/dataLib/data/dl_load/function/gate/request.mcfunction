@@ -11,11 +11,11 @@
 #
 # This function then:
 #   1. Opens the dl.gate scoreboard window
-#   2. Broadcasts confirmation instructions via marker say
+#   2. Broadcasts a clickable confirmation prompt via tellraw
 #   3. Schedules a 30-second auto-cancel
 #
-# CONFIRMING:  /function dl_load:gate/yes
-# CANCELLING:  /function dl_load:gate/no
+# CONFIRMING:  /function dl_load:gate/yes  (or click [Confirm])
+# CANCELLING:  /function dl_load:gate/no   (or click [Cancel])
 #
 # If another gate is already pending, this call is silently dropped to
 # prevent multiple dangerous commands from racing in multiplayer.
@@ -29,13 +29,10 @@ scoreboard players set #pending dl.gate 0
 scoreboard players set #confirmed dl.gate 0
 scoreboard players set #pending dl.gate 1
 
-# Broadcast via marker (server-startup safe, no player context needed)
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.gate_req"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.gate_req,limit=1] run say [DL GATE] Dangerous command pending — awaiting confirmation.
-execute as @e[type=minecraft:marker,tag=datalib.gate_req,limit=1] run say [DL GATE] CONFIRM:  /function dl_load:gate/yes
-execute as @e[type=minecraft:marker,tag=datalib.gate_req,limit=1] run say [DL GATE] CANCEL:   /function dl_load:gate/no
-execute as @e[type=minecraft:marker,tag=datalib.gate_req,limit=1] run say [DL GATE] Auto-cancel fires in 30 seconds.
-execute as @e[type=minecraft:marker,tag=datalib.gate_req,limit=1] run kill @s
+# Broadcast via tellraw — clickable buttons, no marker entity needed.
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Dangerous command pending","color":"yellow","bold":true},{"text":" — awaiting confirmation.","color":"gray"}]
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"[Confirm]","color":"green","bold":true,"underlined":true,"click_event":{"action":"run_command","command":"/function dl_load:gate/yes"}},{"text":"   ","color":"gray"},{"text":"[Cancel]","color":"red","bold":true,"underlined":true,"click_event":{"action":"run_command","command":"/function dl_load:gate/no"}}]
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Auto-cancel fires in 30 seconds.","color":"gray"}]
 
 # Schedule 30-second auto-cancel for dangerous commands
 schedule function dl_load:gate/timeout 30s replace

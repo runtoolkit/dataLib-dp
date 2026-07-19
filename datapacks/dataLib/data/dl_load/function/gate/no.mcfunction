@@ -16,10 +16,8 @@ scoreboard players set #confirmed dl.gate 0
 # Cancel the still-pending timeout if admin called /no explicitly
 schedule clear dl_load:gate/timeout
 
-# Announce cancellation via marker
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.gate_no"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.gate_no,limit=1] run say [DL GATE] Dangerous command CANCELLED. Action was NOT executed.
-execute as @e[type=minecraft:marker,tag=datalib.gate_no,limit=1] run kill @s
+# Announce cancellation via tellraw — no marker entity needed.
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Dangerous command CANCELLED.","color":"red","bold":true},{"text":" Action was NOT executed.","color":"gray"}]
 
 # Discard pending context
 data remove storage datalib:engine pending_gate

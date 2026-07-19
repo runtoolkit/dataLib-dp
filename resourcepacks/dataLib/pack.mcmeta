@@ -1,12 +1,12 @@
 {
   "pack": {
-    "description": "datalib_extensions by Runtoolkit",
+    "description": "dataLib v6.0.1-pre2 — resource pack companion (fonts/textures for GUI & dialog rendering) | runtoolkit",
     "min_format": [
-      88,
+      107,
       1
     ],
     "max_format": [
-      88,
+      107,
       1
     ]
   },

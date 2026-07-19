@@ -8,6 +8,7 @@
 # ---------------
 #   "ban"     → dl_load:gate/exec/ban       (datalib: player, reason)
 #   "ban_ip"  → dl_load:gate/exec/ban_ip    (datalib: player, reason)
+#   "kick"    → dl_load:gate/exec/kick      (datalib: player, reason)
 #   "disable" → dl_load:gate/exec/disable   (no macro params)
 #
 # Adding new types: write an executor in dl_load:gate/exec/, then add
@@ -26,10 +27,8 @@ scoreboard players set #pending dl.gate 0
 # Cancel the 30-second timeout
 schedule clear dl_load:gate/timeout
 
-# Announce execution via marker
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.gate_exec"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.gate_exec,limit=1] run say [DL GATE] Dangerous command CONFIRMED. Executing...
-execute as @e[type=minecraft:marker,tag=datalib.gate_exec,limit=1] run kill @s
+# Announce execution via tellraw — no marker entity needed.
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Dangerous command CONFIRMED.","color":"green","bold":true},{"text":" Executing...","color":"gray"}]
 
 # --- DISPATCH ---
 # Each executor reads its own fields from datalib:engine pending_gate via datalib.
@@ -40,6 +39,9 @@ execute if data storage datalib:engine pending_gate{type:"ban"} run function dl_
 
 # ban_ip: requires {type:"ban_ip", player:"...", reason:"..."}
 execute if data storage datalib:engine pending_gate{type:"ban_ip"} run function dl_load:gate/exec/ban_ip with storage datalib:engine pending_gate
+
+# kick: requires {type:"kick", player:"...", reason:"..."}
+execute if data storage datalib:engine pending_gate{type:"kick"} run function dl_load:gate/exec/kick with storage datalib:engine pending_gate
 
 # disable: requires {type:"disable"} (no extra fields)
 execute if data storage datalib:engine pending_gate{type:"disable"} run function dl_load:gate/exec/disable

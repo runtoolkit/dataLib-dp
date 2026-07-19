@@ -8,13 +8,11 @@
 # Guard: gate must be open or pending
 execute unless score #pending dl.load matches 1 run return 0
 
-# Log via marker
-summon minecraft:marker ~ ~ ~ {Tags:["datalib.safe_gate_no"],CustomName:{"text":"DL"}}
-execute as @e[type=minecraft:marker,tag=datalib.safe_gate_no,limit=1] run say [DL SAFE GATE] safe_load/no — load CANCELLED by operator.
-execute as @e[type=minecraft:marker,tag=datalib.safe_gate_no,limit=1] run say [DL SAFE GATE] Storage has NOT been modified.
-execute if entity @s[type=minecraft:player] run execute as @e[type=minecraft:marker,tag=datalib.safe_gate_no,limit=1] run say [DL SAFE GATE] Cancelled by a player.
-execute unless entity @s[type=minecraft:player] run execute as @e[type=minecraft:marker,tag=datalib.safe_gate_no,limit=1] run say [DL SAFE GATE] Cancelled by server/console.
-execute as @e[type=minecraft:marker,tag=datalib.safe_gate_no,limit=1] run kill @s
+# Log via tellraw — no marker entity needed.
+tellraw @a ["",{"text":"[DL SAFE GATE] ","color":"#555555"},{"text":"safe_load/no — load CANCELLED by operator.","color":"red"}]
+tellraw @a ["",{"text":"[DL SAFE GATE] ","color":"#555555"},{"text":"Storage has NOT been modified.","color":"gray"}]
+execute if entity @s[type=minecraft:player] run tellraw @a ["",{"text":"[DL SAFE GATE] ","color":"#555555"},{"text":"Cancelled by a player.","color":"gray"}]
+execute unless entity @s[type=minecraft:player] run tellraw @a ["",{"text":"[DL SAFE GATE] ","color":"#555555"},{"text":"Cancelled by server/console.","color":"gray"}]
 
 # Notify player if applicable
 execute if entity @s[type=minecraft:player] run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"safe_load cancelled. Storage untouched.","color":"yellow"}]
