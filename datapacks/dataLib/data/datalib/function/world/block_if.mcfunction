@@ -1,2 +1,0 @@
-$execute if block $(x) $(y) $(z) $(block) run $(invoke)
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"world/block_if ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(block)","color":"aqua"}]
