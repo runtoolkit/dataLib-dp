@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "tool_durability_lost": {
+      "trigger": "minecraft:item_durability_changed",
+      "conditions": {
+        "delta": {
+          "max": -1
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_break_block"
+  },
+  "parent": "datalib:hidden/root"
+}

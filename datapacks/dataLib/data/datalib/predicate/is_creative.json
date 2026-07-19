@@ -1,0 +1,12 @@
+[
+  {
+    "condition": "minecraft:entity_properties",
+    "entity": "this",
+    "predicate": {
+      "minecraft:entity_type": "minecraft:player",
+      "minecraft:type_specific/player": {
+        "game_mode": "creative"
+      }
+    }
+  }
+]

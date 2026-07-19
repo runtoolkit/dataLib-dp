@@ -1,0 +1,2 @@
+$data modify storage datalib:engine events.$(event) append value {func:"$(func)"}
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"event/register ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(func)","color":"aqua"}]

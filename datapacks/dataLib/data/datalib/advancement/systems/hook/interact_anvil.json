@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "interact_anvil": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:anvil"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_interact_anvil"
+  },
+  "parent": "datalib:hidden/root"
+}

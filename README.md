@@ -6,7 +6,7 @@
 [![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
 
 ---
-> Current version: **v6.0.1-pre1**
+> Current version: **v6.0.1-pre2**
 ---
 
 > [!WARNING]
@@ -56,7 +56,7 @@ data modify storage <namespace>:engine loaded_datalib set value 1b
 ```
 datalib:engine  (persistent data)
 ├── global
-│   ├── version: "v6.0.1-pre1"
+│   ├── version: "v6.0.1-pre2"
 │   └── tick: <int>
 ├── players
 │   └── Steve { coins:150, level:5, xp:2300, online:1b, ... }

@@ -1,0 +1,11 @@
+{
+  "criteria": {
+    "used_any_item": {
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_item_use"
+  },
+  "parent": "datalib:hidden/root"
+}
