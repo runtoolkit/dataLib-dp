@@ -95,6 +95,12 @@ Used with `execute if predicate <id>`.
 | `datalib:in_overworld` | Player is in the Overworld |
 | `datalib:in_nether` | Player is in the Nether |
 | `datalib:in_end` | Player is in the End |
+| `datalib:is_hungry` | Food level is below 20 (`datalib.food` score) |
+| `datalib:health_below_half` | Health is at or below 10 HP (`datalib.health` score) |
+| `datalib:is_holding_sword` | Main hand holds any item in `#minecraft:swords` |
+| `datalib:is_flying` | Player is flying (creative/spectator flight or elytra without gliding) |
+| `datalib:is_in_water` | Player's location fluid tag is `#minecraft:water` |
+| `datalib:weather_clear` | Not raining and not thundering |
 
 Full reference: [Predicate Reference](https://github.com/runtoolkit/dataLib-dp/wiki)
 
@@ -144,6 +150,64 @@ function datalib:core/lib/string/replace
 # datalib:output string.result → "Hello Everyone"
 ```
 
+---
+
+## 🔑 Permission System
+
+Per-player permission tags, gated behind admin status. Admins (`datalib.admin` tag) can grant/revoke arbitrary permission strings; a denied check plays a sound and shows the player a "no permission" message.
+
+```mcfunction
+$data modify storage datalib:input perm set value {player:"Steve",perm:"build"}
+function datalib:api/perm/grant with storage datalib:input perm
+# grants tag perm.build to Steve, records advancement datalib:api/perm/build
+
+$data modify storage datalib:input perm set value {player:"Steve",perm:"build"}
+function datalib:api/perm/check with storage datalib:input perm
+# returns 1 if Steve is admin OR holds tag perm.build, else 0 (and notifies the player)
+```
+
+Related: `perm/revoke`, `perm/has`, `perm/list`, `perm/clear`, plus `perm/trigger/*` for binding permissions to `/trigger` commands.
+
+---
+
+## 🛡️ Security Levels
+
+A separate, numeric permission tier (`dl.perm_level` scoreboard, 0–4) that gates access to command-execution features such as `cb/run` — independent from the tag-based Permission System above.
+
+| Level | Meaning |
+|---|---|
+| 0 | No access (default for new players) |
+| 1 | Basic — `cmd/` functions requiring `admin_min_level=1` |
+| 2 | Standard — full `cmd/` access (default) |
+| 3 | Elevated — may trigger `$$(cmd)` execution |
+| 4 | Super — may trigger `$$(cmd)` even in sandbox mode |
+
+```mcfunction
+$function datalib:api/security/set_level {player:"Steve",level:3}
+$function datalib:api/security/get_level {player:"Steve"}
+```
+
+> **Note:** if `admin_can_override` is `0b`, even level-4 players are still capped by the `security.sandbox_cmd_min_level` config floor.
+
+---
+
+## ⏱️ Command Block Callbacks (`cb/`)
+
+Runs an arbitrary command string through a temporary command block instead of `execute run`, with optional scheduling. Gated by the Security Levels system above (`security.cmd_min_level`).
+
+```mcfunction
+# Immediate — fires next tick, cleaned up 2 ticks later
+data modify storage datalib:input cb set value {cmd:"say hello"}
+function datalib:api/cb/run
+
+# Delayed — pushes onto an internal delay queue
+data modify storage datalib:input cb set value {cmd:"say delayed!",delay:40}
+function datalib:api/cb/run_delayed
+```
+
+`x`/`y`/`z` in the input default to `0 -64 0`. Related: `cb/run_sequence`, `cb/cancel`, `cb/list`, `cb/queue_size`.
+
+---
 
 ## 💉 Injecting into Another Datapack
 
