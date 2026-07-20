@@ -157,11 +157,11 @@ function datalib:core/lib/string/replace
 Per-player permission tags, gated behind admin status. Admins (`datalib.admin` tag) can grant/revoke arbitrary permission strings; a denied check plays a sound and shows the player a "no permission" message.
 
 ```mcfunction
-$data modify storage datalib:input perm set value {player:"Steve",perm:"build"}
+data modify storage datalib:input perm set value {player:"Steve",perm:"build"}
 function datalib:api/perm/grant with storage datalib:input perm
 # grants tag perm.build to Steve, records advancement datalib:api/perm/build
 
-$data modify storage datalib:input perm set value {player:"Steve",perm:"build"}
+data modify storage datalib:input perm set value {player:"Steve",perm:"build"}
 function datalib:api/perm/check with storage datalib:input perm
 # returns 1 if Steve is admin OR holds tag perm.build, else 0 (and notifies the player)
 ```
@@ -183,8 +183,8 @@ A separate, numeric permission tier (`dl.perm_level` scoreboard, 0–4) that gat
 | 4 | Super — may trigger `$$(cmd)` even in sandbox mode |
 
 ```mcfunction
-$function datalib:api/security/set_level {player:"Steve",level:3}
-$function datalib:api/security/get_level {player:"Steve"}
+function datalib:api/security/set_level {player:"Steve",level:3}
+function datalib:api/security/get_level {player:"Steve"}
 ```
 
 > **Note:** if `admin_can_override` is `0b`, even level-4 players are still capped by the `security.sandbox_cmd_min_level` config floor.
