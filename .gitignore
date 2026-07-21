@@ -126,3 +126,7 @@ build/
 !gradle/
 !src/
 !pack.mcmeta
+!datapacks/
+!resourcepacks/
+!buildSrc/
+!mods/dataLib

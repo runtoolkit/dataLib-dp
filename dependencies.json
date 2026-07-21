@@ -1,20 +1,21 @@
 {
-  "embedded": [
-    {
-      "id": "player_action",
-      "version": "v1.7",
-      "source": "https://github.com/ICY105/PlayerAction",
-      "license": "MIT",
-      "namespace": "player_action",
-      "load_tag": "#player_action:load",
-      "note": "Embedded as-is. Provides player event hooks (click, movement, block interaction)."
-    }
-  ],
-  "required": [
-    {
-      "id": "lanternload",
-      "source": "https://github.com/LanternMC/load",
-      "note": "Already bundled via data/load namespace."
-    }
-  ]
+  "name": "dataLib",
+  "id": "datalib",
+  "pack_version": "v6.0.1-pre2",
+  "dependencies": {
+    "optional": [
+      {
+        "id": "stringlib",
+        "url": "https://github.com/CMDred/StringLib.git",
+        "checked_via": "score #StringLib.Init StringLib",
+        "used_by": "datalib:core/lib/string/*",
+        "behavior_if_missing": "debug-tier warning only, load continues"
+      },
+      {
+        "id": "player_action",
+        "url": "https://github.com/ICY105/PlayerAction.git"
+      }
+    ],
+    "required": []
+  }
 }

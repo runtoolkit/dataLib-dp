@@ -1,0 +1,12 @@
+{
+  "criteria": {
+    "ticl": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_tick"
+  },
+  "parent": "datalib:hidden/root",
+  "sends_telemetry_event": false
+}
