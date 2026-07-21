@@ -1,0 +1,2 @@
+tellraw @s ["",{"text":"[dataLib] ","color":"dark_red","bold":true},{"text":"WARNING: This datapack (dataLib-dp) is ARCHIVED and will no longer receive updates!","color":"red"}]
+tellraw @s ["",{"text":"[dataLib] ","color":"dark_red","bold":true},{"text":"GitHub: ","color":"gray"},{"text":"github.com/runtoolkit/dataLib-dp","color":"gold","underlined":true,"click_event":{"action":"open_url","url":"https://github.com/runtoolkit/dataLib-dp/tree/main"}}]
