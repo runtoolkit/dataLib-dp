@@ -9,16 +9,6 @@
 > Current version: **v6.0.1-pre2**
 
 ---
-> [!WARNING]
-> ### ⚠️ THIS PROJECT IS ARCHIVED
-> **`runtoolkit/dataLib-dp`** datapack project has been officially archived.
-> 
-> * **No Further Updates:** This library is no longer under active development and will not be updated for newer Minecraft versions.
-> * **Unmaintained:** Issues and Pull Requests are disabled.
-> * **Usage:** Feel free to inspect, fork, or use the code as-is from the `main` branch.
-> 
-> *For potential alternatives or updates, please check the [@runtoolkit](https://github.com/runtoolkit) organization.*
----
 
 > [!WARNING]
 > **This datapack is considered safe to use, but it is still actively receiving security improvements, bug fixes, and new features. Please keep it up to date.**
