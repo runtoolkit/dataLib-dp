@@ -234,7 +234,7 @@ tasks.register("repack") {
     dependsOn buildTasks
 
         exec {
-            commandLine "pythob3", "./obfuscate_datapack.py"
+            commandLine "python3", "./obfuscate_datapack.py"
         }
     
     doLast {
