@@ -14,21 +14,9 @@ AI / Machine Learning Restrictions
 
 You MAY NOT:
 
-* Use this work, in whole or in part, for training, fine-tuning,
-  benchmarking, evaluating, testing, or improving artificial intelligence,
-  machine learning, large language models, code-generation systems, or
-  similar automated systems without prior written permission from the
-  copyright holder
-* Include this work in datasets, corpora, archives, mirrors, repositories,
-  or collections intended for AI/ML development, research, or commercial
-  use without prior written permission from the copyright holder
-* Generate synthetic datasets, embeddings, model weights, or derivative
-  training materials from this work without prior written permission from
-  the copyright holder
-* Use this work for automated code harvesting, large-scale data collection,
-  model distillation, retrieval augmentation, data/training-set poisoning,
-  prompt injection against AI coding assistants, or similar AI-related
-  purposes without prior written permission from the copyright holder
+* Use this work, in whole or in part, for prompt injection against AI
+  coding assistants or similar AI-related abuse without prior written
+  permission from the copyright holder
 
 CI/CD and Development Container Restrictions
 
@@ -70,10 +58,6 @@ You MAY NOT:
   chat/tellraw flood ("chat DDoS"), packet flooding, traffic flooding,
   service disruption, or resource exhaustion attacks against any server,
   network, or player
-* Introduce or exploit shell injection, command injection, remote code
-  execution, deserialization, or similar injection vulnerabilities in this
-  work, in any tooling that consumes it (including the build pipeline and
-  CI scripts in scripts/), or in any system this work interacts with
 * Use, weaponize, distribute, demonstrate, facilitate, or automate the
   exploitation of zero-day or known-but-unpatched vulnerabilities in
   Minecraft, Minecraft servers, Minecraft plugins, Minecraft mods, or
