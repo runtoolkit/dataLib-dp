@@ -1,6 +1,5 @@
 {
   "name": "dataLib & Python Dev",
-  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
   "customizations": {
     "vscode": {
       "extensions": [

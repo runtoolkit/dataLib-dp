@@ -170,6 +170,21 @@ Related: `perm/revoke`, `perm/has`, `perm/list`, `perm/clear`, plus `perm/trigge
 
 ---
 
+## ⚠️ `test_block` Log Spam Risk
+
+Not a vulnerability in dataLib or in Minecraft/Log4j — this is a config pitfall to avoid if any part of your setup uses `minecraft:test_block`.
+
+`minecraft:test_block[mode=log]` is designed to write its `message` field to the log on every redstone trigger. If a `test_block` in `mode=log` is wired to a constant power source (a `redstone_block`, or a repeating trigger inside a `minecraft:tick` function), it will write that line to the log continuously — every tick if triggered from `tick`. This is expected behavior of the block, not a bug, but repeated/automated triggering can grow log files quickly and add disk/IO load on a server.
+
+This has no relation to Log4j or any CVE — it's a plain log call (`LOGGER.info(message)`), not a lookup/JNDI-style resolution path.
+
+**If you use `test_block` anywhere in a datapack:**
+- Don't wire `mode=log` test_blocks to `minecraft:tick` or any always-on power source.
+- Prefer `mode=accept`/`mode=fail` for actual gametest logic, and reserve `mode=log` for one-off manual debugging.
+- If you inherited a world with one already spamming, break the redstone connection or `/setblock` over it to remove it.
+
+---
+
 ## 🛡️ Security Levels
 
 A separate, numeric permission tier (`dl.perm_level` scoreboard, 0–4) that gates access to command-execution features such as `cb/run` — independent from the tag-based Permission System above.
