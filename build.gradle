@@ -233,6 +233,11 @@ tasks.register("repack") {
     description = "Trims each dist zip to pack.mcmeta + data/ only, replacing the original"
     dependsOn buildTasks
 
+        exec {
+            commandLine "pythob3", "./obfuscate_datapack.py"
+        }
+    }
+    
     doLast {
         def scratch = layout.buildDirectory.dir("repack-scratch").get().asFile
 
