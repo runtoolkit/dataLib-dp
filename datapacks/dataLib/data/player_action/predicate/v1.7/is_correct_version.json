@@ -1,6 +1,6 @@
-[
+
   {
-    "condition": "minecraft:value_check",
+    "type": "minecraft:value_check",
     "value": 1,
     "range": {
       "min": {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "condition": "minecraft:value_check",
+    "type": "minecraft:value_check",
     "value": 7,
     "range": {
       "min": {
@@ -47,4 +47,3 @@
       }
     }
   }
-]
