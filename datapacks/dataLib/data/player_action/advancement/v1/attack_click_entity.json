@@ -3,10 +3,16 @@
     "interact_click_entity": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "entity": {
-          "minecraft:entity_type": "minecraft:interaction",
-          "nbt": "{Tags:[\"player_action.click_entity\"]}"
-        }
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:interaction",
+              "nbt": "{Tags:[\"player_action.click_entity\"]}"
+            }
+          }
+        ]
       }
     }
   },
