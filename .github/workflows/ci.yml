@@ -68,12 +68,11 @@ jobs:
           path: build/jmc_datapack/
           retention-days: 7
 
-      # Run Main.java Test Client & Security Scan (Addition 1)
+      # Run Main.java Test Client & Security Scan via Gradle (Addition 1)
       - name: Run Main.java Test Client
         run: |
-          mkdir -p build/classes
-          javac src/gametest/java/io/runtoolkit/datalib/Main.java -d build/classes
-          java -cp build/classes io.runtoolkit.datalib.Main
+          chmod +x gradlew
+          ./gradlew runMainTestClient --no-daemon
           
       # Performance Metrics & Security Reporting (Addition 3)
       - name: Performance & Security Report
