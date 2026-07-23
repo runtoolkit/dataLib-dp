@@ -182,10 +182,10 @@ tasks.register("lintMecha", Exec) {
             }
         }
 
-        exec {
-            commandLine "pip", "install", "--break-system-packages", "-q",
-                "git+https://github.com/mcbeet/mecha.git"
-        }
+        ProcessBuilder pb = new ProcessBuilder("pip", "install", "--break-system-packages", "-q", "git+https://github.com/mcbeet/mecha.git")
+        pb.inheritIO()
+        Process process = pb.start()
+        process.waitFor()
     }
 
     workingDir = scratch
