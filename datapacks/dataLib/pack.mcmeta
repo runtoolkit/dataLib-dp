@@ -1,68 +1,61 @@
 {
-    "pack": {
-        "description": [
-            {
-                "text": "D.L.",
-                "color": "#00ccff",
-                "bold": true,
-                "italic": false,
-                "extra": [
-                    {
-                        "text": " | ",
-                        "color": "#ff0000",
-                        "bold": false,
-                        "italic": false,
-                        "underlined": false,
-                        "strikethrough": false,
-                        "obfuscated": false
-                    },
-                    {
-                        "text": "by runtoolkit",
-                        "color": "#00ff33",
-                        "bold": false,
-                        "italic": false,
-                        "extra": [
-                            " ",
-                            {
-                                "text": "| ",
-                                "color": "#ff0000",
-                                "bold": false,
-                                "italic": false,
-                                "underlined": false,
-                                "strikethrough": false,
-                                "obfuscated": false
-                            },
-                            {
-                                "text": "26.2",
-                                "color": "#e3ff57",
-                                "bold": false,
-                                "italic": false,
-                                "underlined": true
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": " | v6.0.1-pre2",
-                "color": "#ffaa00",
+  "pack": {
+    "description": [
+      {
+        "text": "D.L.",
+        "color": "#00ccff",
+        "bold": true,
+        "italic": false,
+        "extra": [
+          {
+            "text": " | ",
+            "color": "#ff0000",
+            "bold": false,
+            "italic": false,
+            "underlined": false,
+            "strikethrough": false,
+            "obfuscated": false
+          },
+          {
+            "text": "by runtoolkit",
+            "color": "#00ff33",
+            "bold": false,
+            "italic": false,
+            "extra": [
+              " ",
+              {
+                "text": "| ",
+                "color": "#ff0000",
                 "bold": false,
-                "italic": false
-            }
-        ],
-        "min_format": [
-            107,
-            1
-        ],
-        "max_format": [
-            107,
-            1
-        ],
-        "pack_format": 107
-    },
-    "features": {
-        "enabled": [
-            "minecraft:vanilla"
+                "italic": false,
+                "underlined": false,
+                "strikethrough": false,
+                "obfuscated": false
+              },
+              {
+                "text": "26.3-snapshot-5",
+                "color": "#e3ff57",
+                "bold": false,
+                "italic": false,
+                "underlined": true
+              }
+            ]
+          }
         ]
-    }
+      },
+      {
+        "text": " | v6.0.1-pre2",
+        "color": "#ffaa00",
+        "bold": false,
+        "italic": false
+      }
+    ],
+    "min_format": 112,
+    "max_format": 112
+  },
+  "features": {
+    "enabled": [
+      "minecraft:vanilla"
+    ]
+  }
 }

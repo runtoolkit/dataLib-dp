@@ -1,13 +1,12 @@
-[
-  {
-    "function": "minecraft:set_lore",
-    "lore": [
-      {
-        "text": "✦ Custom Lore Line",
-        "italic": false,
-        "color": "aqua"
-      }
-    ],
-    "mode": "append"
-  }
-]
+{
+  "type": "minecraft:set_lore",
+  "lore": [
+    {
+      "storage": "datalib:input",
+      "nbt":  "lore",
+      "interpret": true,
+      "separator": "\n"
+    }
+  ],
+  "mode": "append"
+}

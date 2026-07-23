@@ -3,14 +3,19 @@
     "interact_click_entity": {
       "trigger": "minecraft:player_interacted_with_entity",
       "conditions": {
-        "entity": {
-          "minecraft:entity_type": "minecraft:interaction",
-          "nbt": "{Tags:[\"player_action.click_entity\"]}"
-        }
+        "entity":
+          {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "minecraft:interaction",
+              "nbt": "{Tags:[\"player_action.click_entity\"]}"
+            }
+          }
       }
     }
   },
   "rewards": {
-    "function": "player_action:v1/internal/interact_click_entity"
+    "function": "player_action:core/internal/v1/interact_click_entity"
   }
 }

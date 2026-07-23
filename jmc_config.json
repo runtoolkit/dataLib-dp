@@ -1,0 +1,7 @@
+{
+    "namespace": "datalib_jmc",
+    "description": "dataLib Datapack compiled with JMC",
+    "pack_format": 112,
+    "target": "main.jmc",
+    "output": "./build/jmc_datapack"
+}

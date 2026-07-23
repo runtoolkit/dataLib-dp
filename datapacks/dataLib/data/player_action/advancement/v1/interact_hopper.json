@@ -3,9 +3,9 @@
     "interact_anvil": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location": [
+        "location":
           {
-            "condition": "minecraft:location_check",
+            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": [
@@ -14,11 +14,10 @@
               }
             }
           }
-        ]
       }
 	  }
   },
   "rewards":{ 
-    "function":"player_action:v1/internal/interact_hopper"
+    "function":"player_action:core/internal/v1/interact_hopper"
   }
 }

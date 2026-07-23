@@ -1,6 +1,6 @@
 # ─────────────────────────────────────────────────────────────────
 # datalib:world/get_time
-# Compatible with 26.2+ World Clocks (minecraft:overworld)
+# Compatible with 26.3-snapshot-5+ World Clocks (minecraft:overworld)
 #
 # OUTPUT:
 # datalib:output.daytime → in-day time (0-23999)

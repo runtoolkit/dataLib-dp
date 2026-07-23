@@ -3,13 +3,11 @@
     "trigger": {
       "trigger": "minecraft:fishing_rod_hooked",
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {}
-          }
-        ]
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {}
+        }
       }
     }
   },

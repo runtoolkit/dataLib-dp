@@ -1,6 +1,8 @@
-[
+{
+  "type": "minecraft:any_of",
+  "terms": [
   {
-    "condition": "minecraft:value_check",
+    "type": "minecraft:value_check",
     "value": {
       "type": "minecraft:score",
       "target": "this",
@@ -26,7 +28,7 @@
     }
   },
   {
-    "condition": "minecraft:value_check",
+    "type": "minecraft:value_check",
     "value": {
       "type": "minecraft:score",
       "target": "this",
@@ -52,7 +54,7 @@
     }
   },
   {
-    "condition": "minecraft:value_check",
+    "type": "minecraft:value_check",
     "value": {
       "type": "minecraft:score",
       "target": "this",
@@ -78,7 +80,7 @@
     }
   },
   {
-    "condition": "minecraft:value_check",
+    "type": "minecraft:value_check",
     "value": {
       "type": "minecraft:score",
       "target": "this",
@@ -104,3 +106,4 @@
     }
   }
 ]
+}

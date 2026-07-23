@@ -3,20 +3,19 @@
     "interact_anvil": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "location": [
+        "location":
           {
-            "condition": "minecraft:location_check",
+            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": "#minecraft:cauldrons"
               }
             }
           }
-        ]
       }
 	  }
   },
   "rewards":{ 
-    "function":"player_action:v1/internal/interact_cauldron"
+    "function":"player_action:core/internal/v1/interact_cauldron"
   }
 }

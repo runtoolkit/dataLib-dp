@@ -1,7 +1,5 @@
-[
-  {
-    "function": "minecraft:set_enchantments",
-    "enchantments": {},
-    "add": false
-  }
-]
+{
+  "type": "minecraft:set_enchantments",
+  "enchantments": {},
+  "add": false
+}

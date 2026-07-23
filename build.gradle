@@ -1,6 +1,75 @@
 import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 
+plugins {
+    id 'net.fabricmc.fabric-loom' version '1.18.0-alpha.9'
+    id 'java'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+sourceSets {
+    gametest {
+        java {
+            srcDirs = ['src/gametest/java']
+        }
+        resources {
+            srcDirs = ['src/gametest/resources']
+        }
+    }
+}
+
+afterEvaluate {
+    configurations {
+        gametestCompileClasspath.extendsFrom minecraftNamedCompile
+        gametestRuntimeClasspath.extendsFrom minecraftNamedRuntime
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://maven.fabricmc.net/" }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:26.3-snapshot-5"
+    
+    implementation "net.fabricmc:fabric-loader:0.19.3"
+    implementation "net.fabricmc.fabric-api:fabric-api:0.155.3+26.3"
+    
+    // Gametest dependencies
+    gametestImplementation "net.fabricmc:fabric-loader:0.19.3"
+    gametestImplementation "net.fabricmc.fabric-api:fabric-api:0.155.3+26.3"
+}
+
+fabricApi {
+    configureTests {
+        createSourceSet = false
+        modId = 'datalib-testmod'
+    }
+}
+
+loom {
+    runs {
+        gametest {
+            inherit server
+            name "Game Test"
+            vmArg "-Dfabric-api.gametest"
+            vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
+            runDir "build/gametest"
+        }
+    }
+    mods {
+        "datalib-testmod" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.gametest
+        }
+    }
+}
+
 // =====================================================================
 // dataLib — Datapack build system (pure Gradle, no plugins required)
 // Replaces: build.yml, dp-lint.yml, lint-and-build.yml
@@ -10,7 +79,7 @@ import groovy.json.JsonOutput
 
 // label -> pack_format. Single target now that overlays are gone.
 def TARGETS = [
-    "full" : 107
+    "full" : 112
 ]
 
 // Source roots after the datapacks/ + resourcepacks/ restructure.
@@ -113,10 +182,10 @@ tasks.register("lintMecha", Exec) {
             }
         }
 
-        exec {
-            commandLine "pip", "install", "--break-system-packages", "-q",
-                "git+https://github.com/mcbeet/mecha.git"
-        }
+        ProcessBuilder pb = new ProcessBuilder("pip", "install", "--break-system-packages", "-q", "git+https://github.com/mcbeet/mecha.git")
+        pb.inheritIO()
+        Process process = pb.start()
+        process.waitFor()
     }
 
     workingDir = scratch
@@ -299,7 +368,7 @@ tasks.register("release") {
         exec {
             commandLine "gh", "release", "create", version,
                 "--title", "dataLib ${version}",
-                "--notes", "**Datapack build** (pack_format 107).",
+                "--notes", "**Datapack build** (pack_format 112).",
                 "--latest",
                 "${zip}#dataLib-full.zip"
         }
@@ -307,11 +376,7 @@ tasks.register("release") {
     }
 }
 
-tasks.register("clean", Delete) {
-    group = "build"
-    description = "Deletes the build/ directory"
-    delete(layout.buildDirectory)
-}
+// Clean task is automatically registered by the java plugin.
 
 
 // ---------------------------------------------------------------------
@@ -342,4 +407,11 @@ tasks.register('createSourceZip', Zip) {
     from layout.buildDirectory.dir('archive/source')
     archiveFileName = 'source-with-history.zip'
     destinationDirectory = layout.buildDirectory.dir('archive')
+}
+
+tasks.register("runMainTestClient", JavaExec) {
+    group = "verification"
+    description = "Runs Main.java Test Client standalone"
+    classpath = sourceSets.gametest.runtimeClasspath
+    mainClass = "io.runtoolkit.datalib.Main"
 }
