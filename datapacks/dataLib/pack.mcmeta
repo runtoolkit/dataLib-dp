@@ -51,8 +51,7 @@
             }
         ],
         "min_format": [112, 1],
-        "max_format": [112, 1],
-        "pack_format": 112
+        "max_format": [112, 1]
     },
     "features": {
         "enabled": [

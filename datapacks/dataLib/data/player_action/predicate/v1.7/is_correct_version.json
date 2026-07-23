@@ -1,5 +1,5 @@
 {
-  "type": "all_of",
+  "type": "minecraft:all_of",
   "terms": [
     
   {
