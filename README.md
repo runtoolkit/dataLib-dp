@@ -1,5 +1,5 @@
 # 🔧 dataLib
-**Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
+**Minecraft Java Edition 26.3-snapshot-5 | Multiplayer-Safe | Pure Datapack**
 
 [![CI](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
@@ -419,4 +419,4 @@ echo "Wrote $OUT_ZIP ($TARGET_DIR was not modified)"
 
 ---
 
-*dataLib v6.0.1 | MC Java 26.2 | Pure Datapack*
+*dataLib v6.0.1 | MC Java 26.3-snapshot-5 | Pure Datapack*

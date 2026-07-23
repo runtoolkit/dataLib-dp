@@ -33,7 +33,7 @@
                                 "obfuscated": false
                             },
                             {
-                                "text": "26.2",
+                                "text": "26.3-snapshot-5",
                                 "color": "#e3ff57",
                                 "bold": false,
                                 "italic": false,
@@ -50,14 +50,8 @@
                 "italic": false
             }
         ],
-        "min_format": [
-            107,
-            1
-        ],
-        "max_format": [
-            107,
-            1
-        ],
+        "min_format": [112, 1],
+        "max_format": [112, 1],
         "pack_format": 107
     },
     "features": {
