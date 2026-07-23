@@ -1,5 +1,15 @@
 #!/bin/bash
 set -e
+mkdir -p .vscode && cat << 'EOF' > .vscode/settings.json
+{
+  "groovy.classpath": [
+    "."
+  ],
+  "files.associations": {
+    "*.gradle": "groovy"
+  }
+}
+EOF
 
 # ── Package manager detection ─────────────────────────────────────────
 for PM in apt-get apt yum dnf apk; do
