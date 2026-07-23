@@ -2,9 +2,10 @@
   "function": "minecraft:set_lore",
   "lore": [
     {
-      "text": "\u2726 Custom Lore Line",
-      "italic": false,
-      "color": "aqua"
+      "storage": "datalib:input",
+      "nbt":  "lore",
+      "interpret": true,
+      "separator": "\n"
     }
   ],
   "mode": "append"
