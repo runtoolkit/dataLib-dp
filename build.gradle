@@ -10,7 +10,7 @@ import groovy.json.JsonOutput
 
 // label -> pack_format. Single target now that overlays are gone.
 def TARGETS = [
-    "full" : 107
+    "full" : 112
 ]
 
 // Source roots after the datapacks/ + resourcepacks/ restructure.
