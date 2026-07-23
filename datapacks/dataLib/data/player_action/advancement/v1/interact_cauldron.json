@@ -3,16 +3,15 @@
     "interact_anvil": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "location": [
+        "location":
           {
-            "condition": "minecraft:location_check",
+            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": "#minecraft:cauldrons"
               }
             }
           }
-        ]
       }
 	  }
   },

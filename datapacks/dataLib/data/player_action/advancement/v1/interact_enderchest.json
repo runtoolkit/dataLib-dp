@@ -1,24 +1,21 @@
 {
   "criteria": {
-    "interact_anvil": {
+    "interact_enderchest": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location": [
+        "location":
           {
-            "condition": "minecraft:location_check",
+            "type": "minecraft:location_check",
             "predicate": {
               "block": {
-                "blocks": [
-                  "minecraft:ender_chest"
-                ]
+                "blocks": "minecraft:ender_chest"
               }
             }
           }
-        ]
       }
-	  }
+    }
   },
-  "rewards":{ 
-    "function":"player_action:v1/internal/interact_enderchest"
+  "rewards": {
+    "function": "player_action:v1/internal/interact_enderchest"
   }
 }
