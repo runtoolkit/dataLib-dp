@@ -16,6 +16,6 @@
 	  }
   },
   "rewards":{ 
-    "function":"player_action:v1/internal/interact_cauldron"
+    "function":"player_action:core/internal/v1/interact_cauldron"
   }
 }

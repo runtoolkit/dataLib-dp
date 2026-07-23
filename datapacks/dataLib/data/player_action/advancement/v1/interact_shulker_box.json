@@ -34,6 +34,6 @@
 	}
 	},
 	"rewards":{ 
-	  "function":"player_action:v1/internal/interact_shulker_box"
+	  "function":"player_action:core/internal/v1/interact_shulker_box"
 	}
   }
