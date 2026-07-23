@@ -1,4 +1,7 @@
-
+{
+  "type": "all_of",
+  "terms": [
+    
   {
     "type": "minecraft:value_check",
     "value": 1,
@@ -47,3 +50,6 @@
       }
     }
   }
+
+  ]
+}

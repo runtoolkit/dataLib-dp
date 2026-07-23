@@ -1,5 +1,5 @@
 {
-  "function": "minecraft:set_components",
+  "type": "minecraft:set_components",
   "components": {
     "minecraft:tooltip_display": {
       "hide_tooltip": true
