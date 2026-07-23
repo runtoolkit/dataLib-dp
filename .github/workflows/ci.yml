@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, workflows, devlop]
+    branches: [main, devlop]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -26,6 +26,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Install Mecha
+        run: pip install git+https://github.com/mcbeet/mecha.git
       - name: Gradle lint
         run: chmod +x gradlew && ./gradlew lint --no-daemon
 
@@ -49,6 +51,10 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Install Mecha on CI
+      - name: Install Mecha
+        run: pip install git+https://github.com/mcbeet/mecha.git
+
       # JMC Verification & Build (Addition 2)
       - name: Verify JMC compilation
         run: |
@@ -66,7 +72,7 @@ jobs:
       - name: Run Main.java Test Client
         run: |
           mkdir -p build/classes
-          javac src/testmod/io/runtoolkit/datalib/Main.java -d build/classes
+          javac src/gametest/java/io/runtoolkit/datalib/Main.java -d build/classes
           java -cp build/classes io.runtoolkit.datalib.Main
           
       # Performance Metrics & Security Reporting (Addition 3)
