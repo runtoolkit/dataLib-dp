@@ -363,15 +363,15 @@ tasks.register("release") {
 
         def zip = new File(distRoot, "dataLib-full.zip")
 
-        exec { commandLine "bash", "-c", "gh release delete '${version}' --yes 2>/dev/null || true" }
-        exec { commandLine "bash", "-c", "git push origin ':refs/tags/${version}' 2>/dev/null || true" }
-        exec {
+        providers.exec { commandLine "bash", "-c", "gh release delete '${version}' --yes 2>/dev/null || true" }.result.get()
+        providers.exec { commandLine "bash", "-c", "git push origin ':refs/tags/${version}' 2>/dev/null || true" }.result.get()
+        providers.exec {
             commandLine "gh", "release", "create", version,
                 "--title", "dataLib ${version}",
                 "--notes", "**Datapack build** (pack_format 112).",
                 "--latest",
                 "${zip}#dataLib-full.zip"
-        }
+        }.result.get()
         logger.lifecycle("Released ${version}")
     }
 }
