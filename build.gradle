@@ -62,6 +62,12 @@ loom {
             runDir "build/gametest"
         }
     }
+
+    decompilers {
+        // Vineflower worker'ının JVM argümanlarını doğrudan kontrol eder
+    }
+}
+
     mods {
         "datalib-testmod" {
             sourceSet sourceSets.main
