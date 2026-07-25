@@ -4,9 +4,9 @@
 # expected version. Returns 1 → match / not yet set (proceed).
 # Returns 0 → mismatch (version_warn fired, load aborted upstream).
 #
-# EXPECTED (v6.0.1-pre2): major=6 minor=0 patch=1 pre=2
+# EXPECTED (v6.0.1): major=6 minor=0 patch=1 pre=2
 #
-# BUGFIX (v6.0.1-pre2): the previous check compared #dl.pre against
+# BUGFIX (v6.0.1): the previous check compared #dl.pre against
 # "matches 1.." (i.e. "any pre >= 1 counts as mismatch"), which made
 # this objective self-defeating — the pack's own expected pre value
 # is >= 1, so a *correctly* stamped scoreboard from a prior pass in

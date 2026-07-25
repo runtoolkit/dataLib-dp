@@ -1,17 +1,4 @@
-# 🔧 dataLib — ⚠️ ARCHIVED
-
-> [!CAUTION]
-> **This repository is ARCHIVED.** Active development, maintenance, and new security patches have stopped.
-> The existing security gate/approval system (`dl_load:gate/*`, `core/security/cmd_gate`, the `check_all` chain) **has not been removed and continues to run**, but it will not be updated against new threats.
->
-> **Datapack risks (also apply to this project):**
-> - String injection: `$$(...)` macro calls run without type safety in the datapack environment.
-> - No namespace isolation: one datapack can freely interfere with another datapack's function/data space.
-> - TOCTOU issues: the tick gap between check and use can be exploited.
-> - No compile-time type checking: errors only surface at runtime (or not at all).
->
-> **Recommended path:** migrate to a **Fabric mod** under `runtoolkit` targeting this functionality — MC **1.21.1** (upgrade to **1.21.11** if needed). Fabric provides type safety and real namespace isolation, which structurally removes most of these risks.
-
+# 🔧 dataLib
 **Minecraft Java Edition 26.3-snapshot-5 | Multiplayer-Safe | Pure Datapack**
 
 [![CI](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml)
@@ -19,11 +6,11 @@
 [![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
 
 ---
-> Current version: **v6.0.1-pre2 (ARCHIVED)**
+> Current version: **v6.0.1**
 ---
 
 > [!WARNING]
-> **This repository is archived. It will no longer receive security improvements, bug fixes, or new features.** It can still be used "as-is"; use in production environments is not recommended.
+> **This datapack is considered safe to use, but it is still actively receiving security improvements, bug fixes, and new features. Please keep it up to date.**
 >
 > **Do not copy `datalib:input` or `datalib:engine` into your own datapack.** It is an internal implementation detail and may change without notice between releases.
 
@@ -34,7 +21,7 @@
 ---
 
 > [!NOTE]
-> **v6.0.1-pre2:** the stage-0 load entry point was renamed `dl_load:_` → `dl_load:main`, the marker-entity + `say` broadcast pattern was replaced everywhere with `tellraw` (using the current `click_event`/`command` button format — the old `clickEvent`/`value` field names were renamed by Mojang as of 1.21.5), and the load pipeline was split into `dl_load:resolve/*` (version + dependency resolution) and `dl_load:loader/*` (scoreboard/storage initialization).
+> **v6.0.1:** the stage-0 load entry point was renamed `dl_load:_` → `dl_load:main`, the marker-entity + `say` broadcast pattern was replaced everywhere with `tellraw` (using the current `click_event`/`command` button format — the old `clickEvent`/`value` field names were renamed by Mojang as of 1.21.5), and the load pipeline was split into `dl_load:resolve/*` (version + dependency resolution) and `dl_load:loader/*` (scoreboard/storage initialization).
 ---
 > 🛡️ **This is a Minecraft Datapack — it contains no executables or scripts outside of `.mcfunction` files.**
 > Some antivirus software may flag `.mcfunction` files as suspicious due to macro-like syntax. This is a **false positive**. The pack has been scanned on [VirusTotal](https://www.virustotal.com) and returned clean.
@@ -71,7 +58,7 @@ data modify storage <namespace>:engine loaded_datalib set value 1b
 ```
 datalib:engine  (persistent data)
 ├── global
-│   ├── version: "v6.0.1-pre2"
+│   ├── version: "v6.0.1"
 │   └── tick: <int>
 ├── players
 │   └── Steve { coins:150, level:5, xp:2300, online:1b, ... }
