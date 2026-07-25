@@ -63,11 +63,6 @@ loom {
         }
     }
 
-    decompilers {
-        // Vineflower worker'ının JVM argümanlarını doğrudan kontrol eder
-    }
-}
-
     mods {
         "datalib-testmod" {
             sourceSet sourceSets.main
