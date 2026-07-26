@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "datalib-config-bridge",
+  "version": "0.1.0",
+  "name": "dataLib Config Bridge",
+  "description": "A mod that bridges the dataLib config menu to a client-side GUI screen. Provides access to the dataLib datapack's datalib:core/config/set function via a Fabric networking payload.",
+  "authors": [
+    "runtoolkit"
+  ],
+  "contact": {
+    "homepage": "https://github.com/runtoolkit/dataLib-dp"
+  },
+  "license": "MIT",
+  "icon": null,
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.runtoolkit.datalib.DataLibMod"
+    ],
+    "client": [
+      "io.runtoolkit.datalib.client.DataLibModClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "26.3-snapshot-5",
+    "fabric-api": "*"
+  }
+}
