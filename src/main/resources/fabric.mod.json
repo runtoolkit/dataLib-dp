@@ -11,7 +11,6 @@
     "homepage": "https://github.com/runtoolkit/dataLib-dp"
   },
   "license": "MIT",
-  "icon": null,
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -23,7 +22,7 @@
   },
   "depends": {
     "fabricloader": ">=0.19.3",
-    "minecraft": "26.3-snapshot-5",
+    "minecraft": "26.2",
     "fabric-api": "*"
   }
 }
