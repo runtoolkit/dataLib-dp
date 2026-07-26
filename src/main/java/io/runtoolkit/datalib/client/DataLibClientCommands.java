@@ -25,15 +25,15 @@ public final class DataLibClientCommands {
                 dispatcher.register(
                         ClientCommands.literal("datalibconfig")
                                 .executes(context -> {
-                                    // NOTE: there is no Minecraft.setScreen(Screen) method,
-                                    // and no accessible Minecraft.screen field could be
-                                    // verified either (it didn't show up in the javap
-                                    // output) — so instead of "make the current screen the
-                                    // parent" we pass parent as null; DataLibConfigScreen
-                                    // .onClose() then calls setScreenAndShow(null) (returns
-                                    // to the in-game HUD).
+                                    // NOTE: opening the screen synchronously inside the
+                                    // command's .executes() callback gets immediately
+                                    // closed again, because Minecraft closes the
+                                    // chat/command screen right after command execution
+                                    // completes, overwriting whatever screen we just set.
+                                    // Deferring via client.execute() runs this on the
+                                    // next client tick, after that close has happened.
                                     Minecraft client = Minecraft.getInstance();
-                                    client.setScreenAndShow(new DataLibConfigScreen(null));
+                                    client.execute(() -> client.setScreenAndShow(new DataLibConfigScreen(null)));
                                     return 1;
                                 })
                 )
