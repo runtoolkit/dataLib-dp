@@ -1,6 +1,5 @@
 {
-  "_comment": "datalib:item_modifier/set_custom_model_data \u2014 Sets the minecraft:custom_model_data component (1.21.4+ format). Copy and edit the floats/strings/flags/colors arrays for your resource pack model overrides.",
-  "type": "minecraft:set_components",
+  "_comment": "datalib:item_modifier/set_custom_model_data — Sets the minecraft:custom_model_data component (1.21.4+ format). Copy and edit the floats/strings/flags/colors arrays for your resource pack model overrides.",
   "components": {
     "minecraft:custom_model_data": {
       "floats": [
@@ -10,5 +9,6 @@
       "strings": [],
       "colors": []
     }
-  }
+  },
+  "function": "minecraft:set_components"
 }

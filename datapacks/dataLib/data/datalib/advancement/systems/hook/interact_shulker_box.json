@@ -3,8 +3,8 @@
     "interact_shulker_box": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location": {
-            "type": "minecraft:location_check",
+        "location": [
+          {
             "predicate": {
               "block": {
                 "blocks": [
@@ -26,9 +26,11 @@
                   "minecraft:red_shulker_box",
                   "minecraft:black_shulker_box"
                 ]
-            }
+              }
+            },
+            "condition": "minecraft:location_check"
           }
-        }
+        ]
       }
     }
   },

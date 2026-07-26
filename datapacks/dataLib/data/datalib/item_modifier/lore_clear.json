@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:set_lore",
   "lore": [],
-  "mode": "replace_all"
+  "mode": "replace_all",
+  "function": "minecraft:set_lore"
 }

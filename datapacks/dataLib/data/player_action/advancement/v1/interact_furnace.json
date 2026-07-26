@@ -3,21 +3,22 @@
     "interact_furnace": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location":
+        "location": [
           {
-            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": [
                   "minecraft:furnace"
                 ]
               }
-            }
+            },
+            "condition": "minecraft:location_check"
           }
+        ]
       }
-	  }
+    }
   },
-  "rewards":{ 
-    "function":"player_action:core/internal/v1/interact_furnace"
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_furnace"
   }
 }

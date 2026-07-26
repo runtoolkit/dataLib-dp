@@ -3,16 +3,18 @@
     "interact_anvil": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location": {
-            "type": "minecraft:location_check",
+        "location": [
+          {
             "predicate": {
               "block": {
                 "blocks": [
                   "minecraft:anvil"
                 ]
-            }
+              }
+            },
+            "condition": "minecraft:location_check"
           }
-        }
+        ]
       }
     }
   },
