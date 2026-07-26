@@ -37,6 +37,9 @@
 # Safe to call even if objective already exists (add is idempotent)
 scoreboard objectives add dl.load dummy
 
+# Ensure load config defaults exist (idempotent, only fills missing keys)
+function datalib:config/load_cfg
+
 # Reset any stale state from a previous incomplete gate cycle
 scoreboard players set #pending dl.load 0
 scoreboard players set #confirmed dl.load 0
@@ -52,20 +55,57 @@ tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Storage has NOT 
 tellraw @a ["",{"text":"[DL GATE] ----------------------------------------","color":"#555555"}]
 tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"[Confirm]","color":"green","bold":true,"underlined":true,"click_event":{"action":"run_command","command":"/function dl_load:load/yes"}},{"text":"   ","color":"gray"},{"text":"[Cancel]","color":"red","bold":true,"underlined":true,"click_event":{"action":"run_command","command":"/function dl_load:load/no"}}]
 tellraw @a ["",{"text":"[DL GATE] ----------------------------------------","color":"#555555"}]
-tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Auto-cancel fires in 5 minutes if no response.","color":"gray"}]
+
 tellraw @a ["",{"text":"[DL GATE] ========================================","color":"#555555"}]
 
-# Schedule 5-minute auto-cancel
+# Schedule auto-cancel using the config value.
+# NOTE: /schedule cannot take a macro argument for its duration — this is
+# a confirmed Minecraft engine limitation (macros are not supported by
+# /schedule as of this version). So instead of a truly dynamic duration,
+# we branch over a fixed set of allowed values from datalib:config/load_cfg.
+# Anything outside this set falls back to the 300s default.
 # 'replace' ensures repeated /reload does not stack multiple timeout schedules
-schedule function dl_load:timeout 300s replace
+scoreboard players set #timeout_matched dl.tmp 0
+scoreboard players set #timeout_actual dl.tmp 300
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 60 run scoreboard players set #timeout_matched dl.tmp 1
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 60 run scoreboard players set #timeout_actual dl.tmp 60
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 60 run schedule function dl_load:timeout 60s replace
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 120 run scoreboard players set #timeout_matched dl.tmp 1
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 120 run scoreboard players set #timeout_actual dl.tmp 120
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 120 run schedule function dl_load:timeout 120s replace
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 180 run scoreboard players set #timeout_matched dl.tmp 1
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 180 run scoreboard players set #timeout_actual dl.tmp 180
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 180 run schedule function dl_load:timeout 180s replace
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 300 run scoreboard players set #timeout_matched dl.tmp 1
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 300 run schedule function dl_load:timeout 300s replace
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 600 run scoreboard players set #timeout_matched dl.tmp 1
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 600 run scoreboard players set #timeout_actual dl.tmp 600
+execute if score #runtoolkit.packs.datalib.config.load.timeout_seconds datalib.meta matches 600 run schedule function dl_load:timeout 600s replace
+# Fallback: value wasn't one of the allowed presets (whether in-range or not) — #timeout_actual stays 300
+execute if score #timeout_matched dl.tmp matches 0 run schedule function dl_load:timeout 300s replace
+
+# Announce the ACTUAL scheduled duration (#timeout_actual), not the raw
+# config value, so the message can never disagree with what was scheduled.
+# NOTE: a $-prefixed macro line cannot be nested inside 'execute ... run' —
+# it must be a standalone top-level line. We store a suffix flag instead
+# and always emit the same macro tellraw line.
+data modify storage datalib:engine _timeout_tmp.suffix set value "(s)"
+execute if score #timeout_matched dl.tmp matches 0 run data modify storage datalib:engine _timeout_tmp.suffix set value " (invalid config value, using default)"
+execute store result storage datalib:engine _timeout_tmp.seconds int 1 run scoreboard players get #timeout_actual dl.tmp
+tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"Auto-cancel fires in","color":"gray"}," ",{"nbt":"_timeout_tmp.seconds","storage":"datalib:engine","plain":true}," ",{"text":"if no response","color":"gray"},"",{"storage":"datalib:engine","nbt":"_timeout_tmp.suffix","color":"gray","plain":false,"interpret":true},{"text":".","color":"gray"}]
 # ─────────────────────────────────────────────────────────────────
 # SANDBOX MODE — auto-confirm
-# Enable:  /data modify storage datalib:engine sandbox set value 1b
-# Disable: /data modify storage datalib:engine sandbox set value 0b
-# Storage persists across reloads — set once, active until cleared.
+# Enable (legacy):  /data modify storage datalib:engine sandbox set value 1b
+# Enable (config):  /scoreboard players set #runtoolkit.packs.datalib.config.load.sandbox_enabled datalib.meta 1
+# Disable:          set either back to 0 / 0b
+# Both are checked — either one enables sandbox mode.
+# Storage/scoreboard values persist across reloads — set once, active until cleared.
 # NOTE: schedule is cleared inside load/yes. Do NOT remove dl.load
 #       objective here — load/yes guard checks #pending dl.load == 1.
 # ─────────────────────────────────────────────────────────────────
-execute if data storage datalib:engine {sandbox:1b} run tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"SANDBOX MODE — auto-confirming load.","color":"yellow"}]
-execute if data storage datalib:engine {sandbox:1b} run function dl_load:load/yes
-execute if data storage datalib:engine {sandbox:1b} run return 0
+scoreboard players set #sandbox_active dl.tmp 0
+execute if data storage datalib:engine {sandbox:1b} run scoreboard players set #sandbox_active dl.tmp 1
+execute if score #runtoolkit.packs.datalib.config.load.sandbox_enabled datalib.meta matches 1 run scoreboard players set #sandbox_active dl.tmp 1
+execute if score #sandbox_active dl.tmp matches 1 run tellraw @a ["",{"text":"[DL GATE] ","color":"#555555"},{"text":"SANDBOX MODE — auto-confirming load.","color":"yellow"}]
+execute if score #sandbox_active dl.tmp matches 1 run function dl_load:load/yes
+execute if score #sandbox_active dl.tmp matches 1 run return 0

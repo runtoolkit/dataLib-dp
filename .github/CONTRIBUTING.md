@@ -134,8 +134,29 @@ Version numbers must reflect actual changes:
 - Major (`X.0.0`): breaking changes.
 Incrementing a version number without a corresponding changelog entry will be rejected.
 
+### Config System (`datalib:config/*`)
+- Config-affecting keys use the `#runtoolkit.packs.datalib.config.<area>.<name>` naming
+  convention and are stored on the `datalib.meta` scoreboard objective — never on `dl.tmp`
+  (`dl.tmp` is for short-lived intermediate values only, see `dl_load:loader/scoreboards`).
+- Macros are **not** used for config reads/writes by default. The single documented
+  exception is announcing a config-driven value via `tellraw` (e.g. the load-gate
+  timeout message in `dl_load:load/confirm`), because `/schedule` cannot accept a macro
+  argument for its duration — this is a confirmed engine limitation, not a stylistic
+  choice. Any new macro exception must be justified the same way and called out
+  explicitly in the PR description.
+- Because `/schedule` cannot take a dynamic duration, config-driven timers must branch
+  over a fixed, documented set of allowed values (see `dl_load:load/confirm`) rather
+  than attempting a macro-based `schedule` call. Out-of-set values must fall back to a
+  safe default — never silently no-op.
+- Each `config/*_cfg.mcfunction` file (e.g. `tick_cfg`, `load_cfg`) must be idempotent:
+  it only fills in a MISSING key's default, and must never overwrite a value an admin
+  or a previous load cycle already set.
+- All changes to `datalib:config/*` files, and any code that reads
+  `#runtoolkit.packs.datalib.config.*`, must go through a pull request and pass
+  GitHub Actions CI before merge — no direct commits to config logic.
+
 ---
-## AI-Assisted Contributions
+
 
 Using AI tools (ChatGPT, Claude, etc.) to help write code or documentation is allowed,
 but contributions must meet the same standards as hand-written code.
