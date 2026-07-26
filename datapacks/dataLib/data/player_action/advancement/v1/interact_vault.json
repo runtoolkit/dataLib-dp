@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "interact_anvil": {
+    "interact_vault": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "location":

@@ -13,7 +13,7 @@ public class DataLibMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        PayloadTypeRegistry.playC2S().register(DataLibConfigPayload.TYPE, DataLibConfigPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(DataLibConfigPayload.TYPE, DataLibConfigPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(DataLibConfigPayload.TYPE, (payload, context) -> {
             ServerPlayer player = context.player();
@@ -36,15 +36,15 @@ public class DataLibMod implements ModInitializer {
                 // names in storage match $(...) placeholders) — it is NOT a verified
                 // example usage from the datapack. Update this if the real call
                 // convention becomes clear from the dataLib repo.
-                player.getServer().getCommands().performPrefixedCommand(
+                player.serverLevel().getServer().getCommands().performPrefixedCommand(
                         player.createCommandSourceStack(),
                         "data modify storage datalib:input key set value \"" + key.replace("\"", "\\\"") + "\""
                 );
-                player.getServer().getCommands().performPrefixedCommand(
+                player.serverLevel().getServer().getCommands().performPrefixedCommand(
                         player.createCommandSourceStack(),
                         "data modify storage datalib:input value set value \"" + value.replace("\"", "\\\"") + "\""
                 );
-                player.getServer().getCommands().performPrefixedCommand(
+                player.serverLevel().getServer().getCommands().performPrefixedCommand(
                         player.createCommandSourceStack(),
                         "function datalib:core/config/set with storage datalib:input"
                 );

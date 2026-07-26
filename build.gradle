@@ -35,14 +35,14 @@ repositories {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:26.3-snapshot-5"
+    minecraft "com.mojang:minecraft:26.2"
     
     implementation "net.fabricmc:fabric-loader:0.19.3"
-    implementation "net.fabricmc.fabric-api:fabric-api:0.155.3+26.3"
+    implementation "net.fabricmc.fabric-api:fabric-api:0.155.2+26.2"
     
     // Gametest dependencies
     gametestImplementation "net.fabricmc:fabric-loader:0.19.3"
-    gametestImplementation "net.fabricmc.fabric-api:fabric-api:0.155.3+26.3"
+    gametestImplementation "net.fabricmc.fabric-api:fabric-api:0.155.2+26.2"
 }
 
 fabricApi {
@@ -80,7 +80,7 @@ loom {
 
 // label -> pack_format. Single target now that overlays are gone.
 def TARGETS = [
-    "full" : 112
+    "full" : 107
 ]
 
 // Source roots after the datapacks/ + resourcepacks/ restructure.
@@ -369,7 +369,7 @@ tasks.register("release") {
         providers.exec {
             commandLine "gh", "release", "create", version,
                 "--title", "dataLib ${version}",
-                "--notes", "**Datapack build** (pack_format 112).",
+                "--notes", "**Datapack build** (pack_format 107).",
                 "--latest",
                 "${zip}#dataLib-full.zip"
         }.result.get()

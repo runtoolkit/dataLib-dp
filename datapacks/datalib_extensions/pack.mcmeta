@@ -2,11 +2,11 @@
   "pack": {
     "description": "datalib_extensions by Runtoolkit",
     "min_format": [
-      112,
+      107,
       1
     ],
     "max_format": [
-      112,
+      107,
       1
     ]
   },

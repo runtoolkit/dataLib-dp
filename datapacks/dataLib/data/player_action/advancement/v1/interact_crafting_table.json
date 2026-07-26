@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "interact_anvil": {
+    "interact_crafting_table": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
         "location":

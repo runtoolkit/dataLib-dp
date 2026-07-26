@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "interact_click_entity": {
+    "attack_click_entity": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
         "entity": {

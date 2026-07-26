@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "interact_anvil": {
+    "interact_cauldron": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "location":

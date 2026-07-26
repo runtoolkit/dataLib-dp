@@ -33,7 +33,7 @@
                 "obfuscated": false
               },
               {
-                "text": "26.3-snapshot-5",
+                "text": "26.2",
                 "color": "#e3ff57",
                 "bold": false,
                 "italic": false,
@@ -50,8 +50,8 @@
         "italic": false
       }
     ],
-    "min_format": 112,
-    "max_format": 112
+    "min_format": 107,
+    "max_format": 107
   },
   "features": {
     "enabled": [
