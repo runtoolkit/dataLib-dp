@@ -6,7 +6,7 @@
 [![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
 
 ---
-> Current version: **v6.0.1-pre2**
+> Current version: **v6.0.1**
 ---
 
 > [!WARNING]
@@ -21,7 +21,7 @@
 ---
 
 > [!NOTE]
-> **v6.0.1-pre2:** the stage-0 load entry point was renamed `dl_load:_` → `dl_load:main`, the marker-entity + `say` broadcast pattern was replaced everywhere with `tellraw` (using the current `click_event`/`command` button format — the old `clickEvent`/`value` field names were renamed by Mojang as of 1.21.5), and the load pipeline was split into `dl_load:resolve/*` (version + dependency resolution) and `dl_load:loader/*` (scoreboard/storage initialization).
+> **v6.0.1:** the stage-0 load entry point was renamed `dl_load:_` → `dl_load:main`, the marker-entity + `say` broadcast pattern was replaced everywhere with `tellraw` (using the current `click_event`/`command` button format — the old `clickEvent`/`value` field names were renamed by Mojang as of 1.21.5), and the load pipeline was split into `dl_load:resolve/*` (version + dependency resolution) and `dl_load:loader/*` (scoreboard/storage initialization).
 ---
 > 🛡️ **This is a Minecraft Datapack — it contains no executables or scripts outside of `.mcfunction` files.**
 > Some antivirus software may flag `.mcfunction` files as suspicious due to macro-like syntax. This is a **false positive**. The pack has been scanned on [VirusTotal](https://www.virustotal.com) and returned clean.
@@ -58,7 +58,7 @@ data modify storage <namespace>:engine loaded_datalib set value 1b
 ```
 datalib:engine  (persistent data)
 ├── global
-│   ├── version: "v6.0.1-pre2"
+│   ├── version: "v6.0.1"
 │   └── tick: <int>
 ├── players
 │   └── Steve { coins:150, level:5, xp:2300, online:1b, ... }

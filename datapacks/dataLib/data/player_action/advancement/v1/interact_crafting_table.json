@@ -3,21 +3,22 @@
     "interact_crafting_table": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location":
+        "location": [
           {
-            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": [
                   "minecraft:crafting_table"
                 ]
               }
-            }
+            },
+            "condition": "minecraft:location_check"
           }
+        ]
       }
-	  }
+    }
   },
-  "rewards":{ 
-    "function":"player_action:core/internal/v1/interact_crafting_table"
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_crafting_table"
   }
 }

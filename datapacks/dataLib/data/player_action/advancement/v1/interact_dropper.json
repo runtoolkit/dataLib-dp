@@ -3,21 +3,22 @@
     "interact_dropper": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location":
+        "location": [
           {
-            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": [
                   "minecraft:dropper"
                 ]
               }
-            }
+            },
+            "condition": "minecraft:location_check"
           }
+        ]
       }
-	  }
+    }
   },
-  "rewards":{ 
-    "function":"player_action:core/internal/v1/interact_dropper"
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_dropper"
   }
 }

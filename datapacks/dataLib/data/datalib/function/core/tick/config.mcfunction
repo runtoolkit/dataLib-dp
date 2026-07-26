@@ -29,6 +29,11 @@
 # function datalib:core/tick/resume
 # function datalib:core/tick/status
 # function datalib:core/tick/reset_channels
+# function datalib:systems/log/testblock/place — (re)place the mode=log
+#   test_block at datalib:engine debug_log_pos
+# function datalib:debug/tools/log/enable — mirror log messages to
+#   latest.log via the test_block (default: off)
+# function datalib:debug/tools/log/disable — turn that mirroring back off
 # ─────────────────────────────────────────────────────────────────────────────
 
 data modify storage datalib:engine tick.channels set value []

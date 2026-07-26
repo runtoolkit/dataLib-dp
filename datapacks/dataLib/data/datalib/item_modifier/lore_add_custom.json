@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:set_lore",
   "lore": [
     {
       "storage": "datalib:input",
-      "nbt":  "lore",
+      "nbt": "lore",
       "interpret": true,
       "separator": "\n"
     }
   ],
-  "mode": "append"
+  "mode": "append",
+  "function": "minecraft:set_lore"
 }

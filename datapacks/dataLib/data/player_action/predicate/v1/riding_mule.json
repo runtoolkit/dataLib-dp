@@ -1,10 +1,9 @@
-
-  {
-    "type": "minecraft:entity_properties",
-    "entity": "this",
-    "predicate": {
-      "minecraft:vehicle": {
-        "minecraft:entity_type": "minecraft:mule"
-      }
+{
+  "entity": "this",
+  "predicate": {
+    "vehicle": {
+      "entity_type": "minecraft:mule"
     }
-  }
+  },
+  "condition": "minecraft:entity_properties"
+}

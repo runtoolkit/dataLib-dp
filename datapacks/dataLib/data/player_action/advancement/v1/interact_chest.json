@@ -3,21 +3,22 @@
     "interact_chest": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location":
+        "location": [
           {
-            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": [
                   "minecraft:chest"
                 ]
               }
-            }
-        }
+            },
+            "condition": "minecraft:location_check"
+          }
+        ]
       }
-	  }
+    }
   },
-  "rewards":{ 
-    "function":"player_action:core/internal/v1/interact_chest"
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_chest"
   }
 }

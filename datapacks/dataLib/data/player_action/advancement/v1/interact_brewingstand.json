@@ -3,21 +3,22 @@
     "interact_brewingstand": {
       "trigger": "minecraft:default_block_use",
       "conditions": {
-        "location":
+        "location": [
           {
-            "type": "minecraft:location_check",
             "predicate": {
               "block": {
                 "blocks": [
                   "minecraft:brewing_stand"
                 ]
               }
-            }
+            },
+            "condition": "minecraft:location_check"
           }
+        ]
       }
-	  }
+    }
   },
-  "rewards":{ 
-    "function":"player_action:core/internal/v1/interact_brewingstand"
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_brewingstand"
   }
 }
