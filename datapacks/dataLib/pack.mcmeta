@@ -44,14 +44,14 @@
         ]
       },
       {
-        "text": " | v6.0.1-pre2",
+        "text": " | v6.0.1",
         "color": "#ffaa00",
         "bold": false,
         "italic": false
       }
     ],
-    "min_format": 107,
-    "max_format": 107
+    "min_format": [75, 0],
+    "max_format": [100, 0]
   },
   "features": {
     "enabled": [

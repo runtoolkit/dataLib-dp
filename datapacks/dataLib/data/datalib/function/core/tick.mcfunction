@@ -8,6 +8,9 @@
 execute unless entity @a run return 0
 
 # Guard: engine not initialised
+# (loaded flag lives under global.loaded — see dl_load:load/all which sets
+#  `datalib:engine global.loaded`; every other guard in the pack, e.g.
+#  core/security/cmd_gate.mcfunction, already checks the correct path)
 execute unless data storage datalib:engine global{loaded:1b} run return 0
 
 # Online player count — kept for compatibility

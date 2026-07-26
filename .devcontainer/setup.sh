@@ -100,8 +100,10 @@ if [ ! -f "/opt/gradle/bin/gradle" ]; then
   $SUDO unzip -q /tmp/gradle.zip -d /tmp/gradle-extract
   $SUDO cp -r /tmp/gradle-extract/gradle-8.8/. /opt/gradle/
   $SUDO rm -rf /tmp/gradle-extract /tmp/gradle.zip
+  chmod +x gradlew
 else
   echo "  Already installed: $(/opt/gradle/bin/gradle -v | grep Gradle)"
+  chmod +x gradlew
 fi
 append_path "/opt/gradle/bin"
 
