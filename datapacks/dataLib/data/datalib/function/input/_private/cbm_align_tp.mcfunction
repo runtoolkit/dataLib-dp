@@ -13,4 +13,4 @@
 # a command, an advancement) — not assumed here.
 # ======================================================================================
 
-execute as @e[type=minecraft:command_block_minecart,tag=datalib_input] as @a at @s anchored eyes align y positioned ^ ^ ^0.0 run tp @e[sort=nearest,limit=1,tag=datalib_input] ~ ~-0.23 ~
+execute as @a at @s anchored eyes align y positioned ^ ^ ^0.0 run tp @e[type=minecraft:command_block_minecart,tag=datalib_input,sort=nearest,limit=1] ~ ~-0.23 ~
