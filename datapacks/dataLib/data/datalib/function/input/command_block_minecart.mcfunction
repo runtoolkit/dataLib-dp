@@ -44,6 +44,5 @@
 execute unless entity @e[type=minecraft:command_block_minecart,tag=datalib_input] run return 0
 
 execute as @e[type=minecraft:command_block_minecart,tag=datalib_input] run function datalib:input/_private/cbm_process
-function datalib:input/_private/cbm_align_tp
 
 return 1
