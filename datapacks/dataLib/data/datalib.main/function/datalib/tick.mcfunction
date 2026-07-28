@@ -11,4 +11,4 @@ execute if score #runtoolkit.packs.datalib.config.tick.rate datalib.meta matches
 execute if score #runtoolkit.packs.datalib.config.tick.rate datalib.meta matches ..0 run return 0
 
 execute if score #runtoolkit.packs.datalib.config.tick.rate datalib.meta matches 1.. run function datalib:core/tick
-execute if score #runtoolkit.packs.datalib.config.tick.rate datalib.meta matches 1.. run function #datalib:loop
+execute as @a if score #runtoolkit.packs.datalib.config.tick.rate datalib.meta matches 1.. run function #datalib:loop
