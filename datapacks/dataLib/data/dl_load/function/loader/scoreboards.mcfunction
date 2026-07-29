@@ -70,6 +70,9 @@ scoreboard objectives add datalib.hook_fish dummy
 scoreboard players set #10000 dl.tmp 10000
 scoreboard players set #100 dl.tmp 100
 
+# input/validate module — scratch scores, all on the existing dl.tmp
+# objective rather than a new one (DL.Len, DL.DotHits, etc. all live here)
+
 # Log level system: 0=off 1=error 2=warn 3=info 4=debug
 scoreboard objectives add dl.log_level dummy
 execute unless score #dl.log_level dl.log_level matches 0.. run scoreboard players set #dl.log_level dl.log_level 3
