@@ -13,6 +13,9 @@
 # asked to avoid — no field here is ever run as a command, only stored.
 # ======================================================================================
 
+# dialog.raw is RAW, UNVALIDATED text. Run it through
+# datalib:input/validate/check before treating it as a number/bool/tag-safe
+# literal: function datalib:input/validate/check with storage <yourpath> {source:"dialog.raw", type:"int"}
 data modify storage datalib:input dialog.raw set value "$(value)"
 data modify storage datalib:input dialog.executed set value 0b
 execute if data storage datalib:input dialog{executed:0b} run function #datalib:input/dialog

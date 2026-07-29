@@ -5,6 +5,11 @@
 # Runs with @s bound to a single player holding the marked written_book.
 # Extracts SelectedItem.components."minecraft:writable_book_content".pages[0].raw
 # into datalib:input storage. Read-only capture, no execution.
+#
+# book.raw is a RAW, UNVALIDATED string — same contract as cbm.command and
+# dialog.raw. If the caller needs it as a number/bool/tag-safe literal,
+# run it through datalib:input/validate/check first:
+#   function datalib:input/validate/check with storage <yourpath> {source:"book.raw", type:"int"}
 # ======================================================================================
 
 data modify storage datalib:input book.player set from entity @s UUID
