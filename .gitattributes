@@ -7,62 +7,63 @@
 # ============================================
 # Minecraft Datapack – Force LF
 # ============================================
-*.mcfunction   text eol=lf
-*.json         text eol=lf diff=json
-*.mcmeta       text eol=lf diff=json
-*.snbt         text eol=lf
-*.md           text eol=lf
-*.txt          text eol=lf
-*.nbt          binary
+*.mcfunction text eol=lf
+*.json text eol=lf diff=json
+*.mcmeta text eol=lf diff=json
+*.snbt text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.nbt binary
 *.mcstructure  binary
-*.dat          binary
-*.dat_old      binary
-*.mca          binary
-*.mcc          binary
-*.region       binary
+*.dat binary
+*.dat_old binary
+*.mca binary
+*.mcc binary
+*.region binary
 
 # ============================================
 # Shader Files (Resource Pack compatibility)
 # ============================================
-*.glsl  text eol=lf
-*.vsh   text eol=lf
-*.fsh   text eol=lf
-*.vert  text eol=lf
-*.frag  text eol=lf
-*.geom  text eol=lf
-*.comp  text eol=lf
-*.hlsl  text eol=lf
+*.glsl text eol=lf
+*.vsh text eol=lf
+*.fsh text eol=lf
+*.vert text eol=lf
+*.frag text eol=lf
+*.geom text eol=lf
+*.comp text eol=lf
+*.hlsl text eol=lf
 
 # ============================================
 # Config & Build Files
 # ============================================
-*.yml          text eol=lf
-*.yaml         text eol=lf
-*.toml         text eol=lf
-*.properties   text eol=lf
-*.env          text eol=lf
-*.ini          text eol=lf
-*.cfg          text eol=lf
-.gitignore     text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.properties text eol=lf
+*.env text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+.gitignore text eol=lf
 .gitattributes text eol=lf
-Makefile       text eol=lf
-Dockerfile     text eol=lf
+Makefile text eol=lf
+Dockerfile text eol=lf
 
 # ============================================
 # Script & Web Files
 # ============================================
-*.py    text eol=lf
-*.sh    text eol=lf
-*.bash  text eol=lf
-*.js    text eol=lf
-*.ts    text eol=lf
-*.jsx   text eol=lf
-*.tsx   text eol=lf
-*.html  text eol=lf
-*.css   text eol=lf
-*.scss  text eol=lf
-*.xml   text eol=lf diff=xml
-*.svg   text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.java text eol=lf
+*.bash text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.xml text eol=lf diff=xml
+*.svg text eol=lf
 
 # ============================================
 # Windows-specific (optional)
@@ -74,87 +75,87 @@ Dockerfile     text eol=lf
 # ============================================
 # Document & Office Files
 # ============================================
-*.pdf   binary
-*.doc   binary
-*.docx  binary
-*.xls   binary
-*.xlsx  binary
-*.ppt   binary
-*.pptx  binary
-*.odt   binary
-*.ods   binary
-*.odp   binary
-*.csv   text eol=lf
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
+*.ppt binary
+*.pptx binary
+*.odt binary
+*.ods binary
+*.odp binary
+*.csv text eol=lf
 
 # ============================================
 # Binary Assets – Images
 # ============================================
-*.png   binary
-*.jpg   binary
-*.jpeg  binary
-*.gif   binary
-*.webp  binary
-*.ico   binary
-*.bmp   binary
-*.tga   binary
-*.tiff  binary
-*.psd   binary
-*.xcf   binary
-*.hdr   binary
-*.exr   binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.bmp binary
+*.tga binary
+*.tiff binary
+*.psd binary
+*.xcf binary
+*.hdr binary
+*.exr binary
 
 # ============================================
 # Audio & Video
 # ============================================
-*.ogg   binary
-*.mp3   binary
-*.wav   binary
-*.flac  binary
-*.aac   binary
-*.opus  binary
-*.mp4   binary
-*.webm  binary
-*.avi   binary
-*.mkv   binary
+*.ogg binary
+*.mp3 binary
+*.wav binary
+*.flac binary
+*.aac binary
+*.opus binary
+*.mp4 binary
+*.webm binary
+*.avi binary
+*.mkv binary
 
 # ============================================
 # 3D / Font Assets
 # ============================================
-*.obj   binary
-*.mtl   binary
-*.fbx   binary
-*.gltf  text eol=lf diff=json
-*.glb   binary
-*.ttf   binary
-*.otf   binary
-*.woff  binary
+*.obj binary
+*.mtl binary
+*.fbx binary
+*.gltf text eol=lf diff=json
+*.glb binary
+*.ttf binary
+*.otf binary
+*.woff binary
 *.woff2 binary
 
 # ============================================
 # Archives & Compiled
 # ============================================
-*.zip     binary
-*.rar     binary
-*.7z      binary
-*.tar     binary
-*.gz      binary
-*.jar     binary
-*.exe     binary
-*.dll     binary
-*.so      binary
-*.dylib   binary
-*.class   binary
-*.pyc     binary
-*.mcpack  binary
+*.zip binary
+*.rar binary
+*.7z binary
+*.tar binary
+*.gz binary
+*.jar binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.class binary
+*.pyc binary
+*.mcpack binary
 *.mcworld binary
 *.mcaddon binary
 
 # ============================================
 # Lock files – text, diffable
 # ============================================
-*.lock            text eol=lf
+*.lock text eol=lf
 package-lock.json text eol=lf diff=json
-yarn.lock         text eol=lf
+yarn.lock text eol=lf
 
 # ============================================
 # Git diff drivers
