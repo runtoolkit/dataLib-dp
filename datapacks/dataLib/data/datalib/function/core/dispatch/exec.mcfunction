@@ -17,6 +17,4 @@
 # fibers — see resume_dispatch.mcfunction for the full explanation.
 # ─────────────────────────────────────────────────────────────────
 
-execute unless entity @a run return 0
-
 $function $(func) with storage datalib:engine _dispatch
