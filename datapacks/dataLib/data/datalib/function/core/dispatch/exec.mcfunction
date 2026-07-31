@@ -17,7 +17,6 @@
 # fibers — see resume_dispatch.mcfunction for the full explanation.
 # ─────────────────────────────────────────────────────────────────
 
-execute unless function datalib:debug/tools/utils/check_all run return 0
-execute unless entity @s[type=minecraft:player] run return 0
+execute unless entity @a run return 0
 
 $function $(func) with storage datalib:engine _dispatch
