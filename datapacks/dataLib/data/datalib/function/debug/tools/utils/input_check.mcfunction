@@ -320,6 +320,8 @@ function datalib:core/security/string/field_contains {field:"func",needle:"datal
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"datalib:api/cmd/transfer"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"func",needle:"datalib:api/cmd/as_player"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
 # SECTION 8
@@ -332,25 +334,25 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 #
 # ======================================================================================
 
-function datalib:core/security/string/field_contains {field:"cmd",needle:"op "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"op"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"deop "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"deop"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"ban "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"ban"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"ban-ip "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"ban-ip"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"pardon "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"pardon"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"pardon-ip "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"pardon-ip"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"kick "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"kick"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"stop"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"reload"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"whitelist "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"whitelist"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"save-all"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -360,11 +362,19 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"save-o
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"publish"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"transfer "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"transfer"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"jfr "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"jfr"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"setidletimeout "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"setidletimeout"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"as @e as @€"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"summon minecraft:tnt"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"summon minecraft:tnt_minecart"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"summon minecraft:fireball"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
@@ -502,10 +512,6 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"schedu
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"schedule clear"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute in "}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"execute positioned"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute facing"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute rotated"}
@@ -513,6 +519,10 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute anchored"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"execute align"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"execute at @e"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"execute if entity @e"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
@@ -539,6 +549,22 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"\r"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"\t"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"curl https://"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"curl http://"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"| bash"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"wget https://"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"wget http://"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"git push --force"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"git clone -fd"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"git reset --hard"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
 # SECTION 13
@@ -561,13 +587,13 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:engine"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:output"}
+function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:engine _dispatch"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"with storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:engine"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:output"}
+function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:engine _dispatch"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"func",needle:"storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -622,13 +648,7 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data remove storage datalib:engine"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data modify storage datalib:engine"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"data modify storage datalib:output"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"data merge storage datalib:input"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"data modify storage datalib:input"}
-execute if score #DL.StrFound dl.tmp matches 1 run return 0
+execute if score #DL.StrFound dl.tmp matches 1 run return 00
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data merge storage datalib:debug"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"data remove storage datalib:debug"}
@@ -659,6 +679,8 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"tag @r add datalib.admin"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"tag @n add datalib.admin"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"tag @e[type=minecraft:player] remove datalib.admin"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"tag @s remove datalib.admin"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -695,9 +717,13 @@ execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"{auto:1b"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"Tags:[\\\"dataLibb."}
-function datalib:core/security/string/field_contains {field:"cmd",needle:"dataLib"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"[minecraft:custom_data={dataLib:{input:1b}}]"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"datalib"}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"[minecraft:custom_data={dataLib:{input:0b}}]"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"[custom_data={dataLib:{input:1b}}]"}
+execute if score #DL.StrFound dl.tmp matches 1 run return 0
+function datalib:core/security/string/field_contains {field:"cmd",needle:"[custom_data={dataLib:{input:0b}}]"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"{Tags:[\\\"datalib."}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
@@ -848,7 +874,7 @@ function datalib:core/security/string/field_contains {field:"cmd",needle:"comman
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 function datalib:core/security/string/field_contains {field:"cmd",needle:"minecraft:command_block"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
-function datalib:core/security/string/field_contains {field:"cmd",needle:"fillbiome "}
+function datalib:core/security/string/field_contains {field:"cmd",needle:"fillbiome"}
 execute if score #DL.StrFound dl.tmp matches 1 run return 0
 
 # ======================================================================================
