@@ -25,6 +25,13 @@
 
 ---
 
+> [!NOTE]
+> `tellraw` menus and chat-based interfaces are **not** GUIs. For proper user interfaces and dialog mechanisms:
+> - **In Datapacks (Vanilla):** See [Minecraft Wiki: Dialogs](https://minecraft.wiki/w/Dialog)
+> - **In Fabric Mods:** See [Fabric Documentation: Custom Screens](https://docs.fabricmc.net/develop/rendering/gui/custom-screens)
+
+---
+
 ## 📦 Installation
 
 1. Place [dataLib.zip](https://cdn.modrinth.com/data/jYMa7nhW/versions/EwBBaMuX/dataLib.zip?mr_download_reason=standalone) into `<world>/datapacks/`
