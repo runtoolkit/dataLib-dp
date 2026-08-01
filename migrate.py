@@ -244,7 +244,7 @@ def step_7_prepare_core_skeleton():
 def step_8_build_module_map():
     Logger.step(8, "Build Module -> Source Path Mapping")
     src = TMP_WORK / "datapacks/dataLib/data/datalib/function"
-    scan_roots = ["systems", "core/internal/systems", "api"]
+    scan_roots = ["systems", "core/internal/systems", "api","player/inv","world"]
 
     discovered = {}
     for r in scan_roots:
@@ -455,7 +455,7 @@ def step_11_create_tags_and_ticks():
 
     write_text(
         "data/datalib_core/function/init.mcfunction",
-        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nfunction #load:_private/load\n"
+        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nfunction #load:_private/load\nfunction datalib_core:load_gate/main\n"
     )
     write_text(
         "data/datalib_core/function/tick.mcfunction",
