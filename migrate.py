@@ -115,6 +115,14 @@ DIST_DIR = TMP_WORK / "dist"
 SRC_ROOT = TMP_WORK / "datapacks/dataLib/data/datalib/function"
 DST_BASE = TMP_WORK / "packs/modules"
 
+# Single source of truth for which source subtrees are scanned for
+# per-module discovery. Previously this list only lived inside
+# step_8_build_module_map(); every other step relied on module_map.json
+# already reflecting it, which is fragile if scan_roots ever changes.
+# Now every step references this same constant directly.
+SCAN_ROOTS = ["systems", "input", "api", "player/inv", "world", "systems",
+              "core/cooldown", "core/lib", "core/state", "core/queue"]
+
 
 # ==============================================================================
 # Migration Steps
@@ -245,7 +253,7 @@ def step_7_prepare_core_skeleton():
 def step_8_build_module_map():
     Logger.step(8, "Build Module -> Source Path Mapping")
     src = TMP_WORK / "datapacks/dataLib/data/datalib/function"
-    scan_roots = ["systems", "input", "api","player/inv","world","systems","core/cooldown","core/lib","core/state","core/queue","events"]
+    scan_roots = ["systems", "api","core/cooldown","core/lib","core/state","core/queue"]
 
     discovered = {}
     underscore_dirs = []  # (scan_root, entry_name) pairs -- resolved in step_8b
@@ -260,6 +268,17 @@ def step_8_build_module_map():
                 underscore_dirs.append((r, entry))
                 continue
             discovered.setdefault(entry, []).append(f"{r}/{entry}")
+
+    # `player`, `world`, `events`, `input` are each their own standalone
+    # module as a whole -- unlike scan_roots (which turns each subdirectory
+    # into a separate module), everything directly under these four roots
+    # (loose .mcfunction files included) belongs to one module named after
+    # the root itself.
+    whole_root_modules = ["player", "world", "events", "input"]
+    for root_name in whole_root_modules:
+        root_full = src / root_name
+        if root_full.is_dir():
+            discovered.setdefault(root_name, []).append(root_name)
 
     covered = set(path for paths in discovered.values() for path in paths)
     remaining_top = set()
@@ -288,6 +307,8 @@ def step_8_build_module_map():
             for sub in os.listdir(full):
                 key = f"api/{sub}"
                 if key not in covered: remaining_top.add(key)
+        elif entry in whole_root_modules:
+            pass  # already captured as a whole-root module above
         else:
             remaining_top.add(entry)
 
@@ -339,6 +360,64 @@ def step_8b_resolve_underscore_dirs():
     mm["modules"] = discovered
     map_path.write_text(json.dumps(mm, indent=2, ensure_ascii=False))
     Logger.success(f"Resolved {len(underscore_dirs)} underscore-prefixed dir(s); none dropped.")
+
+
+def step_8c_relocate_root_dirs_to_api():
+    # `player`, `world`, `events`, and `input` are standalone modules in
+    # their own right and must NOT be folded into api/ -- they're scanned
+    # directly as their own scan roots in step_8 instead.
+    #
+    # Any *other* root-level dir that isn't a recognized scan root (i.e.
+    # not systems/api/core/config/debug and not one of the four standalone
+    # roots above) gets folded into api/ before module discovery, so it
+    # still becomes a real module instead of silently sitting outside
+    # every scan root. This runs before step_8's discovery scan, so
+    # step_9's existing classify()/token_pattern remap naturally picks up
+    # the new on-disk location -- no separate call-rewriting pass needed.
+    Logger.step("8c", "Relocate Unrecognized Root-Level Dirs Into api/")
+    src = TMP_WORK / "datapacks/dataLib/data/datalib/function"
+    api_dir = src / "api"
+    standalone_roots = {"player", "world", "events", "input"}
+    reserved = {"systems", "api", "core", "config", "debug"} | standalone_roots
+
+    root_dirs = sorted(
+        entry for entry in os.listdir(src)
+        if (src / entry).is_dir() and entry not in reserved
+    )
+
+    if not root_dirs:
+        Logger.info("No unrecognized root-level directories found; player/world/events/input kept as their own standalone modules.")
+        return
+
+    api_dir.mkdir(parents=True, exist_ok=True)
+    total_moved = []
+    for root_name in root_dirs:
+        root_dir = src / root_name
+        moved = []
+        for entry in sorted(os.listdir(root_dir)):
+            src_entry = root_dir / entry
+            dst_entry = api_dir / entry
+            if dst_entry.exists():
+                Logger.warn(f"api/{entry} already exists -- merging contents from {root_name}/{entry} instead of overwriting.")
+                if src_entry.is_dir():
+                    for sub_dirpath, _, sub_files in os.walk(src_entry):
+                        rel = Path(sub_dirpath).relative_to(src_entry)
+                        target_dir = dst_entry / rel
+                        target_dir.mkdir(parents=True, exist_ok=True)
+                        for f in sub_files:
+                            shutil.move(str(Path(sub_dirpath) / f), str(target_dir / f))
+                    shutil.rmtree(src_entry)
+                else:
+                    shutil.move(str(src_entry), str(dst_entry))
+            else:
+                shutil.move(str(src_entry), str(dst_entry))
+            moved.append(entry)
+
+        root_dir.rmdir()
+        total_moved.extend(moved)
+        Logger.info(f"Relocated {len(moved)} entr{'y' if len(moved)==1 else 'ies'} from {root_name}/ to api/: {moved}")
+
+    Logger.success(f"{len(root_dirs)} unrecognized root-level dir(s) absorbed into api/; player/world/events/input kept standalone.")
 
 
 def step_9_migrate_functions():
@@ -1049,6 +1128,7 @@ def main():
     step_5_clean_deps()
     step_6_build_function_graph()
     step_7_prepare_core_skeleton()
+    step_8c_relocate_root_dirs_to_api()
     step_8_build_module_map()
     step_8b_resolve_underscore_dirs()
     step_9_migrate_functions()
