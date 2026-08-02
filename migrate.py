@@ -244,7 +244,7 @@ def step_7_prepare_core_skeleton():
 def step_8_build_module_map():
     Logger.step(8, "Build Module -> Source Path Mapping")
     src = TMP_WORK / "datapacks/dataLib/data/datalib/function"
-    scan_roots = ["systems", "input", "api","player","events","systems","core/cooldown","core/lib","core/state","core/queue","player","world"]
+    scan_roots = ["systems", "api","player","events","systems","core/cooldown","core/lib","core/state","core/queue","player","world"]
 
     discovered = {}
     for r in scan_roots:
