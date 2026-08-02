@@ -120,7 +120,7 @@ DST_BASE = TMP_WORK / "packs/modules"
 # step_8_build_module_map(); every other step relied on module_map.json
 # already reflecting it, which is fragile if scan_roots ever changes.
 # Now every step references this same constant directly.
-SCAN_ROOTS = ["systems", "input", "api", "player/inv", "world", "systems",
+SCAN_ROOTS = ["systems", "input", "api", "player", "world", "systems",
               "core/cooldown", "core/lib", "core/state", "core/queue"]
 
 
