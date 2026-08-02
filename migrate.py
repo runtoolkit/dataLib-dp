@@ -683,15 +683,90 @@ def step_15_post_fixes():
         (DST_BASE / f"datalib-{m}-module/data/datalib_{m}/function/load").mkdir(parents=True, exist_ok=True)
         (DST_BASE / f"datalib-{m}-module/data/dl_{m}.load/function").mkdir(parents=True, exist_ok=True)
 
-    # 4. Create per-module main entry points
-    has_init = {"uuid", "color", "hook"}
-    has_cleanup = {"rate_limit", "hook", "uuid", "color"}
+    # 4. Discover each module's actual scoreboard objectives & storage
+    #    roots by scanning its migrated .mcfunction files, then GENERATE
+    #    real init.mcfunction / cleanup.mcfunction files from that data.
+    #    Previously init/cleanup were either hardcoded to a wrong module
+    #    set or left as bare comments -- neither approach reflected what
+    #    the module actually touches, and both could leave init/cleanup
+    #    empty or referencing files that don't exist.
+    objective_pattern = re.compile(r'\bscoreboard\s+(?:objectives\s+add|players\s+\S+)\s+\S+\s+(\S+)')
+    objective_def_pattern = re.compile(r'\bscoreboard\s+objectives\s+add\s+(\S+)\s+\S+')
+    # Captures the storage id as a single colon-joined token (ns:root) and,
+    # if present, the following NBT key as a separate token -- this matches
+    # real syntax: `data modify storage <ns:root> <nbt_key> set value ...`.
+    # The storage id itself is never split on the colon; `<ns:root>` and
+    # `<key>` are two distinct command arguments.
+    storage_pattern = re.compile(r'\bstorage\s+(datalib_[a-z0-9_]*:[a-zA-Z0-9_]+)(?:\s+([a-zA-Z0-9_.\[\]]+))?')
+
+    def _clean_key(raw_key):
+        # Reject anything that isn't a genuine NBT path segment (e.g. an
+        # inline `{}`/`{...}` literal that the regex's generic tail
+        # accidentally swept up).
+        if not raw_key or raw_key in ("{}",) or raw_key.startswith("{"):
+            return None
+        return raw_key
+
+    def scan_module_usage(m, ns):
+        mod_root = DST_BASE / f"datalib-{m}-module/data/{ns}/function"
+        objectives = set()
+        storages = set()  # set of (storage_id, nbt_key_or_None) pairs
+        if mod_root.is_dir():
+            for p in mod_root.glob("**/*.mcfunction"):
+                txt = p.read_text(encoding="utf-8", errors="replace")
+                for line in txt.splitlines():
+                    stripped = line.strip()
+                    if stripped.startswith("#"):
+                        continue
+                    for om in objective_def_pattern.finditer(line):
+                        objectives.add(om.group(1))
+                    for sm in storage_pattern.finditer(line):
+                        storages.add((sm.group(1), _clean_key(sm.group(2))))
+        return sorted(objectives), sorted(storages, key=lambda t: (t[0], t[1] or ""))
 
     for m in module_list:
         ns = f"datalib_{m}"
         dir_path = DST_BASE / f"datalib-{m}-module/data/dl_{m}.load/function"
-        init_line = f"function {ns}:load/init" if m in has_init else "# (no module-specific init routine)"
-        cleanup_note = f"# Cleanup: #load:module_cleanup -> {ns}:load/cleanup" if m in has_cleanup else "# No storage cleanup required."
+        objectives, storage_pairs = scan_module_usage(m, ns)
+
+        # -- init.mcfunction: (re)create every objective/storage this
+        #    module actually references, so nothing is left undeclared.
+        init_dir = DST_BASE / f"datalib-{m}-module/data/{ns}/function/load"
+        init_dir.mkdir(parents=True, exist_ok=True)
+        init_path = init_dir / "init.mcfunction"
+        init_lines = [f"# {ns}:load/init -- ensures this module's objectives/storages exist"]
+        for obj in objectives:
+            init_lines.append(f"scoreboard objectives add {obj} dummy")
+        for st_id, key in storage_pairs:
+            if key:
+                init_lines.append(f"execute unless data storage {st_id} {key} run data modify storage {st_id} {key} set value {{}}")
+            else:
+                init_lines.append(f"execute unless data storage {st_id} run data modify storage {st_id} set value {{}}")
+        if not objectives and not storage_pairs:
+            init_lines.append("# No module-local scoreboards/storages detected.")
+        init_path.write_text("\n".join(init_lines) + "\n", encoding="utf-8")
+        init_line = f"function {ns}:load/init"
+
+        # -- cleanup.mcfunction: reset every objective and clear every
+        #    storage key this module owns, run on datapack unload/reload.
+        cleanup_dir = DST_BASE / f"datalib-{m}-module/data/{ns}/function/load"
+        cleanup_path = cleanup_dir / "cleanup.mcfunction"
+        cleanup_lines = [f"# {ns}:load/cleanup -- resets this module's scoreboards/storages"]
+        for obj in objectives:
+            cleanup_lines.append(f"scoreboard players reset * {obj}")
+        for st_id, key in storage_pairs:
+            # `data remove storage <ns:root>` alone (no key) removes the
+            # entire storage root -- valid. `data remove storage <ns:root>
+            # <key>` removes just that key -- also valid, and required
+            # whenever a specific NBT key was observed in usage.
+            if key:
+                cleanup_lines.append(f"execute if data storage {st_id} {key} run data remove storage {st_id} {key}")
+            else:
+                cleanup_lines.append(f"execute if data storage {st_id} run data remove storage {st_id}")
+        if not objectives and not storage_pairs:
+            cleanup_lines.append("# No module-local scoreboards/storages detected.")
+        cleanup_path.write_text("\n".join(cleanup_lines) + "\n", encoding="utf-8")
+        cleanup_note = f"# Cleanup: #load:module_cleanup -> {ns}:load/cleanup"
 
         content = f"""# dl_{m}.load:main -- Stage entry point for the {m} module
 scoreboard objectives add dl.{m}.version dummy
