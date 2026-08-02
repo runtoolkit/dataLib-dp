@@ -447,7 +447,7 @@ def step_11_create_tags_and_ticks():
         "values": ["#load:_private/init", {"id": "#load:pre_load", "required": False}, {"id": "#load:load", "required": False}, {"id": "#load:post_load", "required": False}]
     })
     write_json("data/load/tags/function/_private/init.json", {"values": ["load:_private/init"]})
-    write_json("data/load/tags/function/load.json", {"values": ["stringlib:zprivate/load", "datalib_core:init", "#player_action:load"]})
+    write_json("data/load/tags/function/load.json", {"values": ["stringlib:zprivate/load", "datalib_core:init", "#player_action:load","datalib_core:load_gate/main"]})
     write_json("data/load/tags/function/pre_load.json", {"values": []})
     write_json("data/load/tags/function/post_load.json", {"values": module_load_tags})
     write_json("data/minecraft/tags/function/load.json", {"values": ["datalib_core:init"]})
@@ -455,7 +455,7 @@ def step_11_create_tags_and_ticks():
 
     write_text(
         "data/datalib_core/function/init.mcfunction",
-        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nfunction #load:_private/load\nfunction datalib_core:load_gate/main\n"
+        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nfunction #load:_private/load\n"
     )
     write_text(
         "data/datalib_core/function/tick.mcfunction",
