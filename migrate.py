@@ -252,8 +252,22 @@ def step_8_build_module_map():
         if not r_full.is_dir():
             continue
         for entry in sorted(os.listdir(r_full)):
-            if (r_full / entry).is_dir():
-                discovered.setdefault(entry, []).append(f"{r}/{entry}")
+            if not (r_full / entry).is_dir():
+                continue
+            if entry.startswith("_"):
+                # Internal-helper dirs (e.g. input/_private) are not a
+                # standalone module -- fold them into the sibling module
+                # that owns this scan root's other entries, if one exists.
+                siblings = [
+                    s for s in os.listdir(r_full)
+                    if s != entry and not s.startswith("_") and (r_full / s).is_dir()
+                ]
+                if len(siblings) == 1:
+                    discovered.setdefault(siblings[0], []).append(f"{r}/{entry}")
+                # Ambiguous (0 or >1 sibling modules) -- leave unclassified
+                # here; it will fall through to core via classify()'s default.
+                continue
+            discovered.setdefault(entry, []).append(f"{r}/{entry}")
 
     covered = set(path for paths in discovered.values() for path in paths)
     remaining_top = set()
@@ -810,6 +824,10 @@ def step_18_lint_and_validate():
     issues = []
     total_files = 0
     bool_pattern = re.compile(r':\s*(true|false)\b')
+    # Matches only the {...} NBT payload following `data modify/merge ... storage <ns:path>`,
+    # so text-component JSON (tellraw/title/etc.) and quoted string literals
+    # elsewhere on the line are never scanned.
+    nbt_block_pattern = re.compile(r'\bdata\s+(?:modify|merge)\b[^{"]*\bstorage\b[^{"]*(\{.*?\})(?=\s|$)')
 
     for dirpath, _, files in os.walk(packs_dir):
         for fn in files:
@@ -820,8 +838,9 @@ def step_18_lint_and_validate():
                 for lineno, line in enumerate(f, 1):
                     stripped = line.strip()
                     if stripped.startswith("#"): continue
-                    if re.search(r'\bdata (modify|merge)\b.*\bstorage\b', line):
-                        for m in bool_pattern.finditer(line):
+                    for block_match in nbt_block_pattern.finditer(line):
+                        nbt_block = block_match.group(1)
+                        for m in bool_pattern.finditer(nbt_block):
                             issues.append((str(full.relative_to(packs_dir)), lineno, stripped[:120]))
 
     Logger.info(f"Total .mcfunction files linted: {total_files}")
