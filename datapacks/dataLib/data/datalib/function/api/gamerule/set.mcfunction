@@ -21,21 +21,21 @@
 #
 # RETURN: 1 on success, 0 on guard failure.
 
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 # ── Normalize rule name: spaces → underscores via StringLib ──────────────────
-data modify storage stringlib:input replace.String set from storage datalib:input rule
-data modify storage stringlib:input replace.Find set value " "
-data modify storage stringlib:input replace.Replace set value "_"
-function stringlib:util/replace
-data modify storage datalib:input _gamerule_norm set from storage stringlib:output replace
-data remove storage stringlib:input replace
+data modify storage datalib:stringlib_data.input replace.String set from storage datalib:input rule
+data modify storage datalib:stringlib_data.input replace.Find set value " "
+data modify storage datalib:stringlib_data.input replace.Replace set value "_"
+function datalib:modules/string/api/legacy/replace
+data modify storage datalib:input _gamerule_norm set from storage datalib:stringlib_data.output replace
+data remove storage datalib:stringlib_data.input replace
 
 # ── Persist value in engine storage ──────────────────────────────────────────
-function datalib:core/internal/api/gamerule/persist with storage datalib:input {}
+function datalib:internal/gamerule/persist with storage datalib:input {}
 
 # ── Dispatch callbacks ────────────────────────────────────────────────────────
-function datalib:core/internal/api/gamerule/dispatch with storage datalib:input {}
+function datalib:internal/gamerule/dispatch with storage datalib:input {}
 
 # ── Debug log ─────────────────────────────────────────────────────────────────
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"gamerule/set ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(_gamerule_norm)","color":"white"},{"text":" = ","color":"#555555"},{"text":"$(value)","color":"green"}]

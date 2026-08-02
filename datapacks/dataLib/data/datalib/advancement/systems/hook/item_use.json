@@ -5,7 +5,7 @@
     }
   },
   "rewards": {
-    "function": "datalib:systems/hook/on_item_use"
+    "function": "datalib:internal/hook/api/on_item_use"
   },
   "parent": "datalib:hidden/root"
 }

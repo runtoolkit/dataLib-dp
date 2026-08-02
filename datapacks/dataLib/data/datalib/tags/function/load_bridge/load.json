@@ -1,0 +1,7 @@
+{
+    "values": [
+        "datalib:modules/string/internal/legacy/load",
+        "datalib:runtime/load/load",
+        "#datalib:player_action/load"
+    ]
+}

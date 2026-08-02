@@ -14,7 +14,7 @@
 #   function datalib:api/title/actionbar {player:"Steve",\
 #     json:'[{"text":"Kills: "},{"score":{"name":"@s","objective":"kills"},"color":"gold"}]'}
 
-execute unless function datalib:debug/tools/utils/check_all run return 0
+execute unless function datalib:debug/menu/tools/utils/check_all run return 0
 
 $title @a[name=$(player),limit=1] actionbar $(json)
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"title/actionbar ","color":"aqua"},{"text":"$(player)","color":"white"}]

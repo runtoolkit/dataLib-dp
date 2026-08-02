@@ -13,7 +13,7 @@ data modify storage datalib:engine multiCommands.active set value 1b
 # Validate type
 execute if data storage datalib:engine {security:{multi_type_allowlist:{multi_cmd_adv:0b}}} run data remove storage datalib:engine multiCommands.type
 execute if data storage datalib:engine {security:{multi_type_allowlist:{multi_cmd_adv:0b}}} run data remove storage datalib:engine multiCommands.active
-execute if data storage datalib:engine {security:{multi_type_allowlist:{multi_cmd_adv:0b}}} run return run function datalib:core/security/multi_type_check
+execute if data storage datalib:engine {security:{multi_type_allowlist:{multi_cmd_adv:0b}}} run return run function datalib:runtime/security/multi_type_check
 
 $data modify storage datalib:engine _mcmd_queue set value $(commands)
 data modify storage datalib:engine _mcmd_options set value {error_mode:"continue",profile:0b,spread:0}

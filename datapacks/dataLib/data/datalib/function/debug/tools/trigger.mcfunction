@@ -1,1 +1,1 @@
-$function datalib:debug/tools/trigger/execute {type:"$(type)",data:$(data)}
+$function datalib:debug/menu/tools/trigger/execute {type:"$(type)",data:$(data)}

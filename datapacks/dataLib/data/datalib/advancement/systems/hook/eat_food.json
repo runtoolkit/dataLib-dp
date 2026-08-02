@@ -6,6 +6,6 @@
     }
   },
   "rewards": {
-    "function": "datalib:core/internal/systems/hook/on_eat"
+    "function": "datalib:internal/hook/on_eat"
   }
 }

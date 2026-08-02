@@ -17,7 +17,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Security gate
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 # Verify required inputs
 execute unless data storage datalib:input cb.cmd run tellraw @s [{"text":"[DL/cb] ","color":"#00AAAA","bold":true},{"text":"cb.cmd not set","color":"red"}]
@@ -26,8 +26,8 @@ execute unless data storage datalib:input cb.delay run tellraw @s [{"text":"[DL/
 execute unless data storage datalib:input cb.delay run return 0
 
 # Fill coordinate defaults
-function datalib:core/internal/api/cb/apply_defaults
+function datalib:internal/cb/apply_defaults
 
 # Push to delay queue and schedule flush
-function datalib:core/internal/systems/cb/queue_push with storage datalib:input cb
+function datalib:internal/cb/tick/queue_push with storage datalib:input cb
 data remove storage datalib:input cb

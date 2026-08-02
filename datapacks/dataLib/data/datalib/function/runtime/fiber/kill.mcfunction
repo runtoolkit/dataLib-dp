@@ -1,0 +1,9 @@
+# ─────────────────────────────────────────────────────────────────
+# datalib:runtime/fiber/kill
+# Stops a fiber. Pending resumes in the queue will not run.
+#
+# INPUT (storage datalib:input):
+# id → fiber id
+# ─────────────────────────────────────────────────────────────────
+
+function datalib:runtime/lib/internal/fiber/kill_exec with storage datalib:input {}

@@ -10,4 +10,4 @@
 # function datalib:api/wand/unregister
 # ─────────────────────────────────────────────────────────────────
 
-function datalib:core/internal/api/wand/unregister_exec with storage datalib:input {}
+function datalib:internal/wand/unregister_exec with storage datalib:input {}

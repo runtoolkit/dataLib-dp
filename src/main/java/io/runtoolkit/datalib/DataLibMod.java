@@ -28,7 +28,7 @@ public class DataLibMod implements ModInitializer {
                 LOGGER.info("dataLib config_set: {} set {} = {}",
                         player.getGameProfile().name(), key, value);
 
-                // UNVERIFIED ASSUMPTION: datalib:core/config/set is a macro function
+                // UNVERIFIED ASSUMPTION: datalib:runtime/config/set is a macro function
                 // (uses $(key), $(value) — verified from set.mcfunction) but no call
                 // site for it was found anywhere in the repo (grep came back empty).
                 // The "with storage" call below relies on Minecraft's general/standard
@@ -36,6 +36,9 @@ public class DataLibMod implements ModInitializer {
                 // names in storage match $(...) placeholders) — it is NOT a verified
                 // example usage from the datapack. Update this if the real call
                 // convention becomes clear from the dataLib repo.
+                // NOTE (V2 reorg): path updated from datalib:core/config/set to
+                // datalib:runtime/config/set — config/* moved under runtime/ since
+                // it is part of dataLib's own runtime engine, not public API surface.
                 context.server().getCommands().performPrefixedCommand(
                         player.createCommandSourceStack(),
                         "data modify storage datalib:input key set value \"" + key.replace("\"", "\\\"") + "\""
@@ -46,7 +49,7 @@ public class DataLibMod implements ModInitializer {
                 );
                 context.server().getCommands().performPrefixedCommand(
                         player.createCommandSourceStack(),
-                        "function datalib:core/config/set with storage datalib:input"
+                        "function datalib:runtime/config/set with storage datalib:input"
                 );
             });
         });

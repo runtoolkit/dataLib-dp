@@ -1,8 +1,8 @@
 {
   "values": [
-    "datalib:input/writable_book",
-    "datalib:input/command_block_minecart",
-    "datalib:core/internal/api/cmd/freeze/tick",
-    "datalib:input/private/cbm_align_tp"
+    "datalib:api/input/writable_book",
+    "datalib:api/input/command_block_minecart",
+    "datalib:internal/cmd/freeze/tick",
+    "datalib:api/input/private/cbm_align_tp"
   ]
 }

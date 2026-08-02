@@ -35,7 +35,7 @@
     }
   },
   "rewards": {
-    "function": "datalib:systems/hook/on_interact_shulker_box"
+    "function": "datalib:internal/hook/api/on_interact_shulker_box"
   },
   "parent": "datalib:hidden/root"
 }

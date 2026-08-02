@@ -4,7 +4,7 @@
 # Shows each queued command and its remaining ticks.
 # ─────────────────────────────────────────────────────────────────
 
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 execute store result score #cb_queue_size dl.tmp run data get storage datalib:engine cb_queue
 execute if score #cb_queue_size dl.tmp matches 0 run tellraw @s [{"text":"[DL/cb] ","color":"#00AAAA","bold":true},{"text":"Queue is empty","color":"gray"}]

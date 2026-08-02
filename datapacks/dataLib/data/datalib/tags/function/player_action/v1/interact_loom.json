@@ -1,0 +1,6 @@
+{
+  "values": [
+    "#datalib:player_action/v1/interact_block",
+    "#datalib:player_action/v1/open_gui"
+  ]
+}

@@ -12,19 +12,19 @@
 #   function datalib:api/gamerule/get with storage datalib:input {}
 #   # read: data get storage datalib:output gamerule
 
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 # Normalize key (spaces → underscores, lowercase)
-data modify storage stringlib:input replace.String set from storage datalib:input rule
-data modify storage stringlib:input replace.Find set value " "
-data modify storage stringlib:input replace.Replace set value "_"
-function stringlib:util/replace
-data modify storage datalib:input _gamerule_norm set from storage stringlib:output replace
-data remove storage stringlib:input replace
+data modify storage datalib:stringlib_data.input replace.String set from storage datalib:input rule
+data modify storage datalib:stringlib_data.input replace.Find set value " "
+data modify storage datalib:stringlib_data.input replace.Replace set value "_"
+function datalib:modules/string/api/legacy/replace
+data modify storage datalib:input _gamerule_norm set from storage datalib:stringlib_data.output replace
+data remove storage datalib:stringlib_data.input replace
 
 # Read from engine storage
 data remove storage datalib:output gamerule
-function datalib:core/internal/api/gamerule/read with storage datalib:input {}
+function datalib:internal/gamerule/read with storage datalib:input {}
 
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"gamerule/get ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(_gamerule_norm)","color":"white"},{"text":" = ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"gamerule","color":"green"}]
 

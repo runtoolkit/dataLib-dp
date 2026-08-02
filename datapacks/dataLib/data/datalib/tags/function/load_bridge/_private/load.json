@@ -1,0 +1,8 @@
+{
+    "values": [
+        "#datalib:runtime/load/load_bridge/_private/init",
+        {"id": "#datalib:runtime/load/load_bridge/pre_load", "required": false},
+        {"id": "#datalib:load_bridge/load", "required": false},
+        {"id": "#datalib:runtime/load/load_bridge/post_load", "required": false}
+    ]
+}

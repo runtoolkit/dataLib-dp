@@ -1,4 +1,4 @@
-# datalib:debug/tools/utils/perm_check
+# datalib:debug/menu/tools/utils/perm_check
 # Returns 1 if executor has sufficient dl.perm_level for admin commands.
 # Returns 0 (+ fallback) if not.
 #
@@ -18,5 +18,5 @@ execute store result score #perm_req dl.tmp run data get storage datalib:engine 
 execute if score @s dl.perm_level >= #perm_req dl.tmp run return 1
 
 # Denied
-function datalib:core/fallback/no_permission
+function datalib:runtime/fallback/no_permission
 return 0

@@ -6,7 +6,7 @@
       "source": "https://github.com/ICY105/PlayerAction",
       "license": "MIT",
       "namespace": "player_action",
-      "load_tag": "#player_action:load",
+      "load_tag": "#datalib:player_action/load",
       "note": "Embedded as-is. Provides player event hooks (click, movement, block interaction)."
     }
   ],

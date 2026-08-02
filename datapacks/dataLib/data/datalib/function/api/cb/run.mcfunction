@@ -17,15 +17,15 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Security gate
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 # Verify required input
 execute unless data storage datalib:input cb.cmd run tellraw @s [{"text":"[DL/cb] ","color":"#00AAAA","bold":true},{"text":"cb.cmd not set","color":"red"}]
 execute unless data storage datalib:input cb.cmd run return 0
 
 # Fill coordinate defaults
-function datalib:core/internal/api/cb/apply_defaults
+function datalib:internal/cb/apply_defaults
 
 # Execute
-function datalib:core/internal/api/cb/exec with storage datalib:input cb
+function datalib:internal/cb/exec with storage datalib:input cb
 data remove storage datalib:input cb

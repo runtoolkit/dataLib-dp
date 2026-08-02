@@ -1,5 +1,5 @@
 {
   "values": [
-    "datalib:core/dispatch/run"
+    "datalib:runtime/dispatch/run"
   ]
 }

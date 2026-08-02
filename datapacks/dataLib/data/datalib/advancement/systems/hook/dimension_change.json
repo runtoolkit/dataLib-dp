@@ -5,7 +5,7 @@
     }
   },
   "rewards": {
-    "function": "datalib:systems/hook/on_dimension_change"
+    "function": "datalib:internal/hook/api/on_dimension_change"
   },
   "parent": "datalib:hidden/root"
 }

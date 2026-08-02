@@ -10,6 +10,18 @@ permission-notice requirement.
 
 Source repository: https://github.com/runtoolkit/dataLib-dp
 
+Third-Party Embedded Code
+
+This repository embeds, in modified/relocated form, code from the
+following third-party project(s):
+
+* PlayerAction by ICY105 (https://github.com/ICY105/PlayerAction),
+  MIT License. Originally shipped under its own `player_action`
+  namespace; as of the V2 reorganization its function/predicate/tag
+  files live under `data/datalib/.../player_action/` for datapack
+  layout consistency, but the code and its origin remain distinct
+  from the datalib project's own authored code.
+
 AI / Machine Learning Restrictions
 
 You MAY NOT:

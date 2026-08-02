@@ -5,7 +5,7 @@
     }
   },
   "rewards": {
-    "function": "datalib:systems/hook/on_trade"
+    "function": "datalib:internal/hook/api/on_trade"
   },
   "parent": "datalib:hidden/root"
 }

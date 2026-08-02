@@ -1,5 +1,5 @@
 {
   "values": [
-    "datalib.main:datalib/tick"
+    "datalib:runtime/bootstrap/datalib/tick"
   ]
 }

@@ -19,10 +19,11 @@ import net.minecraft.network.chat.Component;
  *   - Button.Builder(Component, OnPress).bounds(x,y,w,h).build()
  *
  * UNVERIFIED PART: the full list of real config keys (seen referenced in
- * namespace_list.mcfunction and the core/config/* functions) is not used
- * here yet — this screen offers free-text key/value entry, not a dropdown/
- * predefined key list. To list the real schema you'd need to look at the
- * contents of namespace_list.mcfunction on the datapack side.
+ * api/config/namespace_list.mcfunction and the runtime/config/* functions)
+ * is not used here yet — this screen offers free-text key/value entry, not
+ * a dropdown/predefined key list. To list the real schema you'd need to
+ * look at the contents of api/config/namespace_list.mcfunction on the
+ * datapack side.
  */
 public class DataLibConfigScreen extends Screen {
 
@@ -54,7 +55,7 @@ public class DataLibConfigScreen extends Screen {
                 Component.literal(
                         "Enter a config key (e.g. sandbox.enabled) and its new value, "
                         + "then press Save. Real authorization and validation happen "
-                        + "server-side in the datalib:core/config/set function."
+                        + "server-side in the datalib:runtime/config/set function."
                 ),
                 this.font
         );

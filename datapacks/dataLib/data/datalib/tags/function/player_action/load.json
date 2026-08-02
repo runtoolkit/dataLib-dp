@@ -1,0 +1,6 @@
+{
+  "values": [
+    "#datalib:player_action/enumerate",
+	"#datalib:player_action/resolve"
+  ]
+}

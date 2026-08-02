@@ -1,0 +1,5 @@
+{
+  "values": [
+    "datalib:internal/hook/on_open_gui"
+  ]
+}

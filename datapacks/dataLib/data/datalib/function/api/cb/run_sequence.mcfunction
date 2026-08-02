@@ -18,16 +18,16 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Security gate
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 # Verify required input
 execute unless data storage datalib:input cb.cmds[0] run tellraw @s [{"text":"[DL/cb] ","color":"#00AAAA","bold":true},{"text":"cb.cmds is empty or not set","color":"red"}]
 execute unless data storage datalib:input cb.cmds[0] run return 0
 
 # Fill defaults
-function datalib:core/internal/api/cb/apply_defaults
+function datalib:internal/cb/apply_defaults
 execute unless data storage datalib:input cb.interval run data modify storage datalib:input cb.interval set value 2
 
 # Expand cmds list into individual delayed queue entries
-function datalib:core/internal/systems/cb/seq_expand
+function datalib:internal/cb/tick/seq_expand
 data remove storage datalib:input cb

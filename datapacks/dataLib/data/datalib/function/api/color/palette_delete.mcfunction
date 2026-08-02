@@ -9,7 +9,7 @@
 # Usage:
 #   function datalib:api/color/palette_delete {key:"brand"}
 
-execute unless function datalib:core/security/cmd_gate run return 0
+execute unless function datalib:runtime/security/cmd_gate run return 0
 
 $data remove storage datalib:engine color.palette.$(key)
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"color/palette_delete ","color":"aqua"},{"text":"$(key)","color":"white"}]

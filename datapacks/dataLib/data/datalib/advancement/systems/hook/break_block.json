@@ -10,7 +10,7 @@
     }
   },
   "rewards": {
-    "function": "datalib:systems/hook/on_break_block"
+    "function": "datalib:internal/hook/api/on_break_block"
   },
   "parent": "datalib:hidden/root"
 }

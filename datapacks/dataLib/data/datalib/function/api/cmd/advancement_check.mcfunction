@@ -1,4 +1,4 @@
-execute unless function datalib:debug/tools/utils/check_all run return 0
+execute unless function datalib:debug/menu/tools/utils/check_all run return 0
 
 data modify storage datalib:output result set value 0b
 $execute if entity @a[name=$(player),limit=1,advancements={$(advancement)=true}] run data modify storage datalib:output result set value 1b

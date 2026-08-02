@@ -1,4 +1,4 @@
-execute unless function datalib:debug/tools/utils/check_all run return 0
+execute unless function datalib:debug/menu/tools/utils/check_all run return 0
 
 $bossbar add $(id) {"text":"$(text)"}
 $bossbar set $(id) color $(color)

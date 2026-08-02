@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
  * config menu.
  *
  * Real storage schema (verified from
- * datapacks/dataLib/data/datalib/function/core/config/set.mcfunction):
+ * datapacks/dataLib/data/datalib/function/runtime/config/set.mcfunction):
  *   $data modify storage datalib:engine config.$(key) set value "$(value)"
  * i.e. there is NO separate "section" field — the key is written directly
  * to the config.<key> NBT path (a dot-separated key, e.g. "sandbox.enabled",

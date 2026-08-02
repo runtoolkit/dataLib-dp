@@ -6,6 +6,6 @@
 # detection is not reliably possible, so this function has been removed.
 # See: SECURITY.md — "Intent Detection" section.
 #
-# Alternative: datalib:systems/string/announce
+# Alternative: datalib:modules/string/api/announce
 # ─────────────────────────────────────────────────────────────────
 return 0

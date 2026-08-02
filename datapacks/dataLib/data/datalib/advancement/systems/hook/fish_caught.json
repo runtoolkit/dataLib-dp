@@ -14,6 +14,6 @@
     }
   },
   "rewards": {
-    "function": "datalib:core/internal/systems/hook/on_fish_caught"
+    "function": "datalib:internal/hook/on_fish_caught"
   }
 }

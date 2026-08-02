@@ -1,5 +1,5 @@
 {
     "values": [
-        "datalib.main:datalib/load"
+        "datalib:runtime/bootstrap/datalib/load"
     ]
 }

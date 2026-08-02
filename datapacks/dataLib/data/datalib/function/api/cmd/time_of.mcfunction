@@ -1,4 +1,4 @@
-execute unless function datalib:debug/tools/utils/check_all run return 0
+execute unless function datalib:debug/menu/tools/utils/check_all run return 0
 
 # DL - Universal World Clock Controller
 # Usage: /function ame:clock_handler {clock:"datalib:test", action:"set", value:"12000"}

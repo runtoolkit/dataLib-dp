@@ -1,4 +1,4 @@
-execute unless function datalib:debug/tools/utils/check_all run return 0
+execute unless function datalib:debug/menu/tools/utils/check_all run return 0
 
 # ─────────────────────────────────────────────────────────────────
 # datalib:api/cmd/unfreeze
@@ -16,5 +16,5 @@ execute unless function datalib:debug/tools/utils/check_all run return 0
 #   function datalib:api/cmd/unfreeze {player:"Steve"}
 # ─────────────────────────────────────────────────────────────────
 
-$execute as @a[name=$(player),tag=datalib.frozen,limit=1] run function datalib:core/internal/api/cmd/freeze/remove
+$execute as @a[name=$(player),tag=datalib.frozen,limit=1] run function datalib:internal/cmd/freeze/remove
 $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"cmd/unfreeze ","color":"aqua"},{"text":"$(player)","color":"white"},{"text":" → ","color":"#555555"},{"translate":"datalib.msg.unfreeze","color":"#55ff55","bold":true}]

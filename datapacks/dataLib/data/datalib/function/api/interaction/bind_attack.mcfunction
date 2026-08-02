@@ -9,4 +9,4 @@
 #   data modify storage datalib:input tag set value "my_interact"
 #   data modify storage datalib:input func set value "mypack:on_attack"
 #   function datalib:api/interaction/bind_attack with storage datalib:input {}
-function datalib:core/internal/api/interaction/bind_attack_do with storage datalib:input {}
+function datalib:internal/interaction/bind_attack_do with storage datalib:input {}

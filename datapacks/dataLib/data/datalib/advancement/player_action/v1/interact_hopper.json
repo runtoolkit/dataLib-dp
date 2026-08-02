@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "interact_hopper": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:hopper"
+                ]
+              }
+            },
+            "condition": "minecraft:location_check"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "datalib:internal/player_action/v1/interact_hopper"
+  }
+}

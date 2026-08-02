@@ -1,6 +1,6 @@
 # datalib_extensions:extensions/gate
 #
-# Called from dl_load:load/fork_yes, immediately after an operator
+# Called from datalib:runtime/load/loader/load/fork_yes, immediately after an operator
 # confirms this build is a fork (fork_verified set to 0b) and only
 # when datalib_extensions is present in the build.
 #

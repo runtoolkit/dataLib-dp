@@ -1,7 +1,7 @@
 {
   "datalib.load.success": {
     "sounds": [
-      { "name": "datalib:load_success", "volume": 0.6, "pitch": 1.0 }
+      { "name": "datalib:runtime/load/load_success", "volume": 0.6, "pitch": 1.0 }
     ],
     "subtitle": "datalib.subtitle.load_success"
   },

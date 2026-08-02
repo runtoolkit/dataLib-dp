@@ -17,4 +17,4 @@ tellraw @a[tag=datalib.admin] ["",{"text":"[DL/dialog] ","color":"gold","bold":t
 data modify storage datalib:engine _log_add_tmp.message set value "[dialog/notify_admins] dialog opened"
 data modify storage datalib:engine _log_add_tmp.level set value "INFO"
 data modify storage datalib:engine _log_add_tmp.color set value "gray"
-function datalib:systems/log/add with storage datalib:engine _log_add_tmp
+function datalib:debug/menu/log/add with storage datalib:engine _log_add_tmp

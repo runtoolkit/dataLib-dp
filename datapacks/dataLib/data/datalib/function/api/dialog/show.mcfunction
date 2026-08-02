@@ -8,7 +8,7 @@
 execute if entity @s[tag=datalib.dialog_opened] at @s run return 0
 execute unless data storage datalib:engine dialog.DIALOG run return 0
 
-execute at @s run function datalib:player/get_name
+execute at @s run function datalib:api/player/get_name
 data modify storage datalib:engine dialog.NAME set from storage datalib:names temp.NAME
 
 function datalib:api/dialog/show_dialog_exec with storage datalib:engine dialog
