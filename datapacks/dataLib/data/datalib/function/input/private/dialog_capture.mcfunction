@@ -1,5 +1,5 @@
 # ======================================================================================
-# datalib:input/_private/dialog_capture  [INTERNAL — do not call directly]
+# datalib:input/private/dialog_capture  [INTERNAL — do not call directly]
 # ======================================================================================
 #
 # Called by the dialog system itself via its "run_command" action template

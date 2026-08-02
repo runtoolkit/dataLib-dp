@@ -1,5 +1,5 @@
 # ======================================================================================
-# datalib:input/_private/cbm_capture  [INTERNAL — do not call directly]
+# datalib:input/private/cbm_capture  [INTERNAL — do not call directly]
 # ======================================================================================
 #
 # Only reached when cbm_process confirmed Command is non-empty. Runs with
