@@ -690,8 +690,21 @@ def step_15_post_fixes():
     #    set or left as bare comments -- neither approach reflected what
     #    the module actually touches, and both could leave init/cleanup
     #    empty or referencing files that don't exist.
-    objective_pattern = re.compile(r'\bscoreboard\s+(?:objectives\s+add|players\s+\S+)\s+\S+\s+(\S+)')
     objective_def_pattern = re.compile(r'\bscoreboard\s+objectives\s+add\s+(\S+)\s+\S+')
+    # `scoreboard players <set|add|remove|get|enable|operation> <targets> <objective> ...`
+    # -- the objective is the token right after the target selector.
+    objective_use_pattern = re.compile(
+        r'\bscoreboard\s+players\s+(?:set|add|remove|get|enable|operation|reset)\s+\S+\s+(\S+)'
+    )
+
+    def _clean_objective(raw_obj):
+        # Reject macro placeholders (e.g. $(objective), $(pb_obj)) -- these
+        # are resolved at runtime per-call and aren't a fixed objective
+        # name this module can pre-declare.
+        if not raw_obj or raw_obj.startswith("$("):
+            return None
+        return raw_obj
+
     # Captures the storage id as a single colon-joined token (ns:root) and,
     # if present, the following NBT key as a separate token -- this matches
     # real syntax: `data modify storage <ns:root> <nbt_key> set value ...`.
@@ -719,7 +732,13 @@ def step_15_post_fixes():
                     if stripped.startswith("#"):
                         continue
                     for om in objective_def_pattern.finditer(line):
-                        objectives.add(om.group(1))
+                        obj = _clean_objective(om.group(1))
+                        if obj:
+                            objectives.add(obj)
+                    for om in objective_use_pattern.finditer(line):
+                        obj = _clean_objective(om.group(1))
+                        if obj:
+                            objectives.add(obj)
                     for sm in storage_pattern.finditer(line):
                         storages.add((sm.group(1), _clean_key(sm.group(2))))
         return sorted(objectives), sorted(storages, key=lambda t: (t[0], t[1] or ""))
