@@ -78,7 +78,7 @@ command_history.txt.bak
 !pack.png
 backup*.zip
 backup*.rar
-!datapacks/*.zip
+*/datapacks/*.zip
 
 # Other
 *.rar
@@ -130,3 +130,4 @@ build/
 !resourcepacks/
 !buildSrc/
 !mods/dataLib
+!gradle/wrapper/gradle-wrapper.jar
