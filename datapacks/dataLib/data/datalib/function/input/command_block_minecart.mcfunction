@@ -43,6 +43,6 @@
 # Fast exit — nothing tagged, nothing to scan this tick.
 execute unless entity @e[type=minecraft:command_block_minecart,tag=datalib_input] run return 0
 
-execute as @e[type=minecraft:command_block_minecart,tag=datalib_input] run function datalib:input/_private/cbm_process
+execute as @e[type=minecraft:command_block_minecart,tag=datalib_input] run function datalib:input/private/cbm_process
 
 return 1

@@ -1,5 +1,5 @@
 # ======================================================================================
-# datalib:input/_private/cbm_process  [INTERNAL — do not call directly]
+# datalib:input/private/cbm_process  [INTERNAL — do not call directly]
 # ======================================================================================
 #
 # Runs with @s bound to a single tagged command_block_minecart. Reads its
@@ -13,4 +13,4 @@ data modify storage datalib:input _cbm.current set from entity @s Command
 
 # Compare the actual VALUE to "" — a compound match, not a path-existence
 # check. This is the fix for the false-positive-on-empty-Command bug.
-execute unless data storage datalib:input {_cbm:{current:""}} run function datalib:input/_private/cbm_capture
+execute unless data storage datalib:input {_cbm:{current:""}} run function datalib:input/private/cbm_capture

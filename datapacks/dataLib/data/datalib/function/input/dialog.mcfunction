@@ -9,7 +9,7 @@
 #   e.g. 'execute as <player> run function datalib:input/dialog', or bound
 #   to a right-click/other trigger by the caller). Submitted text lands in
 #   datalib:input_prompt's action, which macro-calls
-#   datalib:input/_private/dialog_capture — capture only, no execution.
+#   datalib:input/private/dialog_capture — capture only, no execution.
 #
 # ASSUMPTION FLAGGED — CONFIRM WITH LEGENDS11:
 #   This function assumes the caller decides WHEN to open the dialog

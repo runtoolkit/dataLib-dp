@@ -1,5 +1,5 @@
 # ======================================================================================
-# datalib:input/_private/book_capture  [INTERNAL — do not call directly]
+# datalib:input/private/book_capture  [INTERNAL — do not call directly]
 # ======================================================================================
 #
 # Runs with @s bound to a single player holding the marked written_book.

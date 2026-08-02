@@ -1,5 +1,5 @@
 # ======================================================================================
-# datalib:input/_private/cbm_align_tp  [INTERNAL — call explicitly, not auto-ticked]
+# datalib:input/private/cbm_align_tp  [INTERNAL — call explicitly, not auto-ticked]
 # ======================================================================================
 #
 # Legends11's tested pattern: teleports the executing player to the nearest
