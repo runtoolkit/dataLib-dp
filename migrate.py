@@ -50,11 +50,12 @@ class Logger:
         print(f"{cls.CYAN}╚{'═' * width}╝{cls.RESET}\n")
 
     @classmethod
-    def step(cls, step_num: int, name: str):
+    def step(cls, step_num, name: str):
         timestamp = cls._timestamp()
         divider = f"{cls.MUTED}{'─' * 55}{cls.RESET}"
+        label = f"{step_num:02d}" if isinstance(step_num, int) else str(step_num)
         print(f"\n{divider}")
-        print(f"{timestamp} {cls.BOLD}{cls.HEADER}🚀 STEP {step_num:02d}:{cls.RESET} {cls.BOLD}{name}{cls.RESET}")
+        print(f"{timestamp} {cls.BOLD}{cls.HEADER}🚀 STEP {label}:{cls.RESET} {cls.BOLD}{name}{cls.RESET}")
         print(f"{divider}")
 
     @classmethod
@@ -244,9 +245,10 @@ def step_7_prepare_core_skeleton():
 def step_8_build_module_map():
     Logger.step(8, "Build Module -> Source Path Mapping")
     src = TMP_WORK / "datapacks/dataLib/data/datalib/function"
-    scan_roots = ["systems", "api","player","events","systems","core/cooldown","core/lib","core/state","core/queue","player","world"]
+    scan_roots = ["systems", "input", "api","player/inv","world","systems","core/cooldown","core/lib","core/state","core/queue","events"]
 
     discovered = {}
+    underscore_dirs = []  # (scan_root, entry_name) pairs -- resolved in step_8b
     for r in scan_roots:
         r_full = src / r
         if not r_full.is_dir():
@@ -255,17 +257,7 @@ def step_8_build_module_map():
             if not (r_full / entry).is_dir():
                 continue
             if entry.startswith("_"):
-                # Internal-helper dirs (e.g. input/_private) are not a
-                # standalone module -- fold them into the sibling module
-                # that owns this scan root's other entries, if one exists.
-                siblings = [
-                    s for s in os.listdir(r_full)
-                    if s != entry and not s.startswith("_") and (r_full / s).is_dir()
-                ]
-                if len(siblings) == 1:
-                    discovered.setdefault(siblings[0], []).append(f"{r}/{entry}")
-                # Ambiguous (0 or >1 sibling modules) -- leave unclassified
-                # here; it will fall through to core via classify()'s default.
+                underscore_dirs.append((r, entry))
                 continue
             discovered.setdefault(entry, []).append(f"{r}/{entry}")
 
@@ -300,12 +292,53 @@ def step_8_build_module_map():
             remaining_top.add(entry)
 
     (TMP_ANALYSIS / "module_map.json").write_text(json.dumps({
-        "modules": discovered, 
-        "core_remaining": sorted(remaining_top)
+        "modules": discovered,
+        "core_remaining": sorted(remaining_top),
+        "underscore_dirs": underscore_dirs,
     }, indent=2, ensure_ascii=False))
 
     Logger.info(f"Auto-detected modules ({len(discovered)}): {Logger.CYAN}{sorted(discovered.keys())}{Logger.RESET}")
     Logger.success("module_map.json successfully written.")
+
+
+def step_8b_resolve_underscore_dirs():
+    # Underscore-prefixed dirs (e.g. input/_private) are internal-helper
+    # trees, not standalone modules -- but they must never be silently
+    # dropped. Each one is folded into exactly one real module, with an
+    # explicit, logged decision for every case:
+    #   1 sibling module in the same scan root -> fold into it
+    #   0 or >1 siblings (ambiguous)           -> fold into "core"
+    # Either way the source path is guaranteed to end up in `discovered`.
+    Logger.step("8b", "Resolve Underscore-Prefixed Internal Dirs")
+    src = TMP_WORK / "datapacks/dataLib/data/datalib/function"
+    map_path = TMP_ANALYSIS / "module_map.json"
+    mm = json.loads(map_path.read_text())
+    discovered = mm["modules"]
+    underscore_dirs = mm.get("underscore_dirs", [])
+
+    if not underscore_dirs:
+        Logger.info("No underscore-prefixed directories found.")
+        return
+
+    for r, entry in underscore_dirs:
+        r_full = src / r
+        siblings = [
+            s for s in os.listdir(r_full)
+            if s != entry and not s.startswith("_") and (r_full / s).is_dir()
+        ]
+        source_path = f"{r}/{entry}"
+        if len(siblings) == 1:
+            target = siblings[0]
+            reason = f"sole sibling module '{target}' under {r}/"
+        else:
+            target = "core"
+            reason = f"ambiguous ({len(siblings)} siblings under {r}/) -> defaulting to core"
+        discovered.setdefault(target, []).append(source_path)
+        Logger.info(f"{source_path} -> {target} ({reason})")
+
+    mm["modules"] = discovered
+    map_path.write_text(json.dumps(mm, indent=2, ensure_ascii=False))
+    Logger.success(f"Resolved {len(underscore_dirs)} underscore-prefixed dir(s); none dropped.")
 
 
 def step_9_migrate_functions():
@@ -1017,6 +1050,7 @@ def main():
     step_6_build_function_graph()
     step_7_prepare_core_skeleton()
     step_8_build_module_map()
+    step_8b_resolve_underscore_dirs()
     step_9_migrate_functions()
     step_10_migrate_dlload()
     step_11_create_tags_and_ticks()
