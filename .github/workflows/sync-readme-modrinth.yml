@@ -1,0 +1,39 @@
+name: Sync README to Modrinth
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Update Modrinth project description
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          DESC_JSON=$(python3 -c "
+          import json
+          with open('README.md', 'r', encoding='utf-8') as f:
+              content = f.read()
+          print(json.dumps({'description': content}))
+          ")
+
+          HTTP_STATUS=$(curl -s -o /tmp/response.json -w "%{http_code}" \
+            -X PATCH "https://api.modrinth.com/v2/project/datalib" \
+            -H "Authorization: $MODRINTH_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$DESC_JSON")
+
+          if [ "$HTTP_STATUS" -ge 400 ]; then
+            echo "Modrinth API error (HTTP $HTTP_STATUS)"
+            cat /tmp/response.json
+            exit 1
+          fi
+
+          echo "Description updated successfully (HTTP $HTTP_STATUS)"
