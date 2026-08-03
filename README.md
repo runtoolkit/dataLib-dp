@@ -1,5 +1,5 @@
 # 🔧 dataLib
-**Minecraft Java Edition 1.20.1 | Multiplayer-Safe | Pure Datapack**
+**Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
 
 [![CI](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
@@ -29,7 +29,7 @@
 
 ## 📌 Version targeting note
 
-Active development is currently frozen at **Minecraft 1.20.1** and macro-free (`$$(cmd)` is not used), pending improvements to Mojang's datapack internal gate mechanisms. Newer Minecraft versions (26.x and beyond) are monitored and researched, but are not the active development target until those improvements land.
+Active development is currently frozen at **Minecraft 26.2** and macro-free (`$$(cmd)` is not used), pending improvements to Mojang's datapack internal gate mechanisms. Newer Minecraft versions (26.x and beyond) are monitored and researched, but are not the active development target until those improvements land.
 
 ---
 
@@ -143,4 +143,4 @@ function datalib:core/lib/string/replace
 
 ---
 
-*dataLib v6.0.2 | MC Java 1.20.1 | Pure Datapack*
+*dataLib v6.0.2 | MC Java 26.2 | Pure Datapack*
