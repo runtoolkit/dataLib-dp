@@ -1,5 +1,5 @@
 # 🔧 dataLib
-**Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
+**Minecraft Java Edition 1.20.1 | Multiplayer-Safe | Pure Datapack**
 
 [![CI](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
@@ -13,6 +13,8 @@
 >
 > **Do not copy `datalib:input` or `datalib:engine` into your own datapack.** It is an internal implementation detail and may change without notice between releases.
 
+> ⚠️ **Do not use v5.1.1.** That version bound `_rt_origin.mcfunction` to the load tag, causing it to run automatically on every load with no safe removal path. Fixed in later versions — always use the latest release.
+
 ---
 
 > ⚠️ A `/reload` is still required after installation or after adding the load hook below. Automatic first-join initialization is not implemented in this version — do not rely on this until verified in-game with repeated reloads.
@@ -25,9 +27,15 @@
 
 ---
 
+## 📌 Version targeting note
+
+Active development is currently frozen at **Minecraft 1.20.1** and macro-free (`$$(cmd)` is not used), pending improvements to Mojang's datapack internal gate mechanisms. Newer Minecraft versions (26.x and beyond) are monitored and researched, but are not the active development target until those improvements land.
+
+---
+
 ## 📦 Installation
 
-1. Place [dataLib.zip](https://cdn.modrinth.com/data/jYMa7nhW/versions/bHdACiPH/dataLib-dp.zip?mr_download_reason=standalone) into `<world>/datapacks/`
+1. Download the latest release from the [Modrinth versions page](https://modrinth.com/datapack/datalib/versions) and place the `.zip` into `<world>/datapacks/`.
 
 2. Add the following logic to your datapack's `load` tag. Replace `<namespace>` with your own datapack's namespace (e.g. `mypack`) — this applies only to the function names, never to `datalib:engine`, which is dataLib's own fixed storage and must not be changed:
 
@@ -48,7 +56,14 @@ function dl_load:load/fork_no
 data modify storage datalib:engine global.loaded set value 1b
 ```
 
-**Fixed bug:** an earlier version checked `datalib:engine {global:{loaded:1b}}` in the trigger but set `<namespace>:engine loaded_datalib` in the guard — two different storages, two different paths. The set never satisfied the trigger's condition, so `load_datalib` re-ran every time the load tag fired. This doesn't crash anything, but it silently re-triggers `dl_load:load/yes` and `fork_no` on every reload, which can accumulate side effects depending on what those functions do. Both the check and the set must target `datalib:engine global.loaded`. If you're updating from an older copy of this README, verify by reloading multiple times and confirming `load_datalib` does NOT re-run after the first load.
+<details>
+<summary>Fixed bug: duplicate load trigger (click to expand)</summary>
+
+An earlier version checked `datalib:engine {global:{loaded:1b}}` in the trigger but set `<namespace>:engine loaded_datalib` in the guard — two different storages, two different paths. The set never satisfied the trigger's condition, so `load_datalib` re-ran every time the load tag fired. This doesn't crash anything, but it silently re-triggers `dl_load:load/yes` and `fork_no` on every reload, which can accumulate side effects depending on what those functions do.
+
+Both the check and the set must target `datalib:engine global.loaded`. If you're updating from an older copy of this README, verify by reloading multiple times and confirming `load_datalib` does NOT re-run after the first load.
+
+</details>
 
 ---
 
@@ -80,7 +95,7 @@ datalib:output  (receiving results from a function)
 ## 📦 Dependencies
 
 ### Lantern Load
-**Repository:** https://github.com/LanternMC/load  
+**Repository:** https://github.com/LanternMC/load
 **License:** BSD 0-Clause (public domain)
 
 Provides deterministic load order, version tracking, and pre/load/post-load hooks.
@@ -94,7 +109,7 @@ scoreboard players get dataLib load.status
 ```
 
 ### StringLib
-**Repository:** https://github.com/CMDred/StringLib  
+**Repository:** https://github.com/CMDred/StringLib
 **License:** MIT
 
 Bundled under the `stringlib` namespace. Exposed via `datalib:core/lib/string/*`.
@@ -128,4 +143,4 @@ function datalib:core/lib/string/replace
 
 ---
 
-*dataLib v6.0.2 | MC Java 26.2 | Pure Datapack*
+*dataLib v6.0.2 | MC Java 1.20.1 | Pure Datapack*
