@@ -50,7 +50,6 @@ tellraw @a ["",{"text":"[DL SAFE GATE] =========================================
 # Delegate to regular load/yes
 function dl_load:load/yes
 
-
 # Enable sandbox mode
 data modify storage datalib:engine sandbox set value 1b
 
