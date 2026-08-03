@@ -27,7 +27,7 @@
 
 ## 📦 Installation
 
-1. Place [dataLib.zip](https://cdn.modrinth.com/data/jYMa7nhW/versions/EwBBaMuX/dataLib.zip?mr_download_reason=standalone) into `<world>/datapacks/`
+1. Place [dataLib.zip](https://cdn.modrinth.com/data/jYMa7nhW/versions/bHdACiPH/dataLib-dp.zip?mr_download_reason=standalone) into `<world>/datapacks/`
 
 2. Add the following logic to your datapack's `load` tag. Replace `<namespace>` with your own datapack's namespace (e.g. `mypack`) — this applies only to the function names, never to `datalib:engine`, which is dataLib's own fixed storage and must not be changed:
 
