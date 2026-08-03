@@ -872,11 +872,13 @@ def step_15_post_fixes():
             if key:
                 init_lines.append(f"execute unless data storage {st_id} {key} run data modify storage {st_id} {key} set value {{}}")
             else:
-                # `execute if/unless data storage <id>` requires an NBT path
-                # argument -- it cannot be omitted, so a root-level check is
-                # not valid syntax. Root-level (re)init is idempotent on its
-                # own, so just modify it unconditionally instead of guarding.
-                init_lines.append(f"data modify storage {st_id} set value {{}}")
+                # Neither `execute if/unless data storage <id>` nor
+                # `data modify storage <id> <path> set ...` accept an empty
+                # path -- `modify` requires a path argument before `set`.
+                # `merge` is the one storage subcommand that operates on the
+                # whole storage directly (no path token), and is a no-op if
+                # the key already exists, so it's safe to run unconditionally.
+                init_lines.append(f"data merge storage {st_id} {{}}")
         if not objectives and not storage_pairs:
             init_lines.append("# No module-local scoreboards/storages detected.")
         init_path.write_text("\n".join(init_lines) + "\n", encoding="utf-8")
@@ -897,11 +899,15 @@ def step_15_post_fixes():
             if key:
                 cleanup_lines.append(f"execute if data storage {st_id} {key} run data remove storage {st_id} {key}")
             else:
-                # Same mandatory-path constraint as init: `execute if data
-                # storage <id>` alone is not valid syntax. `data remove
-                # storage <id>` is idempotent (no-op if already absent), so
-                # remove it unconditionally instead of guarding.
-                cleanup_lines.append(f"data remove storage {st_id}")
+                # `data remove storage <id>` also requires a path argument --
+                # there is no vanilla/mecha syntax to remove a whole storage
+                # root in one command. `merge` is the only storage
+                # subcommand without a path token, but it only adds/
+                # overwrites keys, it can't delete ones not present in the
+                # merged value, so this can't be a true wipe. Best available
+                # syntactically-valid approximation: overwrite the root with
+                # an empty compound (matches init's reset value).
+                cleanup_lines.append(f"data merge storage {st_id} {{}}")
         if not objectives and not storage_pairs:
             cleanup_lines.append("# No module-local scoreboards/storages detected.")
         cleanup_path.write_text("\n".join(cleanup_lines) + "\n", encoding="utf-8")
