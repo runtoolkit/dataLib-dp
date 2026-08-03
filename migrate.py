@@ -581,7 +581,7 @@ def step_11_create_tags_and_ticks():
 
     write_text(
         "data/datalib_core/function/init.mcfunction",
-        '#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\ntellraw @s [{text:"Click here",color:"aqua",bold:0b,italic:0b,underlined:1b,click_event:{action:"run_command",command:"/function datalib_core:load_gate/main"}},{text:" ",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:"to",color:"gray",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:" ",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:"load",color:"gray",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:".",color:"gray",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b}]'
+        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\n"
     )
     write_text(
         "data/datalib_core/function/tick.mcfunction",
@@ -872,7 +872,11 @@ def step_15_post_fixes():
             if key:
                 init_lines.append(f"execute unless data storage {st_id} {key} run data modify storage {st_id} {key} set value {{}}")
             else:
-                init_lines.append(f"execute unless data storage {st_id} run data modify storage {st_id} set value {{}}")
+                # `execute if/unless data storage <id>` requires an NBT path
+                # argument -- it cannot be omitted, so a root-level check is
+                # not valid syntax. Root-level (re)init is idempotent on its
+                # own, so just modify it unconditionally instead of guarding.
+                init_lines.append(f"data modify storage {st_id} set value {{}}")
         if not objectives and not storage_pairs:
             init_lines.append("# No module-local scoreboards/storages detected.")
         init_path.write_text("\n".join(init_lines) + "\n", encoding="utf-8")
@@ -893,7 +897,11 @@ def step_15_post_fixes():
             if key:
                 cleanup_lines.append(f"execute if data storage {st_id} {key} run data remove storage {st_id} {key}")
             else:
-                cleanup_lines.append(f"execute if data storage {st_id} run data remove storage {st_id}")
+                # Same mandatory-path constraint as init: `execute if data
+                # storage <id>` alone is not valid syntax. `data remove
+                # storage <id>` is idempotent (no-op if already absent), so
+                # remove it unconditionally instead of guarding.
+                cleanup_lines.append(f"data remove storage {st_id}")
         if not objectives and not storage_pairs:
             cleanup_lines.append("# No module-local scoreboards/storages detected.")
         cleanup_path.write_text("\n".join(cleanup_lines) + "\n", encoding="utf-8")
