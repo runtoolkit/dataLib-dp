@@ -1,5 +1,5 @@
-execute unless entity @s[tag=datalib.admin] run playsound datalib:perm.denied master @s ~ ~ ~ 1 1
-execute unless entity @s[tag=datalib.admin] run return run tellraw @s ["",{"text":"\uE000","color":"#00AAAA"},{"text":" ","color":"#00AAAA"},{"text":"✘ ","color":"red"},{"translate":"datalib.msg.permission_denied","color":"red"}]
+execute if entity @s unless entity @s[tag=datalib.admin] run playsound datalib:perm.denied master @s ~ ~ ~ 1 1
+execute if entity @s unless entity @s[tag=datalib.admin] run return run tellraw @s ["",{"text":"\uE000","color":"#00AAAA"},{"text":" ","color":"#00AAAA"},{"text":"✘ ","color":"red"},{"translate":"datalib.msg.permission_denied","color":"red"}]
 
 $data remove storage datalib:engine permissions.$(player).$(perm)
 

@@ -50,9 +50,8 @@ tellraw @a ["",{"text":"[DL SAFE GATE] =========================================
 # Delegate to regular load/yes
 function dl_load:load/yes
 
-
 # Enable sandbox mode
 data modify storage datalib:engine sandbox set value 1b
 
-# Leave players unsafe by default (v6.0.1 default is already 0b)
+# Leave players unsafe by default (v6.0.2 default is already 0b)
 data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:{}}

@@ -1,6 +1,6 @@
 # dl_load:loader/storages
 # Initializes datalib:engine storage fields that do not yet exist.
-# (moved from dl_load:load/storages in v6.0.1 — load/ vs loader/
+# (moved from dl_load:load/storages in v6.0.2 — load/ vs loader/
 #  separates gate/confirmation logic from the actual init routines)
 #
 # SAFETY DESIGN
@@ -108,7 +108,7 @@ data modify storage datalib:engine batches set value {}
 execute unless data storage datalib:engine wand_cooldowns run data modify storage datalib:engine wand_cooldowns set value {}
 
 # ─────────────────────────────────────────────────────────────────
-# Security module init (v6.0.1+)
+# Security module init (v6.0.2+)
 # BREAKING CHANGE: trust_players defaults to 0b — players must have
 # dl.perm_level explicitly set. datalib.admin tag alone gives no access.
 #
@@ -123,7 +123,7 @@ execute unless data storage datalib:engine wand_cooldowns run data modify storag
 #                          every tick (default, legacy behavior). 0b =
 #                          admins must be given datalib.debug explicitly
 #                          via /function datalib:debug/tools/admin/debug_tag/*
-#                          (v6.0.1, see admin_systems.mcfunction)
+#                          (v6.0.2, see admin_systems.mcfunction)
 #   debug_log              0b = test-block console logging disabled (default).
 #                          1b = every systems/log/add call also pulses the
 #                          configured test_block, so the message text lands
@@ -132,7 +132,7 @@ execute unless data storage datalib:engine wand_cooldowns run data modify storag
 # ─────────────────────────────────────────────────────────────────
 execute unless data storage datalib:engine security run data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:{},auto_debug_tag:1b,debug_log:0b}
 # ─────────────────────────────────────────────────────────────────
-# Security module v6.0.1+ additions
+# Security module v6.0.2+ additions
 # BREAKING CHANGE: sandbox_allowlist is now a compound {} (was list []).
 # Empty compound {} = all sandbox commands blocked.
 # multi_type_allowlist: compound of permitted multiCommands.type values.
@@ -143,7 +143,7 @@ execute if data storage datalib:engine security.sandbox_allowlist[] run data mod
 execute unless data storage datalib:engine security run data modify storage datalib:engine security set value {trust_players:0b,cmd_min_level:3,sandbox_cmd_min_level:4,admin_min_level:2,admin_can_override:0b,sandbox_allowlist:{},auto_debug_tag:1b,debug_log:0b}
 execute unless data storage datalib:engine security.sandbox_allowlist run data modify storage datalib:engine security.sandbox_allowlist set value {}
 execute unless data storage datalib:engine security.multi_type_allowlist run data modify storage datalib:engine security.multi_type_allowlist set value {multi_cmd:1b,multi_cmd_adv:1b}
-# Migration: packs upgraded from pre-v6.0.1 will have a security
+# Migration: packs upgraded from pre-v6.0.2 will have a security
 # compound already present without auto_debug_tag — backfill it so the
 # 'unless data storage ... security run ...' guard above (which only
 # fires when the whole compound is absent) doesn't skip existing worlds.

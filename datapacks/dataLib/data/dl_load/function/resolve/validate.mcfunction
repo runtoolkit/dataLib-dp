@@ -2,7 +2,7 @@
 # Returns 1 → validation passed, load continues.
 # Returns 0 → validation failed, load aborted.
 #
-# v6.0.1: split out of the old monolithic
+# v6.0.2: split out of the old monolithic
 # core/internal/load/validate.mcfunction into dl_load:resolve/* —
 # version compatibility and dependency resolution are distinct
 # concerns and are now separately testable/callable:
@@ -10,8 +10,8 @@
 #   dl_load:resolve/dependencies  — rt_origin/fork + StringLib
 
 # ── Init storage if fresh ────────────────────────────────────────
-execute unless data storage datalib:engine global run data modify storage datalib:engine global set value {version:"v6.0.1"}
-data modify storage datalib:engine global.version set value "v6.0.1"
+execute unless data storage datalib:engine global run data modify storage datalib:engine global set value {version:"v6.0.2"}
+data modify storage datalib:engine global.version set value "v6.0.2"
 
 execute unless data storage datalib:engine log_display run data modify storage datalib:engine log_display set value []
 execute unless score #dl.log_count dl.tmp matches 0.. run scoreboard players set #dl.log_count dl.tmp 0

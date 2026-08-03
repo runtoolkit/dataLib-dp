@@ -6,7 +6,7 @@
 [![Download on Modrinth](https://img.shields.io/badge/Download%20on-Modrinth-00AF5C?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/datapack/datalib)
 
 ---
-> Current version: **v6.0.1**
+> Current version: **v6.0.2**
 ---
 
 > **This datapack is considered safe to use, but it is still actively receiving security improvements, bug fixes, and new features. Please keep it up to date.**
@@ -57,7 +57,7 @@ data modify storage datalib:engine global.loaded set value 1b
 ```
 datalib:engine  (persistent data)
 ├── global
-│   ├── version: "v6.0.1"
+│   ├── version: "v6.0.2"
 │   ├── loaded: 1b
 │   └── tick: <int>
 ├── players
@@ -89,7 +89,7 @@ Provides deterministic load order, version tracking, and pre/load/post-load hook
 # Check if dataLib is loaded
 execute if score #dataLib load.status matches 1.. run say dataLib is loaded
 
-# Get version (major*10000 + minor*100 + patch → v6.0.1 = 601)
+# Get version (major*10000 + minor*100 + patch → v6.0.2 = 601)
 scoreboard players get dataLib load.status
 ```
 
@@ -128,4 +128,4 @@ function datalib:core/lib/string/replace
 
 ---
 
-*dataLib v6.0.1 | MC Java 26.2 | Pure Datapack*
+*dataLib v6.0.2 | MC Java 26.2 | Pure Datapack*

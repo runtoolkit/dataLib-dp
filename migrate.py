@@ -923,7 +923,7 @@ scoreboard players set $dl_{m}_version dl.{m}.version 601
             "features": {"enabled": ["minecraft:vanilla"]}
         }
 
-    (DST_BASE / "datalib-core/pack.mcmeta").write_text(json.dumps(get_mcmeta("D.L. Core", " | v6.0.1"), indent=2, ensure_ascii=False))
+    (DST_BASE / "datalib-core/pack.mcmeta").write_text(json.dumps(get_mcmeta("D.L. Core", " | v6.0.2"), indent=2, ensure_ascii=False))
     for m in module_list:
         p_dir = DST_BASE / f"datalib-{m}-module"
         (p_dir / "pack.mcmeta").write_text(json.dumps(get_mcmeta(f"D.L. -- {m}", " | requires datalib-core"), indent=2, ensure_ascii=False))
