@@ -581,7 +581,7 @@ def step_11_create_tags_and_ticks():
 
     write_text(
         "data/datalib_core/function/init.mcfunction",
-        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\n"
+        '#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\ntellraw @s [{text:"Click here",color:"aqua",bold:0b,italic:0b,underlined:1b,click_event:{action:"run_command",command:"/function datalib_core:load_gate/main"}},{text:" ",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:"to",color:"gray",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:" ",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:"load",color:"gray",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b},{text:".",color:"gray",bold:0b,italic:0b,underlined:0b,strikethrough:0b,obfuscated:0b}]'
     )
     write_text(
         "data/datalib_core/function/tick.mcfunction",
