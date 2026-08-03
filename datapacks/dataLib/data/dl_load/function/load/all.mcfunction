@@ -1,7 +1,7 @@
 # dl_load:load/all
 # Load — entry point called from minecraft:load tag via datalib:load
 #
-# STAGE DEBUG NOTE (v6.0.1)
+# STAGE DEBUG NOTE (v6.0.2)
 # -------------------------------
 # Previously each stage spawned a minecraft:marker entity purely to run
 # 'say' (marker context was used because 'say' has no @a[tag=...] filter

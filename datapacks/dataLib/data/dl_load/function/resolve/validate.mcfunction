@@ -2,7 +2,7 @@
 # Returns 1 → validation passed, load continues.
 # Returns 0 → validation failed, load aborted.
 #
-# v6.0.1: split out of the old monolithic
+# v6.0.2: split out of the old monolithic
 # core/internal/load/validate.mcfunction into dl_load:resolve/* —
 # version compatibility and dependency resolution are distinct
 # concerns and are now separately testable/callable:

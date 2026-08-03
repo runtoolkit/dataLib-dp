@@ -8,7 +8,7 @@
 # clickable confirmation prompt, then returns. Nothing in datalib:engine
 # storage is touched here.
 #
-# v6.0.1: renamed from dl_load:_ to dl_load:main, and dropped the
+# v6.0.2: renamed from dl_load:_ to dl_load:main, and dropped the
 # marker-entity + 'say' broadcast pattern entirely.
 #   - The marker/say pattern existed because 'say' has no @a[tag=...]
 #     filter and, historically, tellraw/clickEvent rendering was

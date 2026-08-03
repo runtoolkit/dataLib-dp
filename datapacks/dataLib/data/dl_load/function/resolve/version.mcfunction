@@ -6,7 +6,7 @@
 #
 # EXPECTED (v6.0.2): major=6 minor=0 patch=2 pre=0 (stable, not a pre-release)
 #
-# BUGFIX (v6.0.1): the previous check compared #dl.pre against
+# BUGFIX (v6.0.2): the previous check compared #dl.pre against
 # "matches 1.." (i.e. "any pre >= 1 counts as mismatch"), which made
 # this objective self-defeating — the pack's own expected pre value
 # is >= 1, so a *correctly* stamped scoreboard from a prior pass in
