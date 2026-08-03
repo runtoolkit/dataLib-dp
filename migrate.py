@@ -825,10 +825,21 @@ def step_15_post_fixes():
     storage_pattern = re.compile(r'\bstorage\s+(datalib_[a-z0-9_]*:[a-zA-Z0-9_]+)(?:\s+([a-zA-Z0-9_.\[\]]+))?')
 
     def _clean_key(raw_key):
-        # Reject anything that isn't a genuine NBT path segment (e.g. an
-        # inline `{}`/`{...}` literal that the regex's generic tail
-        # accidentally swept up).
+        # Reject anything that isn't a genuine, syntactically complete NBT
+        # path segment:
+        # - an inline `{}`/`{...}` literal the regex's generic tail
+        #   accidentally swept up
+        # - a trailing `.` (e.g. "color.gradients.") -- these come from
+        #   source lines using the key as a string prefix match, not as a
+        #   real data path; a path segment can't end in a bare dot
+        # - an unclosed/unbalanced `[` or `]` (e.g. "perm_trigger_names[",
+        #   "dataLib.flags[") -- same string-prefix situation, and an open
+        #   bracket alone isn't a valid array index
         if not raw_key or raw_key in ("{}",) or raw_key.startswith("{"):
+            return None
+        if raw_key.endswith("."):
+            return None
+        if raw_key.count("[") != raw_key.count("]"):
             return None
         return raw_key
 
