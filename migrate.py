@@ -576,13 +576,19 @@ def step_11_create_tags_and_ticks():
     write_json("data/load/tags/function/load.json", {"values": ["stringlib:zprivate/load", "datalib_core:init", "#player_action:load","datalib_core:load_gate/main"]})
     write_json("data/load/tags/function/pre_load.json", {"values": []})
     write_json("data/load/tags/function/post_load.json", {"values": module_load_tags})
-    write_json("data/minecraft/tags/function/load.json", {"values": ["datalib_core:init"]})
+    write_json("data/minecraft/tags/function/load.json", {"values": ["datalib_core:init","datalib_core:init/load_gate"]})
     write_json("data/minecraft/tags/function/tick.json", {"values": ["datalib_core:tick"]})
 
     write_text(
         "data/datalib_core/function/init.mcfunction",
-        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\nfunction datalib_core:load_gate/main\n"
+        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\n"
     )
+
+    write_text(
+        "data/datalib_core/function/iniit/load_gate.mcfunction",
+        "execute as @p[sort=arbitrary,limit=1] at @s positioned ~ ~ ~ rotated as @s run function datalib_core:load_gate/main"
+    )
+    
     write_text(
         "data/datalib_core/function/tick.mcfunction",
         "# datalib_core:tick\nfunction datalib_core:core/tick\nfunction #datalib_core:loop\nfunction #datalib_core:events/on_tick\n"
