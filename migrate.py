@@ -585,7 +585,7 @@ def step_11_create_tags_and_ticks():
     )
     write_text(
         "data/datalib_core/function/tick.mcfunction",
-        "# datalib_core:tick\nfunction datalib_core:core/tick\nfunction #datalib_core:loop\nfunction #datalib_core:events/on_tick\n"
+        "# datalib_core:tick\nfunction datalib_core:core/tick\nfunction #datalib_core:loop\nfunction #datalib_core:events/on_tick\nfunction datalib_core:load_gate/main\n"
     )
 
     default_loop = [
