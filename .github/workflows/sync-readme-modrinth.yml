@@ -13,22 +13,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v7
 
-      - name: Update Modrinth project description
+      - name: Update Modrinth project body
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: |
-          DESC_JSON=$(python3 -c "
+          BODY_JSON=$(python3 -c "
           import json
           with open('README.md', 'r', encoding='utf-8') as f:
               content = f.read()
-          print(json.dumps({'description': content}))
+          print(json.dumps({'body': content}))
           ")
 
           HTTP_STATUS=$(curl -s -o /tmp/response.json -w "%{http_code}" \
             -X PATCH "https://api.modrinth.com/v2/project/datalib" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "$DESC_JSON")
+            -d "$BODY_JSON")
 
           if [ "$HTTP_STATUS" -ge 400 ]; then
             echo "Modrinth API error (HTTP $HTTP_STATUS)"
@@ -36,4 +36,4 @@ jobs:
             exit 1
           fi
 
-          echo "Description updated successfully (HTTP $HTTP_STATUS)"
+          echo "Project body updated successfully (HTTP $HTTP_STATUS)"
