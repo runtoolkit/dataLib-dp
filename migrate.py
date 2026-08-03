@@ -581,7 +581,7 @@ def step_11_create_tags_and_ticks():
 
     write_text(
         "data/datalib_core/function/init.mcfunction",
-        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nfunction #load:_private/load\n"
+        "#> Runs on datapack loading\nexecute if data storage datalib_core:engine {global:{loaded:1b}} run return 0\nscoreboard players set #StringLib.ShowLoadMessage StringLib 0\nfunction #load:_private/load\n"
     )
     write_text(
         "data/datalib_core/function/tick.mcfunction",
