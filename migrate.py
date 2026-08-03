@@ -585,7 +585,7 @@ def step_11_create_tags_and_ticks():
     )
 
     write_text(
-        "data/datalib_core/function/iniit/load_gate.mcfunction",
+        "data/datalib_core/function/init/load_gate.mcfunction",
         "execute as @p[sort=arbitrary,limit=1] at @s positioned ~ ~ ~ rotated as @s run function datalib_core:load_gate/main"
     )
     
