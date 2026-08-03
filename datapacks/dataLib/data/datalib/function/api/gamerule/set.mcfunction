@@ -23,13 +23,15 @@
 
 execute unless function datalib:core/security/cmd_gate run return 0
 
-# ── Normalize rule name: spaces → underscores via StringLib ──────────────────
+# ── Normalize rule name: spaces → underscores, then lowercase ────────────────
 data modify storage stringlib:input replace.String set from storage datalib:input rule
 data modify storage stringlib:input replace.Find set value " "
 data modify storage stringlib:input replace.Replace set value "_"
 function stringlib:util/replace
-data modify storage datalib:input _gamerule_norm set from storage stringlib:output replace
+data modify storage stringlib:input to_lowercase.String set from storage stringlib:output replace
 data remove storage stringlib:input replace
+function stringlib:util/to_lowercase/fast
+data modify storage datalib:input _gamerule_norm set from storage stringlib:output to_lowercase
 
 # ── Persist value in engine storage ──────────────────────────────────────────
 function datalib:core/internal/api/gamerule/persist with storage datalib:input {}

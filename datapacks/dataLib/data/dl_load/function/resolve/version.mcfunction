@@ -4,7 +4,7 @@
 # expected version. Returns 1 → match / not yet set (proceed).
 # Returns 0 → mismatch (version_warn fired, load aborted upstream).
 #
-# EXPECTED (v6.0.1): major=6 minor=0 patch=1 pre=2
+# EXPECTED (v6.0.2): major=6 minor=0 patch=2 pre=0 (stable, not a pre-release)
 #
 # BUGFIX (v6.0.1): the previous check compared #dl.pre against
 # "matches 1.." (i.e. "any pre >= 1 counts as mismatch"), which made
@@ -20,8 +20,8 @@ scoreboard players set #dl.mismatch dl.pre_version 0
 # (#dl.ver_set is set by core/internal/load/version_set).
 execute if score #dl.ver_set dl.pre_version matches 1 run execute unless score #dl.major dl.pre_version matches 6 run scoreboard players set #dl.mismatch dl.pre_version 1
 execute if score #dl.ver_set dl.pre_version matches 1 run execute unless score #dl.minor dl.pre_version matches 0 run scoreboard players set #dl.mismatch dl.pre_version 1
-execute if score #dl.ver_set dl.pre_version matches 1 run execute unless score #dl.patch dl.pre_version matches 1 run scoreboard players set #dl.mismatch dl.pre_version 1
-execute if score #dl.ver_set dl.pre_version matches 1 run execute unless score #dl.pre dl.pre_version matches 2 run scoreboard players set #dl.mismatch dl.pre_version 1
+execute if score #dl.ver_set dl.pre_version matches 1 run execute unless score #dl.patch dl.pre_version matches 2 run scoreboard players set #dl.mismatch dl.pre_version 1
+execute if score #dl.ver_set dl.pre_version matches 1 run execute unless score #dl.pre dl.pre_version matches 0 run scoreboard players set #dl.mismatch dl.pre_version 1
 
 execute if score #dl.mismatch dl.pre_version matches 1 run function dl_load:core/internal/load/version_warn
 execute if score #dl.mismatch dl.pre_version matches 1 run return 0

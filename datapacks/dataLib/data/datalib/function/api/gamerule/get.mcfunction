@@ -19,8 +19,10 @@ data modify storage stringlib:input replace.String set from storage datalib:inpu
 data modify storage stringlib:input replace.Find set value " "
 data modify storage stringlib:input replace.Replace set value "_"
 function stringlib:util/replace
-data modify storage datalib:input _gamerule_norm set from storage stringlib:output replace
+data modify storage stringlib:input to_lowercase.String set from storage stringlib:output replace
 data remove storage stringlib:input replace
+function stringlib:util/to_lowercase/fast
+data modify storage datalib:input _gamerule_norm set from storage stringlib:output to_lowercase
 
 # Read from engine storage
 data remove storage datalib:output gamerule
