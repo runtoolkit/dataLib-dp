@@ -27,12 +27,6 @@
 
 ---
 
-## 📌 Version targeting note
-
-Active development is currently frozen at **Minecraft 26.2** and macro-free (`$$(cmd)` is not used), pending improvements to Mojang's datapack internal gate mechanisms. Newer Minecraft versions (26.x and beyond) are monitored and researched, but are not the active development target until those improvements land.
-
----
-
 ## 📦 Installation
 
 1. Download the latest release from the [Modrinth versions page](https://modrinth.com/datapack/datalib/versions) and place the `.zip` into `<world>/datapacks/`.
