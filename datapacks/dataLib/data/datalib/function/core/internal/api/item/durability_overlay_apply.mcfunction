@@ -1,4 +1,4 @@
-# datalib:api/item/internal/durability_overlay_apply
+# datalib:core/internal/api/item/durability_overlay_apply
 # Internal — do not call directly. Second pass of api/item/durability_overlay.
 # Expects: {player:"...",slot:"...",dataLib:{...}}
 

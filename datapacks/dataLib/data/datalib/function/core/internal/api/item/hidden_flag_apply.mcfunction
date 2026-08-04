@@ -1,4 +1,4 @@
-# datalib:api/item/internal/hidden_flag_apply
+# datalib:core/internal/api/item/hidden_flag_apply
 # Internal — do not call directly. Second pass of api/item/hidden_flag.
 # Expects: {player:"...",slot:"...",dataLib:{...}}
 

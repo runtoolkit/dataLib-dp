@@ -19,9 +19,9 @@ $execute unless entity @a[name=$(player),limit=1] run return 0
 data modify storage datalib:output found set value 1b
 
 $data modify storage datalib:_item_tmp player set value "$(player)"
-function datalib:api/item/internal/read_datalib_compound with storage datalib:_item_tmp
+function datalib:core/internal/api/item/read_datalib_compound with storage datalib:_item_tmp
 
 $data modify storage datalib:_item_tmp dataLib.combo set value $(combo)
 $data modify storage datalib:_item_tmp slot set value "$(slot)"
 
-function datalib:api/item/internal/combo_marker_apply with storage datalib:_item_tmp
+function datalib:core/internal/api/item/combo_marker_apply with storage datalib:_item_tmp
