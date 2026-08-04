@@ -1,4 +1,4 @@
-# datalib:api/item/internal/use_cooldown_apply
+# datalib:core/internal/api/item/use_cooldown_apply
 # Internal — do not call directly. Final pass of api/item/use_cooldown.
 # Expects: {player:"...",slot:"...",dataLib:{...}}
 

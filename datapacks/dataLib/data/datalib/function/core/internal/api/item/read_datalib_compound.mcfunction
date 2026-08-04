@@ -1,4 +1,4 @@
-# datalib:api/item/internal/read_datalib_compound
+# datalib:core/internal/api/item/read_datalib_compound
 # Internal — do not call directly.
 #
 # Reads the MAIN HAND item's existing minecraft:custom_data.dataLib compound

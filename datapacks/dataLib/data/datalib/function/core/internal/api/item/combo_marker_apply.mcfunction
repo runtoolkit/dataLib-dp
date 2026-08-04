@@ -1,4 +1,4 @@
-# datalib:api/item/internal/combo_marker_apply
+# datalib:core/internal/api/item/combo_marker_apply
 # Internal — do not call directly. Second pass of api/item/combo_marker.
 # Expects: {player:"...",slot:"...",dataLib:{...}}
 

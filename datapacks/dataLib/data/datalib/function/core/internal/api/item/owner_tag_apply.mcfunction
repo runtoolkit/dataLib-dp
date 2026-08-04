@@ -1,4 +1,4 @@
-# datalib:api/item/internal/owner_tag_apply
+# datalib:core/internal/api/item/owner_tag_apply
 # Internal — do not call directly. Second pass of api/item/owner_tag.
 # Expects: {player:"...",slot:"...",dataLib:{...}}
 

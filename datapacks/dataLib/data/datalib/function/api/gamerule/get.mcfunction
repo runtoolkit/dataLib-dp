@@ -28,6 +28,10 @@ data modify storage datalib:input _gamerule_norm set from storage stringlib:outp
 data remove storage datalib:output gamerule
 function datalib:core/internal/api/gamerule/read with storage datalib:input {}
 
-$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"gamerule/get ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(_gamerule_norm)","color":"white"},{"text":" = ","color":"#555555"},{"plain":true ,"storage":"datalib:output","nbt":"gamerule","color":"green"}]
+# $(_gamerule_norm) below is a NEW macro invocation's arg, bound at call time
+# from current storage — NOT the same binding as this function's own $(rule)
+# arg (which was fixed at entry, before _gamerule_norm existed). Calling this
+# inline as a bare $tellraw would have silently failed to resolve.
+function datalib:core/internal/api/gamerule/debug_print with storage datalib:input {}
 
 data remove storage datalib:input _gamerule_norm
