@@ -1,4 +1,10 @@
 # 🔧 dataLib
+
+> ## 🗄️ ARCHIVED
+> **This project is archived and no longer maintained.** No new features, bug fixes, or security patches will be released. The information below reflects the state of the project at the time of archival and is kept for reference only.
+>
+> Use at your own risk — known issues will not be fixed, and newer Minecraft versions are not guaranteed to be compatible.
+
 **Minecraft Java Edition 26.2 | Multiplayer-Safe | Pure Datapack**
 
 [![CI](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml/badge.svg)](https://github.com/runtoolkit/dataLib-dp/actions/workflows/ci.yml)
@@ -9,7 +15,7 @@
 > Current version: **v6.0.2**
 ---
 
-> **This datapack is considered safe to use, but it is still actively receiving security improvements, bug fixes, and new features. Please keep it up to date.**
+> **This datapack was considered safe to use as of its last release, but it no longer receives security improvements, bug fixes, or new features. There is no "up to date" version to move to.**
 >
 > **Do not copy `datalib:input` or `datalib:engine` into your own datapack.** It is an internal implementation detail and may change without notice between releases.
 
@@ -131,6 +137,8 @@ function datalib:core/lib/string/replace
 ```
 
 ## 💬 Support
+
+**This project is archived. Issues and pull requests are not monitored and will not be actioned.**
 
 [![Issues](https://img.shields.io/github/issues/runtoolkit/dataLib-dp?style=for-the-badge)](https://github.com/runtoolkit/dataLib-dp/issues)
 [![Discussions](https://img.shields.io/github/discussions/runtoolkit/dataLib-dp?style=for-the-badge&logo=github&color=blue)](https://github.com/runtoolkit/dataLib-dp/discussions)

@@ -1,4 +1,8 @@
 # Contributing Guide
+
+> ## 🗄️ ARCHIVED — Not Accepting Contributions
+> This project is archived. Pull requests and feature requests will not be reviewed or merged. Issues will not be triaged. This document is kept for historical reference only.
+
 Thank you for considering contributing to this Minecraft Java Edition datapack.
 This document defines contribution standards, architectural constraints, and review criteria.  
 All contributions are evaluated based on stability, performance, security, and long-term maintainability.
