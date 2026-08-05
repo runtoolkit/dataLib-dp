@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "interact_click_entity": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": [
+          {
+            "entity": "this",
+            "predicate": {
+              "nbt": "{Tags:[\"player_action.click_entity\"]}",
+              "entity_type": "minecraft:interaction"
+            },
+            "condition": "minecraft:entity_properties"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_click_entity"
+  }
+}

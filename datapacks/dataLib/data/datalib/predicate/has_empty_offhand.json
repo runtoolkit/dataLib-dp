@@ -1,0 +1,13 @@
+{
+  "entity": "this",
+  "predicate": {
+    "equipment": {
+      "offhand": {
+        "count": {
+          "max": 0
+        }
+      }
+    }
+  },
+  "condition": "minecraft:entity_properties"
+}

@@ -1,0 +1,11 @@
+{
+  "criteria": {
+    "changed_dimension": {
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_dimension_change"
+  },
+  "parent": "datalib:hidden/root"
+}

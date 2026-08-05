@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "interact_enderchest": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "predicate": {
+              "block": {
+                "blocks": "minecraft:ender_chest"
+              }
+            },
+            "condition": "minecraft:location_check"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_enderchest"
+  }
+}

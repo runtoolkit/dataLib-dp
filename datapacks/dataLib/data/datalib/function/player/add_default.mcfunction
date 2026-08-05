@@ -1,0 +1,2 @@
+$execute unless data storage datalib:engine players.$(player).$(key) run data modify storage datalib:engine players.$(player).$(key) set value $(value)
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/add_default ","color":"aqua"},{"text":"$(player)","color":"white"},{"text":" → ","color":"#555555"},{"text":"$(key)","color":"aqua"}]

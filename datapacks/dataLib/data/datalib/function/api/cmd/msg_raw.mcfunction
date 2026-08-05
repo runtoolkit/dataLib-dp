@@ -1,0 +1,2 @@
+
+$tellraw $(player) $(json)

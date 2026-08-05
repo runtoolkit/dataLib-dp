@@ -1,0 +1,21 @@
+{
+  "criteria": {
+    "attack_click_entity": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [
+          {
+            "entity": "this",
+            "predicate": {
+              "nbt": "{Tags:[\"player_action.click_entity\"]}"
+            },
+            "condition": "minecraft:entity_properties"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "player_action:core/internal/v1/attack_click_entity"
+  }
+}

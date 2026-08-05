@@ -1,0 +1,9 @@
+{
+  "entity": "this",
+  "scores": {
+    "datalib.health": {
+      "max": 10
+    }
+  },
+  "condition": "minecraft:entity_scores"
+}

@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "interact_cauldron": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "predicate": {
+              "block": {
+                "blocks": "#minecraft:cauldrons"
+              }
+            },
+            "condition": "minecraft:location_check"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_cauldron"
+  }
+}

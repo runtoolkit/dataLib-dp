@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "interact_loom": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:loom"
+                ]
+              }
+            },
+            "condition": "minecraft:location_check"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_loom"
+  }
+}

@@ -1,0 +1,2 @@
+$data modify storage datalib:engine players.$(to).$(key) set from storage datalib:engine players.$(from).$(key)
+$tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"player/copy_var ","color":"aqua"},{"text":" → ","color":"#555555"},{"text":"$(key)","color":"aqua"}]

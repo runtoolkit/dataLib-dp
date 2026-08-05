@@ -1,0 +1,14 @@
+{
+  "entity": "this",
+  "predicate": {
+    "flags": {
+      "is_flying": true
+    },
+    "equipment": {
+      "chest": {
+        "items": "minecraft:elytra"
+      }
+    }
+  },
+  "condition": "minecraft:entity_properties"
+}

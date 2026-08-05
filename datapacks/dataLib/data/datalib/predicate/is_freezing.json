@@ -1,0 +1,8 @@
+{
+  "entity": "this",
+  "predicate": {
+    "nbt": "{FrozenTicks:1..}",
+    "entity_type": "minecraft:player"
+  },
+  "condition": "minecraft:entity_properties"
+}

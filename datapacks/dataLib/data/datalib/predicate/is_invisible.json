@@ -1,0 +1,9 @@
+{
+  "entity": "this",
+  "predicate": {
+    "flags": {
+      "is_invisible": true
+    }
+  },
+  "condition": "minecraft:entity_properties"
+}

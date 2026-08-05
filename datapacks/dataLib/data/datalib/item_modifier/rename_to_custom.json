@@ -1,0 +1,9 @@
+{
+  "target": "item_name",
+  "name": {
+    "text": "Custom Item",
+    "italic": false,
+    "color": "gold"
+  },
+  "function": "minecraft:set_name"
+}

@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "interact_dropper": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:dropper"
+                ]
+              }
+            },
+            "condition": "minecraft:location_check"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "player_action:core/internal/v1/interact_dropper"
+  }
+}

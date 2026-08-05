@@ -1,0 +1,11 @@
+{
+  "entity": "this",
+  "predicate": {
+    "equipment": {
+      "mainhand": {
+        "items": "minecraft:bow"
+      }
+    }
+  },
+  "condition": "minecraft:entity_properties"
+}

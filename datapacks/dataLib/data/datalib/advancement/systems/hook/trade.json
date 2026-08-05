@@ -1,0 +1,11 @@
+{
+  "criteria": {
+    "traded_with_villager": {
+      "trigger": "minecraft:villager_trade"
+    }
+  },
+  "rewards": {
+    "function": "datalib:systems/hook/on_trade"
+  },
+  "parent": "datalib:hidden/root"
+}
