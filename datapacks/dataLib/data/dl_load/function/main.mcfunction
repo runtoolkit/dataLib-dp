@@ -11,4 +11,4 @@ execute if data storage datalib:engine global{loaded:1b} if data storage datalib
 
 execute if data storage datalib:engine global{loaded:1b} run return 0
 
-schedule function dl_load:load/all 31s
+schedule function dl_load:load/all 2s
