@@ -1,5 +1,6 @@
 {
     "values": [
-        "datalib.main:datalib/load"
+        "datalib.main:datalib/load",
+        "dl_load:main"
     ]
 }
