@@ -9,4 +9,4 @@ data modify storage stringlib:temp data.CheckString.String set string storage st
 data modify storage stringlib:temp data.CheckString.Find set string storage stringlib:input find.Find 1
 
 function stringlib:zprivate/find/check_word_rest_loop
-execute if score #StringLib.SuccessCheck StringLib matches 1 run
+execute if score #StringLib.SuccessCheck StringLib matches 1 run return 1
