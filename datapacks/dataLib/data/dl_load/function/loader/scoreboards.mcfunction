@@ -14,9 +14,6 @@ scoreboard objectives add datalib.pid dummy
 scoreboard objectives add dl.freeze_id dummy
 scoreboard objectives add datalib.onlinePlayers dummy
 
-# Lantern Load integration — pack version tracking
-scoreboard objectives add load.status dummy
-
 # Wand module — carrot_on_a_stick right-click tracker
 scoreboard objectives add datalib.rightClick minecraft.used:minecraft.carrot_on_a_stick
 
@@ -66,10 +63,6 @@ scoreboard objectives add datalib.hook_eat dummy
 # hook/fish_caught — fishing_rod_hooked advancement-based
 scoreboard objectives add datalib.hook_fish dummy
 
-# Version calculation constants (for Lantern Load integration)
-scoreboard players set #10000 dl.tmp 10000
-scoreboard players set #100 dl.tmp 100
-
 # input/validate module — scratch scores, all on the existing dl.tmp
 # objective rather than a new one (DL.Len, DL.DotHits, etc. all live here)
 
@@ -85,7 +78,3 @@ scoreboard objectives add dl.gamerule dummy
 
 # State scoreboard — per-player state machine (0=idle 1=combat 2=menu ...)
 scoreboard objectives add datalib.state dummy
-
-# Security module — per-player permission level
-# 0=no access (default)  1=basic  2=standard  3=elevated($$(cmd))  4=super
-scoreboard objectives add dl.perm_level dummy
