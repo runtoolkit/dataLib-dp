@@ -1,9 +1,0 @@
-{
-  "entity": "this",
-  "scores": {
-    "datalib.food": {
-      "max": 19
-    }
-  },
-  "condition": "minecraft:entity_scores"
-}
