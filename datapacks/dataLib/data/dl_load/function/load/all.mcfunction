@@ -7,7 +7,7 @@ forceload add -30000000 1600
 
 function dl_load:loader/scoreboards
 function dl_load:loader/storages
-function dl_load:load/other
+function dl_load:loader/other
 
 # Re-apply config after storages (storages may reset defaults)
 function datalib:config
