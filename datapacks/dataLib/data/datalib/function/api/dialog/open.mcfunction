@@ -10,5 +10,3 @@ execute if data storage datalib:engine {dialog:{DIALOG:{type:"multi_action"}}} u
 
 execute if data storage datalib:engine dialog.DIALOG run function datalib:api/dialog/show
 execute if data storage datalib:engine dialog.DIALOG run function datalib:api/dialog/notify_admins
-
-return 1

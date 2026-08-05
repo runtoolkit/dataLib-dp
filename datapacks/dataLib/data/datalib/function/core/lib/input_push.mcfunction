@@ -93,4 +93,3 @@ data modify storage datalib:engine _input_stack[-1].remove_tag set from storage 
 data modify storage datalib:engine _input_stack[-1].expected set from storage datalib:input expected
 data modify storage datalib:engine _input_stack[-1].new_block set from storage datalib:input new_block
 data modify storage datalib:engine _input_stack[-1].replace_with set from storage datalib:input replace_with
-

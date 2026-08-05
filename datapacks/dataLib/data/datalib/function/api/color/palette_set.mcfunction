@@ -12,7 +12,6 @@
 #   function datalib:api/color/palette_set {key:"brand",value:"#00AAAA"}
 #   function datalib:api/color/palette_set {key:"danger",value:"red"}
 
-execute unless function datalib:core/security/cmd_gate run return 0
 
 execute unless data storage datalib:engine color.palette run data modify storage datalib:engine color.palette set value {}
 $data modify storage datalib:engine color.palette.$(key) set value "$(value)"

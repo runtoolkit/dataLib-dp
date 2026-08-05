@@ -17,7 +17,6 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Security gate
-execute unless function datalib:core/security/cmd_gate run return 0
 
 # Verify required inputs
 execute unless data storage datalib:input cb.cmd run tellraw @s [{"text":"[DL/cb] ","color":"#00AAAA","bold":true},{"text":"cb.cmd not set","color":"red"}]

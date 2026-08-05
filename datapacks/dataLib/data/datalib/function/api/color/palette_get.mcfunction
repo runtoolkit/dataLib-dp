@@ -11,7 +11,6 @@
 #   function datalib:api/color/palette_get {key:"brand"}
 #   data get storage datalib:output result
 
-execute unless function datalib:core/security/cmd_gate run return 0
 
 data modify storage datalib:output result set value ""
 $execute if data storage datalib:engine color.palette.$(key) run data modify storage datalib:output result set from storage datalib:engine color.palette.$(key)

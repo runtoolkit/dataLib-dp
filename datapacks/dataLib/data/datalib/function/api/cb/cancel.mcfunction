@@ -10,7 +10,6 @@
 #   function datalib:api/cb/cancel
 # ─────────────────────────────────────────────────────────────────
 
-execute unless function datalib:core/security/cmd_gate run return 0
 
 data remove storage datalib:engine cb_queue
 data modify storage datalib:engine cb_queue set value []

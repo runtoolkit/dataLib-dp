@@ -22,7 +22,6 @@ data modify storage datalib:input cbm.source_uuid set from entity @s UUID
 data modify storage datalib:input cbm.pos set from entity @s Pos
 
 # "raw, unvalidated, unexecuted" — downstream (separate execution pack)
-# must run this through datalib:core/security/sanitize and
 # datalib:debug/tools/utils/input_check before ever treating it as
 # runnable, and running it there stays optional, never mandatory.
 #

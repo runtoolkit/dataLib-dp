@@ -21,7 +21,6 @@
 #
 # RETURN: 1 on success, 0 on guard failure.
 
-execute unless function datalib:core/security/cmd_gate run return 0
 
 # ── Normalize rule name: spaces → underscores, then lowercase ────────────────
 data modify storage stringlib:input replace.String set from storage datalib:input rule
@@ -44,5 +43,3 @@ $tellraw @a[tag=datalib.debug] ["",{"text":"[DL] ","color":"#00AAAA","bold":true
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────
 data remove storage datalib:input _gamerule_norm
-
-return 1

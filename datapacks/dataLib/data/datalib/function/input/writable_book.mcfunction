@@ -29,5 +29,3 @@
 execute unless entity @a[nbt={SelectedItem:{components:{"minecraft:custom_data":{dataLib:{input:1b}}}}}] run return 0
 
 execute as @a[nbt={SelectedItem:{components:{"minecraft:custom_data":{dataLib:{input:1b}}}}}] run function datalib:input/private/book_capture
-
-return 1

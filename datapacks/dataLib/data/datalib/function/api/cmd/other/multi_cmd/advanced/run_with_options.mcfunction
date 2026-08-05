@@ -14,7 +14,6 @@ data modify storage datalib:engine _mcmd_options merge from storage datalib:inpu
 
 # Validate options.type if caller explicitly specified one
 execute if data storage datalib:engine _mcmd_options.type run data modify storage datalib:engine multiCommands.type set from storage datalib:engine _mcmd_options.type
-execute if data storage datalib:engine _mcmd_options.type run execute unless function datalib:core/security/multi_type_check run return 0
 
 execute unless data storage datalib:engine _mcmd_options.error_mode run data modify storage datalib:engine _mcmd_options.error_mode set value "continue"
 execute unless data storage datalib:engine _mcmd_options.profile run data modify storage datalib:engine _mcmd_options.profile set value 0b

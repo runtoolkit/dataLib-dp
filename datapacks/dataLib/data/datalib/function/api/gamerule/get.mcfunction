@@ -12,7 +12,6 @@
 #   function datalib:api/gamerule/get with storage datalib:input {}
 #   # read: data get storage datalib:output gamerule
 
-execute unless function datalib:core/security/cmd_gate run return 0
 
 # Normalize key (spaces → underscores, lowercase)
 data modify storage stringlib:input replace.String set from storage datalib:input rule

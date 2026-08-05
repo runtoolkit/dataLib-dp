@@ -7,7 +7,6 @@
 #
 # config:{silent:1} → suppress debug tellraw.
 
-function datalib:debug/tools/utils/check_all
 
 data modify storage datalib:engine tools_trigger.data.uuid set from entity @s UUID
 

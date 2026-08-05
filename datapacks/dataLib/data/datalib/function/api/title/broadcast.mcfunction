@@ -19,7 +19,6 @@
 #     subtitle:"Save your progress!",color:"red",sub_color:"yellow",\
 #     fade_in:20,stay:100,fade_out:20}
 
-execute unless function datalib:debug/tools/utils/check_all run return 0
 
 $title @a times $(fade_in) $(stay) $(fade_out)
 $title @a title {"text":"$(title)","color":"$(color)"}

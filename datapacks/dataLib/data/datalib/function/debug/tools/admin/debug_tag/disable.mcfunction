@@ -9,7 +9,6 @@
 # Use datalib:debug/tools/admin/debug_tag/grant / revoke to manage
 # datalib.debug per-player once this is disabled.
 
-execute unless function datalib:debug/tools/utils/check_all run return run tellraw @s ["",{"text":"[DL] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"Permission denied.","color":"red"}]
 
 data modify storage datalib:engine security.auto_debug_tag set value 0b
 tag @a[tag=datalib.admin] remove datalib.debug

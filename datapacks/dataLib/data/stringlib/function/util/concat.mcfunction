@@ -22,4 +22,3 @@ data modify storage stringlib:temp data.S1 set from storage stringlib:input conc
 data modify storage stringlib:temp data.S2 set from storage stringlib:input concat[0]
 function stringlib:zprivate/concat/combine_small with storage stringlib:temp data
 data remove storage stringlib:temp data
-return 1

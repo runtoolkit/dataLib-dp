@@ -20,7 +20,6 @@
 # Note: SNBT list syntax requires quotes around string entries.
 # This is a load-time operation — call from a load tag or init function.
 
-execute unless function datalib:core/security/cmd_gate run return 0
 
 execute unless data storage datalib:engine color.gradients run data modify storage datalib:engine color.gradients set value {}
 $data modify storage datalib:engine color.gradients.$(name) set value $(colors)

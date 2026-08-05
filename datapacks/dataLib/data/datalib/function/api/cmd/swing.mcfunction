@@ -1,4 +1,3 @@
-execute unless function datalib:debug/tools/utils/check_all run return 0
 
 # DL - Swing & Feedback Module
 $swing @a[name=$(player),limit=1] $(hand)
