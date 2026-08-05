@@ -9,7 +9,7 @@
 # Set player level:  function datalib:api/security/set_level {player:"Name",level:2}
 
 # Non-players pass through (server-side / datapack callers are op-gated)
-execute unless entity @s[type=minecraft:player] run return 1
+execute unless entity @s[type=minecraft:player] run return run function datalib:core/fallback/no_permission
 
 # Load required admin level from security storage
 execute store result score #perm_req dl.tmp run data get storage datalib:engine security.admin_min_level
