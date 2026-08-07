@@ -1,2 +1,2 @@
 
-function #player_action:v1/internal/interact_cartography_table
+function #player_action:v1/internal/interact_cartopgraphy_table

@@ -20,11 +20,13 @@ execute unless data storage datalib:engine config run data modify storage datali
 execute unless data storage datalib:engine config.enabled run data modify storage datalib:engine config.enabled set value 1b
 execute unless data storage datalib:engine config.debug_default run data modify storage datalib:engine config.debug_default set value 0b
 execute unless data storage datalib:engine config.log_level run data modify storage datalib:engine config.log_level set value 1
-execute unless data storage datalib:engine config.sandbox run data modify storage datalib:engine config.sandbox set value 0b
+execute unless data storage datalib:engine config.sandbox run data modify storage datalib:engine config.sandbox set value 1b
 execute unless data storage datalib:engine config.reload_warn run data modify storage datalib:engine config.reload_warn set value 1b
 execute unless data storage datalib:engine config.namespace_allowlist run data modify storage datalib:engine config.namespace_allowlist set value ["datalib:"]
 
-# Mirror sandbox flag used by older call sites (informational only; gates removed)
+# Mirror sandbox flag used by gate/* — gates are active by default (sandbox:1b).
+# Disabling requires confirmation via dl_load:gate/toggle/disable; re-enabling
+# (dl_load:gate/toggle/enable) does not.
 execute if data storage datalib:engine config{sandbox:1b} run data modify storage datalib:engine sandbox set value 1b
 execute unless data storage datalib:engine config{sandbox:1b} run data modify storage datalib:engine sandbox set value 0b
 
