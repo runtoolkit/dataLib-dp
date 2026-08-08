@@ -31,7 +31,7 @@ jobs:
           python-version: "3.12"
       - name: Install Mecha
         run: |
-          echo "::group::Mecha kuruluyor"
+          echo "::group::Installing Mecha"
           pip install git+https://github.com/mcbeet/mecha.git
           echo "::endgroup::"
       - name: Gradle lint
@@ -67,7 +67,7 @@ jobs:
       # JMC Verification & Build (Addition 2)
       - name: Verify JMC compilation
         run: |
-          echo "::group::JMC derleniyor"
+          echo "::group::Compiling JMC"
           pip install jmcfunction --pre
           python3 build_jmc.py
           echo "::endgroup::"
@@ -83,7 +83,7 @@ jobs:
       - name: Run Main.java Test Client
         run: |
           chmod +x gradlew
-          [ "$RUNNER_DEBUG" = "1" ] && echo "::debug::runMainTestClient debug modunda başlıyor"
+          [ "$RUNNER_DEBUG" = "1" ] && echo "::debug::runMainTestClient starting in debug mode"
           ./gradlew runMainTestClient --no-daemon
 
       # Performance Metrics & Security Reporting (Addition 3)
@@ -114,7 +114,7 @@ jobs:
           java-version: "25"
       - name: Gradle buildAll
         run: |
-          echo "::group::Gradle buildAll + build"
+          echo "::group::Running Gradle buildAll + build"
           chmod +x gradlew && ./gradlew buildAll build --no-daemon
           echo "::endgroup::"
       - uses: actions/upload-artifact@v7
@@ -195,7 +195,7 @@ jobs:
           java-version: "25"
       - name: Gradle createSourceZip
         run: |
-          echo "::group::createSourceZip"
+          echo "::group::Running createSourceZip"
           chmod +x gradlew && ./gradlew createSourceZip --no-daemon
           echo "::endgroup::"
 
