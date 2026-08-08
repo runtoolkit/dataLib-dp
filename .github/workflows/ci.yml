@@ -30,9 +30,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Mecha
-        run: pip install git+https://github.com/mcbeet/mecha.git
+        run: |
+          echo "::group::Installing Mecha"
+          pip install git+https://github.com/mcbeet/mecha.git
+          echo "::endgroup::"
       - name: Gradle lint
-        run: chmod +x gradlew && ./gradlew lint --no-daemon
+        run: |
+          echo "::group::Gradle lint"
+          chmod +x gradlew && ./gradlew lint --no-daemon
+          echo "::endgroup::"
 
   # =====================================================================
   # test — Runtime Validation, Security/Lag Checks & JMC Compiler Checks
@@ -61,8 +67,10 @@ jobs:
       # JMC Verification & Build (Addition 2)
       - name: Verify JMC compilation
         run: |
+          echo "::group::Compiling JMC"
           pip install jmcfunction --pre
           python3 build_jmc.py
+          echo "::endgroup::"
 
       - name: Upload JMC Build Artifact
         uses: actions/upload-artifact@v7
@@ -75,19 +83,22 @@ jobs:
       - name: Run Main.java Test Client
         run: |
           chmod +x gradlew
+          [ "$RUNNER_DEBUG" = "1" ] && echo "::debug::runMainTestClient starting in debug mode"
           ./gradlew runMainTestClient --no-daemon
 
       # Performance Metrics & Security Reporting (Addition 3)
       - name: Performance & Security Report
         if: always()
         run: |
-          echo "### 🚀 dataLib Build & Quality Report" >> $GITHUB_STEP_SUMMARY
-          echo "Verified datapack integrity, compiled JMC assets, and performed live validation." >> $GITHUB_STEP_SUMMARY
-          echo "#### 🛡️ Security & Performance Metrics" >> $GITHUB_STEP_SUMMARY
-          echo "- **JMC Compiler Status:** Passed" >> $GITHUB_STEP_SUMMARY
-          echo "- **Command Wrapper Validation:** Complete (ban, ban_ip, kick, op wrappers online)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Advancement Paths:** Modernized & Safe" >> $GITHUB_STEP_SUMMARY
-          echo "- **Pristine Cleanup:** Successful (all temporary test assets deleted after evaluation)" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### 🚀 dataLib Build & Quality Report"
+            echo "Verified datapack integrity, compiled JMC assets, and performed live validation."
+            echo "#### 🛡️ Security & Performance Metrics"
+            echo "- **JMC Compiler Status:** Passed"
+            echo "- **Command Wrapper Validation:** Complete (ban, ban_ip, kick, op wrappers online)"
+            echo "- **Advancement Paths:** Modernized & Safe"
+            echo "- **Pristine Cleanup:** Successful (all temporary test assets deleted after evaluation)"
+          } >> "$GITHUB_STEP_SUMMARY"
 
   # =====================================================================
   # build — matrix zips (1_20_3, 1_20_5, pre_1_21_4, 1_21_5, 1_21_6, full)
@@ -102,7 +113,10 @@ jobs:
           distribution: temurin
           java-version: "25"
       - name: Gradle buildAll
-        run: chmod +x gradlew && ./gradlew buildAll build --no-daemon
+        run: |
+          echo "::group::Running Gradle buildAll + build"
+          chmod +x gradlew && ./gradlew buildAll build --no-daemon
+          echo "::endgroup::"
       - uses: actions/upload-artifact@v7
         with:
           name: dataLib-datapacks
@@ -129,9 +143,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set +x
           chmod +x gradlew
           ./gradlew zipFull --no-daemon
           ./gradlew release --no-daemon
+          set -x
 
   # =====================================================================
   # generate-build-py — only on push to 'workflows' branch
@@ -178,7 +194,10 @@ jobs:
           distribution: temurin
           java-version: "25"
       - name: Gradle createSourceZip
-        run: chmod +x gradlew && ./gradlew createSourceZip --no-daemon
+        run: |
+          echo "::group::Running createSourceZip"
+          chmod +x gradlew && ./gradlew createSourceZip --no-daemon
+          echo "::endgroup::"
 
       - uses: actions/upload-artifact@v7
         with:
